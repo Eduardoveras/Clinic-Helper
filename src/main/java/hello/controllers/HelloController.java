@@ -16,10 +16,16 @@ public class HelloController {
 
 
     @RequestMapping("/")
-    public String yolo(Model model, @RequestParam(value="name", required=false, defaultValue="home") String name) {
+    public String home(Model model, @RequestParam(value="name", required=false, defaultValue="home") String name) {
         model.addAttribute("name", name);
         return "homepage";
     }
 
+
+    @RequestMapping("/*")
+    public String err(Model model, @RequestParam(value="name", required=false, defaultValue="404") String name) {
+        model.addAttribute("name", name);
+        return "404";
+    }
 
 }
