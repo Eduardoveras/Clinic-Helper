@@ -12,25 +12,72 @@ import java.sql.Timestamp;
 public class Consultation {
     @Id
     @GeneratedValue
-    private String consultId;
-    private Date consultDate;
-    private Timestamp consultTime;
-    private String consultDetail;
+    private String consultationId;
+    private Date consultationDate;
+    private Timestamp consultationTime;
+    private String consultationDetail;
     @OneToOne
-    private Surgery consultSurgery;
+    private Surgery surgery;
     @OneToOne
-    private Appointment consultAppointment;
+    private Appointment appointment;
 
     public Consultation(){
 
     }
-    public Consultation(Date consultDate, Timestamp consultTime, String consultDetail, Surgery consultSurgery, Appointment consultAppointment){
-        this.consultDate= consultDate;
-        this.consultTime= consultTime;
-        this.consultDetail= consultDetail;
-        this.consultSurgery= consultSurgery;
-        this.consultAppointment= consultAppointment;
+    public Consultation(Date consultationDate, Timestamp consultationTime, String consultationDetail, Surgery surgery, Appointment appointment){
+        this.setConsultationDate(consultationDate);
+        this.setConsultationTime(consultationTime);
+        this.setConsultationDetail(consultationDetail);
+        this.setSurgery(surgery);
+        this.setAppointment(appointment);
 
     }
 
+    public String getConsultationId() {
+        return consultationId;
+    }
+
+    public void setConsultationId(String consultationId) {
+        this.consultationId = consultationId;
+    }
+
+    public Date getConsultationDate() {
+        return consultationDate;
+    }
+
+    public void setConsultationDate(Date consultationDate) {
+        this.consultationDate = consultationDate;
+    }
+
+    public Timestamp getConsultationTime() {
+        return consultationTime;
+    }
+
+    public void setConsultationTime(Timestamp consultationTime) {
+        this.consultationTime = consultationTime;
+    }
+
+    public String getConsultationDetail() {
+        return consultationDetail;
+    }
+
+    public void setConsultationDetail(String consultationDetail) {
+        this.consultationDetail = consultationDetail;
+    }
+
+    public Surgery getSurgery() {
+        return surgery;
+    }
+
+    public void setSurgery(Surgery surgery) {
+        this.surgery = surgery;
+    }
+
+    public Appointment getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
+    }
 }

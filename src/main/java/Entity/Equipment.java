@@ -23,8 +23,40 @@ public class Equipment {
    }
 
     public Equipment(String equipmentName, String equipmentUse, String equipmentDescription) {
+        this.setEquipmentName(equipmentName);
+        this.setEquipmentUse(equipmentUse);
+        this.setEquipmentDescription(equipmentDescription);
+    }
+
+    public String getEquipmentId() {
+        return equipmentId;
+    }
+
+    public void setEquipmentId(String equipmentId) {
+        this.equipmentId = equipmentId;
+    }
+
+    public String getEquipmentName() {
+        return equipmentName;
+    }
+
+    public void setEquipmentName(String equipmentName) {
         this.equipmentName = equipmentName;
+    }
+
+    public String getEquipmentUse() {
+        return equipmentUse;
+    }
+
+    public void setEquipmentUse(String equipmentUse) {
         this.equipmentUse = equipmentUse;
+    }
+
+    public String getEquipmentDescription() {
+        return equipmentDescription;
+    }
+
+    public void setEquipmentDescription(String equipmentDescription) {
         this.equipmentDescription = equipmentDescription;
     }
 }

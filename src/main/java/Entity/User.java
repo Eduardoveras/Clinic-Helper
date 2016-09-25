@@ -4,12 +4,14 @@
 package Entity;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "USERS")
 public class User {
     // Attributes
+    @Id
     private String username;
     private String firstName;
     private String lastName;
