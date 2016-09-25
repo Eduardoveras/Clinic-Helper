@@ -17,14 +17,14 @@ public class Record {
     @OneToMany
     private Surgery recordSurgery;
     @OneToMany
-    private Consult recordConsult;
+    private Entity.Consultation recordConsult;
 
 
     public Record(){
 
     }
 
-    public Record(Patient recordPatient, String recordDetails, Surgery recordSurgery, Consult recordConsult) {
+    public Record(Patient recordPatient, String recordDetails, Surgery recordSurgery, Entity.Consultation recordConsult) {
         this.recordPatient = recordPatient;
         this.recordDetails = recordDetails;
         this.recordSurgery = recordSurgery;

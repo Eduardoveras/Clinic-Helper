@@ -3,13 +3,13 @@
  */
 package Service;
 
-import Entity.Consult;
+import Entity.Consultation;
 
-public class ConsultationORM  extends GenericORMService<Consult>{
+public class ConsultationORM  extends GenericORMService<Consultation>{
     private static ConsultationORM instance;
 
     private ConsultationORM(){
-        super(Consult.class);
+        super(Consultation.class);
     }
 
     public static ConsultationORM getInstance(){

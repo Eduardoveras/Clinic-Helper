@@ -9,7 +9,7 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="CONSULTS")
-public class Consult {
+public class Consultation {
     @Id
     @GeneratedValue
     private String consultId;
@@ -21,10 +21,10 @@ public class Consult {
     @OneToOne
     private Appointment consultAppointment;
 
-    public Consult(){
+    public Consultation(){
 
     }
-    public Consult(Date consultDate,Timestamp consultTime, String consultDetail, Surgery consultSurgery,Appointment consultAppointment){
+    public Consultation(Date consultDate, Timestamp consultTime, String consultDetail, Surgery consultSurgery, Appointment consultAppointment){
         this.consultDate= consultDate;
         this.consultTime= consultTime;
         this.consultDetail= consultDetail;
