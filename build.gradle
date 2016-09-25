@@ -35,4 +35,8 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-actuator")
     // end::actuator[]
     testCompile("junit:junit")
+
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-freemarker
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-freemarker', version: '1.4.1.RELEASE'
+
 }
