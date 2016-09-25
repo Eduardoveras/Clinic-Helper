@@ -15,6 +15,6 @@ public class Patient {
     private String patientIdCard;
     private String patientTelephoneNumber;
     private String patientBirthDate;
-    private String patientNacionality;
+    private String patientNationality;
     private String patientAddress;
 }
