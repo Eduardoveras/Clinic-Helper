@@ -1,7 +1,6 @@
 package Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -11,12 +10,23 @@ import java.sql.Timestamp;
 @Entity
 @Table(name="APPOINTMENTS")
 public class Appointment {
+    @Id
+    @GeneratedValue
     private String appointmentId;
     private Date appointmentDate;
     private Timestamp appointmentTime;
+    @ManyToOne
     private Patient appointmentPatient;
-    private enum appointmentAccessFrom{
-        Web,
-        Visit;
+    private String appointmentAccessFrom;
+
+    public Appointment(){
+
+    }
+
+    public Appointment(Date appointmentDate, Timestamp appointmentTime,Patient appointmentPatient, String appointmentAccessFrom){
+        this.appointmentDate = appointmentDate;
+        this.appointmentTime = appointmentTime;
+        this.appointmentPatient = appointmentPatient;
+        this.appointmentAccessFrom = appointmentAccessFrom;
     }
 }
