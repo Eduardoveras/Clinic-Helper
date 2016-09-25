@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/clinichelper.iml" filepath="$PROJECT_DIR$/.idea/modules/clinichelper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/clinichelper_main.iml" filepath="$PROJECT_DIR$/.idea/modules/clinichelper_main.iml" group="clinichelper" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/clinichelper_test.iml" filepath="$PROJECT_DIR$/.idea/modules/clinichelper_test.iml" group="clinichelper" />
+    </modules>
+  </component>
+</project>
