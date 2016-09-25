@@ -2,7 +2,86 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd7bea05-c355-4bd0-bbb2-c8ff117d6429" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Clinic_Helper/settings.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/admin.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/auth_backends.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/conf.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/context_processors.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/decorators.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/fields.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/forms.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/hooks.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/languages.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/locale/ar/LC_MESSAGES/django.mo" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/locale/ar/LC_MESSAGES/django.po" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/locale/de/LC_MESSAGES/django.mo" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/locale/de/LC_MESSAGES/django.po" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/locale/es/LC_MESSAGES/django.mo" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/locale/es/LC_MESSAGES/django.po" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/locale/fa_IR/LC_MESSAGES/django.mo" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/locale/fa_IR/LC_MESSAGES/django.po" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/locale/fr/LC_MESSAGES/django.mo" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/locale/fr/LC_MESSAGES/django.po" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/locale/it/LC_MESSAGES/django.mo" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/locale/it/LC_MESSAGES/django.po" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/locale/ja/LC_MESSAGES/django.mo" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/locale/ja/LC_MESSAGES/django.po" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/locale/nl/LC_MESSAGES/django.mo" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/locale/nl/LC_MESSAGES/django.po" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/locale/pl/LC_MESSAGES/django.mo" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/locale/pl/LC_MESSAGES/django.po" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/locale/pt_BR/LC_MESSAGES/django.mo" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/locale/pt_BR/LC_MESSAGES/django.po" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/locale/ru/LC_MESSAGES/django.mo" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/locale/ru/LC_MESSAGES/django.po" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/locale/sk_SK/LC_MESSAGES/django.mo" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/locale/sk_SK/LC_MESSAGES/django.po" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/locale/tr/LC_MESSAGES/django.mo" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/locale/tr/LC_MESSAGES/django.po" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/locale/zh_CN/LC_MESSAGES/django.mo" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/locale/zh_CN/LC_MESSAGES/django.po" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/locale/zh_TW/LC_MESSAGES/django.mo" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/locale/zh_TW/LC_MESSAGES/django.po" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/management/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/management/commands/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/management/commands/expunge_deleted.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/management/commands/user_password_expiry.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/management/commands/user_password_history.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/managers.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/middleware.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/migrations/0001_initial.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/migrations/0002_fix_str.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/migrations/0003_passwordexpiry_passwordhistory.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/migrations/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/mixins.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/models.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/signals.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/templatetags/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/templatetags/account_tags.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/tests/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/tests/templates/account/email/email_confirmation_message.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/tests/templates/account/email/email_confirmation_subject.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/tests/templates/account/email/password_change.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/tests/templates/account/email/password_change_subject.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/tests/templates/account/email_confirm.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/tests/templates/account/email_confirmation_sent.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/tests/templates/account/login.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/tests/templates/account/logout.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/tests/templates/account/password_change.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/tests/templates/account/settings.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/tests/templates/account/signup.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/tests/templates/account/signup_closed.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/tests/test_auth.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/tests/test_commands.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/tests/test_password.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/tests/test_views.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/tests/urls.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/timezones.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/urls.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/utils.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/views.py" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="clinichelper.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -565,6 +644,32 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="clinic_helper" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="clinic_helper" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="org.jetbrains.plugins.gradle.projectView.GradleTreeStructureProvider$GradleSourceSetDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hello" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -1033,16 +1138,16 @@
       <option name="presentableId" value="Default" />
       <updated>1474821139506</updated>
       <workItem from="1474821141743" duration="1359000" />
-      <workItem from="1474824182537" duration="250000" />
+      <workItem from="1474824182537" duration="412000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1609000" />
+    <option name="totallyTimeSpent" value="1771000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-12" y="-12" width="3224" height="1754" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1058,7 +1163,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24983984" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24983984" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
