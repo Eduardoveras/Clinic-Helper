@@ -24,7 +24,7 @@ public class User {
 
     }
 
-    private User(String username, String firstName, String lastName, String email, String password, String role){
+    public User(String username, String firstName, String lastName, String email, String password, String role){
         this.setUsername(username);
         this.setFirstName(firstName);
         this.setLastName(lastName);
