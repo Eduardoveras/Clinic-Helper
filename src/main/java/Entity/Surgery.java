@@ -1,7 +1,6 @@
 package Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -11,6 +10,8 @@ import java.sql.Timestamp;
 @Entity
 @Table(name="SURGERIES")
 public class Surgery {
+    @Id
+    @GeneratedValue
     private String surgeryId;
     private String surgeryName;
     private String surgeryBodyPart;
@@ -18,6 +19,23 @@ public class Surgery {
     private Timestamp surgeryTime;
     private String surgeryRoom;
     private Staff surgeryStaff;
+    @OneToMany
     private Equipment surgeryEquipment;
+    @OneToOne
     private Appointment surgeryAppointment;
+
+    public Surgery(){
+
+    }
+
+    public Surgery(String surgeryName, String surgeryBodyPart, Date surgeryDate, Timestamp surgeryTime, String surgeryRoom, Staff surgeryStaff, Equipment surgeryEquipment, Appointment surgeryAppointment) {
+        this.surgeryName = surgeryName;
+        this.surgeryBodyPart = surgeryBodyPart;
+        this.surgeryDate = surgeryDate;
+        this.surgeryTime = surgeryTime;
+        this.surgeryRoom = surgeryRoom;
+        this.surgeryStaff = surgeryStaff;
+        this.surgeryEquipment = surgeryEquipment;
+        this.surgeryAppointment = surgeryAppointment;
+    }
 }
