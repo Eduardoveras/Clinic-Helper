@@ -15,7 +15,7 @@ public class SurgeryORM extends GenericORMService<Surgery>{
     public static SurgeryORM getInstance(){
         if(instance == null)
             instance = new SurgeryORM();
-        
+
         return instance;
     }
 }
