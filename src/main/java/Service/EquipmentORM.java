@@ -15,7 +15,7 @@ public class EquipmentORM extends GenericORMService<Equipment>{
     public static EquipmentORM getInstance(){
         if(instance == null)
             instance = new EquipmentORM();
-        
+
         return instance;
     }
 }
