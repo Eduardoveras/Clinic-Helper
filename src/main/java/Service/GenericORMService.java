@@ -53,7 +53,6 @@ public class GenericORMService<T> {
         } catch (Exception exp){
             System.out.println("\n\nGeneral ERROR! --> " + exp.getMessage() + "\n");
             em.getTransaction().rollback();
-            throw  exp;
         } finally{
             em.close();
         }
@@ -85,7 +84,6 @@ public class GenericORMService<T> {
         } catch (Exception exp) {
             System.out.println("\n\nGeneral ERROR! --> " + exp.getMessage() + "\n");
             em.getTransaction().rollback();
-            throw exp;
         } finally {
             em.close();
         }
@@ -117,7 +115,6 @@ public class GenericORMService<T> {
         } catch (Exception exp) {
             System.out.println("\n\nGeneral ERROR! --> " + exp.getMessage() +  "\n");
             em.getTransaction().rollback();
-            throw exp;
         } finally {
             em.close();
         }
@@ -143,10 +140,11 @@ public class GenericORMService<T> {
         } catch (Exception exp) {
             System.out.println("\n\nGeneral ERROR! --> " + exp.getMessage() + "\n");
             em.getTransaction().rollback();
-            throw exp;
         } finally {
             em.close();
         }
+
+        return null;
     }
 
     public List<T> FindAll() {
@@ -179,9 +177,9 @@ public class GenericORMService<T> {
         } catch (Exception exp) {
             System.out.println("\n\nGeneral ERROR! --> " + exp.getMessage() + "\n");
             em.getTransaction().rollback();
-            throw exp;
         } finally {
             em.close();
         }
+        return null;
     }
 }
