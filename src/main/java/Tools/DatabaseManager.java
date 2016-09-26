@@ -3,12 +3,15 @@
  */
 package Tools;
 
+import Entity.Patient;
 import Entity.User;
+import Service.PatientORM;
 import Service.UserORM;
 
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceException;
 import javax.persistence.TransactionRequiredException;
+import java.sql.Date;
 import java.util.List;
 
 public class DatabaseManager {
@@ -39,7 +42,7 @@ public class DatabaseManager {
 
     public boolean createNewUser(String username, String firstName, String lastName, String email, String password, String role){
         try{
-            UserORM.getInstance().Create(new User(username, firstName, lastName, email, password, role));
+            UserORM.getInstance().Create(new User(username.toUpperCase(), firstName.toUpperCase(), lastName.toUpperCase(), email.toLowerCase(), password, role));
             System.out.println("Created new user");
             return true;
         } catch (EntityNotFoundException exp){
@@ -58,12 +61,56 @@ public class DatabaseManager {
     }
 
     public boolean doesUserAccountExist(String username, String password){
-        User account = UserORM.findUserAccountWithUsernameAndPassword(username, password);
+        User account = UserORM.findUserAccountWithUsernameAndPassword(username.toUpperCase(), password);
 
         return (account != null) ? true : false;
     }
 
     public void deleteUserAccount(String username){
-        UserORM.getInstance().Delete(UserORM.getInstance().Find(username));
+        UserORM.getInstance().Delete(UserORM.getInstance().Find(username.toUpperCase()));
+    }
+
+    // Patient Related Function
+    public boolean createNewPatient(String firstName, String lastName, String identificationCard, String telephoneNumber, Date dateOfBirth, String nationality, String address, String city, String country){
+        try {
+            PatientORM.getInstance().Create(new Patient(firstName.toUpperCase(), lastName.toUpperCase(), identificationCard.toUpperCase(), telephoneNumber, dateOfBirth, nationality.toUpperCase(), address.toUpperCase(), city.toUpperCase(), country.toUpperCase()));
+            System.out.println("Created new patient!");
+            return true;
+        } catch (EntityNotFoundException exp){
+            System.out.println("\n\nEntity ERROR! --> " + exp.getMessage() + "\n");
+            return false;
+        } catch (TransactionRequiredException exp) {
+            System.out.println("\n\nTransaction ERROR! --> " + exp.getMessage() + "\n");
+            return false;
+        } catch (PersistenceException exp){
+            System.out.println("\n\nPersistence ERROR! --> " + exp.getMessage() + "\n");
+            return false;
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral ERROR! --> " + exp.getMessage() + "\n");
+            return false;
+        }
+    }
+
+    public Patient findRegisteredPatient(String searchKey){
+        Patient patient;
+
+        // Search by System Id
+        patient = PatientORM.getInstance().Find(searchKey.toUpperCase());
+
+        if (patient != null)
+            return patient;
+
+        // Search by Identification Card
+        patient = PatientORM.findPatientByIdentificationCard(searchKey.toUpperCase());
+
+        if (patient != null)
+            return patient;
+
+        return null;
+    }
+
+    // TODO: test this function
+    public List<Patient> generalSearchForPatientsByIdentifier(String identifier){
+        return PatientORM.generateListOfPatientsThatMatchRegEx(identifier);
     }
 }

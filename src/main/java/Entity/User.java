@@ -3,7 +3,6 @@
  */
 package Entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -11,12 +10,10 @@ import javax.persistence.Id;
 public class User {
     // Attributes
     @Id
-    @Column(name = "USERNAME")
     private String username;
     private String firstName;
     private String lastName;
     private String email;
-    @Column(name = "PASSWORD")
     private String password;
     private String role;
 

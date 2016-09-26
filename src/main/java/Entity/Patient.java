@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.sql.Date;
+import java.util.Calendar;
 
 /**
  * Created by eva_c on 9/25/2016.
@@ -18,22 +20,28 @@ public class Patient {
     private String patientLastName;
     private String patientIdCard;
     private String patientTelephoneNumber;
-    private String patientBirthDate;
+    private Date patientBirthDate;
+    private Date patientRegisteredDate;
     private String patientNationality;
     private String patientAddress;
+    private String patientCity;
+    private String patientCountry;
 
     public Patient(){
 
     }
 
-    public Patient(String patientName, String patientLastName, String patientIdCard, String patientTelephoneNumber, String patientBirthDate, String patientNationality, String patientAddress) {
+    public Patient(String patientName, String patientLastName, String patientIdCard, String patientTelephoneNumber, Date patientBirthDate, String patientNationality, String patientAddress, String patientCity, String patientCountry) {
         this.setPatientName(patientName);
         this.setPatientLastName(patientLastName);
         this.setPatientIdCard(patientIdCard);
         this.setPatientTelephoneNumber(patientTelephoneNumber);
         this.setPatientBirthDate(patientBirthDate);
+        this.setPatientRegisteredDate(new Date(Calendar.getInstance().getTime().getTime()));
         this.setPatientNationality(patientNationality);
         this.setPatientAddress(patientAddress);
+        this.setPatientCity(patientCity);
+        this.setPatientCountry(patientCountry);
     }
 
     public String getPatientId() {
@@ -76,11 +84,11 @@ public class Patient {
         this.patientTelephoneNumber = patientTelephoneNumber;
     }
 
-    public String getPatientBirthDate() {
+    public Date getPatientBirthDate() {
         return patientBirthDate;
     }
 
-    public void setPatientBirthDate(String patientBirthDate) {
+    public void setPatientBirthDate(Date patientBirthDate) {
         this.patientBirthDate = patientBirthDate;
     }
 
@@ -98,5 +106,29 @@ public class Patient {
 
     public void setPatientAddress(String patientAddress) {
         this.patientAddress = patientAddress;
+    }
+
+    public String getPatientCity() {
+        return patientCity;
+    }
+
+    public void setPatientCity(String patientCity) {
+        this.patientCity = patientCity;
+    }
+
+    public String getPatientCountry() {
+        return patientCountry;
+    }
+
+    public void setPatientCountry(String patientCountry) {
+        this.patientCountry = patientCountry;
+    }
+
+    public Date getPatientRegisteredDate() {
+        return patientRegisteredDate;
+    }
+
+    public void setPatientRegisteredDate(Date patientRegisteredDate) {
+        this.patientRegisteredDate = patientRegisteredDate;
     }
 }
