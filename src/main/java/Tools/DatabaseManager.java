@@ -3,8 +3,10 @@
  */
 package Tools;
 
+import Entity.Appointment;
 import Entity.Patient;
 import Entity.User;
+import Service.AppointmentORM;
 import Service.PatientORM;
 import Service.UserORM;
 
@@ -12,6 +14,8 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceException;
 import javax.persistence.TransactionRequiredException;
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.List;
 
 public class DatabaseManager {
@@ -112,5 +116,43 @@ public class DatabaseManager {
     // TODO: test this function
     public List<Patient> generalSearchForPatientsByIdentifier(String identifier){
         return PatientORM.generateListOfPatientsThatMatchRegEx(identifier);
+    }
+
+    // Appointment Related Functions
+    public boolean createNewAppointment(Date appointmentDate, Timestamp appointmentTime, String patientId, String appointmentAccessFrom){
+        try {
+            // Creating a new Appointment
+            AppointmentORM.getInstance().Create(new Appointment(appointmentDate, appointmentTime, findRegisteredPatient(patientId), appointmentAccessFrom));
+            System.out.println("Created new Appointment!");
+            return true;
+        } catch (EntityNotFoundException exp){
+            System.out.println("\n\nEntity ERROR! --> " + exp.getMessage() + "\n");
+            return false;
+        } catch (TransactionRequiredException exp) {
+            System.out.println("\n\nTransaction ERROR! --> " + exp.getMessage() + "\n");
+            return false;
+        } catch (PersistenceException exp){
+            System.out.println("\n\nPersistence ERROR! --> " + exp.getMessage() + "\n");
+            return false;
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral ERROR! --> " + exp.getMessage() + "\n");
+            return false;
+        }
+    }
+
+    public void deleteRegisteredAppointment(String appointmentId){
+        AppointmentORM.getInstance().Delete(AppointmentORM.getInstance().Find(appointmentId));
+    }
+
+    public List<Appointment> findAllAppointmentsForToday(){
+        return findAllAppointmentsForGivenDay(new Date(Calendar.getInstance().getTime().getTime()));
+    }
+
+    public List<Appointment> findAllAppointmentsForGivenDay(Date date){
+        return AppointmentORM.findAppointmentsByDate(date);
+    }
+
+    public List<Appointment> findAllAppointmentsForAGivenMonth(Date startDate){
+        return AppointmentORM.findAppointmentsByMonth(startDate);
     }
 }
