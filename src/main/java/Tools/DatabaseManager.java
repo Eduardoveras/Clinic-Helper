@@ -83,7 +83,7 @@ public class DatabaseManager {
     // Patient Related Function
     public static boolean createNewPatient(String firstName, String lastName, String identificationCard, String telephoneNumber, String patientEmail, Date dateOfBirth, String nationality, String address, String city, String country){
         try {
-            PatientORM.getInstance().Create(new Patient(firstName.toUpperCase(), lastName.toUpperCase(), identificationCard.toUpperCase(), telephoneNumber, patientEmail.toLowerCase(), dateOfBirth, nationality.toUpperCase(), address.toUpperCase(), city.toUpperCase(), country.toUpperCase()));
+            //PatientORM.getInstance().Create(new Patient(firstName.toUpperCase(), lastName.toUpperCase(), identificationCard.toUpperCase(), telephoneNumber, patientEmail.toLowerCase(), dateOfBirth, nationality.toUpperCase(), address.toUpperCase(), city.toUpperCase(), country.toUpperCase()));
             System.out.println("Created new patient!");
             return true;
         } catch (EntityNotFoundException exp){

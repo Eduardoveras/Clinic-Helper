@@ -20,6 +20,8 @@ public class Patient {
     private String patientTelephoneNumber;
     private String patientEmail;
     private Date patientBirthDate;
+    private String patientGender;
+    private String patientMail;
     private Date patientRegisteredDate;
     private String patientNationality;
     private String patientAddress;
@@ -48,6 +50,7 @@ public class Patient {
         this.setPatientTelephoneNumber(patientTelephoneNumber);
         this.setPatientEmail(patientEmail);
         this.setPatientBirthDate(patientBirthDate);
+        this.setPatientGender(patientGender);
         this.setPatientRegisteredDate(new Date(Calendar.getInstance().getTime().getTime()));
         this.setPatientNationality(patientNationality);
         this.setPatientAddress(patientAddress);
@@ -101,6 +104,22 @@ public class Patient {
 
     public void setPatientBirthDate(Date patientBirthDate) {
         this.patientBirthDate = patientBirthDate;
+    }
+
+    public String getPatientGender() {
+        return patientGender;
+    }
+
+    public void setPatientGender(String patientGender) {
+        this.patientGender = patientGender;
+    }
+
+    public String getPatientMail() {
+        return patientMail;
+    }
+
+    public void setPatientMail(String patientMail) {
+        this.patientMail = patientMail;
     }
 
     public String getPatientNationality() {
