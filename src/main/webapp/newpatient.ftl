@@ -30,9 +30,9 @@
         Nacionalidad:
         <select id="countries">
             <option disabled selected value> -- Seleccione un pais -- </option>
-            <option value="RD">Republica Dominicana</option>
-            <option value="China">China</option>
-            <option value="Venezuela">Venezuela</option>
+            <option id="RD">Republica Dominicana</option>
+            <option id="China">China</option>
+            <option id="Venezuela">Venezuela</option>
         </select>
         </select>
         <select id="cities"></select>
