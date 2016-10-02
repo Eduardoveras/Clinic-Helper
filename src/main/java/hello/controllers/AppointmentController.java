@@ -27,7 +27,7 @@ public class AppointmentController {
 
         if(soliciter == null) {
             soliciter = new Patient(firstName, lastName, telephone, email);
-            DatabaseManager.registrationWaitingList.add(soliciter);
+            //DatabaseManager.registrationWaitingList.add(soliciter);
         }
 
         // TODO: create a request appointment waiting list;

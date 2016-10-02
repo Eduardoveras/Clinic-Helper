@@ -21,7 +21,8 @@ import java.util.List;
 
 public class DatabaseManager {
     // Attributes
-    public static List<Patient> registrationWaitingList = new ArrayList<Patient>();
+    private static List<Patient> registrationWaitingList = new ArrayList<Patient>();
+    private static List<Appointment> appointmentWaitingList = new ArrayList<Appointment>();
 
     // Declaring Singleton
     private DatabaseManager(){
