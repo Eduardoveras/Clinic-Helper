@@ -96,7 +96,7 @@ public class PatientORM extends GenericORMService<Patient>{
              firstList) {
             for (Patient s:
                  secondList) {
-                if (f.getPatientId().equals(s.getPatientId())){
+                if (f.getJascId().equals(s.getJascId())){
                     // removing all instances of duplicates in the first list
                     newFirstList.remove(index);
                     break;
