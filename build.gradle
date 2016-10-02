@@ -47,8 +47,10 @@ dependencies {
     compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.2.Final'
     // https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager
     compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.2.2.Final'
-    //All the springboot stuff
-    compile group: 'com.stormpath.spring', name: 'stormpath-default-spring-boot-starter', version:'1.0.RC9.2'
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '1.4.1.RELEASE'
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '1.4.1.RELEASE'
 
 
 }
