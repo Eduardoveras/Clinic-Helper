@@ -1,11 +1,9 @@
 package Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.UUID;
 
 /**
  * Created by eva_c on 9/25/2016.
@@ -14,12 +12,13 @@ import java.util.Calendar;
 @Table(name="PATIENTS")
 public class Patient {
     @Id
-    @GeneratedValue
     private String patientId;
     private String patientName;
     private String patientLastName;
+    @Column(unique = true)
     private String patientIdCard;
     private String patientTelephoneNumber;
+    private String patientEmail;
     private Date patientBirthDate;
     private Date patientRegisteredDate;
     private String patientNationality;
@@ -31,11 +30,23 @@ public class Patient {
 
     }
 
-    public Patient(String patientName, String patientLastName, String patientIdCard, String patientTelephoneNumber, Date patientBirthDate, String patientNationality, String patientAddress, String patientCity, String patientCountry) {
+    // Used only for registration waiting list
+    public Patient(String patientName, String patientLastName, String patientTelephoneNumber, String patientEmail){
+        this.setPatientId("JASC-P-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+        this.setPatientName(patientName);
+        this.setPatientLastName(patientLastName);
+        this.setPatientTelephoneNumber(patientTelephoneNumber);
+        this.setPatientEmail(patientEmail);
+    }
+
+    // Used to create and register new patients
+    public Patient(String patientName, String patientLastName, String patientIdCard, String patientTelephoneNumber, String patientEmail, Date patientBirthDate, String patientNationality, String patientAddress, String patientCity, String patientCountry) {
+        this.setPatientId("JASC-P-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setPatientName(patientName);
         this.setPatientLastName(patientLastName);
         this.setPatientIdCard(patientIdCard);
         this.setPatientTelephoneNumber(patientTelephoneNumber);
+        this.setPatientEmail(patientEmail);
         this.setPatientBirthDate(patientBirthDate);
         this.setPatientRegisteredDate(new Date(Calendar.getInstance().getTime().getTime()));
         this.setPatientNationality(patientNationality);
@@ -130,5 +141,13 @@ public class Patient {
 
     public void setPatientRegisteredDate(Date patientRegisteredDate) {
         this.patientRegisteredDate = patientRegisteredDate;
+    }
+
+    public String getPatientEmail() {
+        return patientEmail;
+    }
+
+    public void setPatientEmail(String patientEmail) {
+        this.patientEmail = patientEmail;
     }
 }

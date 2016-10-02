@@ -25,6 +25,7 @@ public class PatientORM extends GenericORMService<Patient>{
         return instance;
     }
 
+    // SPecialized Functions
     public static Patient findPatientByIdentificationCard(String identificationNumber){
         EntityManager em = GetEntityManager();
 
@@ -33,6 +34,17 @@ public class PatientORM extends GenericORMService<Patient>{
         List<Patient> patients = query.getResultList();
 
         return patients.get(0);
+    }
+
+    public static Patient findRegisteredPatientByFLTEFields(String firstName, String lastName, String telephone, String email){
+        EntityManager em = GetEntityManager();
+
+        TypedQuery<Patient>  query = em.createQuery("select p from Patient as p where p.patientName='" + firstName
+                + "' and p.patientLastName = '" + lastName
+                + "' and p.patientTelephoneNumber = '" + telephone
+                + "' and p.patientEmail = '" + email + "'", Patient.class);
+
+        return query.getSingleResult();
     }
 
     public static List<Patient> generateListOfPatientsThatMatchRegEx(String regex){

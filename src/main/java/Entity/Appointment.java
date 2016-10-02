@@ -3,6 +3,7 @@ package Entity;
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.UUID;
 
 /**
  * Created by eva_c on 9/25/2016.
@@ -17,16 +18,27 @@ public class Appointment {
     private Timestamp appointmentTime;
     @ManyToOne
     private Patient appointmentPatient;
+    @Column(length = 500)
+    private String appointmentDescription;
     private String appointmentAccessFrom;
 
     public Appointment(){
 
     }
 
-    public Appointment(Date appointmentDate, Timestamp appointmentTime,Patient appointmentPatient, String appointmentAccessFrom){
+    public Appointment(Date appointmentDate, Patient appointmentPatient, String appointmentDescription, String appointmentAccessFrom){
+        this.setAppointmentId("JASC-A-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+        this.setAppointmentDate(appointmentDate);
+        this.setAppointmentPatient(appointmentPatient);
+        this.setAppointmentDescription(appointmentDescription);
+        this.setAppointmentAccessFrom(appointmentAccessFrom);
+    }
+
+    public Appointment(Date appointmentDate, Timestamp appointmentTime, Patient appointmentPatient, String appointmentDescription, String appointmentAccessFrom){
         this.setAppointmentDate(appointmentDate);
         this.setAppointmentTime(appointmentTime);
         this.setAppointmentPatient(appointmentPatient);
+        this.setAppointmentDescription(appointmentDescription);
         this.setAppointmentAccessFrom(appointmentAccessFrom);
     }
 
@@ -68,5 +80,13 @@ public class Appointment {
 
     public void setAppointmentAccessFrom(String appointmentAccessFrom) {
         this.appointmentAccessFrom = appointmentAccessFrom;
+    }
+
+    public String getAppointmentDescription() {
+        return appointmentDescription;
+    }
+
+    public void setAppointmentDescription(String appointmentDescription) {
+        this.appointmentDescription = appointmentDescription;
     }
 }

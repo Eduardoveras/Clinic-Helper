@@ -15,17 +15,20 @@ import javax.persistence.PersistenceException;
 import javax.persistence.TransactionRequiredException;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 public class DatabaseManager {
+    // Attributes
+    public static List<Patient> registrationWaitingList = new ArrayList<Patient>();
 
     // Declaring Singleton
     private DatabaseManager(){
 
     }
 
-    public void bootDatabaseServer(){
+    public static void bootDatabaseServer(){
         //Setting up default configurations
         List<User> users = UserORM.getInstance().FindAll();
 
@@ -38,13 +41,13 @@ public class DatabaseManager {
     }
 
     // User Related Functions
-    public boolean isUsernameTaken(String username){
+    public static boolean isUsernameTaken(String username){
         User user = UserORM.getInstance().Find(username);
 
         return (user != null ) ? true : false;
     }
 
-    public boolean createNewUser(String username, String firstName, String lastName, String email, String password, String role){
+    public static boolean createNewUser(String username, String firstName, String lastName, String email, String password, String role){
         try{
             UserORM.getInstance().Create(new User(username.toUpperCase(), firstName.toUpperCase(), lastName.toUpperCase(), email.toLowerCase(), password, role));
             System.out.println("Created new user");
@@ -64,20 +67,20 @@ public class DatabaseManager {
         }
     }
 
-    public boolean doesUserAccountExist(String username, String password){
+    public static boolean doesUserAccountExist(String username, String password){
         User account = UserORM.findUserAccountWithUsernameAndPassword(username.toUpperCase(), password);
 
         return (account != null) ? true : false;
     }
 
-    public void deleteUserAccount(String username){
+    public static void deleteUserAccount(String username){
         UserORM.getInstance().Delete(UserORM.getInstance().Find(username.toUpperCase()));
     }
 
     // Patient Related Function
-    public boolean createNewPatient(String firstName, String lastName, String identificationCard, String telephoneNumber, Date dateOfBirth, String nationality, String address, String city, String country){
+    public static boolean createNewPatient(String firstName, String lastName, String identificationCard, String telephoneNumber, String patientEmail, Date dateOfBirth, String nationality, String address, String city, String country){
         try {
-            PatientORM.getInstance().Create(new Patient(firstName.toUpperCase(), lastName.toUpperCase(), identificationCard.toUpperCase(), telephoneNumber, dateOfBirth, nationality.toUpperCase(), address.toUpperCase(), city.toUpperCase(), country.toUpperCase()));
+            PatientORM.getInstance().Create(new Patient(firstName.toUpperCase(), lastName.toUpperCase(), identificationCard.toUpperCase(), telephoneNumber, patientEmail.toLowerCase(), dateOfBirth, nationality.toUpperCase(), address.toUpperCase(), city.toUpperCase(), country.toUpperCase()));
             System.out.println("Created new patient!");
             return true;
         } catch (EntityNotFoundException exp){
@@ -95,7 +98,11 @@ public class DatabaseManager {
         }
     }
 
-    public Patient findRegisteredPatient(String searchKey){
+    public static Patient findRegisteredPatient(String firstName, String lastName, String telephone, String email){
+        return PatientORM.findRegisteredPatientByFLTEFields(firstName, lastName, telephone, email);
+    }
+
+    public static Patient findRegisteredPatient(String searchKey){
         Patient patient;
 
         // Search by System Id
@@ -114,15 +121,15 @@ public class DatabaseManager {
     }
 
     // TODO: test this function
-    public List<Patient> generalSearchForPatientsByIdentifier(String identifier){
+    public static List<Patient> generalSearchForPatientsByIdentifier(String identifier){
         return PatientORM.generateListOfPatientsThatMatchRegEx(identifier);
     }
 
     // Appointment Related Functions
-    public boolean createNewAppointment(Date appointmentDate, Timestamp appointmentTime, String patientId, String appointmentAccessFrom){
+    public static boolean createNewAppointment(Date appointmentDate, Timestamp appointmentTime, String patientId, String appointmentDescription, String appointmentAccessFrom){
         try {
             // Creating a new Appointment
-            AppointmentORM.getInstance().Create(new Appointment(appointmentDate, appointmentTime, findRegisteredPatient(patientId), appointmentAccessFrom));
+            AppointmentORM.getInstance().Create(new Appointment(appointmentDate, appointmentTime, findRegisteredPatient(patientId), appointmentDescription, appointmentAccessFrom));
             System.out.println("Created new Appointment!");
             return true;
         } catch (EntityNotFoundException exp){
@@ -140,19 +147,19 @@ public class DatabaseManager {
         }
     }
 
-    public void deleteRegisteredAppointment(String appointmentId){
+    public static void deleteRegisteredAppointment(String appointmentId){
         AppointmentORM.getInstance().Delete(AppointmentORM.getInstance().Find(appointmentId));
     }
 
-    public List<Appointment> findAllAppointmentsForToday(){
+    public static List<Appointment> findAllAppointmentsForToday(){
         return findAllAppointmentsForGivenDay(new Date(Calendar.getInstance().getTime().getTime()));
     }
 
-    public List<Appointment> findAllAppointmentsForGivenDay(Date date){
+    public static List<Appointment> findAllAppointmentsForGivenDay(Date date){
         return AppointmentORM.findAppointmentsByDate(date);
     }
 
-    public List<Appointment> findAllAppointmentsForAGivenMonth(Date startDate){
+    public static List<Appointment> findAllAppointmentsForAGivenMonth(Date startDate){
         return AppointmentORM.findAppointmentsByMonth(startDate);
     }
 }
