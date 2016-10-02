@@ -34,7 +34,7 @@
                                                        role="presentation">developer_board</i>Developer Guidep</a>
 
         <div class="mdl-layout-spacer"></div>
-        <a class="mdl-navigation__link" href="https://github.com/Eduardoveras94/url-Shortener-spark"><i
+        <a class="mdl-navigation__link" href="https://github.com/Eduardoveras94/Clinic-Helper"><i
                 class="mdl-color-text--blue-grey-400 material-icons" role="presentation">timeline</i>GitHub<span
                 class="visuallyhidden">Help</span></a>
     </nav>
