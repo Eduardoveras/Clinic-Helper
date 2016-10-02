@@ -23,7 +23,8 @@ import java.util.List;
 
 public class DatabaseManager {
     // Attributes
-    public static List<Patient> registrationWaitingList = new ArrayList<Patient>();
+    private static List<Patient> patientRegistrationWaitingList = new ArrayList<Patient>();
+    private static List<Appointment> appointmentRequestWaitingList = new ArrayList<Appointment>();
 
     // Declaring Singleton
     private DatabaseManager(){
@@ -42,11 +43,90 @@ public class DatabaseManager {
         }
     }
 
+    // Auxiliary Functions
+    public static void createNewAppointmentRequest(Date requestedDate, Patient solicitor, String description, String accessFrom){
+        appointmentRequestWaitingList.add(new Appointment(requestedDate, solicitor, description, accessFrom));
+    }
+
+    public static List<Appointment> showAllAppointmentRequest(){
+        return appointmentRequestWaitingList;
+    }
+
+    public static void approveAppointmentRequest(String appointmentJascId, Date registerdDate,  Timestamp appointmentTime, Patient solicitor){
+        Appointment request = null;
+
+        for (Appointment a:
+             appointmentRequestWaitingList)
+            if(a.getJascId().equals(appointmentJascId)){
+                request = a;
+                break;
+            }
+
+        if (request != null)
+            try{
+                // Approving new appointment request
+                AppointmentORM.getInstance().Create(new Appointment(registerdDate, appointmentTime, solicitor, request.getAppointmentDescription(), request.getAppointmentAccessFrom()));
+                System.out.println("\n\nAppointment registered...");
+                appointmentRequestWaitingList.remove(request);
+            } catch (EntityNotFoundException exp){
+                System.out.println("\n\nEntity ERROR! --> " + exp.getMessage() + "\n");
+                throw exp;
+            } catch (TransactionRequiredException exp) {
+                System.out.println("\n\nTransaction ERROR! --> " + exp.getMessage() + "\n");
+                throw exp;
+            } catch (PersistenceException exp){
+                System.out.println("\n\nPersistence ERROR! --> " + exp.getMessage() + "\n");
+                throw exp;
+            } catch (Exception exp) {
+                System.out.println("\n\nGeneral ERROR! --> " + exp.getMessage() + "\n");
+                throw exp;
+            }
+    }
+
+    public static void addUnregisteredPatientInRegistrationWaitingList(String patientFirstName, String patientLastName, String patientTelephoneNumber, String patientEmail){
+        patientRegistrationWaitingList.add(new Patient(patientFirstName, patientLastName, patientTelephoneNumber, patientEmail));
+    }
+
+    public static List<Patient> showAllUnregisteredPatients(){
+        return patientRegistrationWaitingList;
+    }
+
+    public static void approveNewPatientForRegistration(String patientJascId, String patientIdCard, Date patientBirthDate, String patientNationality, String patientAddress, String patientCity, String patientCountry){
+        Patient candidate = null;
+
+        for (Patient p:
+             patientRegistrationWaitingList)
+            if(p.getJascId().equals(patientJascId)){
+                candidate = p;
+                break;
+            }
+
+        if (candidate != null)
+            try{
+                // Approving new patient
+                PatientORM.getInstance().Create(new Patient(candidate.getPatientName(), candidate.getPatientLastName(), patientIdCard, candidate.getPatientTelephoneNumber(), candidate.getPatientEmail(), patientBirthDate, patientNationality, patientAddress, patientCity, patientCountry));
+                System.out.println("\n\nNew patient approved...");
+                patientRegistrationWaitingList.remove(candidate);
+            } catch (EntityNotFoundException exp){
+                System.out.println("\n\nEntity ERROR! --> " + exp.getMessage() + "\n");
+                throw exp;
+            } catch (TransactionRequiredException exp) {
+                System.out.println("\n\nTransaction ERROR! --> " + exp.getMessage() + "\n");
+                throw exp;
+            } catch (PersistenceException exp){
+                System.out.println("\n\nPersistence ERROR! --> " + exp.getMessage() + "\n");
+                throw exp;
+            } catch (Exception exp) {
+                System.out.println("\n\nGeneral ERROR! --> " + exp.getMessage() + "\n");
+                throw exp;
+            }
+    }
+
     // User Related Functions
     public static boolean isUsernameTaken(String username){
         User user = UserORM.getInstance().Find(username);
 
-        return (user != null ) ? true : false;
+        return ( user != null );
     }
 
     public static boolean createNewUser(String username, String firstName, String lastName, String email, String password, String role){

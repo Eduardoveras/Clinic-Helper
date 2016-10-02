@@ -26,7 +26,7 @@ public class Appointment {
     }
 
     public Appointment(Date appointmentDate, Patient appointmentPatient, String appointmentDescription, String appointmentAccessFrom){
-        this.setJascId("JASC-A-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+        this.setJascId("JASC-?-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setAppointmentDate(appointmentDate);
         this.setAppointmentPatient(appointmentPatient);
         this.setAppointmentDescription(appointmentDescription);
@@ -34,6 +34,7 @@ public class Appointment {
     }
 
     public Appointment(Date appointmentDate, Timestamp appointmentTime, Patient appointmentPatient, String appointmentDescription, String appointmentAccessFrom){
+        this.setJascId("JASC-A-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setAppointmentDate(appointmentDate);
         this.setAppointmentTime(appointmentTime);
         this.setAppointmentPatient(appointmentPatient);

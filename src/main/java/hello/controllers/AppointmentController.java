@@ -26,7 +26,7 @@ public class AppointmentController {
         Patient soliciter = DatabaseManager.findRegisteredPatient(firstName, lastName, telephone, email);
 
         if(soliciter == null) {
-            //soliciter = new Patient(firstName, lastName, telephone, email);
+            soliciter = new Patient(firstName, lastName, telephone, email);
             //DatabaseManager.registrationWaitingList.add(soliciter);
         }
 
