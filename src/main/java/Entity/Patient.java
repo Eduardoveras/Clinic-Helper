@@ -34,7 +34,7 @@ public class Patient {
 
     // Used only for registration waiting list
     public Patient(String patientName, String patientLastName, String patientTelephoneNumber, String patientEmail){
-        this.setJascId("JASC-P-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+        this.setJascId("JASC-?-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setPatientName(patientName);
         this.setPatientLastName(patientLastName);
         this.setPatientTelephoneNumber(patientTelephoneNumber);
