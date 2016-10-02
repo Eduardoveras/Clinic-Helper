@@ -17,23 +17,8 @@ public class Patient {
     private String patientLastName;
     @Column(unique = true)
     private String patientIdCard;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     private String patientTelephoneNumber;
     private String patientEmail;
-=======
-    private Number patientTelephoneNumber;
-    private Number patientContactTelephoneNumber;
->>>>>>> Stashed changes
-=======
-    private Number patientTelephoneNumber;
-    private Number patientContactTelephoneNumber;
->>>>>>> Stashed changes
-=======
-    private Number patientTelephoneNumber;
-    private Number patientContactTelephoneNumber;
->>>>>>> Stashed changes
     private Date patientBirthDate;
     private String patientGender;
     private String patientMail;
@@ -47,9 +32,6 @@ public class Patient {
 
     }
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     // Used only for registration waiting list
     public Patient(String patientName, String patientLastName, String patientTelephoneNumber, String patientEmail){
         this.setJascId("JASC-P-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
@@ -62,35 +44,13 @@ public class Patient {
     // Used to create and register new patients
     public Patient(String patientName, String patientLastName, String patientIdCard, String patientTelephoneNumber, String patientEmail, Date patientBirthDate, String patientNationality, String patientAddress, String patientCity, String patientCountry) {
         this.setJascId("JASC-P-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
-=======
-    public Patient(String patientName, String patientLastName, String patientIdCard, Number patientTelephoneNumber, Number patientContactTelephoneNumber, Date patientBirthDate, String patientGender, String patientMail,String patientNationality, String patientAddress, String patientCity, String patientCountry) {
->>>>>>> Stashed changes
-=======
-    public Patient(String patientName, String patientLastName, String patientIdCard, Number patientTelephoneNumber, Number patientContactTelephoneNumber, Date patientBirthDate, String patientGender, String patientMail,String patientNationality, String patientAddress, String patientCity, String patientCountry) {
->>>>>>> Stashed changes
-=======
-    public Patient(String patientName, String patientLastName, String patientIdCard, Number patientTelephoneNumber, Number patientContactTelephoneNumber, Date patientBirthDate, String patientGender, String patientMail,String patientNationality, String patientAddress, String patientCity, String patientCountry) {
->>>>>>> Stashed changes
         this.setPatientName(patientName);
         this.setPatientLastName(patientLastName);
         this.setPatientIdCard(patientIdCard);
         this.setPatientTelephoneNumber(patientTelephoneNumber);
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
         this.setPatientEmail(patientEmail);
-=======
-        this.setPatientContactTelephoneNumber(patientContactTelephoneNumber);
->>>>>>> Stashed changes
-=======
-        this.setPatientContactTelephoneNumber(patientContactTelephoneNumber);
->>>>>>> Stashed changes
-=======
-        this.setPatientContactTelephoneNumber(patientContactTelephoneNumber);
->>>>>>> Stashed changes
         this.setPatientBirthDate(patientBirthDate);
         this.setPatientGender(patientGender);
-        this.setPatientMail(patientMail);
         this.setPatientRegisteredDate(new Date(Calendar.getInstance().getTime().getTime()));
         this.setPatientNationality(patientNationality);
         this.setPatientAddress(patientAddress);
@@ -130,20 +90,12 @@ public class Patient {
         this.patientIdCard = patientIdCard;
     }
 
-    public Number getPatientTelephoneNumber() {
+    public String getPatientTelephoneNumber() {
         return patientTelephoneNumber;
     }
 
-    public void setPatientTelephoneNumber(Number patientTelephoneNumber) {
+    public void setPatientTelephoneNumber(String patientTelephoneNumber) {
         this.patientTelephoneNumber = patientTelephoneNumber;
-    }
-
-    public Number getPatientContactTelephoneNumber() {
-        return patientContactTelephoneNumber;
-    }
-
-    public void setPatientContactTelephoneNumber(Number patientContactTelephoneNumber) {
-        this.patientContactTelephoneNumber = patientContactTelephoneNumber;
     }
 
     public Date getPatientBirthDate() {
