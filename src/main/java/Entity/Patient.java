@@ -27,6 +27,7 @@ public class Patient {
     private String patientAddress;
     private String patientCity;
     private String patientCountry;
+    private String patientContactTelephoneNumber;
 
     public Patient(){
 
@@ -42,12 +43,13 @@ public class Patient {
     }
 
     // Used to create and register new patients
-    public Patient(String patientName, String patientLastName, String patientIdCard, String patientTelephoneNumber, String patientEmail, Date patientBirthDate, String patientNationality, String patientAddress, String patientCity, String patientCountry) {
+    public Patient(String patientName, String patientLastName, String patientIdCard, String patientTelephoneNumber, String patientContactTelephoneNumber,String patientGender ,String patientEmail, Date patientBirthDate, String patientNationality, String patientAddress, String patientCity, String patientCountry) {
         this.setJascId("JASC-P-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setPatientName(patientName);
         this.setPatientLastName(patientLastName);
         this.setPatientIdCard(patientIdCard);
         this.setPatientTelephoneNumber(patientTelephoneNumber);
+        this.setPatientContactTelephoneNumber(patientContactTelephoneNumber);
         this.setPatientEmail(patientEmail);
         this.setPatientBirthDate(patientBirthDate);
         this.setPatientGender(patientGender);
@@ -96,6 +98,13 @@ public class Patient {
 
     public void setPatientTelephoneNumber(String patientTelephoneNumber) {
         this.patientTelephoneNumber = patientTelephoneNumber;
+    }
+    public String getPatientContactTelephoneNumber() {
+        return patientContactTelephoneNumber;
+    }
+
+    public void setPatientContactTelephoneNumber(String patientContactTelephoneNumber) {
+        this.patientContactTelephoneNumber = patientContactTelephoneNumber;
     }
 
     public Date getPatientBirthDate() {
