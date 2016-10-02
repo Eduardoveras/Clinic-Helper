@@ -12,8 +12,7 @@ import java.util.UUID;
 @Table(name="APPOINTMENTS")
 public class Appointment {
     @Id
-    @GeneratedValue
-    private String appointmentId;
+    private String jascId;
     private Date appointmentDate;
     private Timestamp appointmentTime;
     @ManyToOne
@@ -27,7 +26,7 @@ public class Appointment {
     }
 
     public Appointment(Date appointmentDate, Patient appointmentPatient, String appointmentDescription, String appointmentAccessFrom){
-        this.setAppointmentId("JASC-A-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+        this.setJascId("JASC-A-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setAppointmentDate(appointmentDate);
         this.setAppointmentPatient(appointmentPatient);
         this.setAppointmentDescription(appointmentDescription);
@@ -42,12 +41,12 @@ public class Appointment {
         this.setAppointmentAccessFrom(appointmentAccessFrom);
     }
 
-    public String getAppointmentId() {
-        return appointmentId;
+    public String getJascId() {
+        return jascId;
     }
 
-    public void setAppointmentId(String appointmentId) {
-        this.appointmentId = appointmentId;
+    public void setJascId(String jascId) {
+        this.jascId = jascId;
     }
 
     public Date getAppointmentDate() {

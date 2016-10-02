@@ -12,7 +12,7 @@ import java.util.UUID;
 @Table(name="PATIENTS")
 public class Patient {
     @Id
-    private String patientId;
+    private String jascId;
     private String patientName;
     private String patientLastName;
     @Column(unique = true)
@@ -25,23 +25,25 @@ public class Patient {
     private String patientAddress;
     private String patientCity;
     private String patientCountry;
+    private Insurance patientInsurance;
 
     public Patient(){
 
     }
 
     // Used only for registration waiting list
-    public Patient(String patientName, String patientLastName, String patientTelephoneNumber, String patientEmail){
-        this.setPatientId("JASC-P-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+    public Patient(String patientName, String patientLastName, String patientTelephoneNumber, String patientEmail, Insurance patientInsurance){
+        this.setJascId("JASC-P-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setPatientName(patientName);
         this.setPatientLastName(patientLastName);
         this.setPatientTelephoneNumber(patientTelephoneNumber);
         this.setPatientEmail(patientEmail);
+        this.setPatientInsurance(patientInsurance);
     }
 
     // Used to create and register new patients
-    public Patient(String patientName, String patientLastName, String patientIdCard, String patientTelephoneNumber, String patientEmail, Date patientBirthDate, String patientNationality, String patientAddress, String patientCity, String patientCountry) {
-        this.setPatientId("JASC-P-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+    public Patient(String patientName, String patientLastName, String patientIdCard, String patientTelephoneNumber, String patientEmail, Date patientBirthDate, String patientNationality, String patientAddress, String patientCity, String patientCountry, Insurance patientInsurance) {
+        this.setJascId("JASC-P-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setPatientName(patientName);
         this.setPatientLastName(patientLastName);
         this.setPatientIdCard(patientIdCard);
@@ -53,14 +55,15 @@ public class Patient {
         this.setPatientAddress(patientAddress);
         this.setPatientCity(patientCity);
         this.setPatientCountry(patientCountry);
+        this.setPatientInsurance(patientInsurance);
     }
 
-    public String getPatientId() {
-        return patientId;
+    public String getJascId() {
+        return jascId;
     }
 
-    public void setPatientId(String patientId) {
-        this.patientId = patientId;
+    public void setJascId(String jascId) {
+        this.jascId = jascId;
     }
 
     public String getPatientName() {
@@ -149,5 +152,13 @@ public class Patient {
 
     public void setPatientEmail(String patientEmail) {
         this.patientEmail = patientEmail;
+    }
+
+    public Insurance getPatientInsurance() {
+        return patientInsurance;
+    }
+
+    public void setPatientInsurance(Insurance patientInsurance) {
+        this.patientInsurance = patientInsurance;
     }
 }

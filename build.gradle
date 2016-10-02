@@ -12,6 +12,12 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
+group 'clinichelper'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 jar {
     baseName = 'gs-spring-boot'
     version =  '0.1.0'
@@ -21,8 +27,6 @@ repositories {
     mavenCentral()
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
 
 dependencies {
     // tag::jetty[]
@@ -43,47 +47,11 @@ dependencies {
     compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.2.Final'
     // https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager
     compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.2.2.Final'
+    //All the springboot stuff
+    compile group: 'com.stormpath.spring', name: 'stormpath-default-spring-boot-starter', version:'1.0.RC9.2'
+
 
 }
-group 'clinichelper'
-version '1.0-SNAPSHOT'
 
-apply plugin: 'java'
 
-sourceCompatibility = 1.5
 
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.11'
-}
-group 'clinichelper'
-version '1.0-SNAPSHOT'
-
-apply plugin: 'java'
-
-sourceCompatibility = 1.5
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.11'
-}
-group 'clinic-helper'
-version '1.0-SNAPSHOT'
-
-apply plugin: 'java'
-
-sourceCompatibility = 1.5
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.11'
-}
