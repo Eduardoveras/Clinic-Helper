@@ -4,9 +4,11 @@
 package Tools;
 
 import Entity.Appointment;
+import Entity.Insurance;
 import Entity.Patient;
 import Entity.User;
 import Service.AppointmentORM;
+import Service.InsuranceORM;
 import Service.PatientORM;
 import Service.UserORM;
 
@@ -162,5 +164,23 @@ public class DatabaseManager {
 
     public static List<Appointment> findAllAppointmentsForAGivenMonth(Date startDate){
         return AppointmentORM.findAppointmentsByMonth(startDate);
+    }
+
+    // Insurance Related Functions
+    public static boolean registerNewInsuranceForPatient(String patientJascId, String insuranceSerialCode, String insurancePlan){
+        try{
+            // Registering patient's insurance information
+            InsuranceORM.getInstance().Create(new Insurance(PatientORM.getInstance().Find(patientJascId), insuranceSerialCode, insurancePlan));
+            return true;
+        } catch (TransactionRequiredException exp) {
+            System.out.println("\n\nTransaction ERROR! --> " + exp.getMessage() + "\n");
+            return false;
+        } catch (PersistenceException exp){
+            System.out.println("\n\nPersistence ERROR! --> " + exp.getMessage() + "\n");
+            return false;
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral ERROR! --> " + exp.getMessage() + "\n");
+            return false;
+        }
     }
 }
