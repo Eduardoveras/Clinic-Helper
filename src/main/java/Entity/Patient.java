@@ -19,8 +19,13 @@ public class Patient {
     private String patientIdCard;
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     private String patientTelephoneNumber;
     private String patientEmail;
+=======
+    private Number patientTelephoneNumber;
+    private Number patientContactTelephoneNumber;
+>>>>>>> Stashed changes
 =======
     private Number patientTelephoneNumber;
     private Number patientContactTelephoneNumber;
@@ -44,6 +49,7 @@ public class Patient {
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     // Used only for registration waiting list
     public Patient(String patientName, String patientLastName, String patientTelephoneNumber, String patientEmail){
         this.setJascId("JASC-P-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
@@ -62,13 +68,20 @@ public class Patient {
 =======
     public Patient(String patientName, String patientLastName, String patientIdCard, Number patientTelephoneNumber, Number patientContactTelephoneNumber, Date patientBirthDate, String patientGender, String patientMail,String patientNationality, String patientAddress, String patientCity, String patientCountry) {
 >>>>>>> Stashed changes
+=======
+    public Patient(String patientName, String patientLastName, String patientIdCard, Number patientTelephoneNumber, Number patientContactTelephoneNumber, Date patientBirthDate, String patientGender, String patientMail,String patientNationality, String patientAddress, String patientCity, String patientCountry) {
+>>>>>>> Stashed changes
         this.setPatientName(patientName);
         this.setPatientLastName(patientLastName);
         this.setPatientIdCard(patientIdCard);
         this.setPatientTelephoneNumber(patientTelephoneNumber);
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         this.setPatientEmail(patientEmail);
+=======
+        this.setPatientContactTelephoneNumber(patientContactTelephoneNumber);
+>>>>>>> Stashed changes
 =======
         this.setPatientContactTelephoneNumber(patientContactTelephoneNumber);
 >>>>>>> Stashed changes
