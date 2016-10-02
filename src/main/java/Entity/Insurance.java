@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.UUID;
 
 @Entity
-public class Insurrance implements Serializable{
+public class Insurance implements Serializable{
     // Attributes
     @Id
     private String jascID;
@@ -20,11 +20,11 @@ public class Insurrance implements Serializable{
     private String insurrancePlan;
 
     // Constructors
-    public Insurrance(){
+    public Insurance(){
 
     }
 
-    public Insurrance(Patient owner, String insurranceSerialCode, String insurrancePlan){
+    public Insurance(Patient owner, String insurranceSerialCode, String insurrancePlan){
         this.setJascID("JASC-I-" + UUID.randomUUID().toString().split("-")[0]);
         this.setOwnwer(owner);
         this.setInsurranceSerialCode(insurranceSerialCode);

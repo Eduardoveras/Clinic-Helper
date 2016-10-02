@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 public class Consultation {
     @Id
     @GeneratedValue
-    private String consultationId;
+    private String jascId;
     private Date consultationDate;
     private Timestamp consultationTime;
     private String consultationDetail;
@@ -33,12 +33,12 @@ public class Consultation {
 
     }
 
-    public String getConsultationId() {
-        return consultationId;
+    public String getJascId() {
+        return jascId;
     }
 
-    public void setConsultationId(String consultationId) {
-        this.consultationId = consultationId;
+    public void setJascId(String jascId) {
+        this.jascId = jascId;
     }
 
     public Date getConsultationDate() {

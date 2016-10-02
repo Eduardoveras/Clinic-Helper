@@ -3,13 +3,13 @@
  */
 package Service;
 
-import Entity.Insurrance;
+import Entity.Insurance;
 
-public class InsurranceORM extends GenericORMService<Insurrance>{
+public class InsurranceORM extends GenericORMService<Insurance>{
     private static InsurranceORM instance;
 
     private InsurranceORM(){
-        super(Insurrance.class);
+        super(Insurance.class);
     }
 
     public static InsurranceORM getInstance(){
