@@ -91,7 +91,7 @@ public class DatabaseManager {
         return patientRegistrationWaitingList;
     }
 
-    public static void approveNewPatientForRegistration(String patientJascId, String patientIdCard, Date patientBirthDate, String patientNationality, String patientAddress, String patientCity, String patientCountry){
+    public static void approveNewPatientForRegistration(String patientJascId, String patientIdCard, String patientContactTelephoneNumber, String patientGender,  Date patientBirthDate, String patientNationality, String patientAddress, String patientCity, String patientCountry){
         Patient candidate = null;
 
         for (Patient p:
@@ -104,7 +104,7 @@ public class DatabaseManager {
         if (candidate != null)
             try{
                 // Approving new patient
-                PatientORM.getInstance().Create(new Patient(candidate.getPatientName(), candidate.getPatientLastName(), patientIdCard, candidate.getPatientTelephoneNumber(), candidate.getPatientEmail(), patientBirthDate, patientNationality, patientAddress, patientCity, patientCountry));
+                PatientORM.getInstance().Create(new Patient(candidate.getPatientName(), candidate.getPatientLastName(), patientIdCard, candidate.getPatientTelephoneNumber(), patientContactTelephoneNumber, patientGender, candidate.getPatientEmail(), patientBirthDate, patientNationality, patientAddress, patientCity, patientCountry));
                 System.out.println("\n\nNew patient approved...");
                 patientRegistrationWaitingList.remove(candidate);
             } catch (EntityNotFoundException exp){

@@ -18,5 +18,5 @@ hs_err_pid*
 build/classes/
 lib/
 out/
-/.idea/
-/.idea/workspace.xml
+.idea/
+.idea/workspace.xml
