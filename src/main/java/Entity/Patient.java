@@ -13,21 +13,20 @@ import java.util.UUID;
 public class Patient {
     @Id
     private String jascId;
-    private String patientName;
-    private String patientLastName;
+    private String patientName; //
+    private String patientLastName;//
     @Column(unique = true)
-    private String patientIdCard;
-    private String patientTelephoneNumber;
-    private String patientEmail;
-    private Date patientBirthDate;
-    private String patientGender;
-    private String patientMail;
+    private String patientIdCard;//
+    private String patientTelephoneNumber;//
+    private String patientEmail;//
+    private Date patientBirthDate;//
+    private String patientGender;//
     private Date patientRegisteredDate;
     private String patientNationality;
     private String patientAddress;
     private String patientCity;
     private String patientCountry;
-    private String patientContactTelephoneNumber;
+    private String patientContactTelephoneNumber;//
 
     public Patient(){
 
@@ -123,13 +122,6 @@ public class Patient {
         this.patientGender = patientGender;
     }
 
-    public String getPatientMail() {
-        return patientMail;
-    }
-
-    public void setPatientMail(String patientMail) {
-        this.patientMail = patientMail;
-    }
 
     public String getPatientNationality() {
         return patientNationality;
