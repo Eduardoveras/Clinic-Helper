@@ -12,6 +12,12 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
+group 'clinichelper'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 jar {
     baseName = 'gs-spring-boot'
     version =  '0.1.0'
@@ -21,8 +27,6 @@ repositories {
     mavenCentral()
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
 
 dependencies {
     // tag::jetty[]
@@ -43,5 +47,16 @@ dependencies {
     compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.2.Final'
     // https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager
     compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.2.2.Final'
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '1.4.1.RELEASE'
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '1.4.1.RELEASE'
+    // https://mvnrepository.com/artifact/org.postgresql/postgresql
+    compile group: 'org.postgresql', name: 'postgresql', version: '9.4.1211.jre7'
+
+
 
 }
+
+
+
