@@ -25,24 +25,22 @@ public class Patient {
     private String patientAddress;
     private String patientCity;
     private String patientCountry;
-    private Insurance patientInsurance;
 
     public Patient(){
 
     }
 
     // Used only for registration waiting list
-    public Patient(String patientName, String patientLastName, String patientTelephoneNumber, String patientEmail, Insurance patientInsurance){
+    public Patient(String patientName, String patientLastName, String patientTelephoneNumber, String patientEmail){
         this.setJascId("JASC-P-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setPatientName(patientName);
         this.setPatientLastName(patientLastName);
         this.setPatientTelephoneNumber(patientTelephoneNumber);
         this.setPatientEmail(patientEmail);
-        this.setPatientInsurance(patientInsurance);
     }
 
     // Used to create and register new patients
-    public Patient(String patientName, String patientLastName, String patientIdCard, String patientTelephoneNumber, String patientEmail, Date patientBirthDate, String patientNationality, String patientAddress, String patientCity, String patientCountry, Insurance patientInsurance) {
+    public Patient(String patientName, String patientLastName, String patientIdCard, String patientTelephoneNumber, String patientEmail, Date patientBirthDate, String patientNationality, String patientAddress, String patientCity, String patientCountry) {
         this.setJascId("JASC-P-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setPatientName(patientName);
         this.setPatientLastName(patientLastName);
@@ -55,7 +53,6 @@ public class Patient {
         this.setPatientAddress(patientAddress);
         this.setPatientCity(patientCity);
         this.setPatientCountry(patientCountry);
-        this.setPatientInsurance(patientInsurance);
     }
 
     public String getJascId() {
@@ -152,13 +149,5 @@ public class Patient {
 
     public void setPatientEmail(String patientEmail) {
         this.patientEmail = patientEmail;
-    }
-
-    public Insurance getPatientInsurance() {
-        return patientInsurance;
-    }
-
-    public void setPatientInsurance(Insurance patientInsurance) {
-        this.patientInsurance = patientInsurance;
     }
 }
