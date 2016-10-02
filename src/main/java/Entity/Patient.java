@@ -42,7 +42,7 @@ public class Patient {
     }
 
     // Used to create and register new patients
-    public Patient(String patientName, String patientLastName, String patientIdCard, String patientTelephoneNumber, String patientContactTelephoneNumber,String patientGender ,String patientEmail, Date patientBirthDate, String patientNationality, String patientAddress, String patientCity, String patientCountry) {
+    public Patient(String patientName, String patientLastName, String patientIdCard, String patientTelephoneNumber, String patientContactTelephoneNumber, String patientGender, String patientEmail, Date patientBirthDate, String patientNationality, String patientAddress, String patientCity, String patientCountry) {
         this.setJascId("JASC-P-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setPatientName(patientName);
         this.setPatientLastName(patientLastName);
