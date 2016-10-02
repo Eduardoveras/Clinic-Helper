@@ -15,20 +15,20 @@ public class Insurance implements Serializable{
     @Id
     private String jascID;
     @ManyToOne
-    private Patient ownwer;
-    private String insurranceSerialCode;
-    private String insurrancePlan;
+    private Patient owner;
+    private String insuranceSerialCode;
+    private String insurancePlan;
 
     // Constructors
     public Insurance(){
 
     }
 
-    public Insurance(Patient owner, String insurranceSerialCode, String insurrancePlan){
+    public Insurance(Patient owner, String insuranceSerialCode, String insurancePlan){
         this.setJascID("JASC-I-" + UUID.randomUUID().toString().split("-")[0]);
-        this.setOwnwer(owner);
-        this.setInsurranceSerialCode(insurranceSerialCode);
-        this.setInsurrancePlan(insurrancePlan);
+        this.setOwner(owner);
+        this.setInsuranceSerialCode(insuranceSerialCode);
+        this.setInsurancePlan(insurancePlan);
     }
 
     public String getJascID() {
@@ -39,27 +39,27 @@ public class Insurance implements Serializable{
         this.jascID = jascID;
     }
 
-    public Patient getOwnwer() {
-        return ownwer;
+    public Patient getOwner() {
+        return owner;
     }
 
-    public void setOwnwer(Patient ownwer) {
-        this.ownwer = ownwer;
+    public void setOwner(Patient owner) {
+        this.owner = owner;
     }
 
-    public String getInsurranceSerialCode() {
-        return insurranceSerialCode;
+    public String getInsuranceSerialCode() {
+        return insuranceSerialCode;
     }
 
-    public void setInsurranceSerialCode(String insurranceSerialCode) {
-        this.insurranceSerialCode = insurranceSerialCode;
+    public void setInsuranceSerialCode(String insuranceSerialCode) {
+        this.insuranceSerialCode = insuranceSerialCode;
     }
 
-    public String getInsurrancePlan() {
-        return insurrancePlan;
+    public String getInsurancePlan() {
+        return insurancePlan;
     }
 
-    public void setInsurrancePlan(String insurrancePlan) {
-        this.insurrancePlan = insurrancePlan;
+    public void setInsurancePlan(String insurancePlan) {
+        this.insurancePlan = insurancePlan;
     }
 }
