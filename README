@@ -9,4 +9,8 @@ Programmers:
 	Eduardo Veras
 
 
-Version: v0.1.0
+Version: v0.3.0
+** Refactored JPA database model using Spring Services and PostgreSQL
+
+Version: v0.2.0
+** First visible interfaces managed by Spring Controllers
