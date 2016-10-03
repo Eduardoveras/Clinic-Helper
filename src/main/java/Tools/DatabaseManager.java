@@ -6,9 +6,7 @@ package Tools;
 import Entity.Appointment;
 import Entity.Insurance;
 import Entity.Patient;
-import Entity.User;
 import Service.AppointmentORM;
-import Service.InsuranceORM;
 import Service.PatientORM;
 
 import javax.persistence.EntityNotFoundException;
@@ -245,6 +243,7 @@ public class DatabaseManager {
     }
 
     // Insurance Related Functions
+    /*
     public static boolean registerNewInsuranceForPatient(String patientJascId, String insuranceSerialCode, String insurancePlan){
         try{
             // Registering patient's insurance information
@@ -260,5 +259,5 @@ public class DatabaseManager {
             System.out.println("\n\nGeneral ERROR! --> " + exp.getMessage() + "\n");
             return false;
         }
-    }
+    }*/
 }

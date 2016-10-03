@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Service
@@ -17,6 +18,12 @@ public class UserServices {
     // Implementing Repository
     @Autowired
     private UserRepository userRepository;
+
+    @PostConstruct
+    public void init(){
+        if(userRepository.count() == 0)
+            userRepository.save(new User("ADMIN", "ADMINISTRATION", "", "djidjellypas92@gmail.com", "admin", "admin"));
+    }
 
     // Core Functions
     @Transactional
