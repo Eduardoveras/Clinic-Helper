@@ -8,7 +8,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 public interface UserRepository  extends JpaRepository<User, String>{
+
+    User findByUsername(String username);
+
+    @Query("select u from User u") // TODO: This findAllUsers Query function
+    List<User> findAllUsers();
 
     @Query("select u from User u where u.username = :username and u.password = :pasword")
     User findUserAccountWithUsernameAndPassword(@Param("username") String username, @Param("password") String password);
