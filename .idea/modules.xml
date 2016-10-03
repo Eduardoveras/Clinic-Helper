@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ClinicHelper.iml" filepath="$PROJECT_DIR$/.idea/modules/ClinicHelper.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ClinicHelper_main.iml" filepath="$PROJECT_DIR$/.idea/modules/ClinicHelper_main.iml" group="ClinicHelper" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ClinicHelper_main.iml" filepath="$PROJECT_DIR$/.idea/modules/ClinicHelper_main.iml" group="ClinicHelper" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ClinicHelper_test.iml" filepath="$PROJECT_DIR$/.idea/modules/ClinicHelper_test.iml" group="ClinicHelper" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ClinicHelper_test.iml" filepath="$PROJECT_DIR$/.idea/modules/ClinicHelper_test.iml" group="ClinicHelper" />
     </modules>
   </component>
