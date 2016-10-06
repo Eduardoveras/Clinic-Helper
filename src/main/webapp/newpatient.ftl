@@ -19,14 +19,18 @@
         <input type="number" name="telephonenumber" ><br>
         Numero de telefono de contacto:<br>
         <input type="number" name="contacttelephonenumber" ><br>
+        Direccion:<br>
+        <input type="text" name="address" ><br>
+        Ocupacion:<br>
+        <input type="text" name="occupation" ><br>
         Fecha De nacimiento:
         <input type="date" name="dateofbirth"><br>
-        Sexo:
-        <input type="radio" name="gender" value="male" checked> Masculino<br>
-        <input type="radio" name="gender" value="female"> Femenino<br>
-        <input type="radio" name="gender" value="other"> Otro
         Fecha De Registro:
         <input type="date" name="registeredDate"><br>
+        Sexo:
+        <input type="radio" name="gender" value="male" > Masculino<br>
+        <input type="radio" name="gender" value="female"> Femenino<br>
+        <input type="radio" name="gender" value="other"> Otro
         Nacionalidad:
         <select id="countries">
             <option disabled selected value> -- Seleccione un pais -- </option>
