@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class registerController {
     @RequestMapping("/solicit")
     public String solicit(){
-        return "request";
+        return "newpatient";
     }
 }
