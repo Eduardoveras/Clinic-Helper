@@ -1,16 +1,15 @@
 package com.clinichelper.Entity;
 
-import com.clinichelper.Entity.Appointment;
-
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.UUID;
 
 /**
  * Created by eva_c on 9/25/2016.
  */
 @Entity
-@Table(name="CONSULTS")
+@Table(name="consultation")
 public class Consultation {
     @Id
     @GeneratedValue
@@ -27,6 +26,7 @@ public class Consultation {
 
     }
     public Consultation(Date consultationDate, Timestamp consultationTime, String consultationDetail, Surgery surgery, Appointment appointment){
+        this.setJascId("JASC-C-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setConsultationDate(consultationDate);
         this.setConsultationTime(consultationTime);
         this.setConsultationDetail(consultationDetail);

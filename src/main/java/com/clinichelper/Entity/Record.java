@@ -1,19 +1,16 @@
 package com.clinichelper.Entity;
 
-import com.clinichelper.Entity.Consultation;
-import com.clinichelper.Entity.Patient;
-
 import javax.persistence.*;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * Created by eva_c on 9/25/2016.
  */
 @Entity
-@Table(name="RECORDS")
+@Table(name="records")
 public class Record {
     @Id
-    @GeneratedValue
     private String recordId;
     @OneToOne
     private Patient patient;
@@ -29,6 +26,7 @@ public class Record {
     }
 
     public Record(Patient patient, String recordDetails, Set<Surgery> surgeries, Set<Consultation> consultations) {
+        this.setRecordId("JASC-R-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setPatient(patient);
         this.setRecordDetails(recordDetails);
         this.setSurgeries(surgeries);
@@ -63,9 +61,7 @@ public class Record {
         return surgeries;
     }
 
-    public void setSurgeries(Set<Surgery> surgeries) {
-        this.surgeries = surgeries;
-    }
+    public void setSurgeries(Set<Surgery> surgeries) { this.surgeries = surgeries; }
 
     public Set<Consultation> getConsultations() {
         return consultations;

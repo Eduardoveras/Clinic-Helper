@@ -6,10 +6,12 @@ package com.clinichelper.Entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.UUID;
 
 @Entity
+@Table(name = "insurance")
 public class Insurance implements Serializable{
     // Attributes
     @Id
@@ -25,7 +27,7 @@ public class Insurance implements Serializable{
     }
 
     public Insurance(Patient owner, String insuranceSerialCode, String insurancePlan){
-        this.setJascId("JASC-I-" + UUID.randomUUID().toString().split("-")[0]);
+        this.setJascId("JASC-I-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setOwner(owner);
         this.setInsuranceSerialCode(insuranceSerialCode);
         this.setInsurancePlan(insurancePlan);
@@ -43,9 +45,7 @@ public class Insurance implements Serializable{
         return owner;
     }
 
-    public void setOwner(Patient owner) {
-        this.owner = owner;
-    }
+    public void setOwner(Patient owner) { this.owner = owner; }
 
     public String getInsuranceSerialCode() {
         return insuranceSerialCode;

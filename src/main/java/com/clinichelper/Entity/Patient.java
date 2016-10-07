@@ -9,7 +9,7 @@ import java.util.UUID;
  * Created by eva_c on 9/25/2016.
  */
 @Entity
-@Table(name="PATIENTS")
+@Table(name="patients")
 public class Patient {
     @Id
     private String jascId;
@@ -34,7 +34,7 @@ public class Patient {
 
     // Used only for registration waiting list
     public Patient(String patientName, String patientLastName, String patientTelephoneNumber, String patientEmail){
-        this.setJascId("JASC-?-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+        this.setJascId(UUID.randomUUID().toString().split("-")[0]);
         this.setPatientName(patientName);
         this.setPatientLastName(patientLastName);
         this.setPatientTelephoneNumber(patientTelephoneNumber);
@@ -95,16 +95,13 @@ public class Patient {
         return patientTelephoneNumber;
     }
 
-    public void setPatientTelephoneNumber(String patientTelephoneNumber) {
-        this.patientTelephoneNumber = patientTelephoneNumber;
-    }
+    public void setPatientTelephoneNumber(String patientTelephoneNumber) { this.patientTelephoneNumber = patientTelephoneNumber; }
+
     public String getPatientContactTelephoneNumber() {
         return patientContactTelephoneNumber;
     }
 
-    public void setPatientContactTelephoneNumber(String patientContactTelephoneNumber) {
-        this.patientContactTelephoneNumber = patientContactTelephoneNumber;
-    }
+    public void setPatientContactTelephoneNumber(String patientContactTelephoneNumber) { this.patientContactTelephoneNumber = patientContactTelephoneNumber; }
 
     public Date getPatientBirthDate() {
         return patientBirthDate;
@@ -121,7 +118,6 @@ public class Patient {
     public void setPatientGender(String patientGender) {
         this.patientGender = patientGender;
     }
-
 
     public String getPatientNationality() {
         return patientNationality;
@@ -159,9 +155,7 @@ public class Patient {
         return patientRegisteredDate;
     }
 
-    public void setPatientRegisteredDate(Date patientRegisteredDate) {
-        this.patientRegisteredDate = patientRegisteredDate;
-    }
+    public void setPatientRegisteredDate(Date patientRegisteredDate) { this.patientRegisteredDate = patientRegisteredDate; }
 
     public String getPatientEmail() {
         return patientEmail;

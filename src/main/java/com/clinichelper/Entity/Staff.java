@@ -1,18 +1,17 @@
 package com.clinichelper.Entity;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.UUID;
 
 /**
  * Created by eva_c on 9/25/2016.
  */
 @Entity
-@Table(name="STAFF")
+@Table(name="staff")
 public class Staff {
     @Id
-    @GeneratedValue
     private String staffId;
     private String staffName;
     private String staffClinicId;
@@ -24,6 +23,7 @@ public class Staff {
     }
 
     public Staff(String staffName, String staffClinicId, String staffRole, String staffRoleDescription) {
+        this.setStaffId("JASC-STAFF-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setStaffName(staffName);
         this.setStaffClinicId(staffClinicId);
         this.setStaffRole(staffRole);
@@ -66,7 +66,5 @@ public class Staff {
         return staffRoleDescription;
     }
 
-    public void setStaffRoleDescription(String staffRoleDescription) {
-        this.staffRoleDescription = staffRoleDescription;
-    }
+    public void setStaffRoleDescription(String staffRoleDescription) { this.staffRoleDescription = staffRoleDescription; }
 }

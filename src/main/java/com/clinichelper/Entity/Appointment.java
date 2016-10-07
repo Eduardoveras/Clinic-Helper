@@ -9,7 +9,7 @@ import java.util.UUID;
  * Created by eva_c on 9/25/2016.
  */
 @Entity
-@Table(name="APPOINTMENTS")
+@Table(name="appointments")
 public class Appointment {
     @Id
     private String jascId;
@@ -26,7 +26,7 @@ public class Appointment {
     }
 
     public Appointment(Date appointmentDate, Patient appointmentPatient, String appointmentDescription, String appointmentAccessFrom){
-        this.setJascId("JASC-?-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+        this.setJascId("Request-" + UUID.randomUUID().toString().split("-")[0]);
         this.setAppointmentDate(appointmentDate);
         this.setAppointmentPatient(appointmentPatient);
         this.setAppointmentDescription(appointmentDescription);

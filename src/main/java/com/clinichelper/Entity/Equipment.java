@@ -1,18 +1,17 @@
 package com.clinichelper.Entity;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.UUID;
 
 /**
  * Created by eva_c on 9/25/2016.
  */
 @Entity
-@Table(name="EQUIPMENTS")
+@Table(name="equipments")
 public class Equipment {
     @Id
-    @GeneratedValue
     private String equipmentId;
     private String equipmentName;
     private String equipmentUse;
@@ -23,6 +22,7 @@ public class Equipment {
    }
 
     public Equipment(String equipmentName, String equipmentUse, String equipmentDescription) {
+        this.setEquipmentId("JASC-E-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setEquipmentName(equipmentName);
         this.setEquipmentUse(equipmentUse);
         this.setEquipmentDescription(equipmentDescription);

@@ -1,22 +1,18 @@
 package com.clinichelper.Entity;
 
-import com.clinichelper.Entity.Appointment;
-import com.clinichelper.Entity.Equipment;
-import com.clinichelper.Entity.Staff;
-
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * Created by eva_c on 9/25/2016.
  */
 @Entity
-@Table(name="SURGERIES")
+@Table(name="surgeries")
 public class Surgery {
     @Id
-    @GeneratedValue
     private String surgeryId;
     private String surgeryName;
     private String surgeryDescription;
@@ -35,6 +31,7 @@ public class Surgery {
     }
 
     public Surgery(String surgeryName, String surgeryDescription, Date surgeryDate, Timestamp surgeryTime, String surgeryRoom, Set<Staff> staffs, Set<Equipment> equipments, Appointment appointment) {
+        this.setSurgeryId("JASC-S-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setSurgeryName(surgeryName);
         this.setSurgeryDescription(surgeryDescription);
         this.setSurgeryDate(surgeryDate);
