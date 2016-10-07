@@ -47,6 +47,7 @@ public class PatientORM extends GenericORMService<Patient>{
         return query.getSingleResult();
     }
 
+    // TODO: Translate this function to PatientRepository interface
     public static List<Patient> generateListOfPatientsThatMatchRegEx(String regex){
         String[] expresions = regex.split(" ");
         EntityManager em;

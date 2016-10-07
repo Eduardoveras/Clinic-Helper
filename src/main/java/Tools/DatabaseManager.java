@@ -6,11 +6,8 @@ package Tools;
 import Entity.Appointment;
 import Entity.Insurance;
 import Entity.Patient;
-import Entity.User;
 import Service.AppointmentORM;
-import Service.InsuranceORM;
 import Service.PatientORM;
-import Service.UserORM;
 
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceException;
@@ -33,14 +30,14 @@ public class DatabaseManager {
 
     public static void bootDatabaseServer(){
         //Setting up default configurations
-        List<User> users = UserORM.getInstance().FindAll();
-
+        //List<User> users = UserORM.getInstance().FindAll();
+/*
         if (users.size() == 0){
             System.out.println("Creating True Admin ...");
             //Creating True Admin for Application
             UserORM.getInstance().Create(new User("admin", "JASC", "ITTT", "djidjellypas92@gmail.com", "admin", "admin"));
             System.out.println("True Admin created...");
-        }
+        }*/
     }
 
     // Auxiliary Functions
@@ -123,7 +120,7 @@ public class DatabaseManager {
     }
 
     // User Related Functions
-    public static boolean isUsernameTaken(String username){
+ /*   public static boolean isUsernameTaken(String username){
         User user = UserORM.getInstance().Find(username);
 
         return ( user != null );
@@ -158,7 +155,7 @@ public class DatabaseManager {
     public static void deleteUserAccount(String username){
         UserORM.getInstance().Delete(UserORM.getInstance().Find(username.toUpperCase()));
     }
-
+*/
     // Patient Related Function
     public static boolean createNewPatient(String firstName, String lastName, String identificationCard, String telephoneNumber, String patientEmail, Date dateOfBirth, String nationality, String address, String city, String country){
         try {
@@ -246,6 +243,7 @@ public class DatabaseManager {
     }
 
     // Insurance Related Functions
+    /*
     public static boolean registerNewInsuranceForPatient(String patientJascId, String insuranceSerialCode, String insurancePlan){
         try{
             // Registering patient's insurance information
@@ -261,5 +259,5 @@ public class DatabaseManager {
             System.out.println("\n\nGeneral ERROR! --> " + exp.getMessage() + "\n");
             return false;
         }
-    }
+    }*/
 }

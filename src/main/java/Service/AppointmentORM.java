@@ -33,7 +33,7 @@ public class AppointmentORM extends GenericORMService<Appointment>{
         return query.getResultList();
     }
 
-    // TODO: Test this function
+    // TODO: Translate following functions into AppointmentRepository interface
     public static List<Appointment> findAppointmentsByWeek(Date startDate){
         // Calculating last date of the week given the start date
         Calendar lastDate = Calendar.getInstance();
@@ -48,7 +48,6 @@ public class AppointmentORM extends GenericORMService<Appointment>{
         return query.getResultList();
     }
 
-    // TODO: test this function
     public static List<Appointment> findAppointmentsByMonth(Date startDate){
         // Calculating last date of the week given the start date
         Calendar lastDate = Calendar.getInstance();
