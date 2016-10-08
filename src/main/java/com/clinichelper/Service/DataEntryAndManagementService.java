@@ -64,16 +64,13 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public Consultation createNewConsultation(Date date, Timestamp time, String detail, String surgeryJascId, String appointmentJascId) throws Exception{
-
-        if (!doesSurguryJascIdExist(surgeryJascId))
-            throw new IllegalArgumentException("\n\nThis surgery jasc id is noe valid");
+    public Consultation createNewConsultation(Date date, Timestamp time, String detail, String appointmentJascId) throws Exception{
 
         if (!doesAppointmentJascIdExist(appointmentJascId))
             throw new IllegalArgumentException("\n\nThis appointment jasc id is not valid");
 
         try {
-            return consultationRepository.save(new Consultation(date, time, detail, surgeryRepository.findByJascId(surgeryJascId), appointmentRepository.findByJascId(appointmentJascId)));
+            return consultationRepository.save(new Consultation(date, time, detail, appointmentRepository.findByJascId(appointmentJascId)));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis consultation was not able to persist -> " + exp.getMessage());
@@ -165,13 +162,13 @@ public class DataEntryAndManagementService {
             return recordRepository.save(new Record(patientRepository.findByJascId(patientJascId), recordDetails, surgeries, consultations));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
-            throw new PersistenceException("\n\nThis patient was not able to persist -> " + exp.getMessage());
+            throw new PersistenceException("\n\nThis record was not able to persist -> " + exp.getMessage());
         } catch (NullPointerException exp) {
             System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
             throw new NullPointerException("\n\nAN object or process has risen a null value -> " + exp.getMessage());
         } catch (Exception exp){
             System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
-            throw new Exception("\n\nAn error occurred when trying to create a patient -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred when trying to create a record -> " + exp.getMessage());
         }
     }
 
@@ -184,10 +181,35 @@ public class DataEntryAndManagementService {
             throw new PersistenceException("\n\nThis patient was not able to persist -> " + exp.getMessage());
         } catch (NullPointerException exp) {
             System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
-            throw new NullPointerException("\n\nAN object or process has risen a null value -> " + exp.getMessage());
+            throw new NullPointerException("\n\nAn object or process has risen a null value -> " + exp.getMessage());
         } catch (Exception exp){
             System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
             throw new Exception("\n\nAn error occurred when trying to create a patient -> " + exp.getMessage());
+        }
+    }
+
+    public Surgery createNewSurgery(String name, String description, String patientJascId, Date date, Timestamp time, String surgeryRoom, Set<Staff> staffs, Set<Equipment> equipments, String appointmentJascId) throws Exception {
+
+        if (!doesPatientJascIdExist(patientJascId))
+            throw new IllegalArgumentException("\n\nThis is an invalid patient jascId");
+
+        if (!doesAppointmentJascIdExist(appointmentJascId))
+            throw new IllegalArgumentException("\n\nThis appointment jasc id is not valid");
+
+        if (staffs.isEmpty())
+            throw new NullArgumentException("\n\nYou may not preform a surgery without staff. Please Choose at least one staff member.");
+
+        try {
+            return surgeryRepository.save(new Surgery(name, description, patientRepository.findByJascId(patientJascId), date, time, surgeryRoom, staffs, equipments, appointmentRepository.findByJascId(appointmentJascId)));
+        } catch (PersistenceException exp){
+            System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
+            throw new PersistenceException("\n\nThis surgery was not able to persist -> " + exp.getMessage());
+        } catch (NullPointerException exp) {
+            System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
+            throw new NullPointerException("\n\nAn object or process has risen a null value -> " + exp.getMessage());
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred when trying to create a surgery -> " + exp.getMessage());
         }
     }
 
