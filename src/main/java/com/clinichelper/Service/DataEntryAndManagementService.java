@@ -103,14 +103,83 @@ public class DataEntryAndManagementService {
             return userRepository.save(new User(username, staffRepository.findByJascId(staffJascId), password, role));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
-            throw new PersistenceException("\n\nThis patient was not able to persist -> " + exp.getMessage());
+            throw new PersistenceException("\n\nThis user was not able to persist -> " + exp.getMessage());
         } catch (Exception exp){
             System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
-            throw new Exception("\n\nAn error occurred when trying to create a patient -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred when trying to create a user -> " + exp.getMessage());
         }
     }
 
-    // Auxiliary Function
+    // Elimination Functions
+    public void deleteRegisteredAppointment(String jascId) throws Exception {
+
+        if (!doesAppointmentJascIdExist(jascId))
+            throw new IllegalArgumentException("\n\nThis appointment jasc id is not valid");
+
+        try {
+            appointmentRepository.delete(jascId);
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred while deleting an appointment -> " + exp.getMessage());
+        }
+    }
+
+    public void deleteRegisteredInsurance(String jascId) throws Exception {
+
+        if (!doesInsuranceJascIdExist(jascId))
+            throw new IllegalArgumentException("\n\nThis insurance jasc Id is invalid,! Please try again.");
+
+        try {
+            insuranceRepository.delete(jascId);
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred while deleting an insurance -> " + exp.getMessage());
+        }
+    }
+
+    public void deleteRegisteredStaff(String jascId) throws Exception {
+
+        if (!doesStaffJascIdExist(jascId))
+            throw new IllegalArgumentException("\n\nThis staff jasc id is invalid");
+
+
+        try {
+            staffRepository.delete(jascId);
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred while deleting a staff member -> " + exp.getMessage());
+        }
+    }
+
+    public void deleteRegisterdUserAccount(String username) throws Exception {
+
+        if (!isUsernameAlreadyTaken(username))
+            throw new IllegalArgumentException("\n\nThis user account does not exist");
+
+        if (username.equals("admin"))
+            throw new IllegalArgumentException("\n\nDANGER: YOU CAN NOT ERASE ADMIN ACCOUNT!");
+
+        try {
+            userRepository.delete(username);
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred while deleting a user -> " + exp.getMessage());
+        }
+    }
+
+    // Auxiliary Functions
+    private boolean doesAppointmentJascIdExist(String jascId) {
+        Appointment appointment = appointmentRepository.findByJascId(jascId);
+
+        return (appointment != null);
+    }
+
+    private boolean doesInsuranceJascIdExist(String jascId){
+        Insurance insurance = insuranceRepository.findByJascId(jascId);
+
+        return (insurance != null);
+    }
+
     private boolean doesPatientJascIdExist(String jascId){
         Patient patient = patientRepository.findByJascId(jascId);
 
