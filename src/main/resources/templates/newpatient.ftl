@@ -1,9 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Solicitud de cita</title>
-</head>
+<#include "/header.ftl">
+
 <body>
+<div class="loader"></div>
+
+<div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+
+<#include "/navbar.ftl">
+<#include "/sidebar.ftl">
+
+
+    <main class="mdl-layout__content mdl-color--grey-100">
+
+
+
 <form >
     <fieldset>
         <legend>Registro de paciente:</legend>
@@ -49,5 +58,10 @@
         <input type="submit" value="Submit">
     </fieldset>
 </form>
+
+
+    </main>
+</div>
+
+
 </body>
-</html>
