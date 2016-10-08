@@ -21,7 +21,7 @@ public class Appointment implements Serializable{
     private Timestamp appointmentTime;
     @ManyToOne
     @NotNull
-    private Patient appointmentPatient;
+    private Patient patient;
     @Column(length = 500)
     private String appointmentDescription;
     private String appointmentAccessFrom;
@@ -30,19 +30,19 @@ public class Appointment implements Serializable{
 
     }
 
-    public Appointment(Date appointmentDate, Patient appointmentPatient, String appointmentDescription, String appointmentAccessFrom){
+    public Appointment(Date appointmentDate, Patient patient, String appointmentDescription, String appointmentAccessFrom){
         this.setJascId("Request-" + UUID.randomUUID().toString().split("-")[0]);
         this.setAppointmentDate(appointmentDate);
-        this.setAppointmentPatient(appointmentPatient);
+        this.setPatient(patient);
         this.setAppointmentDescription(appointmentDescription);
         this.setAppointmentAccessFrom(appointmentAccessFrom);
     }
 
-    public Appointment(Date appointmentDate, Timestamp appointmentTime, Patient appointmentPatient, String appointmentDescription, String appointmentAccessFrom){
+    public Appointment(Date appointmentDate, Timestamp appointmentTime, Patient patient, String appointmentDescription, String appointmentAccessFrom){
         this.setJascId("JASC-A-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setAppointmentDate(appointmentDate);
         this.setAppointmentTime(appointmentTime);
-        this.setAppointmentPatient(appointmentPatient);
+        this.setPatient(patient);
         this.setAppointmentDescription(appointmentDescription);
         this.setAppointmentAccessFrom(appointmentAccessFrom);
     }
@@ -71,12 +71,12 @@ public class Appointment implements Serializable{
         this.appointmentTime = appointmentTime;
     }
 
-    public Patient getAppointmentPatient() {
-        return appointmentPatient;
+    public Patient getPatient() {
+        return patient;
     }
 
-    public void setAppointmentPatient(Patient appointmentPatient) {
-        this.appointmentPatient = appointmentPatient;
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
     public String getAppointmentAccessFrom() {

@@ -14,11 +14,13 @@ import java.util.List;
 public interface AppointmentRepository extends JpaRepository<Appointment, String> {
 
     Appointment findByJascId(String jascID);
-/*
-    @Query("select a from Appointment a where a.appointmentDate = :appointmentDate")
-    List<Appointment> findAppointmentsByDate(@Param("appointmentDate") Date searchdate);
 
-    @Query("select a from Appointment a where a.pappointmentDate between :beginning and :ending")
-    List<Appointment> findAppointmentsByRange(@Param("beginning") Date startDate, @Param("ending") Date endDate);
-    */
+    @Query("select a from Appointment a where a.appointmentDate = :appointmentDate")
+    List<Appointment> findByDate(@Param("appointmentDate") Date searchDate);
+
+    @Query("select a from Appointment a where a.appointmentDate between :beginning and :ending")
+    List<Appointment> findByDateRange(@Param("beginning") Date startDate, @Param("ending") Date endDate);
+
+    @Query("select a from Appointment a where a.patient.jascId = :id")
+    List<Appointment> findByPatientJascId(@Param("id") String patientJascId);
 }

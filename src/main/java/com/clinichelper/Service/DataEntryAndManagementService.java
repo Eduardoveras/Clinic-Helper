@@ -477,12 +477,6 @@ public class DataEntryAndManagementService {
         return (staff != null);
     }
 
-    private boolean doesSurguryJascIdExist(String jascId){
-        Surgery surgery = surgeryRepository.findByJascId(jascId);
-
-        return (surgery != null);
-    }
-
     private boolean isUsernameAlreadyTaken(String username){
         User user = userRepository.findByUsername(username);
 
