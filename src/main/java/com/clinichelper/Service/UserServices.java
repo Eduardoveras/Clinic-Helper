@@ -3,6 +3,7 @@
  */
 package com.clinichelper.Service;
 
+import com.clinichelper.Entity.Staff;
 import com.clinichelper.Entity.User;
 import com.clinichelper.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,8 @@ public class UserServices {
     @PostConstruct
     public void init(){
         if(userRepository.count() == 0)
-            userRepository.save(new User("ADMIN", "ADMINISTRATION", "", "djidjellypas92@gmail.com", "admin", "admin"));
+            // TODO: Create admin staff
+            userRepository.save(new User("ADMIN", new Staff(), "admin", "admin"));
     }
 
     // Core Functions

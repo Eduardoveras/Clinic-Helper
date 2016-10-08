@@ -3,6 +3,7 @@ package com.clinichelper.Entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.UUID;
 
 /**
@@ -10,10 +11,12 @@ import java.util.UUID;
  */
 @Entity
 @Table(name="staff")
-public class Staff {
+public class Staff implements Serializable{
     @Id
-    private String staffId;
-    private String staffName;
+    private String jascId;
+    private String staffFirstName;
+    private String staffLastName;
+    private String staffEmail;
     private String staffClinicId;
     private String staffRole;
     private String staffRoleDescription;
@@ -22,28 +25,30 @@ public class Staff {
 
     }
 
-    public Staff(String staffName, String staffClinicId, String staffRole, String staffRoleDescription) {
-        this.setStaffId("JASC-STAFF-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
-        this.setStaffName(staffName);
+    public Staff(String staffFirstName,String staffLastName, String staffEmail, String staffClinicId, String staffRole, String staffRoleDescription) {
+        this.setJascId("JASC-STAFF-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+        this.setStaffFirstName(staffFirstName);
+        this.setStaffLastName(staffLastName);
+        this.setStaffEmail(staffEmail);
         this.setStaffClinicId(staffClinicId);
         this.setStaffRole(staffRole);
         this.setStaffRoleDescription(staffRoleDescription);
     }
 
-    public String getStaffId() {
-        return staffId;
+    public String getJascId() {
+        return jascId;
     }
 
-    public void setStaffId(String staffId) {
-        this.staffId = staffId;
+    public void setJascId(String jascId) {
+        this.jascId = jascId;
     }
 
-    public String getStaffName() {
-        return staffName;
+    public String getStaffFirstName() {
+        return staffFirstName;
     }
 
-    public void setStaffName(String staffName) {
-        this.staffName = staffName;
+    public void setStaffFirstName(String staffFirstName) {
+        this.staffFirstName = staffFirstName;
     }
 
     public String getStaffClinicId() {
@@ -67,4 +72,20 @@ public class Staff {
     }
 
     public void setStaffRoleDescription(String staffRoleDescription) { this.staffRoleDescription = staffRoleDescription; }
+
+    public String getStaffLastName() {
+        return staffLastName;
+    }
+
+    public void setStaffLastName(String staffLastName) {
+        this.staffLastName = staffLastName;
+    }
+
+    public String getStaffEmail() {
+        return staffEmail;
+    }
+
+    public void setStaffEmail(String staffEmail) {
+        this.staffEmail = staffEmail;
+    }
 }

@@ -1,6 +1,7 @@
 package com.clinichelper.Entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Set;
@@ -11,9 +12,9 @@ import java.util.UUID;
  */
 @Entity
 @Table(name="surgeries")
-public class Surgery {
+public class Surgery implements Serializable{
     @Id
-    private String surgeryId;
+    private String jascId;
     private String surgeryName;
     private String surgeryDescription;
     private Date surgeryDate;
@@ -31,7 +32,7 @@ public class Surgery {
     }
 
     public Surgery(String surgeryName, String surgeryDescription, Date surgeryDate, Timestamp surgeryTime, String surgeryRoom, Set<Staff> staffs, Set<Equipment> equipments, Appointment appointment) {
-        this.setSurgeryId("JASC-S-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+        this.setJascId("JASC-S-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setSurgeryName(surgeryName);
         this.setSurgeryDescription(surgeryDescription);
         this.setSurgeryDate(surgeryDate);
@@ -42,12 +43,12 @@ public class Surgery {
         this.setAppointment(appointment);
     }
 
-    public String getSurgeryId() {
-        return surgeryId;
+    public String getJascId() {
+        return jascId;
     }
 
-    public void setSurgeryId(String surgeryId) {
-        this.surgeryId = surgeryId;
+    public void setJascId(String jascId) {
+        this.jascId = jascId;
     }
 
     public String getSurgeryName() {

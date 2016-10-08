@@ -1,6 +1,7 @@
 package com.clinichelper.Entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.UUID;
@@ -10,7 +11,7 @@ import java.util.UUID;
  */
 @Entity
 @Table(name="patients")
-public class Patient {
+public class Patient implements Serializable{
     @Id
     private String jascId;
     private String patientName; //
