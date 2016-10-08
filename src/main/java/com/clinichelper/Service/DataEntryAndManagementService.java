@@ -211,9 +211,7 @@ public class DataEntryAndManagementService {
 
         try {
             User user = userRepository.findByUsername(username);
-
             user.setPassword(password);
-
             userRepository.save(user);
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
