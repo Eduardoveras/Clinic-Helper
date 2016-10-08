@@ -1,6 +1,7 @@
 package com.clinichelper.Entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -15,16 +16,22 @@ import java.util.UUID;
 public class Surgery implements Serializable{
     @Id
     private String jascId;
+    @NotNull
     private String surgeryName;
     private String surgeryDescription;
+    @NotNull
     private Date surgeryDate;
+    @NotNull
     private Timestamp surgeryTime;
+    @NotNull
     private String surgeryRoom;
     @ManyToMany
+    @NotNull
     private Set<Staff> staffs;
     @OneToMany
     private Set<Equipment> equipments;
     @OneToOne
+    @NotNull
     private Appointment appointment;
 
     public Surgery(){

@@ -1,6 +1,7 @@
 package com.clinichelper.Entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Calendar;
@@ -14,20 +15,29 @@ import java.util.UUID;
 public class Patient implements Serializable{
     @Id
     private String jascId;
+    @NotNull
     private String patientFirstName; //
+    @NotNull
     private String patientLastName;//
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String patientIdCard;//
+    @NotNull
     private String patientTelephoneNumber;//
+    private String patientContactTelephoneNumber;//
+    @NotNull
     private String patientEmail;//
+    @NotNull
     private Date patientBirthDate;//
+    @NotNull
     private String patientGender;//
     private Date patientRegisteredDate;
     private String patientNationality;
+    @NotNull
     private String patientAddress;
+    @NotNull
     private String patientCity;
+    @NotNull
     private String patientCountry;
-    private String patientContactTelephoneNumber;//
 
     public Patient(){
 

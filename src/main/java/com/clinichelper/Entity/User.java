@@ -6,6 +6,7 @@ package com.clinichelper.Entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
@@ -14,8 +15,11 @@ public class User implements Serializable{
     // Attributes
     @Id
     private String username;
+    @NotNull
     private Staff staff;
+    @NotNull
     private String password;
+    @NotNull
     private String role;
 
     // Constructors
