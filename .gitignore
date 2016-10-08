@@ -46,3 +46,5 @@ nbdist/
 .gradle
 /build/
 !gradle/wrapper/gradle-wrapper.jar
+bin/
+src/test/
