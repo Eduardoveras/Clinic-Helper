@@ -1,57 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="338a71bb-b984-48da-b5a4-09cf58e20bee" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/resources/main/static/css/common.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/resources/main/static/js/common.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/resources/main/static/js/jquery-3.0.0.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/resources/main/static/media/android-desktop.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/resources/main/static/media/favicon.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/resources/main/static/media/ios-desktop.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/resources/main/template/404.ftl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/resources/main/template/header.ftl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/resources/main/template/hello.ftl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/resources/main/template/index.ftl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/resources/main/template/login.ftl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/resources/main/template/navbar.ftl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/resources/main/template/newpatient.ftl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/resources/main/template/register.ftl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/resources/main/template/request.ftl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/resources/main/template/sidebar.ftl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/static/css/common.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/static/js/common.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/static/js/jquery-3.0.0.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/static/media/android-desktop.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/static/media/favicon.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/static/media/ios-desktop.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/template/404.ftl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/template/header.ftl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/template/hello.ftl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/template/index.ftl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/template/login.ftl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/template/navbar.ftl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/template/newpatient.ftl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/template/register.ftl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/template/request.ftl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/template/sidebar.ftl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/newpatient.ftl" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/resources/main/application.properties" afterPath="$PROJECT_DIR$/build/resources/main/application.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/AppointmentController.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/AppointmentController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/IndexController.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/IndexController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/loginController.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/loginController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/registerController.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/registerController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/Appointment.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/Appointment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/Consultation.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/Consultation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/Equipment.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/Equipment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/Patient.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/Patient.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/Record.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/Record.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/Staff.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/Staff.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/Surgery.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/Surgery.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/User.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Service/UserServices.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Service/UserServices.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/application.properties" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" />
-    </list>
+    <list default="true" id="338a71bb-b984-48da-b5a4-09cf58e20bee" name="Default" comment="" />
     <ignored path="ClinicHelper.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -1462,12 +1412,12 @@
       <workItem from="1475801341378" duration="597000" />
       <workItem from="1475804267609" duration="11563000" />
       <workItem from="1475937021373" duration="18000" />
-      <workItem from="1475937454580" duration="3023000" />
+      <workItem from="1475937454580" duration="3207000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24136000" />
+    <option name="totallyTimeSpent" value="24320000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
