@@ -11,7 +11,7 @@ import java.util.List;
  * Created by eva_c on 10/8/2016.
  */
 public interface EquipmentRepository extends JpaRepository<Equipment, String> {
-    Equipment findBy (String jascId);
+    Equipment findByJascId (String jascId);
 
     @Query("select E from Equipment E where E.equipmentName = :equipmentName")
     List<Equipment> findEquipmentByequipmentName(@Param("equipmentName") String equipmentName);

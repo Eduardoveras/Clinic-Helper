@@ -23,6 +23,8 @@ public class DataEntryAndManagementService {
     @Autowired
     private ConsultationRepository consultationRepository;
     @Autowired
+    private EquipmentRepository equipmentRepository;
+    @Autowired
     private InsuranceRepository insuranceRepository;
     @Autowired
     private PatientRepository patientRepository;
@@ -69,6 +71,19 @@ public class DataEntryAndManagementService {
         } catch (Exception exp){
             System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
             throw new Exception("\n\nAn error occurred when trying to create a consultation -> " + exp.getMessage());
+        }
+    }
+
+    public Equipment createNewEquipment(String equipmentName, String equipmentUse, String equipmentDescription) throws Exception {
+
+        try {
+            return equipmentRepository.save(new Equipment(equipmentName, equipmentUse, equipmentDescription));
+        } catch (PersistenceException exp){
+            System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
+            throw new PersistenceException("\n\nThis equipment was not able to persist -> " + exp.getMessage());
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred when trying to create a equipment -> " + exp.getMessage());
         }
     }
 
@@ -147,6 +162,19 @@ public class DataEntryAndManagementService {
         }
     }
 
+    public void deleteRegisteredEquipment(String jascId) throws Exception {
+
+        if (!doesEquipmentJascIdExist(jascId))
+            throw new IllegalArgumentException("\n\nThis equipment jasc id is not valid");
+
+        try {
+            equipmentRepository.delete(jascId);
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred while deleting an equipment -> " + exp.getMessage());
+        }
+    }
+
     public void deleteRegisteredInsurance(String jascId) throws Exception {
 
         if (!doesInsuranceJascIdExist(jascId))
@@ -204,6 +232,19 @@ public class DataEntryAndManagementService {
         }
     }
 
+    public void editEquipment(Equipment equipment) throws Exception {
+
+        try {
+            equipmentRepository.save(equipment);
+        } catch (PersistenceException exp){
+            System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
+            throw new PersistenceException("\n\nThis equipment was not able to persist -> " + exp.getMessage());
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred when trying to edit an equipment -> " + exp.getMessage());
+        }
+    }
+
     public void editInsurance(Insurance insurance) throws Exception {
 
         try {
@@ -250,6 +291,12 @@ public class DataEntryAndManagementService {
         Appointment appointment = appointmentRepository.findByJascId(jascId);
 
         return (appointment != null);
+    }
+
+    private boolean doesEquipmentJascIdExist(String jascId){
+        Equipment equipment = equipmentRepository.findByJascId(jascId);
+
+        return (equipment != null);
     }
 
     private boolean doesInsuranceJascIdExist(String jascId){
