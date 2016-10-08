@@ -33,6 +33,8 @@ public class DataEntryAndManagementService {
     @Autowired
     private PatientRepository patientRepository;
     @Autowired
+    private RecordRepository recordRepository;
+    @Autowired
     private StaffRepository staffRepository;
     @Autowired
     private SurgeryRepository surgeryRepository;
@@ -142,6 +144,25 @@ public class DataEntryAndManagementService {
 
         try {
             return patientRepository.save(new Patient(patientFirstName, patientLastName, patientIdCard, patientTelephoneNumber, patientContactTelephoneNumber, patientGender, patientEmail, patientBirthDate, patientNationality, patientAddress, patientCity, patientCountry));
+        } catch (PersistenceException exp){
+            System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
+            throw new PersistenceException("\n\nThis patient was not able to persist -> " + exp.getMessage());
+        } catch (NullPointerException exp) {
+            System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
+            throw new NullPointerException("\n\nAN object or process has risen a null value -> " + exp.getMessage());
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred when trying to create a patient -> " + exp.getMessage());
+        }
+    }
+
+    public Record createNewRecord(String patientJascId, String recordDetails, Set<Surgery> surgeries, Set<Consultation> consultations) throws Exception {
+
+        if (!doesPatientJascIdExist(patientJascId))
+            throw new IllegalArgumentException("\n\nThis is an invalid patient jascId");
+
+        try {
+            return recordRepository.save(new Record(patientRepository.findByJascId(patientJascId), recordDetails, surgeries, consultations));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis patient was not able to persist -> " + exp.getMessage());
