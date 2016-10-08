@@ -8,6 +8,9 @@ Programmers:
 	Eva Soraya 
 	Eduardo Veras
 
+Version: v0.4.0
+** New Assistant interface implemented and Creation of core services
+
 Version: v0.3.0
 ** Refactoring code and project structure to optimize Spring Boot framework
         v0.3.1
