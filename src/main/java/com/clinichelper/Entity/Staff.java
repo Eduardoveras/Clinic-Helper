@@ -18,21 +18,17 @@ public class Staff implements Serializable{
     private String staffLastName;
     private String staffEmail;
     private String staffClinicId;
-    private String staffRole;
-    private String staffRoleDescription;
 
     public Staff(){
 
     }
 
-    public Staff(String staffFirstName,String staffLastName, String staffEmail, String staffClinicId, String staffRole, String staffRoleDescription) {
+    public Staff(String staffFirstName,String staffLastName, String staffEmail, String staffClinicId) {
         this.setJascId("JASC-STAFF-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setStaffFirstName(staffFirstName);
         this.setStaffLastName(staffLastName);
         this.setStaffEmail(staffEmail);
         this.setStaffClinicId(staffClinicId);
-        this.setStaffRole(staffRole);
-        this.setStaffRoleDescription(staffRoleDescription);
     }
 
     public String getJascId() {
@@ -58,20 +54,6 @@ public class Staff implements Serializable{
     public void setStaffClinicId(String staffClinicId) {
         this.staffClinicId = staffClinicId;
     }
-
-    public String getStaffRole() {
-        return staffRole;
-    }
-
-    public void setStaffRole(String staffRole) {
-        this.staffRole = staffRole;
-    }
-
-    public String getStaffRoleDescription() {
-        return staffRoleDescription;
-    }
-
-    public void setStaffRoleDescription(String staffRoleDescription) { this.staffRoleDescription = staffRoleDescription; }
 
     public String getStaffLastName() {
         return staffLastName;
