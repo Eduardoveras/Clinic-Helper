@@ -19,6 +19,9 @@ public class Surgery implements Serializable{
     @NotNull
     private String surgeryName;
     private String surgeryDescription;
+    @ManyToOne
+    @NotNull
+    private Patient patient;
     @NotNull
     private Date surgeryDate;
     @NotNull
@@ -38,10 +41,11 @@ public class Surgery implements Serializable{
 
     }
 
-    public Surgery(String surgeryName, String surgeryDescription, Date surgeryDate, Timestamp surgeryTime, String surgeryRoom, Set<Staff> staffs, Set<Equipment> equipments, Appointment appointment) {
+    public Surgery(String surgeryName, String surgeryDescription, Patient patient, Date surgeryDate, Timestamp surgeryTime, String surgeryRoom, Set<Staff> staffs, Set<Equipment> equipments, Appointment appointment) {
         this.setJascId("JASC-S-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setSurgeryName(surgeryName);
         this.setSurgeryDescription(surgeryDescription);
+        this.setPatient(patient);
         this.setSurgeryDate(surgeryDate);
         this.setSurgeryTime(surgeryTime);
         this.setSurgeryRoom(surgeryRoom);
@@ -120,5 +124,13 @@ public class Surgery implements Serializable{
 
     public void setEquipments(Set<Equipment> equipments) {
         this.equipments = equipments;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 }
