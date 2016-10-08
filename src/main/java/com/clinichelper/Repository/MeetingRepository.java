@@ -12,7 +12,7 @@ import java.util.List;
  * Created by eva_c on 10/8/2016.
  */
 public interface MeetingRepository extends JpaRepository<Meeting, String> {
-    Meeting findByJascID (String jascId);
+    Meeting findByJascId (String jascId);
 
     @Query("select M from Meeting M where M.meetingTitle = :meetingTitle")
     List<Meeting> findMeetingBymeetingTitle(@Param("meetingTitle") String meetingTitle);
