@@ -46,6 +46,24 @@ public class DataQueryService {
         return appointmentRepository.findByDateRange(beginnigOfTimePeriod, endOfTimePeriod);
     }
 
+    // Consultation Queries
+
+    // Equipment Queries
+
+    // Insurance Queries
+
+    // Meeting Queries
+
+    // Patient Queries
+
+    // Record Queries
+
+    // Staff Queries
+
+    // Surgery Queries
+
+    // User Queries
+
     // Auxiliary Functions
     private boolean doesPatientJascIdExist(String jascId){
         Patient patient = patientRepository.findByJascId(jascId);
