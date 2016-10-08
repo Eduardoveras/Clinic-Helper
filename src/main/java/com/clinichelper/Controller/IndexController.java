@@ -16,10 +16,10 @@ public class IndexController {
     }
 
 
-    @RequestMapping("/*")
+    /*@RequestMapping("/*")
     public ModelAndView err(Model model, @RequestParam(value="name", required=false, defaultValue="404") String name) {
         model.addAttribute("name", name);
         return new ModelAndView("404");
-    }
+    }*/
 
 }
