@@ -1,6 +1,7 @@
 package com.clinichelper.Entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 import java.util.UUID;
 
@@ -9,9 +10,9 @@ import java.util.UUID;
  */
 @Entity
 @Table(name="records")
-public class Record {
+public class Record implements Serializable{
     @Id
-    private String recordId;
+    private String jascId;
     @OneToOne
     private Patient patient;
     private String recordDetails;
@@ -26,19 +27,19 @@ public class Record {
     }
 
     public Record(Patient patient, String recordDetails, Set<Surgery> surgeries, Set<Consultation> consultations) {
-        this.setRecordId("JASC-R-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+        this.setJascId("JASC-R-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setPatient(patient);
         this.setRecordDetails(recordDetails);
         this.setSurgeries(surgeries);
         this.setConsultations(consultations);
     }
 
-    public String getRecordId() {
-        return recordId;
+    public String getJascId() {
+        return jascId;
     }
 
-    public void setRecordId(String recordId) {
-        this.recordId = recordId;
+    public void setJascId(String jascId) {
+        this.jascId = jascId;
     }
 
     public Patient getPatient() {

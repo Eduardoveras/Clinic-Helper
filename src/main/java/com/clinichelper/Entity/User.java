@@ -6,16 +6,15 @@ package com.clinichelper.Entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Serializable{
     // Attributes
     @Id
     private String username;
-    private String firstName;
-    private String lastName;
-    private String email;
+    private Staff staff;
     private String password;
     private String role;
 
@@ -24,11 +23,9 @@ public class User {
 
     }
 
-    public User(String username, String firstName, String lastName, String email, String password, String role){
+    public User(String username, Staff staff, String password, String role){
         this.setUsername(username);
-        this.setFirstName(firstName);
-        this.setLastName(lastName);
-        this.setEmail(email);
+        this.setStaff(staff);
         this.setPassword(password);
         this.setRole(role);
     }
@@ -40,30 +37,6 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getPassword() {
@@ -80,5 +53,13 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public Staff getStaff() {
+        return staff;
+    }
+
+    public void setStaff(Staff staff) {
+        this.staff = staff;
     }
 }

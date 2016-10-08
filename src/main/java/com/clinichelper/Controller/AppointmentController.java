@@ -15,13 +15,5 @@ import java.sql.Date;
 public class AppointmentController {
 
     // Posts
-    @PostMapping("/new-appointment")
-    public String createNewAppointment(Model model, @RequestParam(name = "firstName", required = true) String firstName,
-                                       @RequestParam(name = "lastName", required = true) String lastName,
-                                       @RequestParam(name = "email", required = true) String email,
-                                       @RequestParam(name = "telephone", required = true) String telephone,
-                                       @RequestParam(name = "description", required = true) String description,
-                                       @RequestParam(name = "suggestedDate", required = true) Date suggestedDate){
-        return "/request-appointment";
-    }
+    // TODO: appointment things
 }
