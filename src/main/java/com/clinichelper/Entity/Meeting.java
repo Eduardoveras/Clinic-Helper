@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -20,12 +21,18 @@ public class Meeting implements Serializable{
     // Attributes
     @Id
     private String jascId;
+    @NotNull
     private String meetingTitle; //
+    @NotNull
     private String meetingObjective;
+    @NotNull
     private Date meetingDate;//
+    @NotNull
     private Timestamp meetingTime;
+    @NotNull
     private String meetingPlace;//
     @OneToMany
+    @NotNull
     private Set<Staff> attendees;
 
     // Constructores

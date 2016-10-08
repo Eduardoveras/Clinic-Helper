@@ -1,6 +1,7 @@
 package com.clinichelper.Entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Set;
 import java.util.UUID;
@@ -14,8 +15,9 @@ public class Record implements Serializable{
     @Id
     private String jascId;
     @OneToOne
+    @NotNull
     private Patient patient;
-    private String recordDetails;
+    private String recordDetails; // TODO: Turn this into an historial
     @OneToMany
     private Set<Surgery> surgeries;
     @OneToMany

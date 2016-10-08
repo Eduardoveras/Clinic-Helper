@@ -1,6 +1,7 @@
 package com.clinichelper.Entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -15,23 +16,23 @@ public class Consultation implements Serializable{
     @Id
     @GeneratedValue
     private String jascId;
+    @NotNull
     private Date consultationDate;//
+    @NotNull
     private Timestamp consultationTime;
     private String consultationDetail;
     @OneToOne
-    private Surgery surgery;
-    @OneToOne
+    @NotNull
     private Appointment appointment;
 
     public Consultation(){
 
     }
-    public Consultation(Date consultationDate, Timestamp consultationTime, String consultationDetail, Surgery surgery, Appointment appointment){
+    public Consultation(Date consultationDate, Timestamp consultationTime, String consultationDetail, Appointment appointment){
         this.setJascId("JASC-C-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setConsultationDate(consultationDate);
         this.setConsultationTime(consultationTime);
         this.setConsultationDetail(consultationDetail);
-        this.setSurgery(surgery);
         this.setAppointment(appointment);
 
     }
@@ -66,14 +67,6 @@ public class Consultation implements Serializable{
 
     public void setConsultationDetail(String consultationDetail) {
         this.consultationDetail = consultationDetail;
-    }
-
-    public Surgery getSurgery() {
-        return surgery;
-    }
-
-    public void setSurgery(Surgery surgery) {
-        this.surgery = surgery;
     }
 
     public Appointment getAppointment() {

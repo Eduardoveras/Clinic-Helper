@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -15,11 +16,15 @@ import java.util.UUID;
 public class Staff implements Serializable{
     @Id
     private String jascId;
+    @NotNull
     private String staffFirstName;
+    @NotNull
     private String staffLastName;
     @Column(unique = true)
+    @NotNull
     private String staffEmail;
     @Column(unique = true)
+    @NotNull
     private String staffClinicId;
 
     public Staff(){
