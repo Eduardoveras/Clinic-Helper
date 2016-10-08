@@ -1,5 +1,6 @@
 package com.clinichelper.Entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -16,7 +17,9 @@ public class Staff implements Serializable{
     private String jascId;
     private String staffFirstName;
     private String staffLastName;
+    @Column(unique = true)
     private String staffEmail;
+    @Column(unique = true)
     private String staffClinicId;
 
     public Staff(){

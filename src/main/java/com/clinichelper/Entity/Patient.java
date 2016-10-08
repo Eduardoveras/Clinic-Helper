@@ -14,7 +14,7 @@ import java.util.UUID;
 public class Patient implements Serializable{
     @Id
     private String jascId;
-    private String patientName; //
+    private String patientFirstName; //
     private String patientLastName;//
     @Column(unique = true)
     private String patientIdCard;//
@@ -34,18 +34,18 @@ public class Patient implements Serializable{
     }
 
     // Used only for registration waiting list
-    public Patient(String patientName, String patientLastName, String patientTelephoneNumber, String patientEmail){
+    public Patient(String patientFirstName, String patientLastName, String patientTelephoneNumber, String patientEmail){
         this.setJascId(UUID.randomUUID().toString().split("-")[0]);
-        this.setPatientName(patientName);
+        this.setPatientFirstName(patientFirstName);
         this.setPatientLastName(patientLastName);
         this.setPatientTelephoneNumber(patientTelephoneNumber);
         this.setPatientEmail(patientEmail);
     }
 
     // Used to create and register new patients
-    public Patient(String patientName, String patientLastName, String patientIdCard, String patientTelephoneNumber, String patientContactTelephoneNumber, String patientGender, String patientEmail, Date patientBirthDate, String patientNationality, String patientAddress, String patientCity, String patientCountry) {
+    public Patient(String patientFirstName, String patientLastName, String patientIdCard, String patientTelephoneNumber, String patientContactTelephoneNumber, String patientGender, String patientEmail, Date patientBirthDate, String patientNationality, String patientAddress, String patientCity, String patientCountry) {
         this.setJascId("JASC-P-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
-        this.setPatientName(patientName);
+        this.setPatientFirstName(patientFirstName);
         this.setPatientLastName(patientLastName);
         this.setPatientIdCard(patientIdCard);
         this.setPatientTelephoneNumber(patientTelephoneNumber);
@@ -68,12 +68,12 @@ public class Patient implements Serializable{
         this.jascId = jascId;
     }
 
-    public String getPatientName() {
-        return patientName;
+    public String getPatientFirstName() {
+        return patientFirstName;
     }
 
-    public void setPatientName(String patientName) {
-        this.patientName = patientName;
+    public void setPatientFirstName(String patientFirstName) {
+        this.patientFirstName = patientFirstName;
     }
 
     public String getPatientLastName() {
