@@ -460,7 +460,7 @@ public class DataEntryAndManagementService {
     }
 
     private boolean doesMeetingJascIdExist(String jascId){
-        Meeting meeting = meetingRepository.findByJascID(jascId);
+        Meeting meeting = meetingRepository.findByJascId(jascId);
 
         return (meeting != null);
     }
