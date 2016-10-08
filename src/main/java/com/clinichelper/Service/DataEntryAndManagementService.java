@@ -167,6 +167,63 @@ public class DataEntryAndManagementService {
         }
     }
 
+    // Editing Functions
+    public void editAppointment(Appointment appointment) throws Exception {
+
+        try {
+            appointmentRepository.save(appointment);
+        } catch (PersistenceException exp){
+            System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
+            throw new PersistenceException("\n\nThis appointment was not able to persist -> " + exp.getMessage());
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred when trying to edit an appointment -> " + exp.getMessage());
+        }
+    }
+
+    public void editInsurance(Insurance insurance) throws Exception {
+
+        try {
+
+        } catch (PersistenceException exp){
+            System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
+            throw new PersistenceException("\n\nThis insurance was not able to persist -> " + exp.getMessage());
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred when trying to edit an insurance -> " + exp.getMessage());
+        }
+    }
+
+    public void editPatient(Patient patient) throws Exception {
+
+        try {
+            patientRepository.save(patient);
+        } catch (PersistenceException exp){
+            System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
+            throw new PersistenceException("\n\nThis patient was not able to persist -> " + exp.getMessage());
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred when trying to edit a patient -> " + exp.getMessage());
+        }
+    }
+
+    public void editUserAccountPassword(String username, String password) throws Exception{
+
+        try {
+            User user = userRepository.findByUsername(username);
+
+            user.setPassword(password);
+
+            userRepository.save(user);
+        } catch (PersistenceException exp){
+            System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
+            throw new PersistenceException("\n\nThis username was not able to persist -> " + exp.getMessage());
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred when trying to edit username-> " + exp.getMessage());
+        }
+    }
+
     // Auxiliary Functions
     private boolean doesAppointmentJascIdExist(String jascId) {
         Appointment appointment = appointmentRepository.findByJascId(jascId);
