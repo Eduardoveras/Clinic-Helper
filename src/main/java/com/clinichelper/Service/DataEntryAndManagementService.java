@@ -21,11 +21,15 @@ public class DataEntryAndManagementService {
     @Autowired
     private AppointmentRepository appointmentRepository;
     @Autowired
+    private ConsultationRepository consultationRepository;
+    @Autowired
     private InsuranceRepository insuranceRepository;
     @Autowired
     private PatientRepository patientRepository;
     @Autowired
     private StaffRepository staffRepository;
+    @Autowired
+    private SurgeryRepository surgeryRepository;
     @Autowired
     private UserRepository userRepository;
 
@@ -45,7 +49,26 @@ public class DataEntryAndManagementService {
             throw new PersistenceException("\n\nThis appointment was not able to persist -> " + exp.getMessage());
         } catch (Exception exp){
             System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
-            throw new Exception("\n\nAn error occured when trying to create an appointment -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred when trying to create an appointment -> " + exp.getMessage());
+        }
+    }
+
+    public Consultation createNewConsultation(Date date, Timestamp time, String detail, String surgeryJascId, String appointmentJascId) throws Exception{
+
+        if (!doesSurguryJascIdExist(surgeryJascId))
+            throw new IllegalArgumentException("\n\nThis surgery jasc id is noe valid");
+
+        if (!doesAppointmentJascIdExist(appointmentJascId))
+            throw new IllegalArgumentException("\n\nThis appointment jasc id is not valid");
+
+        try {
+            return consultationRepository.save(new Consultation(date, time, detail, surgeryRepository.findByJascId(surgeryJascId), appointmentRepository.findByJascId(appointmentJascId)));
+        } catch (PersistenceException exp){
+            System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
+            throw new PersistenceException("\n\nThis consultation was not able to persist -> " + exp.getMessage());
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred when trying to create a consultation -> " + exp.getMessage());
         }
     }
 
@@ -61,7 +84,7 @@ public class DataEntryAndManagementService {
             throw new PersistenceException("\n\nThis insurance was not able to persist -> " + exp.getMessage());
         } catch (Exception exp){
             System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
-            throw new Exception("\n\nAn error occured when trying to create an insurance -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred when trying to create an insurance -> " + exp.getMessage());
         }
     }
 
@@ -245,6 +268,12 @@ public class DataEntryAndManagementService {
         Staff staff = staffRepository.findByJascId(jascId);
 
         return (staff != null);
+    }
+
+    private boolean doesSurguryJascIdExist(String jascId){
+        Surgery surgery = surgeryRepository.findByJascId(jascId);
+
+        return (surgery != null);
     }
 
     private boolean isUsernameAlreadyTaken(String username){
