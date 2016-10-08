@@ -15,7 +15,7 @@ public class Consultation implements Serializable{
     @Id
     @GeneratedValue
     private String jascId;
-    private Date consultationDate;
+    private Date consultationDate;//
     private Timestamp consultationTime;
     private String consultationDetail;
     @OneToOne

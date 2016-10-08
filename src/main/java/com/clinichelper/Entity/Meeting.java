@@ -20,11 +20,11 @@ public class Meeting implements Serializable{
     // Attributes
     @Id
     private String jascId;
-    private String meetingTitle;
+    private String meetingTitle; //
     private String meetingObjective;
-    private Date meetingDate;
+    private Date meetingDate;//
     private Timestamp meetingTime;
-    private String meetingPlace;
+    private String meetingPlace;//
     @OneToMany
     private Set<Staff> attendees;
 
