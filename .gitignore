@@ -19,3 +19,30 @@ build/classes/
 lib/
 out/
 settings.gradle
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+/.idea/
+
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+
+### STS ###
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+
+.gradle
+/build/
+!gradle/wrapper/gradle-wrapper.jar
