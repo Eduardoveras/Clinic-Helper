@@ -27,6 +27,7 @@ repositories {
     mavenCentral()
 }
 
+archivesBaseName = "app"
 
 defaultTasks = ['stage']
 
@@ -34,6 +35,13 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.7'
 }
 
+task stage {
+    dependsOn clean, build
+}
+
+springBoot {
+    mainClass = "com.clinichelper.WebApplication"
+}
 
 
 dependencies {

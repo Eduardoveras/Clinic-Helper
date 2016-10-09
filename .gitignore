@@ -48,3 +48,6 @@ nbdist/
 !gradle/wrapper/gradle-wrapper.jar
 bin/
 src/test/
+build
+out
+.DS_Store
