@@ -47,7 +47,11 @@ public class DataQueryService {
     }
 
     // Consultation Queries
+    public Concultation findRegisteredConsultation(String jascId){ return consultationRepository.findByJascId(jascId)}
 
+    public List<Consultation> findResgisteredConcultationByDate(Date searchDate){
+        return consultationRepository.findConsultationByconsultationDate(searchDate);
+    }
     // Equipment Queries
 
     // Insurance Queries
