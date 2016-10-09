@@ -42,8 +42,8 @@ public class DataQueryService {
         return appointmentRepository.findByDate(searchDate);
     }
 
-    public List<Appointment> findAllRegisteredAppointmentsByTimePeriod(Date beginnigOfTimePeriod, Date endOfTimePeriod){
-        return appointmentRepository.findByDateRange(beginnigOfTimePeriod, endOfTimePeriod);
+    public List<Appointment> findAllRegisteredAppointmentsByTimePeriod(Date beginningOfTimePeriod, Date endOfTimePeriod){
+        return appointmentRepository.findByDateRange(beginningOfTimePeriod, endOfTimePeriod);
     }
 
     // Consultation Queries
