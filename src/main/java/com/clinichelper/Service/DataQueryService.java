@@ -56,18 +56,39 @@ public class DataQueryService {
     public Equipment findRegisteredEquipment(String jascId) { return equipmentRepository }
 
     public List<Equipment> findRegisteredEquipmentByName(String searchName){
-        return equipmentRepository.findRegisteredEquipmentByname(searchName)
+        return equipmentRepository.findEquipmentByequipmentName(searchName);
     }
     // Insurance Queries
     public Insurance findRegisteredInsurance(String jascId){ return insuranceRepository }
 
     public List<Insurance> findRegisteredInsuranceByOwner(String searchID){
-        return insuranceRepository.findRegisteredInsuranceByOwner(searchID)
+        return insuranceRepository.findRegisteredPatientsInsuranceInformation(searchID);
     }
     // Meeting Queries
+    public Meeting findRegisteredMeeting(String jascId){ return meetingRepository}
 
+    public List<Meeting> findRegisteredMeetingByTitle(String searchTitle){
+        return meetingRepository.findMeetingBymeetingTitle(searchTitle);
+    }
+
+    public List<Meeting> findRegisteredMeetingByDate (Date searchDate){
+        return meetingRepository.findmeetingBymeetingDate(searchDate);
+    }
+
+    public List<Meeting> findRegisteredMeetingByPlace (String searchPlace){
+        return meetingRepository.findmeetingBymeetingPlace(serachPlace);
+    }
     // Patient Queries
+    public Patient findRegisteredPatient(String jsacId){ return patientRepository}
 
+    public List<Patient> findRegisteredPatientByIdCard(String searchIdCard){
+        return patientRepository.findPatientByIdentificationCard(searchIdCard);
+    }
+
+    public List<Patient> findRegisteredPatientByGeneralInfomation(String searchFistName, String searchLastName,
+                                                                  String searchTelephone,String searchEmail ){
+        return patientRepository.findRegisteredPatientByFLTEFields(searchFistName,searchLastName,searchTelephone,searchEmail);
+    }
     // Record Queries
 
     // Staff Queries
