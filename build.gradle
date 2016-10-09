@@ -43,11 +43,6 @@ springBoot {
     mainClass = "com.clinichelper.WebApplication"
 }
 
-jar {
-    baseName = 'app'
-    version = '0.0.1'
-}
-
 
 dependencies {
     // tag::jetty[]
