@@ -131,7 +131,17 @@ public class DataQueryService {
     public List<Surgery> findRegisteredSurgeryByName(String searchSurgeryName){
         return surgeryRepository.findSurgeryBysurgeryName(searchSurgeryName);
     }
+    public List<Surgery> findRegisteredSurgeryByDate(Date searchDate){
+        return surgeryRepository.findSurgeryBysurgeryDate(searchDate);
+    }
 
+    public List<Surgery> findRegisteredSurgeryByRoom(String searchRoom){
+        return surgeryRepository.findSurgeryBysurgeryRoom(searchRoom);
+    }
+
+    public List<Surgery> findResgisteredSurgeryByDateAndRoom(String searchRoom, Date searchDate){
+        return surgeryRepository.findSurgeryBysurgeryDateAndsurgeryRoom(searchDate,searchRoom);
+    }
     // User Queries
 
     // Auxiliary Functions
