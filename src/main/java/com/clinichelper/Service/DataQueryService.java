@@ -47,25 +47,25 @@ public class DataQueryService {
     }
 
     // Consultation Queries
-    public Concultation findRegisteredConsultation(String jascId){ return consultationRepository.findByJascId(jascId)}
+    public Concultation findRegisteredConsultation(String jascId){ return consultationRepository.findByJascId(jascId);}
 
     public List<Consultation> findResgisteredConcultationByDate(Date searchDate){
         return consultationRepository.findConsultationByconsultationDate(searchDate);
     }
     // Equipment Queries
-    public Equipment findRegisteredEquipment(String jascId) { return equipmentRepository }
+    public Equipment findRegisteredEquipment(String jascId) { return equipmentRepository.findByJascId(jascId); }
 
     public List<Equipment> findRegisteredEquipmentByName(String searchName){
         return equipmentRepository.findEquipmentByequipmentName(searchName);
     }
     // Insurance Queries
-    public Insurance findRegisteredInsurance(String jascId){ return insuranceRepository }
+    public Insurance findRegisteredInsurance(String jascId){ return insuranceRepository.findByJascId(jascId); }
 
     public List<Insurance> findRegisteredInsuranceByOwner(String searchID){
         return insuranceRepository.findRegisteredPatientsInsuranceInformation(searchID);
     }
     // Meeting Queries
-    public Meeting findRegisteredMeeting(String jascId){ return meetingRepository}
+    public Meeting findRegisteredMeeting(String jascId){ return meetingRepository.findByJascId(jascId);}
 
     public List<Meeting> findRegisteredMeetingByTitle(String searchTitle){
         return meetingRepository.findMeetingBymeetingTitle(searchTitle);
@@ -79,7 +79,7 @@ public class DataQueryService {
         return meetingRepository.findmeetingBymeetingPlace(serachPlace);
     }
     // Patient Queries
-    public Patient findRegisteredPatient(String jsacId){ return patientRepository}
+    public Patient findRegisteredPatient(String jsacId){ return patientRepository.findByJascId(jascId);}
 
     public List<Patient> findRegisteredPatientByIdCard(String searchIdCard){
         return patientRepository.findPatientByIdentificationCard(searchIdCard);
@@ -90,16 +90,22 @@ public class DataQueryService {
         return patientRepository.findRegisteredPatientByFLTEFields(searchFistName,searchLastName,searchTelephone,searchEmail);
     }
     // Record Queries
-    public Record findRegisteredRecord(String jascId){return recordRepository}
+    public Record findRegisteredRecord(String jascId){return recordRepository.findByJascId(jascId);}
 
     public List<Record> findPatientsRegisteredRecord(String patientJascId){
 
         if (!doesPatientJascIdExist(patientJascId))
             throw new IllegalArgumentException("\n\nThis is an invalid patient jascId");
 
-        return RecordRepository.findRecordyBypatient(patientJascId);
+        return recordRepository.findRecordyBypatient(patientJascId);
     }
     // Staff Queries
+    public Staff findRegisteredStaff(String jascId){ return staffRepository.findByJascId(jascId); }
+
+    public List<Staff> findRegisteredStaffByFirstNameAndLastName(String searchFirstName, String searchLastName){
+        return staffRepository.findByFirstNameAndLastName(searchFirstName,searchLastName);
+    }
+
 
     // Surgery Queries
 
