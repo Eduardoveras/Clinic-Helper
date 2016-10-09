@@ -3,10 +3,8 @@
  */
 package com.clinichelper.Service;
 
-import com.clinichelper.Entity.Appointment;
-import com.clinichelper.Entity.Patient;
-import com.clinichelper.Repository.AppointmentRepository;
-import com.clinichelper.Repository.PatientRepository;
+import com.clinichelper.Entity.*;
+import com.clinichelper.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +17,23 @@ public class DataQueryService {
     @Autowired
     private AppointmentRepository appointmentRepository;
     @Autowired
+    private ConsultationRepository consultationRepository;
+    @Autowired
+    private EquipmentRepository equipmentRepository;
+    @Autowired
+    private InsuranceRepository insuranceRepository;
+    @Autowired
+    private MeetingRepository meetingRepository;
+    @Autowired
     private PatientRepository patientRepository;
+    @Autowired
+    private RecordRepository recordRepository;
+    @Autowired
+    private StaffRepository staffRepository;
+    @Autowired
+    private SurgeryRepository surgeryRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     // Appointment Queries
     public Appointment findRegisteredAppointment(String jascId){
@@ -47,23 +61,26 @@ public class DataQueryService {
     }
 
     // Consultation Queries
-    public Concultation findRegisteredConsultation(String jascId){ return consultationRepository.findByJascId(jascId);}
+    public Consultation findRegisteredConsultation(String jascId){ return consultationRepository.findByJascId(jascId);}
 
     public List<Consultation> findResgisteredConcultationByDate(Date searchDate){
         return consultationRepository.findConsultationByconsultationDate(searchDate);
     }
+
     // Equipment Queries
     public Equipment findRegisteredEquipment(String jascId) { return equipmentRepository.findByJascId(jascId); }
 
     public List<Equipment> findRegisteredEquipmentByName(String searchName){
         return equipmentRepository.findEquipmentByequipmentName(searchName);
     }
+
     // Insurance Queries
     public Insurance findRegisteredInsurance(String jascId){ return insuranceRepository.findByJascId(jascId); }
 
     public List<Insurance> findRegisteredInsuranceByOwner(String searchID){
         return insuranceRepository.findRegisteredPatientsInsuranceInformation(searchID);
     }
+
     // Meeting Queries
     public Meeting findRegisteredMeeting(String jascId){ return meetingRepository.findByJascId(jascId);}
 
@@ -76,12 +93,13 @@ public class DataQueryService {
     }
 
     public List<Meeting> findRegisteredMeetingByPlace (String searchPlace){
-        return meetingRepository.findmeetingBymeetingPlace(serachPlace);
+        return meetingRepository.findmeetingBymeetingPlace(searchPlace);
     }
-    // Patient Queries
-    public Patient findRegisteredPatient(String jsacId){ return patientRepository.findByJascId(jascId);}
 
-    public List<Patient> findRegisteredPatientByIdCard(String searchIdCard){
+    // Patient Queries
+    public Patient findRegisteredPatient(String jascId){ return patientRepository.findByJascId(jascId);}
+
+    public Patient findRegisteredPatientByIdCard(String searchIdCard){
         return patientRepository.findPatientByIdentificationCard(searchIdCard);
     }
 
@@ -97,7 +115,7 @@ public class DataQueryService {
         if (!doesPatientJascIdExist(patientJascId))
             throw new IllegalArgumentException("\n\nThis is an invalid patient jascId");
 
-        return recordRepository.findRecordyBypatient(patientJascId);
+        return recordRepository.findRecordyBypatient(patientRepository.findByJascId(patientJascId));
     }
     // Staff Queries
     public Staff findRegisteredStaff(String jascId){ return staffRepository.findByJascId(jascId); }
