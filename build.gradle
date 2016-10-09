@@ -39,6 +39,14 @@ task stage {
     dependsOn clean, build
 }
 
+task copyToLib(type: Copy) {
+    into "$buildDir/lib"
+    from(configurations.compile)
+}
+
+stage.dependsOn(copyToLib)
+
+
 springBoot {
     mainClass = "com.clinichelper.WebApplication"
 }
