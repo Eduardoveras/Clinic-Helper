@@ -53,9 +53,17 @@ public class DataQueryService {
         return consultationRepository.findConsultationByconsultationDate(searchDate);
     }
     // Equipment Queries
+    public Equipment findRegisteredEquipment(String jascId) { return equipmentRepository }
 
+    public List<Equipment> findRegisteredEquipmentByName(String searchName){
+        return equipmentRepository.findRegisteredEquipmentByname(searchName)
+    }
     // Insurance Queries
+    public Insurance findRegisteredInsurance(String jascId){ return insuranceRepository }
 
+    public List<Insurance> findRegisteredInsuranceByOwner(String searchID){
+        return insuranceRepository.findRegisteredInsuranceByOwner(searchID)
+    }
     // Meeting Queries
 
     // Patient Queries
