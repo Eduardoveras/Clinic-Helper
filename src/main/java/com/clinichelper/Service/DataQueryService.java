@@ -90,7 +90,15 @@ public class DataQueryService {
         return patientRepository.findRegisteredPatientByFLTEFields(searchFistName,searchLastName,searchTelephone,searchEmail);
     }
     // Record Queries
+    public Record findRegisteredRecord(String jascId){return recordRepository}
 
+    public List<Record> findPatientsRegisteredRecord(String patientJascId){
+
+        if (!doesPatientJascIdExist(patientJascId))
+            throw new IllegalArgumentException("\n\nThis is an invalid patient jascId");
+
+        return RecordRepository.findRecordyBypatient(patientJascId);
+    }
     // Staff Queries
 
     // Surgery Queries
