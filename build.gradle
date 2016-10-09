@@ -27,6 +27,17 @@ repositories {
     mavenCentral()
 }
 
+archivesBaseName = "app"
+mainClassName = 'WebApplication'
+applicationName = 'app'
+
+defaultTasks = ['stage']
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.7'
+}
+
+
 
 dependencies {
     // tag::jetty[]
@@ -55,4 +66,8 @@ dependencies {
     compile group: 'org.postgresql', name: 'postgresql', version: '9.4.1211.jre7'
 
     compile("org.springframework.boot:spring-boot-devtools")
+}
+
+task stage {
+    dependsOn installDist
 }
