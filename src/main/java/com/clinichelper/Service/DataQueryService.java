@@ -142,6 +142,7 @@ public class DataQueryService {
     public List<Surgery> findResgisteredSurgeryByDateAndRoom(String searchRoom, Date searchDate){
         return surgeryRepository.findSurgeryBysurgeryDateAndsurgeryRoom(searchDate,searchRoom);
     }
+    
     // User Queries
 
     // Auxiliary Functions
