@@ -108,6 +108,11 @@ public class DataQueryService {
 
 
     // Surgery Queries
+    public Surgery findRegisteredSurgery (String jascId){return surgeryRepository.findByJascId(jascId);}
+
+    public List<Surgery> findRegisteredSurgeryByName(String searchSurgeryName){
+        return surgeryRepository.findSurgeryBysurgeryName(searchSurgeryName);
+    }
 
     // User Queries
 
