@@ -20,8 +20,8 @@
 <div class="mdl-grid demo-content">
 
 <!--EACH SECTION START-->
-    <div class="mdl-cell mdl-cell--4-col">
-        <div class="demo-card-event mdl-card mdl-shadow--2dp">
+    <div class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone">
+        <div class="dashboard-top-cards mdl-card mdl-shadow--2dp">
             <div class="mdl-card__title mdl-card--expand">
                 <h4>
                     Featured event:<br>
@@ -40,8 +40,8 @@
     </div>
     <!--EACH SECTION END-->
     <!--EACH SECTION START-->
-    <div class="mdl-cell mdl-cell--4-col">
-        <div class="demo-card-event mdl-card mdl-shadow--2dp" style="background: red;">
+    <div class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone">
+        <div class="dashboard-top-cards mdl-card mdl-shadow--2dp" style="background: red;">
             <div class="mdl-card__title mdl-card--expand" >
                 <h4>
                     Featured event:<br>
@@ -60,8 +60,8 @@
     </div>
     <!--EACH SECTION END-->
     <!--EACH SECTION START-->
-    <div class="mdl-cell mdl-cell--4-col">
-        <div class="demo-card-event mdl-card mdl-shadow--2dp" style="background: green;">
+    <div class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone">
+        <div class="dashboard-top-cards mdl-card mdl-shadow--2dp" style="background: green;">
             <div class="mdl-card__title mdl-card--expand">
                 <h4>
                     Featured event:<br>
@@ -80,8 +80,8 @@
     </div>
     <!--EACH SECTION END-->
     <!--EACH SECTION START-->
-    <div class="mdl-cell mdl-cell--4-col">
-        <div class="demo-card-event mdl-card mdl-shadow--2dp" style="background: green;">
+    <div class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone">
+        <div class="dashboard-top-cards mdl-card mdl-shadow--2dp" style="background: green;">
             <div class="mdl-card__title mdl-card--expand">
                 <h4>
                     Featured event:<br>
@@ -105,8 +105,8 @@
 
 
     <!--EACH SECTION START-->
-    <div class="mdl-cell mdl-cell--8-col">
-        <div class="demo-card-event mdl-card mdl-shadow--2dp" style="background: lightgrey;">
+    <div class="mdl-cell mdl-cell--6-col">
+        <div class="dashboard-top-cards mdl-card mdl-shadow--2dp" style="background: lightgrey;">
             <div class="mdl-card__title mdl-card--expand">
                 <h4>
                     Featured event:<br>
