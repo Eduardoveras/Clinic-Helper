@@ -87,21 +87,15 @@ public class DataQueryService {
 
 
 
-    
+
     // Meeting Queries
     public Meeting findRegisteredMeeting(String jascId){ return meetingRepository.findByJascId(jascId);}
 
-    public List<Meeting> findRegisteredMeetingByTitle(String searchTitle){
-        return meetingRepository.findMeetingBymeetingTitle(searchTitle);
-    }
+    public List<Meeting> findRegisteredMeetingByTitle(String searchTitle){ return meetingRepository.findByMeetingTitle(searchTitle); }
 
-    public List<Meeting> findRegisteredMeetingByDate (Date searchDate){
-        return meetingRepository.findmeetingBymeetingDate(searchDate);
-    }
+    public List<Meeting> findRegisteredMeetingByDate (Date searchDate){ return meetingRepository.findByMeetingDate(searchDate); }
 
-    public List<Meeting> findRegisteredMeetingByPlace (String searchPlace){
-        return meetingRepository.findmeetingBymeetingPlace(searchPlace);
-    }
+    public List<Meeting> findRegisteredMeetingByPlace (String searchPlace){ return meetingRepository.findByMeetingPlace(searchPlace); }
 
     // Patient Queries
     public Patient findRegisteredPatient(String jascId){ return patientRepository.findByJascId(jascId);}
