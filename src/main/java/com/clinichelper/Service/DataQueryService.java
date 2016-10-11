@@ -120,15 +120,19 @@ public class DataQueryService {
 
 
     // Record Queries
-    public Record findRegisteredRecord(String jascId){return recordRepository.findByJascId(jascId);}
+    public Record findRegisteredRecord(String jascId){ return recordRepository.findByJascId(jascId); }
 
     public List<Record> findPatientsRegisteredRecord(String patientJascId){
 
         if (!doesPatientJascIdExist(patientJascId))
             throw new IllegalArgumentException("\n\nThis is an invalid patient jascId");
 
-        return recordRepository.findRecordyBypatient(patientRepository.findByJascId(patientJascId));
+        return recordRepository.findByPatientJascId(patientJascId);
     }
+
+
+
+
     // Staff Queries
     public Staff findRegisteredStaff(String jascId){ return staffRepository.findByJascId(jascId); }
 
