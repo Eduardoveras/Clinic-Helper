@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -14,7 +14,9 @@ import java.util.List;
 public interface ConsultationRepository extends JpaRepository<Consultation, String> {
     Consultation findByJascId (String jascId);
 
-    @Query("select C from Consultation C where C.consultationDate = :consultationDate")
-    List<Consultation> findConsultationByconsultationDate(@Param("consultationDate") Date consultationDate);
+    @Query("select c from Consultation c where c.consultationDate = :consultationDate")
+    List<Consultation> findByConsultationDate(@Param("consultationDate") Date consultationDate);
 
+    @Query("select c from Consultation c where c.consultationDate between :beginning and :ending")
+    List<Consultation> findByConsultationDateRange(@Param("beginning") Date startDate, @Param("ending") Date endDate);
 }

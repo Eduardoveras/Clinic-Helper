@@ -52,20 +52,16 @@ public class DataQueryService {
         return appointmentRepository.findAll();
     }
 
-    public List<Appointment> findAllRegisteredAppointmentsByGivenDate(Date searchDate){
-        return appointmentRepository.findByDate(searchDate);
-    }
+    public List<Appointment> findAllRegisteredAppointmentsByGivenDate(Date searchDate){ return appointmentRepository.findByDate(searchDate); }
 
-    public List<Appointment> findAllRegisteredAppointmentsByTimePeriod(Date beginningOfTimePeriod, Date endOfTimePeriod){
-        return appointmentRepository.findByDateRange(beginningOfTimePeriod, endOfTimePeriod);
-    }
+    public List<Appointment> findAllRegisteredAppointmentsByTimePeriod(Date beginningOfTimePeriod, Date endOfTimePeriod){ return appointmentRepository.findByDateRange(beginningOfTimePeriod, endOfTimePeriod); }
 
     // Consultation Queries
     public Consultation findRegisteredConsultation(String jascId){ return consultationRepository.findByJascId(jascId);}
 
-    public List<Consultation> findResgisteredConcultationByDate(Date searchDate){
-        return consultationRepository.findConsultationByconsultationDate(searchDate);
-    }
+    public List<Consultation> findResgisteredConcultationByDate(Date searchDate){ return consultationRepository.findByConsultationDate(searchDate); }
+
+    public  List<Consultation> findAllRegisteredConsultationsByTimePeriod(Date beginningOfTimePeriod, Date endOfTimePeriod){ return consultationRepository.findByConsultationDateRange(beginningOfTimePeriod, endOfTimePeriod); }
 
     // Equipment Queries
     public Equipment findRegisteredEquipment(String jascId) { return equipmentRepository.findByJascId(jascId); }
