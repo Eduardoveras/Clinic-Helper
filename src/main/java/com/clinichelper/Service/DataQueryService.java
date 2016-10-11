@@ -97,17 +97,28 @@ public class DataQueryService {
 
     public List<Meeting> findRegisteredMeetingByPlace (String searchPlace){ return meetingRepository.findByMeetingPlace(searchPlace); }
 
+
+
+
     // Patient Queries
     public Patient findRegisteredPatient(String jascId){ return patientRepository.findByJascId(jascId);}
 
-    public Patient findRegisteredPatientByIdCard(String searchIdCard){
-        return patientRepository.findPatientByIdentificationCard(searchIdCard);
-    }
+    public Patient findRegisteredPatientByIdCard(String searchIdCard){ return patientRepository.findByPatientIdCard(searchIdCard); }
+
+    public List<Patient> findRegisteredPatientByEmail(String patientEmail){ return patientRepository.findByPatientEmail(patientEmail); }
+
+    public List<Patient> findRegisteredPatientByBirthDate(Date patientBirthDate){ return patientRepository.findByPatientBirthDate(patientBirthDate); }
+
+    public List<Patient> findRegisteredPatientByFullName(String searchFistName, String searchLastName){ return patientRepository.findByFullName(searchFistName, searchLastName); }
 
     public List<Patient> findRegisteredPatientByGeneralInfomation(String searchFistName, String searchLastName,
                                                                   String searchTelephone,String searchEmail ){
-        return patientRepository.findRegisteredPatientByFLTEFields(searchFistName,searchLastName,searchTelephone,searchEmail);
+        return patientRepository.findByFLTEFields(searchFistName,searchLastName,searchTelephone,searchEmail);
     }
+
+
+
+
     // Record Queries
     public Record findRegisteredRecord(String jascId){return recordRepository.findByJascId(jascId);}
 
