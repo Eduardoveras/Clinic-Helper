@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="725512bc-b9cf-4975-a72d-193892e4a123" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Repository/SurgeryRepository.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Repository/SurgeryRepository.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/User.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/User.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Repository/UserRepository.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Repository/UserRepository.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Service/DataQueryService.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Service/DataQueryService.java" />
     </list>
     <ignored path="ClinicHelper.iws" />
@@ -42,8 +44,18 @@
       <file leaf-file-name="DataQueryService.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/clinichelper/Service/DataQueryService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="251">
-              <caret line="154" column="149" selection-start-line="154" selection-start-column="149" selection-end-line="154" selection-end-column="149" />
+            <state relative-caret-position="156">
+              <caret line="160" column="0" selection-start-line="160" selection-start-column="0" selection-end-line="160" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserRepository.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/clinichelper/Repository/UserRepository.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -81,6 +93,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/User.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="182">
+              <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="RecordRepository.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/clinichelper/Repository/RecordRepository.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -111,31 +133,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Meeting.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/Meeting.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="24" column="35" selection-start-line="24" selection-start-column="35" selection-end-line="24" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Staff.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/Staff.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="59">
+            <state relative-caret-position="270">
               <caret line="24" column="29" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Patient.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/Patient.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="158">
-              <caret line="29" column="33" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -548,6 +550,9 @@
         <option value="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/Staff.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/clinichelper/Repository/StaffRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/clinichelper/Repository/SurgeryRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/SystemUser.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/clinichelper/Repository/UserRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/User.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/clinichelper/Service/DataQueryService.java" />
       </list>
     </option>
@@ -1216,12 +1221,12 @@
       <option name="presentableId" value="Default" />
       <updated>1476188269144</updated>
       <workItem from="1476188279279" duration="2468000" />
-      <workItem from="1476196681265" duration="3097000" />
+      <workItem from="1476196681265" duration="4254000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5713000" />
+    <option name="totallyTimeSpent" value="6870000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1312,7 +1317,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/clinichelper/Repository/UserRepository.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/clinichelper/Service/InsuranceServices.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/clinichelper/Service/UserServices.java" />
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/applicationContext.xml" />
@@ -1504,14 +1508,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="27" column="5" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/newpatient.ftl">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1122">
@@ -1602,14 +1598,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/Staff.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="59">
-          <caret line="24" column="29" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/clinichelper/Repository/StaffRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -1636,10 +1624,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/Staff.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="24" column="29" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/clinichelper/Repository/UserRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/clinichelper/Service/DataQueryService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="154" column="149" selection-start-line="154" selection-start-column="149" selection-end-line="154" selection-end-column="149" />
+        <state relative-caret-position="156">
+          <caret line="160" column="0" selection-start-line="160" selection-start-column="0" selection-end-line="160" selection-end-column="0" />
           <folding />
         </state>
       </provider>

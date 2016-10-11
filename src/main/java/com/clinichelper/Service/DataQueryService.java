@@ -157,8 +157,17 @@ public class DataQueryService {
     public List<Surgery> findRegisteredSurgeryByRoom(String searchRoom){ return surgeryRepository.findBySurgeryRoom(searchRoom); }
 
     public List<Surgery> findResgisteredSurgeryByDateAndRoom(String searchRoom, Date searchDate){ return surgeryRepository.findBySurgeryDateAndSurgeryRoom(searchDate,searchRoom); }
-    
+
+
+
+
     // User Queries
+    public User findRegisteredUserAccount(String username){ return userRepository.findByUsername(username); }
+
+    public User findRegisteredUserAccountOfRegisteredStaff(String staffJascId){ return userRepository.findByStaffJascId(staffJascId); }
+
+
+
 
     // Auxiliary Functions
     private boolean doesPatientJascIdExist(String jascId){
