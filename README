@@ -8,6 +8,9 @@ Programmers:
 	Eva Soraya 
 	Eduardo Veras
 
+Version: v0.5.0
+** Implementing new DataEntryAndManagement and DataQuery services
+
 Version: v0.4.0
 ** New Assistant interface implemented and Creation of core services
 
