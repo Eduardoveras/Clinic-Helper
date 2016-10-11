@@ -14,5 +14,5 @@ public interface EquipmentRepository extends JpaRepository<Equipment, String> {
     Equipment findByJascId (String jascId);
 
     @Query("select E from Equipment E where E.equipmentName = :equipmentName")
-    List<Equipment> findEquipmentByequipmentName(@Param("equipmentName") String equipmentName);
+    List<Equipment> findByEquipmentName(@Param("equipmentName") String equipmentName);
 }

@@ -66,9 +66,7 @@ public class DataQueryService {
     // Equipment Queries
     public Equipment findRegisteredEquipment(String jascId) { return equipmentRepository.findByJascId(jascId); }
 
-    public List<Equipment> findRegisteredEquipmentByName(String searchName){
-        return equipmentRepository.findEquipmentByequipmentName(searchName);
-    }
+    public List<Equipment> findRegisteredEquipmentByName(String searchName){ return equipmentRepository.findByEquipmentName(searchName); }
 
     // Insurance Queries
     public Insurance findRegisteredInsurance(String jascId){ return insuranceRepository.findByJascId(jascId); }
