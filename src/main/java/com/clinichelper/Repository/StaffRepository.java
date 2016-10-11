@@ -14,6 +14,8 @@ public interface StaffRepository extends JpaRepository<Staff, String>{
 
     Staff findByJascId(String jascId);
 
+    Staff findByStaffEmail(String staffEmail);
+
     @Query("select s from Staff s where s.staffFirstName = :firstname and s.staffLastName = :lastname")
     List<Staff> findByFirstNameAndLastName(@Param("firstname") String staffFirstName, @Param("lastname") String staffLastName);
 }

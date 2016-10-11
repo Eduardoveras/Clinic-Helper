@@ -136,9 +136,11 @@ public class DataQueryService {
     // Staff Queries
     public Staff findRegisteredStaff(String jascId){ return staffRepository.findByJascId(jascId); }
 
-    public List<Staff> findRegisteredStaffByFirstNameAndLastName(String searchFirstName, String searchLastName){
-        return staffRepository.findByFirstNameAndLastName(searchFirstName,searchLastName);
-    }
+    public Staff findRegisteredStaffByEmail(String staffEmail){ return staffRepository.findByStaffEmail(staffEmail); }
+
+    public List<Staff> findRegisteredStaffByFirstNameAndLastName(String searchFirstName, String searchLastName){ return staffRepository.findByFirstNameAndLastName(searchFirstName,searchLastName); }
+
+
 
 
     // Surgery Queries
