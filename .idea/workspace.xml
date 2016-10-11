@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="725512bc-b9cf-4975-a72d-193892e4a123" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/User.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Repository/UserRepository.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Repository/UserRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Service/DataQueryService.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Service/DataQueryService.java" />
-    </list>
+    <list default="true" id="725512bc-b9cf-4975-a72d-193892e4a123" name="Default" comment="" />
     <ignored path="ClinicHelper.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -1221,12 +1216,12 @@
       <option name="presentableId" value="Default" />
       <updated>1476188269144</updated>
       <workItem from="1476188279279" duration="2468000" />
-      <workItem from="1476196681265" duration="4254000" />
+      <workItem from="1476196681265" duration="4328000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6870000" />
+    <option name="totallyTimeSpent" value="6944000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
