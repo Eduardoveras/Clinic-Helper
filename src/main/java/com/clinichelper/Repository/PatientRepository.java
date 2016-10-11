@@ -17,7 +17,7 @@ public interface PatientRepository extends JpaRepository<Patient, String>{
     @Query("select p from Patient p where p.patientIdCard = :patientIdCard")
     Patient findPatientByIdentificationCard(@Param("patientIdCard") String identificationNumber);
 
-    @Query("select p from Patient p where p.patientName = :firstName and p.patientLasName = :lastName and p.patientTelephoneNumber = :telephone and p.patientEmail = :email")
+    @Query("select p from Patient p where p.patientFirstName = :firstName and p.patientLastName = :lastName and p.patientTelephoneNumber = :telephone and p.patientEmail = :email")
     List<Patient> findRegisteredPatientByFLTEFields(@Param("firstName") String firstName, @Param("lastName") String lastName, @Param("telephone") String telephone, @Param("email") String email);
 
 }
