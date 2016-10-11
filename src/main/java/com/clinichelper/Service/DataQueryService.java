@@ -56,6 +56,9 @@ public class DataQueryService {
 
     public List<Appointment> findAllRegisteredAppointmentsByTimePeriod(Date beginningOfTimePeriod, Date endOfTimePeriod){ return appointmentRepository.findByDateRange(beginningOfTimePeriod, endOfTimePeriod); }
 
+
+
+
     // Consultation Queries
     public Consultation findRegisteredConsultation(String jascId){ return consultationRepository.findByJascId(jascId);}
 
@@ -63,18 +66,28 @@ public class DataQueryService {
 
     public  List<Consultation> findAllRegisteredConsultationsByTimePeriod(Date beginningOfTimePeriod, Date endOfTimePeriod){ return consultationRepository.findByConsultationDateRange(beginningOfTimePeriod, endOfTimePeriod); }
 
+
+
+
     // Equipment Queries
     public Equipment findRegisteredEquipment(String jascId) { return equipmentRepository.findByJascId(jascId); }
 
     public List<Equipment> findRegisteredEquipmentByName(String searchName){ return equipmentRepository.findByEquipmentName(searchName); }
 
+
+
+
+
     // Insurance Queries
     public Insurance findRegisteredInsurance(String jascId){ return insuranceRepository.findByJascId(jascId); }
 
-    public List<Insurance> findRegisteredInsuranceByOwner(String searchID){
-        return insuranceRepository.findRegisteredPatientsInsuranceInformation(searchID);
-    }
+    public List<Insurance> findRegisteredInsyranceByInsuranceSerialCode(String insuranceSerialCode){ return insuranceRepository.findByInsuranceSerialCode(insuranceSerialCode); }
 
+    public List<Insurance> findRegisteredInsuranceByOwner(String searchID){ return insuranceRepository.findByOwnerJascId(searchID); }
+
+
+
+    
     // Meeting Queries
     public Meeting findRegisteredMeeting(String jascId){ return meetingRepository.findByJascId(jascId);}
 

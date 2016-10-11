@@ -45,9 +45,7 @@ public class Insurance implements Serializable{
         this.jascId = jascId;
     }
 
-    public Patient getOwner() {
-        return owner;
-    }
+    public Patient getOwner() { return owner; }
 
     public void setOwner(Patient owner) { this.owner = owner; }
 
