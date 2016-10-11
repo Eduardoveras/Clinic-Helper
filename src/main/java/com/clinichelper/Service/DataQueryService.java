@@ -144,22 +144,19 @@ public class DataQueryService {
 
 
     // Surgery Queries
-    public Surgery findRegisteredSurgery (String jascId){return surgeryRepository.findByJascId(jascId);}
+    public Surgery findRegisteredSurgery (String jascId){ return surgeryRepository.findByJascId(jascId); }
 
-    public List<Surgery> findRegisteredSurgeryByName(String searchSurgeryName){
-        return surgeryRepository.findSurgeryBysurgeryName(searchSurgeryName);
-    }
-    public List<Surgery> findRegisteredSurgeryByDate(Date searchDate){
-        return surgeryRepository.findSurgeryBysurgeryDate(searchDate);
-    }
+    public List<Surgery> findRegisteredSurgeryByName(String searchSurgeryName){ return surgeryRepository.findBySurgeryName(searchSurgeryName); }
 
-    public List<Surgery> findRegisteredSurgeryByRoom(String searchRoom){
-        return surgeryRepository.findSurgeryBysurgeryRoom(searchRoom);
-    }
+    public List<Surgery> findRegisteredSurgeryByPatient(String patientJascId){ return surgeryRepository.findByPatientJascId(patientJascId);}
 
-    public List<Surgery> findResgisteredSurgeryByDateAndRoom(String searchRoom, Date searchDate){
-        return surgeryRepository.findSurgeryBysurgeryDateAndsurgeryRoom(searchDate,searchRoom);
-    }
+    public List<Surgery> findRegisteredSurgeryByDate(Date searchDate){ return surgeryRepository.findBySurgeryDate(searchDate); }
+
+    public List<Surgery> findRegisteredSurgeryByTimePeriod(Date startDate, Date endDate){ return surgeryRepository.findyDateRange(startDate, endDate);}
+
+    public List<Surgery> findRegisteredSurgeryByRoom(String searchRoom){ return surgeryRepository.findBySurgeryRoom(searchRoom); }
+
+    public List<Surgery> findResgisteredSurgeryByDateAndRoom(String searchRoom, Date searchDate){ return surgeryRepository.findBySurgeryDateAndSurgeryRoom(searchDate,searchRoom); }
     
     // User Queries
 
