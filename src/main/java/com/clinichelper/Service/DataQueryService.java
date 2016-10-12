@@ -40,16 +40,16 @@ public class DataQueryService {
         return appointmentRepository.findByJascId(jascId);
     }
 
+    public List<Appointment> findAllRegisteredAppointments(){
+        return appointmentRepository.findAll();
+    }
+
     public List<Appointment> findPatientsRegisteredAppointments(String patientJascId){
 
         if (!doesPatientJascIdExist(patientJascId))
             throw new IllegalArgumentException("\n\nThis is an invalid patient jascId");
 
         return appointmentRepository.findByPatientJascId(patientJascId);
-    }
-
-    public List<Appointment> findAllRegisteredAppointments(){
-        return appointmentRepository.findAll();
     }
 
     public List<Appointment> findAllRegisteredAppointmentsByGivenDate(Date searchDate){ return appointmentRepository.findByDate(searchDate); }
@@ -62,6 +62,8 @@ public class DataQueryService {
     // Consultation Queries
     public Consultation findRegisteredConsultation(String jascId){ return consultationRepository.findByJascId(jascId);}
 
+    public List<Consultation> findAllRegisteredConsultations(){ return consultationRepository.findAll(); }
+
     public List<Consultation> findResgisteredConcultationByDate(Date searchDate){ return consultationRepository.findByConsultationDate(searchDate); }
 
     public  List<Consultation> findAllRegisteredConsultationsByTimePeriod(Date beginningOfTimePeriod, Date endOfTimePeriod){ return consultationRepository.findByConsultationDateRange(beginningOfTimePeriod, endOfTimePeriod); }
@@ -72,6 +74,8 @@ public class DataQueryService {
     // Equipment Queries
     public Equipment findRegisteredEquipment(String jascId) { return equipmentRepository.findByJascId(jascId); }
 
+    public List<Equipment> findAllRegisteredEquipments(){ return equipmentRepository.findAll(); }
+
     public List<Equipment> findRegisteredEquipmentByName(String searchName){ return equipmentRepository.findByEquipmentName(searchName); }
 
 
@@ -80,6 +84,8 @@ public class DataQueryService {
 
     // Insurance Queries
     public Insurance findRegisteredInsurance(String jascId){ return insuranceRepository.findByJascId(jascId); }
+
+    public List<Insurance> findAllRegisteredInsurances(){ return insuranceRepository.findAll(); }
 
     public List<Insurance> findRegisteredInsyranceByInsuranceSerialCode(String insuranceSerialCode){ return insuranceRepository.findByInsuranceSerialCode(insuranceSerialCode); }
 
@@ -90,6 +96,8 @@ public class DataQueryService {
 
     // Meeting Queries
     public Meeting findRegisteredMeeting(String jascId){ return meetingRepository.findByJascId(jascId);}
+
+    public List<Meeting> findAllRegisteredMeetings(){ return meetingRepository.findAll(); }
 
     public List<Meeting> findRegisteredMeetingByTitle(String searchTitle){ return meetingRepository.findByMeetingTitle(searchTitle); }
 
@@ -102,6 +110,8 @@ public class DataQueryService {
 
     // Patient Queries
     public Patient findRegisteredPatient(String jascId){ return patientRepository.findByJascId(jascId);}
+
+    public List<Patient> findAllRegisteredPatients(){ return patientRepository.findAll(); }
 
     public Patient findRegisteredPatientByIdCard(String searchIdCard){ return patientRepository.findByPatientIdCard(searchIdCard); }
 
@@ -122,6 +132,8 @@ public class DataQueryService {
     // Record Queries
     public Record findRegisteredRecord(String jascId){ return recordRepository.findByJascId(jascId); }
 
+    public List<Record> findRegisteredRecords(){ return recordRepository.findAll(); }
+
     public List<Record> findPatientsRegisteredRecord(String patientJascId){
 
         if (!doesPatientJascIdExist(patientJascId))
@@ -136,6 +148,8 @@ public class DataQueryService {
     // Staff Queries
     public Staff findRegisteredStaff(String jascId){ return staffRepository.findByJascId(jascId); }
 
+    public List<Staff> findAllRegisteredStaffs(){ return staffRepository.findAll(); }
+
     public Staff findRegisteredStaffByEmail(String staffEmail){ return staffRepository.findByStaffEmail(staffEmail); }
 
     public List<Staff> findRegisteredStaffByFirstNameAndLastName(String searchFirstName, String searchLastName){ return staffRepository.findByFirstNameAndLastName(searchFirstName,searchLastName); }
@@ -145,6 +159,8 @@ public class DataQueryService {
 
     // Surgery Queries
     public Surgery findRegisteredSurgery (String jascId){ return surgeryRepository.findByJascId(jascId); }
+
+    public List<Surgery> findAllRegisteredSurgeries(){ return surgeryRepository.findAll(); }
 
     public List<Surgery> findRegisteredSurgeryByName(String searchSurgeryName){ return surgeryRepository.findBySurgeryName(searchSurgeryName); }
 
@@ -163,6 +179,8 @@ public class DataQueryService {
 
     // User Queries
     public User findRegisteredUserAccount(String username){ return userRepository.findByUsername(username); }
+
+    public  List<User> findAllRegisteredUserAccounts(){ return userRepository.findAll(); }
 
     public User findRegisteredUserAccountOfRegisteredStaff(String staffJascId){ return userRepository.findByStaffJascId(staffJascId); }
 
