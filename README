@@ -8,6 +8,10 @@ Programmers:
 	Eva Soraya 
 	Eduardo Veras
 
+Language: Java
+Framework(s): Java SE 8 - JDK 1.8, Spring Boot, FreeMarker, JPA-ORM
+Database: PostgreSQL 9
+
 Version: v0.5.0
 ** Implementing new DataEntryAndManagement and DataQuery services
 
