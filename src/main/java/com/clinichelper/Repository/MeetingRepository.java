@@ -15,11 +15,11 @@ public interface MeetingRepository extends JpaRepository<Meeting, String> {
     Meeting findByJascId (String jascId);
 
     @Query("select M from Meeting M where M.meetingTitle = :meetingTitle")
-    List<Meeting> findMeetingBymeetingTitle(@Param("meetingTitle") String meetingTitle);
+    List<Meeting> findByMeetingTitle(@Param("meetingTitle") String meetingTitle);
 
     @Query("select M from Meeting M where M.meetingDate = :meetingDate")
-    List<Meeting> findmeetingBymeetingDate (@Param("meetingDate") Date meetingDate);
+    List<Meeting> findByMeetingDate(@Param("meetingDate") Date meetingDate);
 
     @Query("select M from Meeting M where M.meetingPlace = :meetingPlace")
-    List<Meeting> findmeetingBymeetingPlace (@Param("meetingPlace") String meetingPlace);
+    List<Meeting> findByMeetingPlace(@Param("meetingPlace") String meetingPlace);
 }

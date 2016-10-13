@@ -3,9 +3,7 @@
  */
 package com.clinichelper.Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
@@ -15,6 +13,7 @@ public class User implements Serializable{
     // Attributes
     @Id
     private String username;
+    @OneToOne
     @NotNull
     private Staff staff;
     @NotNull

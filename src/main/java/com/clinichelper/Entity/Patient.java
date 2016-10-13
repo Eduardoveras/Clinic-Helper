@@ -63,7 +63,7 @@ public class Patient implements Serializable{
         this.setPatientEmail(patientEmail);
         this.setPatientBirthDate(patientBirthDate);
         this.setPatientGender(patientGender);
-        this.setPatientRegisteredDate(new Date(Calendar.getInstance().getTime().getTime()));
+        this.setPatientRegisteredDate(new Date(Calendar.getInstance().getTime().getTime())); // current date
         this.setPatientNationality(patientNationality);
         this.setPatientAddress(patientAddress);
         this.setPatientCity(patientCity);
