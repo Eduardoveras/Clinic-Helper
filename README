@@ -8,6 +8,11 @@ Programmers:
 	Eva Soraya 
 	Eduardo Veras
 
+##HEROKU IMPORTANT CONFIG FOR LOCAL RUN
+export JDBC_DATABASE_URL=jdbc:postgresql://localhost:5432/ClinicHelperDB
+export JDBC_DATABASE_USERNAME=postgres
+export JDBC_DATABASE_PASSWORD=postgres
+
 Language: Java
 Framework(s): Java SE 8 - JDK 1.8, Spring Boot, FreeMarker, JPA-ORM, Hibernate
 Database: PostgreSQL 9

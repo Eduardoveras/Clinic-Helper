@@ -51,3 +51,4 @@ src/test/
 build
 out
 .DS_Store
+/.env
