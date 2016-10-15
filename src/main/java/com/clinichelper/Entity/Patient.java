@@ -31,6 +31,7 @@ public class Patient implements Serializable{
     @NotNull
     private String patientGender;//
     private Date patientRegisteredDate;
+    private String occupation;
     private String patientNationality;
     @NotNull
     private String patientAddress;
@@ -53,21 +54,23 @@ public class Patient implements Serializable{
     }
 
     // Used to create and register new patients
-    public Patient(String patientFirstName, String patientLastName, String patientIdCard, String patientTelephoneNumber, String patientContactTelephoneNumber, String patientGender, String patientEmail, Date patientBirthDate, String patientNationality, String patientAddress, String patientCity, String patientCountry) {
+    public Patient(String patientFirstName, String patientLastName, String patientIdCard, String patientTelephoneNumber, String patientContactTelephoneNumber,String occupation, String patientGender, String patientEmail, Date patientBirthDate, String patientNationality, String patientAddress, String patientCity, String patientCountry) {
         this.setJascId("JASC-P-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setPatientFirstName(patientFirstName);
         this.setPatientLastName(patientLastName);
         this.setPatientIdCard(patientIdCard);
         this.setPatientTelephoneNumber(patientTelephoneNumber);
         this.setPatientContactTelephoneNumber(patientContactTelephoneNumber);
+        this.setOccupation(occupation);
+        this.setPatientGender(patientGender);
         this.setPatientEmail(patientEmail);
         this.setPatientBirthDate(patientBirthDate);
-        this.setPatientGender(patientGender);
-        this.setPatientRegisteredDate(new Date(Calendar.getInstance().getTime().getTime())); // current date
         this.setPatientNationality(patientNationality);
         this.setPatientAddress(patientAddress);
         this.setPatientCity(patientCity);
         this.setPatientCountry(patientCountry);
+        this.setPatientRegisteredDate(new Date(Calendar.getInstance().getTime().getTime())); // current date
+
     }
 
     public String getJascId() {
@@ -174,5 +177,13 @@ public class Patient implements Serializable{
 
     public void setPatientEmail(String patientEmail) {
         this.patientEmail = patientEmail;
+    }
+
+    public String getOccupation() {
+        return occupation;
+    }
+
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
     }
 }
