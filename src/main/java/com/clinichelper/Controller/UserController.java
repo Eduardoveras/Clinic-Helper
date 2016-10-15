@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
  * Created by Eduardo veras on 02-Oct-16.
  */
 @Controller
-public class registerController {
+public class UserController {
 
     @RequestMapping("/solicit")
     public ModelAndView solicit(Model model){
