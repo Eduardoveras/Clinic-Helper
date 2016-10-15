@@ -1,53 +1,37 @@
 buildscript {
+    ext {
+        springBootVersion = '1.4.1.RELEASE'
+    }
     repositories {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.1.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
 }
 
 apply plugin: 'java'
-apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
-group 'clinichelper'
-version '1.0-SNAPSHOT'
+group 'myapp'
+version = '0.0.1-SNAPSHOT'
+
+
+
+jar {
+    baseName = 'myapp'
+    version = '0.0.1-SNAPSHOT'
+    manifest {
+        attributes 'Main-Class': 'com.clinichelper.WebApplication'
+    }
+}
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-jar {
-    baseName = 'heroku-gradle-spring-boot'
-}
-
 repositories {
     mavenCentral()
-}
-
-archivesBaseName = "app"
-
-defaultTasks = ['stage']
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.7'
-}
-
-task stage {
-    dependsOn clean, build
-}
-
-task copyToLib(type: Copy) {
-    into "$buildDir/lib"
-    from(configurations.compile)
-}
-
-stage.dependsOn(copyToLib)
-
-
-springBoot {
-    mainClass = "com.clinichelper.WebApplication"
 }
 
 
@@ -79,17 +63,31 @@ dependencies {
 
     compile("org.springframework.boot:spring-boot-devtools")
 }
-group 'ClinicHelper'
-version '1.0-SNAPSHOT'
 
-apply plugin: 'java'
 
-sourceCompatibility = 1.5
 
-repositories {
-    mavenCentral()
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.9'
 }
 
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.11'
+task stage(type: Copy, dependsOn: [clean, build]) {
+    from jar.archivePath
+    into project.rootDir
+    rename {
+        'app.jar'
+    }
 }
+
+stage.mustRunAfter(clean)
+
+
+clean << {
+    project.file('app.jar').delete()
+}
+
+springBoot {
+    mainClass = "com.clinichelper.WebApplication"
+}
+
+
+
