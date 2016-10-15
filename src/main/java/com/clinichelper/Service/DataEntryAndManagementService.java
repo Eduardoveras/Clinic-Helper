@@ -137,10 +137,17 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public Patient createNewPatient(String patientFirstName, String patientLastName, String patientIdCard, String patientTelephoneNumber, String patientContactTelephoneNumber, String patientGender, String patientEmail, Date patientBirthDate, String patientNationality, String patientAddress, String patientCity, String patientCountry) throws Exception {
+    public Patient createNewPatient(String patientFirstName, String patientLastName, String patientIdCard,
+                                    String patientTelephoneNumber, String patientContactTelephoneNumber,
+                                    String occupation, String patientGender, String patientEmail,
+                                    Date patientBirthDate, String patientNationality, String patientAddress,
+                                    String patientCity, String patientCountry) throws Exception {
 
         try {
-            return patientRepository.save(new Patient(patientFirstName, patientLastName, patientIdCard, patientTelephoneNumber, patientContactTelephoneNumber, patientGender, patientEmail, patientBirthDate, patientNationality, patientAddress, patientCity, patientCountry));
+            return patientRepository.save(new Patient(patientFirstName, patientLastName, patientIdCard,
+                    patientTelephoneNumber, patientContactTelephoneNumber,
+                    occupation, patientGender, patientEmail, patientBirthDate, patientNationality,
+                    patientAddress, patientCity, patientCountry));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis patient was not able to persist -> " + exp.getMessage());
