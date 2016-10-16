@@ -53,4 +53,22 @@ public class AppointmentController {
         return "redirect:/appointments";
     }
 
+    @PostMapping("/cancelAppointment")
+    public String cancelRegisteredAppointment(@RequestParam("jascId") String appointmentJascId){
+
+        try {
+            DEAMS.deleteRegisteredAppointment(appointmentJascId);
+        } catch (PersistenceException exp){
+            //
+        } catch (NullPointerException exp) {
+            //
+        } catch (Exception exp){
+            //
+        }
+
+        return "redirect:/appointments";
+    }
+
+    
+
 }
