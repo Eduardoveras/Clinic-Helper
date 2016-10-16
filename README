@@ -17,6 +17,9 @@ Language: Java
 Framework(s): Java SE 8 - JDK 1.8, Spring Boot, FreeMarker, JPA-ORM, Hibernate
 Database: PostgreSQL 9
 
+Version: v0.7.0
+** Core Controller implementations
+
 Version: v0.6.0
 ** Heroku support with functional domain
 	v0.6.1
