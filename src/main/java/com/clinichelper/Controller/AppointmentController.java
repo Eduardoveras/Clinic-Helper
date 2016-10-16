@@ -3,6 +3,7 @@
  */
 package com.clinichelper.Controller;
 
+import com.clinichelper.Entity.Appointment;
 import com.clinichelper.Entity.Patient;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
@@ -69,6 +70,25 @@ public class AppointmentController {
         return "redirect:/appointments";
     }
 
-    
+    @PostMapping("/changeDateAndTime")
+    public String editDateAndTimeOfRegisteredAppointment(@RequestParam("jascId") String appointmentJascId, @RequestParam("date") Date newDate, @RequestParam("time") Timestamp newTime){
+
+        Appointment appointment = DQS.findRegisteredAppointment(appointmentJascId);
+
+        appointment.setAppointmentDate(newDate);
+        appointment.setAppointmentTime(newTime);
+
+        try {
+            DEAMS.editAppointment(appointment);
+        } catch (PersistenceException exp){
+            //
+        } catch (NullPointerException exp) {
+            //
+        } catch (Exception exp){
+            //
+        }
+
+        return "redirect:/appointments";
+    }
 
 }
