@@ -19,6 +19,8 @@ Database: PostgreSQL 9
 
 Version: v0.6.0
 ** Heroku support with functional domain
+	v0.6.1
+** Implementing no heroku domain settings configurations with application-heroku.properties
 
 Version: v0.5.0
 ** Implementing new DataEntryAndManagement and DataQuery services
