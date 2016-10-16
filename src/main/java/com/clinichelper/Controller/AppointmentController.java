@@ -3,17 +3,92 @@
  */
 package com.clinichelper.Controller;
 
+import com.clinichelper.Entity.Appointment;
 import com.clinichelper.Entity.Patient;
+import com.clinichelper.Service.DataEntryAndManagementService;
+import com.clinichelper.Service.DataQueryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.persistence.PersistenceException;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 @Controller
 public class AppointmentController {
 
+    // Services
+    @Autowired
+    private DataEntryAndManagementService DEAMS;
+    @Autowired
+    private DataQueryService DQS;
+
+    // Gets
+    @GetMapping("/appointment")
+    public ModelAndView fetchAppointmentView(Model model){
+
+        model.addAttribute("appointments", DQS.findAllRegisteredAppointments());
+
+        return new ModelAndView("appointments");
+    }
+
     // Posts
-    // TODO: appointment things
+    @PostMapping("/newAppointment")
+    public String createNweApointment(@RequestParam("date") Date appointmentDate, @RequestParam("time") Timestamp appointmentTime, @RequestParam("jascId") String patientJascId, @RequestParam("description") String appointmentDescription, @RequestParam("access") String appointmentAccessFrom){
+
+        try {
+            DEAMS.createNewAppointment(appointmentDate, appointmentTime, patientJascId, appointmentDescription, appointmentAccessFrom);
+        } catch (PersistenceException exp){
+            //
+        } catch (NullPointerException exp) {
+            //
+        } catch (Exception exp){
+            //
+        }
+        
+        return "redirect:/appointments";
+    }
+
+    @PostMapping("/cancelAppointment")
+    public String cancelRegisteredAppointment(@RequestParam("jascId") String appointmentJascId){
+
+        try {
+            DEAMS.deleteRegisteredAppointment(appointmentJascId);
+        } catch (PersistenceException exp){
+            //
+        } catch (NullPointerException exp) {
+            //
+        } catch (Exception exp){
+            //
+        }
+
+        return "redirect:/appointments";
+    }
+
+    @PostMapping("/changeDateAndTime")
+    public String editDateAndTimeOfRegisteredAppointment(@RequestParam("jascId") String appointmentJascId, @RequestParam("date") Date newDate, @RequestParam("time") Timestamp newTime){
+
+        Appointment appointment = DQS.findRegisteredAppointment(appointmentJascId);
+
+        appointment.setAppointmentDate(newDate);
+        appointment.setAppointmentTime(newTime);
+
+        try {
+            DEAMS.editAppointment(appointment);
+        } catch (PersistenceException exp){
+            //
+        } catch (NullPointerException exp) {
+            //
+        } catch (Exception exp){
+            //
+        }
+
+        return "redirect:/appointments";
+    }
+
 }
