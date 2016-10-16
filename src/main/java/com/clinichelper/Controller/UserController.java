@@ -24,10 +24,78 @@ public class UserController {
     private DataEntryAndManagementService DEAMS;
     @Autowired
     private DataQueryService DQS;
-    @GetMapping("/user")
-    public ModelAndView fetchPatientView(Model model){
 
-        model.addAttribute("usertList", DQS.findAllRegisteredPatients());
+    @GetMapping("/staff")
+    public ModelAndView fetchStaffView(Model model){
+
+        model.addAttribute("staffList", DQS.findAllRegisteredStaffs());
+
+        return new ModelAndView("staff");
+    }
+    @PostMapping("/deleteStaff")
+    public String deleteStaff (@RequestParam("jascID") String jascId){
+
+        try {
+            DEAMS.deleteRegisterdUserAccount(jascId);
+        }
+        catch (PersistenceException exp){
+            //
+        } catch (NullPointerException exp) {
+            //
+        } catch (Exception exp){
+            //
+        }
+        return "redirect/staff";
+    }
+    @PostMapping("/editStaff")
+    public String editStaff(@RequestParam("jascId") String jascId,
+                           @RequestParam("firstName") String firstName,
+                           @RequestParam("lastName") String lastName,
+                            @RequestParam("mail") String mail,
+                            @RequestParam("clinicId") String clinicId
+    ){
+        Staff staff = DQS.findRegisteredStaff(jascId);
+        staff.setStaffClinicId(clinicId);
+        staff.setStaffEmail(mail);
+        staff.setStaffFirstName(firstName);
+        staff.setStaffLastName(lastName);
+        try {
+            DEAMS.editStaff(staff);
+        }
+        catch (PersistenceException exp){
+            //
+        } catch (NullPointerException exp) {
+            //
+        } catch (Exception exp){
+            //
+        }
+        return "redirect:/staff";
+    }
+    @PostMapping("/newStaff")
+    public String newStaff(
+                           @RequestParam("firstName") String firstName,
+                           @RequestParam("lastName") String lastName,
+                           @RequestParam("mail") String mail,
+                           @RequestParam("clinicId") String clinicId
+    ){
+        try{
+            DEAMS.createNewStaffMember(firstName,lastName,mail,clinicId);
+        }
+        catch (PersistenceException exp){
+            //
+        } catch (NullPointerException exp) {
+            //
+        } catch (Exception exp){
+            //
+        }
+        return "redirect:/";
+
+    }
+
+    @GetMapping("/user")
+    public ModelAndView fetchUsertView(Model model){
+
+        model.addAttribute("userList", DQS.findAllRegisteredUserAccounts());
 
         return new ModelAndView("user");
     }
@@ -69,7 +137,7 @@ public class UserController {
         return "redirect:/user";
     }
     @PostMapping("/newUser")
-    public String newUSer(@RequestParam("username") String username,
+    public String newUser(@RequestParam("username") String username,
                           @RequestParam("staff") String staff,
                           @RequestParam("password") String password,
                           @RequestParam("role") String role
@@ -87,6 +155,7 @@ public class UserController {
         return "redirect:/";
 
     }
+
 
 
 
