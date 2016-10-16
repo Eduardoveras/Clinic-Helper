@@ -429,12 +429,13 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public void editUserAccountPassword(String username, String password) throws Exception{
+    public void editUserAccount(User user) throws Exception{
 
         try {
-            User user = userRepository.findByUsername(username);
-            user.setPassword(password);
             userRepository.save(user);
+            //user.setPassword(password);
+            //user.setRole(role);
+
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis username was not able to persist -> " + exp.getMessage());
@@ -446,6 +447,7 @@ public class DataEntryAndManagementService {
             throw new Exception("\n\nAn error occurred when trying to edit username-> " + exp.getMessage());
         }
     }
+
 
     // Auxiliary Functions
     private boolean doesAppointmentJascIdExist(String jascId) {
