@@ -3,6 +3,8 @@
  */
 package com.clinichelper.Entity;
 
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -55,7 +57,18 @@ public class User implements Serializable{
     }
 
     public void setRole(String role) {
-        this.role = role;
+        //Avaible roles: ADMIN, USER
+
+        switch (role.toUpperCase()) {
+            case "ADMIN":
+                this.role = "ADMIN";
+                break;
+            case "USER":
+                this.role = "USER";
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid role: " + role);
+        }
     }
 
     public Staff getStaff() {
