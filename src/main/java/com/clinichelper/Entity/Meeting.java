@@ -42,8 +42,8 @@ public class Meeting implements Serializable{
 
     public Meeting(String meetingTitle, String meetingObjective, Date meetingDate, Timestamp meetingTime, String meetingPlace, Set<Staff> attendees){
         this.setJascId("JASC-M-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
-        this.setMeetingTitle(meetingTitle);
-        this.setMeetingObjective(meetingObjective);
+        this.setMeetingTitle(meetingTitle.toUpperCase());
+        this.setMeetingObjective(meetingObjective.toUpperCase());
         this.setMeetingDate(meetingDate);
         this.setMeetingTime(meetingTime);
         this.setMeetingPlace(meetingPlace);

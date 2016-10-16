@@ -309,7 +309,15 @@ public class DataEntryAndManagementService {
         if (!doesStaffJascIdExist(jascId))
             throw new IllegalArgumentException("\n\nThis staff jasc id is invalid");
 
+        if (jascId.equals("JASC-STAFF-ADMIN"))
+            throw new IllegalArgumentException("\n\nDANGER: YOU CAN NOT ERASE ADMIN ACCOUNT!");
+
         try {
+            User user = userRepository.findByStaffJascId(jascId);
+
+            if (user != null)
+                userRepository.delete(user);
+
             staffRepository.delete(jascId);
         } catch (NullPointerException exp) {
             System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
@@ -343,7 +351,7 @@ public class DataEntryAndManagementService {
     public void editAppointment(Appointment appointment) throws Exception {
 
         if (appointment == null)
-            throw new NullArgumentException("\n\nTHis appoint was sent with a value of NULL");
+            throw new NullArgumentException("\n\nThis appoint was sent with a value of NULL");
 
         try {
             appointmentRepository.save(appointment);
@@ -429,13 +437,13 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public void editUserAccount(User user) throws Exception{
+    public void editUserAccountCredentials(String username, String password, String role) throws Exception{
 
         try {
+            User user = userRepository.findByUsername(username);
+            user.setPassword(password);
+            user.setRole(role);
             userRepository.save(user);
-            //user.setPassword(password);
-            //user.setRole(role);
-
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis username was not able to persist -> " + exp.getMessage());

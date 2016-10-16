@@ -1,9 +1,11 @@
 package com.clinichelper.config;
 
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 /**
@@ -11,7 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  */
 @Configurable
 @EnableGlobalMethodSecurity(securedEnabled = true)
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+//@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter/* implements ApplicationContextAware */{
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

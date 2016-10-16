@@ -33,9 +33,9 @@ public class Staff implements Serializable{
 
     public Staff(String staffFirstName,String staffLastName, String staffEmail, String staffClinicId) {
         this.setJascId("JASC-STAFF-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
-        this.setStaffFirstName(staffFirstName);
-        this.setStaffLastName(staffLastName);
-        this.setStaffEmail(staffEmail);
+        this.setStaffFirstName(staffFirstName.toLowerCase());
+        this.setStaffLastName(staffLastName.toUpperCase());
+        this.setStaffEmail(staffEmail.toLowerCase());
         this.setStaffClinicId(staffClinicId);
     }
 

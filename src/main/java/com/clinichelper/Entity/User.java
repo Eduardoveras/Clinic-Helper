@@ -29,7 +29,7 @@ public class User implements Serializable{
     }
 
     public User(String username, Staff staff, String password, String role){
-        this.setUsername(username);
+        this.setUsername(username.toLowerCase());
         this.setStaff(staff);
         this.setPassword(password);
         this.setRole(role);

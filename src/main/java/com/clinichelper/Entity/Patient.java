@@ -47,30 +47,29 @@ public class Patient implements Serializable{
     // Used only for registration waiting list
     public Patient(String patientFirstName, String patientLastName, String patientTelephoneNumber, String patientEmail){
         this.setJascId(UUID.randomUUID().toString().split("-")[0]);
-        this.setPatientFirstName(patientFirstName);
-        this.setPatientLastName(patientLastName);
+        this.setPatientFirstName(patientFirstName.toLowerCase());
+        this.setPatientLastName(patientLastName.toUpperCase());
         this.setPatientTelephoneNumber(patientTelephoneNumber);
-        this.setPatientEmail(patientEmail);
+        this.setPatientEmail(patientEmail.toLowerCase());
     }
 
     // Used to create and register new patients
     public Patient(String patientFirstName, String patientLastName, String patientIdCard, String patientTelephoneNumber, String patientContactTelephoneNumber,String occupation, String patientGender, String patientEmail, Date patientBirthDate, String patientNationality, String patientAddress, String patientCity, String patientCountry) {
         this.setJascId("JASC-P-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
-        this.setPatientFirstName(patientFirstName);
-        this.setPatientLastName(patientLastName);
+        this.setPatientFirstName(patientFirstName.toLowerCase());
+        this.setPatientLastName(patientLastName.toUpperCase());
         this.setPatientIdCard(patientIdCard);
         this.setPatientTelephoneNumber(patientTelephoneNumber);
         this.setPatientContactTelephoneNumber(patientContactTelephoneNumber);
-        this.setOccupation(occupation);
-        this.setPatientGender(patientGender);
-        this.setPatientEmail(patientEmail);
+        this.setOccupation(occupation.toUpperCase());
+        this.setPatientGender(patientGender.toUpperCase());
+        this.setPatientEmail(patientEmail.toLowerCase());
         this.setPatientBirthDate(patientBirthDate);
-        this.setPatientNationality(patientNationality);
-        this.setPatientAddress(patientAddress);
-        this.setPatientCity(patientCity);
-        this.setPatientCountry(patientCountry);
+        this.setPatientNationality(patientNationality.toUpperCase());
+        this.setPatientAddress(patientAddress.toUpperCase());
+        this.setPatientCity(patientCity.toUpperCase());
+        this.setPatientCountry(patientCountry.toUpperCase());
         this.setPatientRegisteredDate(new Date(Calendar.getInstance().getTime().getTime())); // current date
-
     }
 
     public String getJascId() {
