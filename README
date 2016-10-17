@@ -19,6 +19,11 @@ Database: PostgreSQL 9
 
 Version: v0.7.0
 ** Core Controller implementations
+        v0.7.1
+** Implement new naming convention to establish data standard (LowerCase v UpperCase)
+** Refactor new editUserAccountCredentials functions for easy user account modifications
+** Add missing makeAdmin POST function and modify editUser Post
+** Refactor TeamController
 
 Version: v0.6.0
 ** Heroku support with functional domain
