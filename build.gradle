@@ -60,8 +60,16 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '1.4.1.RELEASE'
     // https://mvnrepository.com/artifact/org.postgresql/postgresql
     compile group: 'org.postgresql', name: 'postgresql', version: '9.4.1211.jre7'
+    compile('com.vaadin:vaadin-spring-boot-starter:1.0.2')
+
 
     compile("org.springframework.boot:spring-boot-devtools")
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "com.vaadin:vaadin-bom:7.7.3"
+    }
 }
 
 
