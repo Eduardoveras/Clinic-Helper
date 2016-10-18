@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Set;
 import java.util.UUID;
 
@@ -88,6 +89,12 @@ public class Surgery implements Serializable{
 
     public Timestamp getSurgeryTime() {
         return surgeryTime;
+    }
+
+    public String getStringSurgeryTime(){
+        Date date = new Date(surgeryTime.getTime());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+        return sdf.format(date).substring(11,16);
     }
 
     public void setSurgeryTime(Timestamp surgeryTime) {

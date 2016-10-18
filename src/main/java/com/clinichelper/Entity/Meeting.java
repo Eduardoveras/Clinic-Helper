@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Set;
 import java.util.UUID;
 
@@ -84,6 +85,12 @@ public class Meeting implements Serializable{
 
     public Timestamp getMeetingTime() {
         return meetingTime;
+    }
+
+    public String getStringMeetingTime(){
+        Date date = new Date(meetingTime.getTime());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+        return sdf.format(date).substring(11,16);
     }
 
     public void setMeetingTime(Timestamp meetingTime) {

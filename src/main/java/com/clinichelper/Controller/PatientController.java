@@ -40,7 +40,7 @@ public class PatientController {
         model.addAttribute("patientList", DQS.findAllRegisteredPatients());
         model.addAttribute("amount", DQS.findAllRegisteredPatients().size());
 
-        return new ModelAndView("test");
+        return new ModelAndView("");
     }
 
     // Posts
@@ -50,10 +50,9 @@ public class PatientController {
         try {
 
             SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
-            java.util.Date date = sdf1.parse(dateOfBirth);
 
             DEAMS.createNewPatient(firstName, lastName, idCard, telephoneNumber,
-                    contactTelephoneNumber, occupation, gender, mail, new Date(date.getTime()), nationality, address, cities, countries);
+                    contactTelephoneNumber, occupation, gender, mail, new Date(sdf1.parse(dateOfBirth).getTime()), nationality, address, cities, countries);
         } catch (PersistenceException exp){
             //
         } catch(IllegalArgumentException exp){
@@ -69,21 +68,23 @@ public class PatientController {
 
     @PostMapping("/editPatient")
     public String deletePatient(@RequestParam("jascId") String jascId, @RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("idCard") String idCard, @RequestParam("mail") String mail, @RequestParam("telephoneNumer") String telephoneNumber, @RequestParam("contactTelephoneNumber") String contactTelephoneNumber, @RequestParam("address") String address, @RequestParam("occupation") String occupation, @RequestParam("dateOfBirth")Date dateOfBirth, @RequestParam("gender") String gender, @RequestParam("nationality") String nationality, @RequestParam("countries") String countries, @RequestParam("cities") String cities){
-        Patient patient = DQS.findRegisteredPatient(jascId);
-        patient.setPatientFirstName(firstName);
-        patient.setPatientLastName(lastName);
-        patient.setPatientIdCard(idCard);
-        patient.setPatientBirthDate(dateOfBirth);
-        patient.setPatientEmail(mail);
-        patient.setPatientTelephoneNumber(telephoneNumber);
-        patient.setPatientContactTelephoneNumber(contactTelephoneNumber);
-        patient.setPatientAddress(address);
-        patient.setOccupation(occupation);
-        patient.setPatientGender(gender);
-        patient.setPatientNationality(nationality);
-        patient.setPatientCountry(countries);
-        patient.setPatientCity(cities);
+
         try {
+
+            Patient patient = DQS.findRegisteredPatient(jascId);
+            patient.setPatientFirstName(firstName.toLowerCase());
+            patient.setPatientLastName(lastName.toUpperCase());
+            patient.setPatientIdCard(idCard);
+            patient.setPatientBirthDate(dateOfBirth);
+            patient.setPatientEmail(mail.toLowerCase());
+            patient.setPatientTelephoneNumber(telephoneNumber);
+            patient.setPatientContactTelephoneNumber(contactTelephoneNumber);
+            patient.setPatientAddress(address.toUpperCase());
+            patient.setOccupation(occupation.toUpperCase());
+            patient.setPatientGender(gender.toUpperCase());
+            patient.setPatientNationality(nationality.toUpperCase());
+            patient.setPatientCountry(countries.toUpperCase());
+            patient.setPatientCity(cities.toUpperCase());
             DEAMS.editPatient(patient);
         }
         catch (PersistenceException exp){
