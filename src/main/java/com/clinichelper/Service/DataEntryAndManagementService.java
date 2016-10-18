@@ -50,6 +50,11 @@ public class DataEntryAndManagementService {
         if (!doesPatientJascIdExist(patientJascId))
             throw new IllegalArgumentException("\n\nThis is an invalid patient jascId");
 
+        java.util.Date utilDate = new java.util.Date();
+
+        if (differenceInDays(new Date(utilDate.getTime()), appointmentDate) <= 0)
+            throw new IllegalArgumentException("The appointment date must be a future date");
+
         try {
             return appointmentRepository.save(new Appointment(appointmentDate, appointmentTime, patientRepository.findByJascId(patientJascId), appointmentDescription, appointmentAccessFrom));
         } catch (PersistenceException exp){
@@ -123,6 +128,12 @@ public class DataEntryAndManagementService {
         if (attendees.isEmpty())
             throw new NullArgumentException("\n\nYou can not schedule a meeting without any staff attending. Please choose who will attend");
 
+
+        java.util.Date utilDate = new java.util.Date();
+
+        if (differenceInDays(new Date(utilDate.getTime()), date) <= 0)
+            throw new IllegalArgumentException("The meeting date must be a future date");
+
         try {
             return meetingRepository.save(new Meeting(title,objective, date, time, place, attendees));
         } catch (PersistenceException exp){
@@ -142,6 +153,11 @@ public class DataEntryAndManagementService {
                                     String occupation, String patientGender, String patientEmail,
                                     Date patientBirthDate, String patientNationality, String patientAddress,
                                     String patientCity, String patientCountry) throws Exception {
+
+        java.util.Date utilDate = new java.util.Date();
+
+        if (differenceInDays(patientBirthDate ,new Date(utilDate.getTime())) <= 0)
+            throw new IllegalArgumentException("The birth date must be a past date");
 
         try {
             return patientRepository.save(new Patient(patientFirstName, patientLastName, patientIdCard,
