@@ -24,6 +24,8 @@ Version: v0.7.0
 ** Refactor new editUserAccountCredentials functions for easy user account modifications
 ** Add missing makeAdmin POST function and modify editUser Post
 ** Refactor TeamController
+        v0.7.2
+** Add new date validation system
 
 Version: v0.6.0
 ** Heroku support with functional domain

@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="725512bc-b9cf-4975-a72d-193892e4a123" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/PatientController.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/PatientController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/TeamController.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/TeamController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Service/DataEntryAndManagementService.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Service/DataEntryAndManagementService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README" afterPath="$PROJECT_DIR$/README" />
     </list>
     <ignored path="ClinicHelper.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -64,8 +61,8 @@
       <file leaf-file-name="README" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="22" column="84" selection-start-line="22" selection-start-column="84" selection-end-line="22" selection-end-column="84" />
+            <state relative-caret-position="501">
+              <caret line="44" column="15" selection-start-line="44" selection-start-column="15" selection-end-line="44" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -295,7 +292,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="2953161240178" />
+        <entry key="$PROJECT_DIR$" value="2953390676431" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -470,11 +467,11 @@
         <option value="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/Staff.java" />
         <option value="$PROJECT_DIR$/src/main/resources/data.sql" />
         <option value="$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/TeamController.java" />
-        <option value="$PROJECT_DIR$/README" />
         <option value="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/Patient.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/test.ftl" />
         <option value="$PROJECT_DIR$/src/main/java/com/clinichelper/Service/DataEntryAndManagementService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/PatientController.java" />
+        <option value="$PROJECT_DIR$/README" />
       </list>
     </option>
   </component>
@@ -1228,12 +1225,12 @@
       <workItem from="1476800720651" duration="40000" />
       <workItem from="1476815496943" duration="1445000" />
       <workItem from="1476817345485" duration="10000" />
-      <workItem from="1476817685871" duration="12000" />
+      <workItem from="1476817685871" duration="105000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34346000" />
+    <option name="totallyTimeSpent" value="34439000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1671,8 +1668,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/README">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="22" column="84" selection-start-line="22" selection-start-column="84" selection-end-line="22" selection-end-column="84" />
+        <state relative-caret-position="501">
+          <caret line="44" column="15" selection-start-line="44" selection-start-column="15" selection-end-line="44" selection-end-column="15" />
           <folding />
         </state>
       </provider>
