@@ -309,7 +309,15 @@ public class DataEntryAndManagementService {
         if (!doesStaffJascIdExist(jascId))
             throw new IllegalArgumentException("\n\nThis staff jasc id is invalid");
 
+        if (jascId.equals("JASC-STAFF-ADMIN"))
+            throw new IllegalArgumentException("\n\nDANGER: YOU CAN NOT ERASE ADMIN ACCOUNT!");
+
         try {
+            User user = userRepository.findByStaffJascId(jascId);
+
+            if (user != null)
+                userRepository.delete(user);
+
             staffRepository.delete(jascId);
         } catch (NullPointerException exp) {
             System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
@@ -343,7 +351,7 @@ public class DataEntryAndManagementService {
     public void editAppointment(Appointment appointment) throws Exception {
 
         if (appointment == null)
-            throw new NullArgumentException("\n\nTHis appoint was sent with a value of NULL");
+            throw new NullArgumentException("\n\nThis appoint was sent with a value of NULL");
 
         try {
             appointmentRepository.save(appointment);
@@ -429,11 +437,12 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public void editUserAccountPassword(String username, String password) throws Exception{
+    public void editUserAccountCredentials(String username, String password, String role) throws Exception{
 
         try {
             User user = userRepository.findByUsername(username);
             user.setPassword(password);
+            user.setRole(role);
             userRepository.save(user);
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
@@ -446,6 +455,24 @@ public class DataEntryAndManagementService {
             throw new Exception("\n\nAn error occurred when trying to edit username-> " + exp.getMessage());
         }
     }
+
+    public void editStaff(Staff staff) throws Exception{
+
+        try {
+            staffRepository.save(staff);
+
+        } catch (PersistenceException exp){
+            System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
+            throw new PersistenceException("\n\nThis staff was not able to persist -> " + exp.getMessage());
+        } catch (NullPointerException exp) {
+            System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
+            throw new NullPointerException("\n\nAN object or process has risen a null value -> " + exp.getMessage());
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred when trying to edit a staff -> " + exp.getMessage());
+        }
+    }
+
 
     // Auxiliary Functions
     private boolean doesAppointmentJascIdExist(String jascId) {

@@ -52,3 +52,5 @@ build
 out
 .DS_Store
 /.env
+
+test.ftl

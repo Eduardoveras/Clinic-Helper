@@ -27,7 +27,7 @@ public class Equipment implements Serializable{
 
     public Equipment(String equipmentName, String equipmentUse, String equipmentDescription) {
         this.setJascId("JASC-E-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
-        this.setEquipmentName(equipmentName);
+        this.setEquipmentName(equipmentName.toUpperCase());
         this.setEquipmentUse(equipmentUse);
         this.setEquipmentDescription(equipmentDescription);
     }
