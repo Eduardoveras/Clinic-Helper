@@ -17,40 +17,58 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.PersistenceException;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 @Controller
 public class PatientController {
+    // Repositories
     @Autowired
     private DataEntryAndManagementService DEAMS;
     @Autowired
     private DataQueryService DQS;
+
+    // Gets
     @RequestMapping("/solicit")
     public ModelAndView solicit(Model model){
 
         return new ModelAndView("newpatient");
     }
 
-    @GetMapping("/patient")
+    @GetMapping("/patients")
     public ModelAndView fetchPatientView(Model model){
 
         model.addAttribute("patientList", DQS.findAllRegisteredPatients());
+        model.addAttribute("amount", DQS.findAllRegisteredPatients().size());
 
-        return new ModelAndView("newpatient");
+        return new ModelAndView("test");
     }
+
+    // Posts
+    @PostMapping("/newPatient")
+    public String registerNewPatient(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("idCard") String idCard, @RequestParam("email") String mail, @RequestParam("telephoneNumber") String telephoneNumber, @RequestParam("contactTelephoneNumber") String contactTelephoneNumber, @RequestParam("address") String address, @RequestParam("occupation") String occupation, @RequestParam("dateOfBirth")String dateOfBirth, @RequestParam("gender") String gender, @RequestParam("nationality") String nationality, @RequestParam("countries") String countries, @RequestParam("cities") String cities){
+
+        try {
+
+            SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
+            java.util.Date date = sdf1.parse(dateOfBirth);
+
+            DEAMS.createNewPatient(firstName, lastName, idCard, telephoneNumber,
+                    contactTelephoneNumber, occupation, gender, mail, new Date(date.getTime()), nationality, address, cities, countries);
+        } catch (PersistenceException exp){
+            //
+        } catch(IllegalArgumentException exp){
+            //
+        } catch (NullPointerException exp) {
+            //
+        } catch (Exception exp){
+            //
+        }
+
+        return "redirect:/patients";
+    }
+
     @PostMapping("/editPatient")
-    public String deletePatient(@RequestParam("jascId") String jascId, @RequestParam("firstName") String firstName,
-                                @RequestParam("lastName") String lastName,
-                                @RequestParam("idCard") String idCard,
-                                @RequestParam("mail") String mail,
-                                @RequestParam("telephoneNumer") String telephoneNumber,
-                                @RequestParam("contactTelephoneNumber") String contactTelephoneNumber,
-                                @RequestParam("address") String address,
-                                @RequestParam("occupation") String occupation,
-                                @RequestParam("dateOfBirth")Date dateOfBirth,
-                                @RequestParam("gender") String gender,
-                                @RequestParam("nationality") String nationality,
-                                @RequestParam("countries") String countries,
-                                @RequestParam("cities") String cities){
+    public String deletePatient(@RequestParam("jascId") String jascId, @RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("idCard") String idCard, @RequestParam("mail") String mail, @RequestParam("telephoneNumer") String telephoneNumber, @RequestParam("contactTelephoneNumber") String contactTelephoneNumber, @RequestParam("address") String address, @RequestParam("occupation") String occupation, @RequestParam("dateOfBirth")Date dateOfBirth, @RequestParam("gender") String gender, @RequestParam("nationality") String nationality, @RequestParam("countries") String countries, @RequestParam("cities") String cities){
         Patient patient = DQS.findRegisteredPatient(jascId);
         patient.setPatientFirstName(firstName);
         patient.setPatientLastName(lastName);
@@ -70,6 +88,8 @@ public class PatientController {
         }
         catch (PersistenceException exp){
             //
+        } catch(IllegalArgumentException exp){
+            //
         } catch (NullPointerException exp) {
             //
         } catch (Exception exp){
@@ -77,35 +97,5 @@ public class PatientController {
         }
         return "redirect:/patient";
     }
-    @PostMapping("/newPatient")
-    public String registerNewPatient(@RequestParam("firstName") String firstName,
-                                         @RequestParam("lastName") String lastName,
-                                         @RequestParam("idCard") String idCard,
-                                         @RequestParam("mail") String mail,
-                                         @RequestParam("telephoneNumer") String telephoneNumber,
-                                         @RequestParam("contactTelephoneNumber") String contactTelephoneNumber,
-                                         @RequestParam("address") String address,
-                                         @RequestParam("occupation") String occupation,
-                                         @RequestParam("dateOfBirth")Date dateOfBirth,
-                                         @RequestParam("gender") String gender,
-                                         @RequestParam("nationality") String nationality,
-                                         @RequestParam("countries") String countries,
-                                         @RequestParam("cities") String cities
-                                        ){
-        try{
-        DEAMS.createNewPatient(firstName, lastName, idCard, telephoneNumber,
-                contactTelephoneNumber, occupation, gender, mail, dateOfBirth, nationality, address, cities, countries);
-    }
-         catch (PersistenceException exp){
-             //
-        } catch (NullPointerException exp) {
-            //
-        } catch (Exception exp){
-            //
-        }
-
-        return "redirect:/";
-    }
-
 
 }

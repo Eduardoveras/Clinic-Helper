@@ -32,7 +32,7 @@ public class TeamController {
         model.addAttribute("staffList", DQS.findAllRegisteredStaffs());
         model.addAttribute("userList", DQS.findAllRegisteredUserAccounts());
 
-        return new ModelAndView("test");
+        return new ModelAndView("");
     }
 
     // Post
