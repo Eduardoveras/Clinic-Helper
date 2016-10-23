@@ -44,7 +44,7 @@ public class ToolKitService {
         FetchCustomTasks();
 
         // Adding Birthday reminder tasks
-        FetchBirthDateReminders();
+        FetchBirthAndRegistrationDatesReminders();
 
         // Adding all of today's appointments
         FetchAppointments();
@@ -56,7 +56,7 @@ public class ToolKitService {
         todoList.addAll(choreRepository.findAll());
     }
 
-    private void FetchBirthDateReminders(){
+    private void FetchBirthAndRegistrationDatesReminders(){
 
         todoList.addAll(findAllPatientBirthdayForNextWeek());
 
@@ -104,6 +104,20 @@ public class ToolKitService {
                 chores.add(new Chore("It's almost someone's special day!",
                         Task.PATIENT_BIRTHDAY,
                         "In" + differenceInDays(new Date(utilDate.getTime()), p.getPatientBirthDate()) + "day(s) it will be " + p.getPatientFirstName() + " " + p.getPatientLastName() + "'s special day! Be Ready!"));
+        }
+
+        return chores;
+    }
+
+    private List<Chore> findAllPatientWhoCampletedAnotherYear(){
+
+        List<Chore> chores = new ArrayList<>();
+
+        java.util.Date utilDate = new java.util.Date();
+
+        for (Patient p:
+             patientRepository.findAll()) {
+            //if ()
         }
 
         return chores;
