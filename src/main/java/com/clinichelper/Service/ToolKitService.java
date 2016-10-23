@@ -61,6 +61,8 @@ public class ToolKitService {
         todoList.addAll(findAllPatientBirthdayForNextWeek());
 
         todoList.addAll(findAllStaffBirthdayForNextWeek());
+
+        todoList.addAll(findAllPatientWhoCompletedAnotherYear());
     }
 
     private void FetchAppointments(){
@@ -109,15 +111,30 @@ public class ToolKitService {
         return chores;
     }
 
-    private List<Chore> findAllPatientWhoCampletedAnotherYear(){
+    private List<Chore> findAllPatientWhoCompletedAnotherYear(){
+        Calendar today = Calendar.getInstance();
+        Calendar registered = Calendar.getInstance();
 
         List<Chore> chores = new ArrayList<>();
 
         java.util.Date utilDate = new java.util.Date();
 
+        today.setTime(new Date(utilDate.getTime()));
+
         for (Patient p:
              patientRepository.findAll()) {
-            //if ()
+
+            registered.setTime(p.getPatientRegisteredDate());
+
+            if ((today.get(Calendar.MONTH) - registered.get(Calendar.MONTH)) == 0 && (today.get(Calendar.DAY_OF_MONTH) - registered.get(Calendar.DAY_OF_MONTH)) == 0)
+                if ((today.get(Calendar.YEAR) - registered.get(Calendar.YEAR)) == 1)
+                    chores.add(new Chore(p.getPatientFirstName().toUpperCase() + " " + p.getPatientLastName() + " Met Us One Year Ago!",
+                            Task.REGISTRATIONDATE,
+                            "Has it been ONE year already? " + p.getPatientFirstName().toUpperCase() + " " + p.getPatientLastName() + " has completed their first year with us! Congratulations faithful patient!"));
+                else if ((today.get(Calendar.YEAR) - registered.get(Calendar.YEAR)) > 1)
+                    chores.add(new Chore( "We Are Happy To Be Celebrating Another Year With " + p.getPatientFirstName().toUpperCase() + " " + p.getPatientLastName(),
+                            Task.REGISTRATIONDATE,
+                            (today.get(Calendar.YEAR) - registered.get(Calendar.YEAR)) + " years together! How time flies?! " + p.getPatientFirstName().toUpperCase() + " " + p.getPatientLastName() + " has completed their first year with us! Congratulations faithful patient!"));
         }
 
         return chores;
