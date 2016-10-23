@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.UUID;
 
 /**
@@ -20,6 +21,8 @@ public class Staff implements Serializable{
     private String staffFirstName;
     @NotNull
     private String staffLastName;
+    @NotNull
+    private Date staffBirthDate;
     @Column(unique = true)
     @NotNull
     private String staffEmail;
@@ -31,10 +34,11 @@ public class Staff implements Serializable{
 
     }
 
-    public Staff(String staffFirstName,String staffLastName, String staffEmail, String staffClinicId) {
+    public Staff(String staffFirstName,String staffLastName, Date staffBirthDate, String staffEmail, String staffClinicId) {
         this.setJascId("JASC-STAFF-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setStaffFirstName(staffFirstName.toLowerCase());
         this.setStaffLastName(staffLastName.toUpperCase());
+        this.setStaffBirthDate(staffBirthDate);
         this.setStaffEmail(staffEmail.toLowerCase());
         this.setStaffClinicId(staffClinicId);
     }
@@ -77,5 +81,13 @@ public class Staff implements Serializable{
 
     public void setStaffEmail(String staffEmail) {
         this.staffEmail = staffEmail;
+    }
+
+    public Date getStaffBirthDate() {
+        return staffBirthDate;
+    }
+
+    public void setStaffBirthDate(Date staffBirthDate) {
+        this.staffBirthDate = staffBirthDate;
     }
 }

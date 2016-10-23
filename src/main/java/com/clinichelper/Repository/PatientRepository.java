@@ -24,6 +24,9 @@ public interface PatientRepository extends JpaRepository<Patient, String>{
     @Query("select p from Patient p where p.patientBirthDate = :birthDate")
     List<Patient> findByPatientBirthDate(@Param("birthDate") Date patientBirthDate);
 
+    @Query("select p from Patient p where p.patientBirthDate between :starting and :ending")
+    List<Patient> findByPatientBirthDateRange(@Param("starting") Date start, @Param("ending") Date end);
+
     @Query("select p from Patient p where p.patientFirstName = :firstName and p.patientLastName = :lastName")
     List<Patient> findByFullName(@Param("firstName") String patientFristName, @Param("lastName") String patientLastName);
 

@@ -5,6 +5,7 @@ package com.clinichelper.Service;
 
 import com.clinichelper.Entity.*;
 import com.clinichelper.Repository.*;
+import com.clinichelper.Tools.Task;
 import freemarker.template.utility.NullArgumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,8 @@ public class DataEntryAndManagementService {
     // Repositories
     @Autowired
     private AppointmentRepository appointmentRepository;
+    @Autowired
+    private ChoreRepository choreRepository;
     @Autowired
     private ConsultationRepository consultationRepository;
     @Autowired
@@ -66,6 +69,22 @@ public class DataEntryAndManagementService {
         } catch (Exception exp){
             System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
             throw new Exception("\n\nAn error occurred when trying to create an appointment -> " + exp.getMessage());
+        }
+    }
+
+    public Chore createNewCustomTask(String title, Task type, String description) throws Exception{
+
+        try {
+            return choreRepository.save(new Chore(title, type, description));
+        } catch (PersistenceException exp){
+            System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
+            throw new PersistenceException("\n\nThis consultation was not able to persist -> " + exp.getMessage());
+        } catch (NullPointerException exp) {
+            System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
+            throw new NullPointerException("\n\nAn object or process has risen a null value -> " + exp.getMessage());
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred when trying to create a consultation -> " + exp.getMessage());
         }
     }
 
@@ -195,10 +214,10 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public Staff createNewStaffMember(String staffFirstName,String staffLastName, String staffEmail, String staffClinicId) throws Exception {
+    public Staff createNewStaffMember(String staffFirstName,String staffLastName, Date staffBirthDate, String staffEmail, String staffClinicId) throws Exception {
 
         try{
-            return staffRepository.save(new Staff(staffFirstName, staffLastName, staffEmail, staffClinicId));
+            return staffRepository.save(new Staff(staffFirstName, staffLastName, staffBirthDate, staffEmail, staffClinicId));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis patient was not able to persist -> " + exp.getMessage());
@@ -272,6 +291,22 @@ public class DataEntryAndManagementService {
         } catch (Exception exp){
             System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
             throw new Exception("\n\nAn error occurred while deleting an appointment -> " + exp.getMessage());
+        }
+    }
+
+    public void deleteCustomTask(String jascId) throws Exception{
+
+        if (!doesCustomTaskJascIdExist(jascId))
+            throw new IllegalArgumentException("This Task jasc id is invalid");
+
+        try{
+            choreRepository.delete(jascId);
+        } catch (NullPointerException exp) {
+            System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
+            throw new NullPointerException("\n\nAN object or process has risen a null value -> " + exp.getMessage());
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred while deleting a custom task -> " + exp.getMessage());
         }
     }
 
@@ -490,6 +525,12 @@ public class DataEntryAndManagementService {
         Appointment appointment = appointmentRepository.findByJascId(jascId);
 
         return (appointment != null);
+    }
+
+    private boolean doesCustomTaskJascIdExist(String jascId){
+        Chore chore = choreRepository.findByJascId(jascId);
+
+        return (chore != null);
     }
 
     private boolean doesEquipmentJascIdExist(String jascId){
