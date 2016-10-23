@@ -40,12 +40,25 @@ public class PatientController {
         model.addAttribute("patientList", DQS.findAllRegisteredPatients());
         model.addAttribute("amount", DQS.findAllRegisteredPatients().size());
 
-        return new ModelAndView("");
+        return new ModelAndView("allPatients");
     }
 
     // Posts
     @PostMapping("/newPatient")
-    public String registerNewPatient(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("idCard") String idCard, @RequestParam("email") String mail, @RequestParam("telephoneNumber") String telephoneNumber, @RequestParam("contactTelephoneNumber") String contactTelephoneNumber, @RequestParam("address") String address, @RequestParam("occupation") String occupation, @RequestParam("dateOfBirth")String dateOfBirth, @RequestParam("gender") String gender, @RequestParam("nationality") String nationality, @RequestParam("countries") String countries, @RequestParam("cities") String cities){
+    public String registerNewPatient(
+            @RequestParam("firstName") String firstName,
+            @RequestParam("lastName") String lastName,
+            @RequestParam("idCard") String idCard,
+            @RequestParam("email") String mail,
+            @RequestParam("telephoneNumber") String telephoneNumber,
+            @RequestParam("contactTelephoneNumber") String contactTelephoneNumber,
+            @RequestParam("address") String address,
+            @RequestParam("occupation") String occupation,
+            @RequestParam("dateOfBirth")String dateOfBirth,
+            @RequestParam("gender") String gender,
+            @RequestParam("nationality") String nationality,
+            @RequestParam("countries") String countries,
+            @RequestParam("cities") String cities){
 
         try {
 
@@ -53,14 +66,10 @@ public class PatientController {
 
             DEAMS.createNewPatient(firstName, lastName, idCard, telephoneNumber,
                     contactTelephoneNumber, occupation, gender, mail, new Date(sdf1.parse(dateOfBirth).getTime()), nationality, address, cities, countries);
-        } catch (PersistenceException exp){
-            //
-        } catch(IllegalArgumentException exp){
-            //
-        } catch (NullPointerException exp) {
-            //
+        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
+            System.out.println("ERROR EN CREAR PACIENTE");
         } catch (Exception exp){
-            //
+            System.out.println("ERROR EN CREAR PACIENTE");
         }
 
         return "redirect:/patients";
