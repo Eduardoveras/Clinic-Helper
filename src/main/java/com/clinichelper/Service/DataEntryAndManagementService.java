@@ -81,7 +81,7 @@ public class DataEntryAndManagementService {
             throw new PersistenceException("\n\nThis consultation was not able to persist -> " + exp.getMessage());
         } catch (NullPointerException exp) {
             System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
-            throw new NullPointerException("\n\nAN object or process has risen a null value -> " + exp.getMessage());
+            throw new NullPointerException("\n\nAn object or process has risen a null value -> " + exp.getMessage());
         } catch (Exception exp){
             System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
             throw new Exception("\n\nAn error occurred when trying to create a consultation -> " + exp.getMessage());
@@ -291,6 +291,22 @@ public class DataEntryAndManagementService {
         } catch (Exception exp){
             System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
             throw new Exception("\n\nAn error occurred while deleting an appointment -> " + exp.getMessage());
+        }
+    }
+
+    public void deleteCustomTask(String jascId) throws Exception{
+
+        if (!doesCustomTaskJascIdExist(jascId))
+            throw new IllegalArgumentException("This Task jasc id is invalid");
+
+        try{
+            choreRepository.delete(jascId);
+        } catch (NullPointerException exp) {
+            System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
+            throw new NullPointerException("\n\nAN object or process has risen a null value -> " + exp.getMessage());
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred while deleting a custom task -> " + exp.getMessage());
         }
     }
 
@@ -509,6 +525,12 @@ public class DataEntryAndManagementService {
         Appointment appointment = appointmentRepository.findByJascId(jascId);
 
         return (appointment != null);
+    }
+
+    private boolean doesCustomTaskJascIdExist(String jascId){
+        Chore chore = choreRepository.findByJascId(jascId);
+
+        return (chore != null);
     }
 
     private boolean doesEquipmentJascIdExist(String jascId){
