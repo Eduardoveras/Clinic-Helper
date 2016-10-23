@@ -26,6 +26,8 @@ Version: v0.7.0
 ** Refactor TeamController
         v0.7.2
 ** Add new date validation system
+        v0.7.3
+** Implement new string time display format
 
 Version: v0.6.0
 ** Heroku support with functional domain
