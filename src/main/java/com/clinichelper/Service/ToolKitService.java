@@ -46,23 +46,14 @@ public class ToolKitService {
     // TodoList Functions
     private void FetchCustomTasks(){
 
-        for (Chore c:
-             choreRepository.findAll()) {
-            todoList.add(c);
-        }
+        todoList.addAll(choreRepository.findAll());
     }
 
     private void FetchBirthDateReminders(){
 
-        for (Chore c:
-             findAllPatientBirthdayForNextWeek()) {
-            todoList.add(c);
-        }
+        todoList.addAll(findAllPatientBirthdayForNextWeek());
 
-        for (Chore c:
-             findAllStaffBirthdayForNextWeek()) {
-            todoList.add(c);
-        }
+        todoList.addAll(findAllStaffBirthdayForNextWeek());
     }
 
     // Auxiliary Function
@@ -104,11 +95,11 @@ public class ToolKitService {
              staffRepository.findByStaffBirthDateRange(new Date(utilDate.getTime()), new Date(c.getTime().getTime()))) {
             if (differenceInDays(new Date(utilDate.getTime()), s.getStaffBirthDate()) <= 0)
                 chores.add(new Chore("Happy Birthday " + s.getStaffFirstName() + " " + s.getStaffLastName() + "!",
-                        Task.PATIENT_BIRTHDAY,
+                        Task.STAFF_BIRTHDAY,
                         "Celebrate " + s.getStaffFirstName() + " " + s.getStaffLastName() + "'s special day! We thank you for being part of the team!"));
             else
                 chores.add(new Chore("It's almost someone's special day!",
-                        Task.PATIENT_BIRTHDAY,
+                        Task.STAFF_BIRTHDAY,
                         "In" + differenceInDays(new Date(utilDate.getTime()), s.getStaffBirthDate()) + "day(s) it will be " + s.getStaffFirstName() + " " + s.getStaffLastName() + "'s special day! Don't forget to celebrate their contribution as a valued member of the JASC Team!"));
         }
 
