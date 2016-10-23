@@ -2,15 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac50ba1f-5d63-4f02-9150-899f0c0edd39" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/fonts.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/icon.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/material.cyan-light_blue.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/static/js/material.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/static/css/material_calendar.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/css/common.css" afterPath="$PROJECT_DIR$/src/main/resources/static/css/common.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/common.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/common.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/header.ftl" afterPath="$PROJECT_DIR$/src/main/resources/templates/header.ftl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/index.ftl" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.ftl" />
     </list>
     <ignored path="ClinicHelper.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,7 +33,23 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
-        <projects_view />
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <PATH>
+              <PATH_ELEMENT>
+                <option name="myItemId" value="" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ExternalProjectsStructure$RootNode" />
+              </PATH_ELEMENT>
+              <PATH_ELEMENT>
+                <option name="myItemId" value="ClinicHelper" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ProjectNode" />
+              </PATH_ELEMENT>
+            </PATH>
+          </tree_state>
+        </projects_view>
       </state>
     </system>
   </component>
@@ -46,8 +58,18 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="application-heroku.properties" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/application-heroku.properties">
+      <file leaf-file-name="AppointmentController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/AppointmentController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="567">
+              <caret line="38" column="33" selection-start-line="38" selection-start-column="33" selection-end-line="38" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -56,70 +78,74 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="emptyPageTemplate.ftl" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/emptyPageTemplate.ftl">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="13" column="44" selection-start-line="13" selection-start-column="44" selection-end-line="13" selection-end-column="44" />
-              <folding>
-                <marker date="1477237946669" expanded="true" signature="31:349" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="login.ftl" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/login.ftl">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="594">
-              <caret line="22" column="27" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="register.ftl" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/register.ftl">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="20" column="30" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="header.ftl" pinned="false" current-in-tab="true">
+      <file leaf-file-name="header.ftl" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/templates/header.ftl">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="29" column="81" selection-start-line="29" selection-start-column="81" selection-end-line="29" selection-end-column="81" />
-              <folding />
+            <state relative-caret-position="452">
+              <caret line="36" column="55" selection-start-line="36" selection-start-column="55" selection-end-line="36" selection-end-column="55" />
+              <folding>
+                <marker date="1477245000007" expanded="true" signature="32:2150" ph="..." />
+                <marker date="1477245000007" expanded="true" signature="40:2150" ph="..." />
+              </folding>
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="favicon.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/static/media/favicon.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="common.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/common.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="2" column="9" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
+            <state relative-caret-position="900">
+              <caret line="35" column="9" selection-start-line="35" selection-start-column="9" selection-end-line="35" selection-end-column="9" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="common.css" pinned="false" current-in-tab="false">
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="572">
+              <caret line="85" column="5" selection-start-line="85" selection-start-column="5" selection-end-line="85" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WebApplication.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/clinichelper/WebApplication.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="5" column="16" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="loginController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/loginController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="material_calendar.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/static/css/material_calendar.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1431">
+              <caret line="53" column="1" selection-start-line="53" selection-start-column="1" selection-end-line="53" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="common.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/resources/static/css/common.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="885">
-              <caret line="239" column="1" selection-start-line="239" selection-start-column="1" selection-end-line="239" selection-end-column="1" />
+            <state relative-caret-position="799">
+              <caret line="238" column="17" selection-start-line="238" selection-start-column="17" selection-end-line="238" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -130,17 +156,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="558">
               <caret line="109" column="0" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="data.sql" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/data.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+              <folding>
+                <marker date="1477241919554" expanded="true" signature="3583:3636" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -151,6 +169,16 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GradleLocalSettings">
+    <option name="myGradleHomes">
+      <map>
+        <entry key="$PROJECT_DIR$" value="C:\Users\Eduardo veras\.gradle\wrapper\dists\gradle-2.7-all\4ryh47z6pv2tj9n03uiw8pzc6\gradle-2.7" />
+      </map>
+    </option>
+    <option name="myGradleVersions">
+      <map>
+        <entry key="$PROJECT_DIR$" value="2.7" />
+      </map>
+    </option>
     <option name="availableProjects">
       <map>
         <entry>
@@ -171,9 +199,320 @@
         </entry>
       </map>
     </option>
+    <option name="availableTasks">
+      <map>
+        <entry key="$PROJECT_DIR$">
+          <value>
+            <list>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays the components produced by root project 'ClinicHelper'. [incubating]" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="components" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles and tests this project and all projects that depend on it." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="buildDependents" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays the sub-projects of root project 'ClinicHelper'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="projects" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles classes 'main'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="classes" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="wrapper" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles classes 'test'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="testClasses" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Generates Javadoc API documentation for the main source code." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="javadoc" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles a jar archive containing the main classes." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="jar" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays the configuration model of root project 'ClinicHelper'. [incubating]" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="model" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Processes JVM resources 'main:resources'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="processResources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays the tasks runnable from root project 'ClinicHelper'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="tasks" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Initializes a new Gradle build. [incubating]" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="init" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Runs the unit tests." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="test" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="dependencyManagement" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Repackage existing JAR and WAR archives so that they can be executed from the command line using 'java -jar'" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="bootRepackage" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Run the project with support for auto-detecting main class and reloading static resources" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="bootRun" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Compiles Java source 'main:java'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="compileJava" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays the insight into a specific dependency in root project 'ClinicHelper'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="dependencyInsight" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Runs all checks." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="check" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles the outputs of this project." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="assemble" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Deletes the build directory." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="clean" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Compiles Java source 'test:java'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="compileTestJava" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays all dependencies declared in root project 'ClinicHelper'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="dependencies" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Processes JVM resources 'test:resources'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="processTestResources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays a help message." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="help" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="stage" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles and tests this project." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="build" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="findMainClass" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles and tests this project and all projects it depends on." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="buildNeeded" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays the properties of root project 'ClinicHelper'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="properties" />
+              </ExternalTaskPojo>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="2953402887757" />
+        <entry key="$PROJECT_DIR$" value="2953434547085" />
+      </map>
+    </option>
+    <option name="projectBuildClasspath">
+      <map>
+        <entry key="$PROJECT_DIR$">
+          <value>
+            <ExternalProjectBuildClasspathPojo>
+              <option name="modulesBuildClasspath">
+                <map>
+                  <entry key="$PROJECT_DIR$">
+                    <value>
+                      <ExternalModuleBuildClasspathPojo>
+                        <option name="entries">
+                          <list>
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-gradle-plugin/1.4.1.RELEASE/4c84ae5e525c3e224cde2e90ca7e340b1f3a5714/spring-boot-gradle-plugin-1.4.1.RELEASE-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-gradle-plugin/1.4.1.RELEASE/899766b30092b5cc3467def7c8093baf39b8bf92/spring-boot-gradle-plugin-1.4.1.RELEASE.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-loader-tools/1.4.1.RELEASE/1665ad7bc97c7bc716fa9318adef4615d1101fc5/spring-boot-loader-tools-1.4.1.RELEASE-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-loader-tools/1.4.1.RELEASE/939fe186f9cb554862f3daab2400f5f91d62efdc/spring-boot-loader-tools-1.4.1.RELEASE.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.spring.gradle/dependency-management-plugin/0.6.1.RELEASE/d324f1dab8d15e9e55507d9981de9e2b6f0b1c78/dependency-management-plugin-0.6.1.RELEASE-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.spring.gradle/dependency-management-plugin/0.6.1.RELEASE/46cb985239502be3dcb94e0df45f797804e95fb8/dependency-management-plugin-0.6.1.RELEASE.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-core/4.3.3.RELEASE/ee672807fd6afe5ab70e1d089e38ed925d527a36/spring-core-4.3.3.RELEASE-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-core/4.3.3.RELEASE/ffad13be3dac6eef7d2418a9de87c2a1592d3033/spring-core-4.3.3.RELEASE.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/ecf26c7507d67782a3bbd148d170b31dfad001aa/commons-logging-1.2-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/4bfc12adfe4842bf07b657f0369c4cb522955686/commons-logging-1.2.jar" />
+                          </list>
+                        </option>
+                        <option name="path" value="$PROJECT_DIR$" />
+                      </ExternalModuleBuildClasspathPojo>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="name" value="ClinicHelper" />
+              <option name="projectBuildClasspath">
+                <list>
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/announce" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/antlr" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/base-services" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/base-services-groovy" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/build-comparison" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/build-init" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/cli" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/code-quality" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/core" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/dependency-management" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/diagnostics" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/ear" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/ide" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/ide-native" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/internal-integ-testing" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/internal-testing" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/ivy" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/jacoco" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/javascript" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/jetty" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/language-groovy" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/language-java" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/language-jvm" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/language-native" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/language-scala" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/launcher" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/maven" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/messaging" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/model-core" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/model-groovy" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/native" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/open-api" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/osgi" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/platform-base" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/platform-jvm" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/platform-native" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/platform-play" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/plugin-development" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/plugin-use" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/plugins" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/publish" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/reporting" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/resources" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/resources-http" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/resources-s3" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/resources-sftp" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/scala" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/signing" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/sonar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/test-kit" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/testing-native" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/tooling-api" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/tooling-api-builders" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/ui" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/src/wrapper" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/ant-1.9.3.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/ant-launcher-1.9.3.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/gradle-base-services-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/gradle-base-services-groovy-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/gradle-cli-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/gradle-core-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/gradle-docs-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/gradle-launcher-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/gradle-messaging-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/gradle-model-core-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/gradle-model-groovy-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/gradle-native-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/gradle-open-api-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/gradle-resources-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/gradle-tooling-api-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/gradle-ui-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/gradle-wrapper-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/groovy-all-2.3.10.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-announce-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-antlr-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-build-comparison-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-build-init-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-code-quality-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-dependency-management-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-diagnostics-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-ear-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-ide-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-ide-native-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-ivy-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-jacoco-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-javascript-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-jetty-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-language-groovy-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-language-java-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-language-jvm-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-language-native-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-language-scala-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-maven-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-osgi-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-platform-base-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-platform-jvm-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-platform-native-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-platform-play-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-plugin-development-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-plugin-use-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-plugins-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-publish-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-reporting-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-resources-http-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-resources-s3-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-resources-sftp-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-scala-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-signing-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-sonar-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-test-kit-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-testing-native-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/gradle-tooling-api-builders-2.7.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.7-all/4ryh47z6pv2tj9n03uiw8pzc6/gradle-2.7/lib/plugins/ivy-2.2.0.jar" />
+                  <option value="$PROJECT_DIR$/buildSrc/src/main/java" />
+                  <option value="$PROJECT_DIR$/buildSrc/src/main/groovy" />
+                </list>
+              </option>
+            </ExternalProjectBuildClasspathPojo>
+          </value>
+        </entry>
       </map>
     </option>
     <option name="externalProjectsViewState">
@@ -185,10 +524,13 @@
       <list>
         <option value="$PROJECT_DIR$/README" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/emptyPageTemplate.ftl" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/css/common.css" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/js/common.js" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/index.ftl" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/css/material_calendar.css" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/header.ftl" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/js/common.js" />
+        <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/src/main/java/com/clinichelper/WebApplication.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/css/common.css" />
       </list>
     </option>
   </component>
@@ -398,7 +740,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="fonts" />
+              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -425,6 +767,36 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="clinichelper" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ClinicHelper" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="clinic_helper" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="org.jetbrains.plugins.gradle.projectView.GradleTreeStructureProvider$GradleSourceSetDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="clinichelper" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controller" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -895,12 +1267,12 @@
       <workItem from="1477064200122" duration="598000" />
       <workItem from="1477235707257" duration="512000" />
       <workItem from="1477236720064" duration="44000" />
-      <workItem from="1477237133130" duration="6268000" />
+      <workItem from="1477237133130" duration="9063000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7487000" />
+    <option name="totallyTimeSpent" value="10282000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-12" y="-12" width="3224" height="1754" extended-state="6" />
@@ -924,13 +1296,13 @@
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3298292" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3298292" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24951954" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32991672" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1023,17 +1395,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/AppointmentController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="554">
@@ -1084,39 +1445,92 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/css/common.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="885">
-          <caret line="239" column="1" selection-start-line="239" selection-start-column="1" selection-end-line="239" selection-end-column="1" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/media/favicon.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/index.ftl">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="558">
           <caret line="109" column="0" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1477241919554" expanded="true" signature="3583:3636" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/media/favicon.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/common.js">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/css/material_calendar.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="2" column="9" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
+        <state relative-caret-position="1431">
+          <caret line="53" column="1" selection-start-line="53" selection-start-column="1" selection-end-line="53" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/header.ftl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="29" column="81" selection-start-line="29" selection-start-column="81" selection-end-line="29" selection-end-column="81" />
+        <state relative-caret-position="452">
+          <caret line="36" column="55" selection-start-line="36" selection-start-column="55" selection-end-line="36" selection-end-column="55" />
+          <folding>
+            <marker date="1477245000007" expanded="true" signature="32:2150" ph="..." />
+            <marker date="1477245000007" expanded="true" signature="40:2150" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/common.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="900">
+          <caret line="35" column="9" selection-start-line="35" selection-start-column="9" selection-end-line="35" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/loginController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/AppointmentController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="38" column="33" selection-start-line="38" selection-start-column="33" selection-end-line="38" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="572">
+          <caret line="85" column="5" selection-start-line="85" selection-start-column="5" selection-end-line="85" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/clinichelper/WebApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="5" column="16" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/css/common.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="799">
+          <caret line="238" column="17" selection-start-line="238" selection-start-column="17" selection-end-line="238" selection-end-column="17" />
           <folding />
         </state>
       </provider>

@@ -34,6 +34,8 @@
     <link rel="stylesheet" href="fonts/icon.css">
     <link rel="stylesheet" href="fonts/material.cyan-light_blue.min.css">
     <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/material_calendar.css">
+
     <script defer src="js/material.min.js"></script>
 
     <script src='https://www.google.com/recaptcha/api.js'></script>
