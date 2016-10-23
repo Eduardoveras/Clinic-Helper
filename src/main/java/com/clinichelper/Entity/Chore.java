@@ -19,6 +19,8 @@ public class Chore implements Serializable{
     @Id
     private String jascId;
     @NotNull
+    private String title;
+    @NotNull
     private Task type;
     @NotNull
     @Column(length = 500)
@@ -31,8 +33,9 @@ public class Chore implements Serializable{
 
     }
 
-    public Chore(Task type, String description){
+    public Chore(String title, Task type, String description){
         this.setJascId("JASC-CH-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+        this.setTitle(title);
         this.setType(type);
         this.setDescription(description);
         this.setCompleted(false);
@@ -69,5 +72,13 @@ public class Chore implements Serializable{
 
     public void setCompleted(boolean completed) {
         this.completed = completed;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

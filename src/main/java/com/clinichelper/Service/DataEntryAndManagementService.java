@@ -72,10 +72,10 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public Chore createNewCustomTask(Task type, String description) throws Exception{
+    public Chore createNewCustomTask(String title, Task type, String description) throws Exception{
 
         try {
-            return choreRepository.save(new Chore(type, description));
+            return choreRepository.save(new Chore(title, type, description));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis consultation was not able to persist -> " + exp.getMessage());
