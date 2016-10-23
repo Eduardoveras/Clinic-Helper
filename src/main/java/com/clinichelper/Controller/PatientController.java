@@ -27,12 +27,6 @@ public class PatientController {
     @Autowired
     private DataQueryService DQS;
 
-    // Gets
-    @RequestMapping("/solicit")
-    public ModelAndView solicit(Model model){
-
-        return new ModelAndView("newpatient");
-    }
 
     @GetMapping("/patients")
     public ModelAndView fetchPatientView(Model model){
@@ -59,6 +53,7 @@ public class PatientController {
             @RequestParam("nationality") String nationality,
             @RequestParam("countries") String countries,
             @RequestParam("cities") String cities){
+        System.out.println("THIS IS A PROOF THAT YOLO IS SWAG");
 
         try {
 
