@@ -35,12 +35,12 @@
 
         <#list patientList as patient>
             <tr>
-                <td>${patient.jascID}</td>
+                <td>${patient.jascId}</td>
                 <td>${patient.patientFirstName}</td>
                 <td>${patient.patientLastName}</td>
-                <td>${patient.patienIdCard}</td>
+                <td>${patient.patientIdCard}</td>
                 <td>${patient.patientTelephoneNumber}</td>
-                <td>${patient.patienteContactTelephoneNumber}</td>
+                <td>${patient.patientContactTelephoneNumber}</td>
                 <td>${patient.patientEmail}</td>
                 <td>${patient.patientBirthDate}</td>
                 <td>${patient.patientGender}</td>
@@ -51,6 +51,8 @@
                 <td>${patient.patientCity}</td>
                 <td>${patient.patientCountry}</td>
             </tr>
+        <#else>
+        <h1>No hay pacientes</h1>
         </#list>
         </table>
 
