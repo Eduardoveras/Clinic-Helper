@@ -3,9 +3,11 @@
  */
 package com.clinichelper.Service;
 
+import com.clinichelper.Entity.Appointment;
 import com.clinichelper.Entity.Chore;
 import com.clinichelper.Entity.Patient;
 import com.clinichelper.Entity.Staff;
+import com.clinichelper.Repository.AppointmentRepository;
 import com.clinichelper.Repository.ChoreRepository;
 import com.clinichelper.Repository.PatientRepository;
 import com.clinichelper.Repository.StaffRepository;
@@ -27,6 +29,8 @@ public class ToolKitService {
 
     // Repositories
     @Autowired
+    private AppointmentRepository appointmentRepository;
+    @Autowired
     private ChoreRepository choreRepository;
     @Autowired
     private PatientRepository patientRepository;
@@ -41,6 +45,9 @@ public class ToolKitService {
 
         // Adding Birthday reminder tasks
         FetchBirthDateReminders();
+
+        // Adding all of today's appointments
+        FetchAppointments();
     }
 
     // TodoList Functions
@@ -56,7 +63,27 @@ public class ToolKitService {
         todoList.addAll(findAllStaffBirthdayForNextWeek());
     }
 
+    private void FetchAppointments(){
+        todoList.addAll(findAllOfTodaysAppointments());
+    }
+
     // Auxiliary Function
+    private List<Chore> findAllOfTodaysAppointments(){
+
+        List<Chore> chores = new ArrayList<>();
+
+        java.util.Date utilDate = new java.util.Date();
+
+        for (Appointment a:
+             appointmentRepository.findByDate(new Date(utilDate.getTime()))) {
+            chores.add(new Chore("Appointment with: " + a.getPatient().getPatientLastName() + " " + a.getPatient().getPatientLastName(),
+                    Task.APPOINTMENT,
+                    "Time: " + a.getAppointmentTime().toString().substring(13) + "\nObjective: " + a.getAppointmentDescription()));
+        }
+
+        return chores;
+    }
+
     private List<Chore> findAllPatientBirthdayForNextWeek(){
 
         List<Chore> chores = new ArrayList<>();
