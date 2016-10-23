@@ -11,8 +11,6 @@
 
     <main class="mdl-layout__content mdl-color--grey-100">
 
-
-
         <div class="mdl-grid demo-content">
             <div class="mdl-cell mdl-cell--4-col">
                 <div class="demo-card-wide mdl-card mdl-shadow--2dp">
@@ -49,8 +47,8 @@
 
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
-                                <label class="mdl-textfield__label"  for="mail" >Correo electronico</label>
-                                <input class="mdl-textfield__input"  type="email" name="mail" id="mail"><br>
+                                <label class="mdl-textfield__label"  for="email" >Correo electronico</label>
+                                <input class="mdl-textfield__input"  type="email" name="email" id="email"><br>
 
                             </div>
                         </div>
@@ -58,8 +56,8 @@
 
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
-                                <label class="mdl-textfield__label"  for="telephone" >Telefono</label>
-                                <input class="mdl-textfield__input"  type="number" name="telephone" id="telephone"><br>
+                                <label class="mdl-textfield__label"  for="telephoneNumber" >Telefono</label>
+                                <input class="mdl-textfield__input"  type="number" name="telephoneNumber" id="telephoneNumber"><br>
 
                             </div>
                         </div>
@@ -67,8 +65,8 @@
 
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
-                                <label class="mdl-textfield__label"  for="contactTelephone" >Numero de telefono de contacto</label>
-                                <input class="mdl-textfield__input"  type="number" name="contactTelephone" id="contactTelephone"><br>
+                                <label class="mdl-textfield__label"  for="contactTelephoneNumber" >Numero de telefono de contacto</label>
+                                <input class="mdl-textfield__input"  type="number" name="contactTelephoneNumber" id="contactTelephoneNumber"><br>
 
 
                             </div>
@@ -97,8 +95,8 @@
 
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
-                                <label class="mdl-textfield__label"  for="dateofbirth" >Fecha de nacimiento</label>
-                                <input class="mdl-textfield__input"  type="date" name="dateofbirth" id="dateofbirth" onfocus="placeholder = ''" onblur="placeholder "><br>
+                                <label class="mdl-textfield__label"  for="dateOfBirth" >Fecha de nacimiento</label>
+                                <input class="mdl-textfield__input"  type="date" name="dateOfBirth" id="dateOfBirth" onfocus="placeholder = ''" onblur="placeholder "><br>
 
 
                             </div>
@@ -126,8 +124,18 @@
                                     <option id="Venezuela">Venezuela</option>
                                 </select>
 
-                                <label class="mdl-textfield__label"  for="city" >Ciudad</label>
-                                <input class="mdl-textfield__input"  type="text" name="city" id="city"><br>
+                                <label class="mdl-textfield__label"  for="cities" >Ciudad</label>
+                                <input class="mdl-textfield__input"  type="text" name="cities" id="cities"><br>
+
+                            </div>
+                        </div>
+                        <div class="mdl-card__supporting-text">
+
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+                                <label class="mdl-textfield__label"  for="nationality" >Ocupacion</label>
+                                <input class="mdl-textfield__input"  type="text" name="nationality" id="nationality"><br>
+
 
                             </div>
                         </div>

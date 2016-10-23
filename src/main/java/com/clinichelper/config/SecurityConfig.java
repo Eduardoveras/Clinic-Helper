@@ -17,21 +17,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityConfig extends WebSecurityConfigurerAdapter/* implements ApplicationContextAware */{
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("admin")
-                .password("admin")
-                .roles("ADMIN","USER")
-                .and()
-                .withUser("usuario")
-                .password("1234")
-                .roles("USER");
-    }
-
-
-    @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //Marcando las reglas para permitir unicamente los usuarios
+        http.csrf().disable();
         http.authorizeRequests()
                 .antMatchers("/admin/**")
                 .hasAnyRole("ADMIN", "USER")
@@ -43,6 +30,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter/* implements Ap
                 .and()
                 .logout()
                 .permitAll();
+    }
+
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        //Cargando los usuarios en memoria.
+        auth.inMemoryAuthentication()
+                .withUser("admin")
+                .password("1234")
+                .roles("ADMIN","USER")
+                .and()
+                .withUser("usuario")
+                .password("1234")
+                .roles("USER");
     }
 
 }
