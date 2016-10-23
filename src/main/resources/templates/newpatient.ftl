@@ -99,7 +99,7 @@
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
                                 <label class="mdl-textfield__label"  for="dateofbirth" >Fecha de nacimiento</label>
-                                <input class="mdl-textfield__input"  type="date" name="dateofbirth" id="dateofbirth"><br>
+                                <input class="mdl-textfield__input"  type="date" name="dateofbirth" id="dateofbirth" onfocus="placeholder = ''" onblur="placeholder "><br>
 
 
                             </div>
@@ -119,8 +119,16 @@
 
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
-                                <label class="mdl-textfield__label"  for="telephone" >Telefono</label>
-                                <input class="mdl-textfield__input"  type="number" name="telephone" id="telephone"><br>
+                                Nacionalidad:
+                                <select id="countries" name="countries">
+                                    <option disabled selected value> -- Seleccione un pais -- </option>
+                                    <option id="RD">Republica Dominicana</option>
+                                    <option id="China">China</option>
+                                    <option id="Venezuela">Venezuela</option>
+                                </select>
+
+                                <label class="mdl-textfield__label"  for="city" >Ciudad</label>
+                                <input class="mdl-textfield__input"  type="text" name="city" id="city"><br>
 
                             </div>
                         </div>
