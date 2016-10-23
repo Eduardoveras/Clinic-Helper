@@ -5,7 +5,8 @@ package com.clinichelper.Tools;
 
 public enum Task {
     APPOINTMENT,
-    BIRTHDATE,
+    PATIENT_BIRTHDAY,
+    STAFF_BIRTHDAY,
     REGISTRATIONDATE,
     MEETING,
     MISC,
