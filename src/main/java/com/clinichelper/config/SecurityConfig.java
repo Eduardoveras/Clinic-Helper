@@ -13,7 +13,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  */
 @Configurable
 @EnableGlobalMethodSecurity(securedEnabled = true)
-//@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter/* implements ApplicationContextAware */{
 
     @Override
