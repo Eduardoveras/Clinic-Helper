@@ -3,14 +3,8 @@
  */
 package com.clinichelper.Service;
 
-import com.clinichelper.Entity.Appointment;
-import com.clinichelper.Entity.Chore;
-import com.clinichelper.Entity.Patient;
-import com.clinichelper.Entity.Staff;
-import com.clinichelper.Repository.AppointmentRepository;
-import com.clinichelper.Repository.ChoreRepository;
-import com.clinichelper.Repository.PatientRepository;
-import com.clinichelper.Repository.StaffRepository;
+import com.clinichelper.Entity.*;
+import com.clinichelper.Repository.*;
 import com.clinichelper.Tools.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +27,8 @@ public class ToolKitService {
     @Autowired
     private ChoreRepository choreRepository;
     @Autowired
+    private MeetingRepository meetingRepository;
+    @Autowired
     private PatientRepository patientRepository;
     @Autowired
     private StaffRepository staffRepository;
@@ -48,6 +44,9 @@ public class ToolKitService {
 
         // Adding all of today's appointments
         FetchAppointments();
+
+        // Adding all of today's meeting;
+        FetchMeetings();
     }
 
     // TodoList Functions
@@ -69,6 +68,10 @@ public class ToolKitService {
         todoList.addAll(findAllOfTodaysAppointments());
     }
 
+    private void FetchMeetings(){
+        todoList.addAll(findAllOfTodaysMeetings());
+    }
+
     // Auxiliary Function
     private List<Chore> findAllOfTodaysAppointments(){
 
@@ -81,6 +84,30 @@ public class ToolKitService {
             chores.add(new Chore("Appointment with: " + a.getPatient().getPatientLastName() + " " + a.getPatient().getPatientLastName(),
                     Task.APPOINTMENT,
                     "Time: " + a.getAppointmentTime().toString().substring(13) + "\nObjective: " + a.getAppointmentDescription()));
+        }
+
+        return chores;
+    }
+
+    private List<Chore> findAllOfTodaysMeetings(){
+
+        List<Chore> chores = new ArrayList<>();
+
+        java.util.Date utilDate = new java.util.Date();
+
+        for (Meeting m:
+             meetingRepository.findByMeetingDate(new Date(utilDate.getTime()))) {
+
+            String staff = "**";
+
+            for (Staff s:
+                 m.getAttendees()) {
+                staff += s.getStaffFirstName() + " " + s.getStaffLastName() + "** ";
+            }
+
+            chores.add(new Chore("Meeting Today: " + m.getMeetingTitle() + " At " + m.getMeetingTime(),
+                    Task.MEETING,
+                    "Place" + m.getMeetingPlace() + "\nAttendees: " + staff + "\nObjective: " + m.getMeetingObjective()));
         }
 
         return chores;
