@@ -48,7 +48,9 @@ public class AppointmentController {
             SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
             SimpleDateFormat sdf2 = new SimpleDateFormat("hh:mm:ss");
 
-            DEAMS.createNewAppointment(new Date(sdf1.parse(appointmentDate).getTime()), new Timestamp(sdf2.parse(appointmentTime).getTime()), patientJascId, appointmentDescription, appointmentAccessFrom);
+            Patient patient = DQS.findRegisteredPatientByIdCard(patientJascId);
+
+            DEAMS.createNewAppointment(new Date(sdf1.parse(appointmentDate).getTime()), new Timestamp(sdf2.parse(appointmentTime).getTime()), patient.getJascId(), appointmentDescription, appointmentAccessFrom);
         } catch (PersistenceException exp){
             //
         } catch(IllegalArgumentException exp){
