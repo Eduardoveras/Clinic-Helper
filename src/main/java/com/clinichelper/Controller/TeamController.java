@@ -77,9 +77,9 @@ public class TeamController {
 
         Staff staff = DQS.findRegisteredStaff(jascId);
         staff.setStaffClinicId(clinicId);
-        staff.setStaffEmail(mail);
-        staff.setStaffFirstName(firstName);
-        staff.setStaffLastName(lastName);
+        staff.setStaffEmail(mail.toLowerCase());
+        staff.setStaffFirstName(firstName.toLowerCase());
+        staff.setStaffLastName(lastName.toUpperCase());
 
         try {
             DEAMS.editStaff(staff);
