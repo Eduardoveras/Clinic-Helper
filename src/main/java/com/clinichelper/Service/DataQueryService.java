@@ -184,7 +184,12 @@ public class DataQueryService {
 
     public User findRegisteredUserAccountOfRegisteredStaff(String staffJascId){ return userRepository.findByStaffJascId(staffJascId); }
 
+    public boolean validateUserAccountCredentials(String username, String password) {
 
+        User user = userRepository.findUserAccountWithUsernameAndPassword(username.toLowerCase(), password);
+
+        return (user != null);
+    }
 
 
     // Auxiliary Functions
