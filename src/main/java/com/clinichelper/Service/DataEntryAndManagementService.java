@@ -214,10 +214,10 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public Staff createNewStaffMember(String staffFirstName,String staffLastName, String staffEmail, String staffClinicId) throws Exception {
+    public Staff createNewStaffMember(String staffFirstName,String staffLastName, Date staffBirthDate, String staffEmail, String staffClinicId) throws Exception {
 
         try{
-            return staffRepository.save(new Staff(staffFirstName, staffLastName, staffEmail, staffClinicId));
+            return staffRepository.save(new Staff(staffFirstName, staffLastName, staffBirthDate, staffEmail, staffClinicId));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis patient was not able to persist -> " + exp.getMessage());

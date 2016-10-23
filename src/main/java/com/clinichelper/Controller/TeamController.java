@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.PersistenceException;
+import java.sql.Date;
 
 /**
  * Created by Eduardo veras on 02-Oct-16.
@@ -45,10 +46,10 @@ public class TeamController {
 
     // Post
     @PostMapping("/newStaff")
-    public String newStaff(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("email") String mail, @RequestParam("clinicId") String clinicId){
+    public String newStaff(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("birthDate") Date birthDate, @RequestParam("email") String mail, @RequestParam("clinicId") String clinicId){
 
         try{
-            DEAMS.createNewStaffMember(firstName,lastName,mail,clinicId);
+            DEAMS.createNewStaffMember(firstName, lastName, birthDate, mail, clinicId);
         } catch (PersistenceException exp){
             //
         } catch (IllegalArgumentException exp) {
