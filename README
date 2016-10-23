@@ -28,6 +28,12 @@ Version: v0.7.0
 ** Add new date validation system
         v0.7.3
 ** Implement new string time display format
+        v0.7.4
+** Implemented new login protocol with updated TeamController
+** Add login POST protocol with user validation technique
+** Refactor deleteStaff protocol to include user validation technique
+** Fix bug with edit password Post with new user validation technique
+** Fix logical errors with make admin with user account query
 
 Version: v0.6.0
 ** Heroku support with functional domain
