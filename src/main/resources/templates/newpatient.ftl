@@ -17,7 +17,7 @@
         <div class="mdl-grid demo-content">
             <div class="mdl-cell mdl-cell--4-col">
                 <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-                    <form action="" METHOD="POST">
+                    <form action="/newPatient" METHOD="POST">
                         <div class="mdl-card__title">
                             <h2 class="mdl-card__title-text">REgistro de pacientes</h2>
                         </div>
