@@ -329,11 +329,6 @@ public class DataEntryAndManagementService {
             throw new IllegalArgumentException("\n\nDANGER: YOU CAN NOT ERASE ADMIN ACCOUNT!");
 
         try {
-            User user = userRepository.findByStaffJascId(jascId);
-
-            if (user != null)
-                userRepository.delete(user);
-
             staffRepository.delete(jascId);
         } catch (NullPointerException exp) {
             System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());

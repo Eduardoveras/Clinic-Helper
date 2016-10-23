@@ -35,6 +35,14 @@ public class TeamController {
         return new ModelAndView("");
     }
 
+    @RequestMapping("/login")
+    public ModelAndView fetchLoginView(Model model){
+
+        model.addAttribute("name", "THIS IS NOT NECESSARY");
+
+        return new ModelAndView("login");
+    }
+
     // Post
     @PostMapping("/newStaff")
     public String newStaff(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("email") String mail, @RequestParam("clinicId") String clinicId){
@@ -58,6 +66,12 @@ public class TeamController {
     public String deleteStaff (@RequestParam("jascID") String jascId){
 
         try {
+
+            User user = DQS.findRegisteredUserAccountOfRegisteredStaff(jascId);
+
+            if (user != null)
+                DEAMS.deleteRegisterdUserAccount(user.getUsername());
+
             DEAMS.deleteRegisteredStaff(jascId);
         } catch (PersistenceException exp){
             //
@@ -114,6 +128,15 @@ public class TeamController {
         return "redirect:/team";
     }
 
+    @PostMapping("/userlogin")
+    public String loginUser(@RequestParam("username") String username, @RequestParam("password") String password){
+
+        if (DQS.validateUserAccountCredentials(username, password))
+            return "redirect:/appointments"; // TODO: filter which user is login in to redirect them to the correct url
+        else
+            return "redirect:/login"; // TODO: Implement error exception or message to login
+    }
+
     @PostMapping("/deleteUser")
     public String deleteUser (@RequestParam("username") String username){
 
@@ -133,23 +156,27 @@ public class TeamController {
     }
 
     @PostMapping("/editUserPassword")
-    public String editUserPassword(@RequestParam("username") String username, @RequestParam("password") String password){
+    public String editUserPassword(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("newPassword") String newPassword){
 
-        User user = DQS.findRegisteredUserAccount(username);
+        if (DQS.validateUserAccountCredentials(username.toLowerCase(), password)){
 
-        try {
-            DEAMS.editUserAccountCredentials(user.getUsername(), password, user.getRole());
-        } catch (PersistenceException exp){
-            //
-        } catch (IllegalArgumentException exp) {
-            //
-        } catch (NullPointerException exp) {
-            //
-        } catch (Exception exp){
-            //
+            User user = DQS.findRegisteredUserAccount(username.toLowerCase());
+
+            try {
+                DEAMS.editUserAccountCredentials(user.getUsername(), newPassword, user.getRole());
+            } catch (PersistenceException exp){
+                //
+            } catch (IllegalArgumentException exp) {
+                //
+            } catch (NullPointerException exp) {
+                //
+            } catch (Exception exp){
+                //
+            }
+            return "redirect:/team";
         }
-
-        return "redirect:/team";
+        else
+            return "redirect:/editUserPassword"; // TODO: Implement error exception or message to edit password
     }
 
     @PostMapping("/makeAdmin")
@@ -157,18 +184,22 @@ public class TeamController {
 
         User user = DQS.findRegisteredUserAccount(username);
 
-        try {
-            DEAMS.editUserAccountCredentials(user.getUsername(), user.getPassword(), "admin");
-        } catch (PersistenceException exp){
-            //
-        } catch (IllegalArgumentException exp) {
-            //
-        } catch (NullPointerException exp) {
-            //
-        } catch (Exception exp){
-            //
-        }
+        if (user != null) {
+            try {
+                DEAMS.editUserAccountCredentials(user.getUsername(), user.getPassword(), "admin");
+            } catch (PersistenceException exp) {
+                //
+            } catch (IllegalArgumentException exp) {
+                //
+            } catch (NullPointerException exp) {
+                //
+            } catch (Exception exp) {
+                //
+            }
 
-        return "redirect:/team";
+            return "redirect:/team";
+        }
+        else
+            return "redirect:/team";  // TODO: Implement error exception or message to make admin
     }
 }
