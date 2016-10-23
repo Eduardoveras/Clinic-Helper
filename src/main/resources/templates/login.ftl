@@ -19,7 +19,7 @@
                 <h2 class="mdl-card__title-text">Acme Co.</h2>
             </div>
             <div class="mdl-card__supporting-text">
-                <form action="#">
+                <form action="/">
                     <div class="mdl-textfield mdl-js-textfield">
                         <input class="mdl-textfield__input" type="text" id="username" />
                         <label class="mdl-textfield__label" for="username">Username</label>
