@@ -17,6 +17,12 @@ Language: Java
 Framework(s): Java SE 8 - JDK 1.8, Spring Boot, FreeMarker, JPA-ORM, Hibernate
 Database: PostgreSQL 9
 
+Version: v0.8.0
+** Functional Demo
+** Implements creation of patients and appointments with client-server union
+** New string date system
+** Bootstrap interface library
+
 Version: v0.7.0
 ** Core Controller implementations
         v0.7.1
