@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.persistence.PersistenceException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 @Controller
 public class PatientController {
@@ -29,12 +30,22 @@ public class PatientController {
 
 
     @GetMapping("/patients")
-    public ModelAndView fetchPatientView(Model model){
+    public ModelAndView fetchAllPatientsView(Model model){
 
         model.addAttribute("patientList", DQS.findAllRegisteredPatients());
         model.addAttribute("amount", DQS.findAllRegisteredPatients().size());
 
         return new ModelAndView("allPatients");
+    }
+
+    @GetMapping("/patient")
+    public ModelAndView fetchPatientview(Model model, @RequestParam("jascId") String jascId){
+
+        model.addAttribute("patient", DQS.findRegisteredPatient(jascId));
+        model.addAttribute("appointments", DQS.findPatientsRegisteredAppointments(jascId));
+        model.addAttribute("today", new Date(Calendar.getInstance().getTime().getTime()));
+
+        return new ModelAndView("");
     }
 
     // Posts
