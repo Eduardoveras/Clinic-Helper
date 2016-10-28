@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.PersistenceException;
@@ -119,6 +120,28 @@ public class TeamController {
         return "redirect:/team";
     }
 
+    @PostMapping("/uploadProfilePhoto")
+    public String uploadProfilePicture(@RequestParam() String jascId, @RequestParam("photo") MultipartFile file){
+
+        Staff staff = DQS.findRegisteredStaff(jascId);
+
+        try {
+            staff.setStaffPhoto(processImageFile(file.getBytes()));
+
+            DEAMS.editStaff(staff);
+        } catch (PersistenceException exp){
+            //
+        } catch (IllegalArgumentException exp) {
+            //
+        } catch (NullPointerException exp) {
+            //
+        } catch (Exception exp){
+            //
+        }
+
+        return "redirect:/profile?username=" + DQS.findRegisteredUserAccountOfRegisteredStaff(jascId).getUsername();
+    }
+
     @PostMapping("/newUser")
     public String newUser(@RequestParam("username") String username, @RequestParam("staff") String staff, @RequestParam("password") String password){
 
@@ -210,5 +233,17 @@ public class TeamController {
         }
         else
             return "redirect:/team";  // TODO: Implement error exception or message to make admin
+    }
+
+    //Auxiliary Functions
+    private Byte[] processImageFile(byte[] buffer) {
+        Byte[] bytes = new Byte[buffer.length];
+        int i = 0;
+
+        for (byte b :
+                buffer)
+            bytes[i++] = b; // Autoboxing
+
+        return bytes;
     }
 }

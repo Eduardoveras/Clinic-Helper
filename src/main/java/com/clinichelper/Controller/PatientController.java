@@ -134,7 +134,7 @@ public class PatientController {
             //
         }
 
-        return "redirect:/patient";
+        return "redirect:/patient?jascId=" + jascId;
     }
 
     //Auxiliary Functions
