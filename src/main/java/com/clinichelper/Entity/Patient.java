@@ -24,7 +24,7 @@ public class Patient implements Serializable{
     @Column(unique = true, nullable = false)
     private String patientIdCard;//
     @Column(length = 5000000)
-    private Byte[] photo;
+    private Byte[] patientPhoto;
     @NotNull
     private String patientTelephoneNumber;//
     private String patientContactTelephoneNumber;//
@@ -192,19 +192,19 @@ public class Patient implements Serializable{
         this.occupation = occupation;
     }
 
-    public Byte[] getPhoto() {
-        return photo;
+    public Byte[] getPatientPhoto() {
+        return patientPhoto;
     }
 
-    public void setPhoto(Byte[] photo) {
-        this.photo = photo;
+    public void setPatientPhoto(Byte[] patientPhoto) {
+        this.patientPhoto = patientPhoto;
     }
 
-    public String displayPhoto(){
-        if(this.photo == null)
+    public String displayPatientPhoto(){
+        if(this.patientPhoto == null)
             return null;
 
-        byte[] imgBytesAsBase64 = Base64.encodeBase64(toPrimitives(this.photo));
+        byte[] imgBytesAsBase64 = Base64.encodeBase64(toPrimitives(this.patientPhoto));
         return new String(imgBytesAsBase64);
     }
 

@@ -120,7 +120,7 @@ public class PatientController {
 
         try {
 
-            patient.setPhoto(processImageFile(file.getBytes()));
+            patient.setPatientPhoto(processImageFile(file.getBytes()));
 
             DEAMS.editPatient(patient);
 

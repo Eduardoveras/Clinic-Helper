@@ -24,7 +24,7 @@ public class Staff implements Serializable{
     @NotNull
     private String staffLastName;
     @Column(length = 5000000)
-    private Byte[] photo;
+    private Byte[] staffPhoto;
     @NotNull
     private Date staffBirthDate;
     @Column(unique = true)
@@ -95,19 +95,19 @@ public class Staff implements Serializable{
         this.staffBirthDate = staffBirthDate;
     }
 
-    public Byte[] getPhoto() {
-        return photo;
+    public Byte[] getStaffPhoto() {
+        return staffPhoto;
     }
 
-    public void setPhoto(Byte[] photo) {
-        this.photo = photo;
+    public void setStaffPhoto(Byte[] staffPhoto) {
+        this.staffPhoto = staffPhoto;
     }
 
-    public String displayPhoto(){
-        if(this.photo == null)
+    public String displayStaffPhoto(){
+        if(this.staffPhoto == null)
             return null;
 
-        byte[] imgBytesAsBase64 = Base64.encodeBase64(toPrimitives(this.photo));
+        byte[] imgBytesAsBase64 = Base64.encodeBase64(toPrimitives(this.staffPhoto));
         return new String(imgBytesAsBase64);
     }
 
