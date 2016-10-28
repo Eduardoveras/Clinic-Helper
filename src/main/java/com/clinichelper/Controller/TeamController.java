@@ -44,6 +44,14 @@ public class TeamController {
         return new ModelAndView("login");
     }
 
+    @RequestMapping("/profile")
+    public ModelAndView fetchUserProfile(Model model, @RequestParam("username") String username){
+
+        model.addAttribute("user", DQS.findRegisteredUserAccount(username));
+
+        return new ModelAndView("");
+    }
+
     // Post
     @PostMapping("/newStaff")
     public String newStaff(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("birthDate") Date birthDate, @RequestParam("email") String mail, @RequestParam("clinicId") String clinicId){
