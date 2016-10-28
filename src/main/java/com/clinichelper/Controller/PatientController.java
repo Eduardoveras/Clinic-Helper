@@ -11,8 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.PersistenceException;
@@ -101,8 +101,7 @@ public class PatientController {
             patient.setPatientCountry(countries.toUpperCase());
             patient.setPatientCity(cities.toUpperCase());
             DEAMS.editPatient(patient);
-        }
-        catch (PersistenceException exp){
+        } catch (PersistenceException exp){
             //
         } catch(IllegalArgumentException exp){
             //
@@ -111,7 +110,42 @@ public class PatientController {
         } catch (Exception exp){
             //
         }
+
         return "redirect:/patient";
     }
 
+    @PostMapping("/uploadPhoto")
+    public String uploadPatientPhoto(@RequestParam("jascId") String jascId ,@RequestParam("photo")MultipartFile file){
+        Patient patient = DQS.findRegisteredPatient(jascId);
+
+        try {
+
+            patient.setPhoto(processImageFile(file.getBytes()));
+
+            DEAMS.editPatient(patient);
+
+        } catch (PersistenceException exp){
+            //
+        } catch(IllegalArgumentException exp){
+            //
+        } catch (NullPointerException exp) {
+            //
+        } catch (Exception exp){
+            //
+        }
+
+        return "redirect:/patient";
+    }
+
+    //Auxiliary Functions
+    private Byte[] processImageFile(byte[] buffer) {
+        Byte[] bytes = new Byte[buffer.length];
+        int i = 0;
+
+        for (byte b :
+                buffer)
+            bytes[i++] = b; // Autoboxing
+
+        return bytes;
+    }
 }
