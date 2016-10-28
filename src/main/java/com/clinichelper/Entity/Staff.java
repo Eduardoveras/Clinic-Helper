@@ -1,5 +1,7 @@
 package com.clinichelper.Entity;
 
+import org.apache.tomcat.util.codec.binary.Base64;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -21,6 +23,8 @@ public class Staff implements Serializable{
     private String staffFirstName;
     @NotNull
     private String staffLastName;
+    @Column(length = 5000000)
+    private Byte[] photo;
     @NotNull
     private Date staffBirthDate;
     @Column(unique = true)
@@ -89,5 +93,31 @@ public class Staff implements Serializable{
 
     public void setStaffBirthDate(Date staffBirthDate) {
         this.staffBirthDate = staffBirthDate;
+    }
+
+    public Byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(Byte[] photo) {
+        this.photo = photo;
+    }
+
+    public String displayPhoto(){
+        if(this.photo == null)
+            return null;
+
+        byte[] imgBytesAsBase64 = Base64.encodeBase64(toPrimitives(this.photo));
+        return new String(imgBytesAsBase64);
+    }
+
+    // Auxiliary Function
+    private byte[] toPrimitives(Byte[] buffer) {
+
+        byte[] bytes = new byte[buffer.length];
+        for(int i = 0; i < buffer.length; i++){
+            bytes[i] = buffer[i];
+        }
+        return bytes;
     }
 }

@@ -1,5 +1,7 @@
 package com.clinichelper.Entity;
 
+import org.apache.tomcat.util.codec.binary.Base64;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -21,6 +23,8 @@ public class Patient implements Serializable{
     private String patientLastName;//
     @Column(unique = true, nullable = false)
     private String patientIdCard;//
+    @Column(length = 5000000)
+    private Byte[] photo;
     @NotNull
     private String patientTelephoneNumber;//
     private String patientContactTelephoneNumber;//
@@ -95,6 +99,8 @@ public class Patient implements Serializable{
     public void setPatientLastName(String patientLastName) {
         this.patientLastName = patientLastName;
     }
+
+    public String getPatientFullName() { return patientFirstName.toUpperCase() + " " + patientLastName; }
 
     public String getPatientIdCard() {
         return patientIdCard;
@@ -184,5 +190,31 @@ public class Patient implements Serializable{
 
     public void setOccupation(String occupation) {
         this.occupation = occupation;
+    }
+
+    public Byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(Byte[] photo) {
+        this.photo = photo;
+    }
+
+    public String displayPhoto(){
+        if(this.photo == null)
+            return null;
+
+        byte[] imgBytesAsBase64 = Base64.encodeBase64(toPrimitives(this.photo));
+        return new String(imgBytesAsBase64);
+    }
+
+    // Auxiliary Function
+    private byte[] toPrimitives(Byte[] buffer) {
+
+        byte[] bytes = new byte[buffer.length];
+        for(int i = 0; i < buffer.length; i++){
+            bytes[i] = buffer[i];
+        }
+        return bytes;
     }
 }
