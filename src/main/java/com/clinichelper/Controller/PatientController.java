@@ -35,7 +35,7 @@ public class PatientController {
         model.addAttribute("patientList", DQS.findAllRegisteredPatients());
         model.addAttribute("amount", DQS.findAllRegisteredPatients().size());
 
-        return new ModelAndView("allPatients");
+        return new ModelAndView("patientPage");
     }
 
     @GetMapping("/patient")

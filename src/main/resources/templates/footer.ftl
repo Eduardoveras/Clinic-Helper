@@ -7,7 +7,6 @@
 <!-- NProgress -->
 <script src="../vendors/nprogress/nprogress.js"></script>
 
+
 <!-- Custom Theme Scripts -->
 <script src="../build/js/custom.min.js"></script>
-</body>
-</html>
