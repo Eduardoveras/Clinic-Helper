@@ -20,7 +20,7 @@ lib/
 out/
 settings.gradle
 nbproject/private/
-build/
+/build
 nbbuild/
 dist/
 nbdist/
@@ -44,11 +44,10 @@ nbdist/
 
 
 .gradle
-/build/
 !gradle/wrapper/gradle-wrapper.jar
 bin/
 src/test/
-build
+
 out
 .DS_Store
 /.env
