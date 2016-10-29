@@ -42,7 +42,7 @@ public class TeamController {
 
         model.addAttribute("name", "THIS IS NOT NECESSARY");
 
-        return new ModelAndView("login");
+        return new ModelAndView("/users/login_register");
     }
 
     @RequestMapping("/profile")

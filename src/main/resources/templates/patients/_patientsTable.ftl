@@ -23,10 +23,7 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th>JascID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Last Name</th>
+                    <th>Name</th>
                     <th>Cedula/pasaporte</th>
                     <th>Phone</th>
                     <th>Contact Phone</th>
@@ -44,9 +41,7 @@
                 <tbody>
                 <#list patientList as patient>
                 <tr>
-                    <td>${patient.jascId}</td>
-                    <td>${patient.patientFirstName}</td>
-                    <td>${patient.patientLastName}</td>
+                    <td><a href="/patient/${patient.jascId}">${patient.patientFirstName} ${patient.patientLastName}</a></td>
                     <td>${patient.patientIdCard}</td>
                     <td>${patient.patientTelephoneNumber}</td>
                     <td>${patient.patientContactTelephoneNumber}</td>
@@ -59,6 +54,7 @@
                     <td>${patient.patientAddress}</td>
                     <td>${patient.patientCity}</td>
                     <td>${patient.patientCountry}</td>
+
                 </tr>
                 <#else>
                 <tr>

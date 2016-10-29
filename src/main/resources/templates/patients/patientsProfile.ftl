@@ -44,7 +44,7 @@
                                     <div class="profile_img">
                                         <div id="crop-avatar">
                                             <!-- Current avatar -->
-                                            <img class="img-responsive avatar-view" src="/images/user.jpg" alt="Avatar" title="Change the avatar">
+                                            <img class="img-responsive avatar-view" src="/images/user.png" alt="Avatar" title="Change the avatar">
                                         </div>
                                     </div>
                                     <h3>${patient.patientFirstName} ${patient.patientLastName}</h3>
@@ -135,7 +135,7 @@
                                                 <!-- start recent activity -->
                                                 <ul class="messages">
                                                     <li>
-                                                        <img src="images/img.jpg" class="avatar" alt="Avatar">
+                                                        <img src="/images/img.jpg" class="avatar" alt="Avatar">
                                                         <div class="message_date">
                                                             <h3 class="date text-info">24</h3>
                                                             <p class="month">May</p>
@@ -151,7 +151,7 @@
                                                         </div>
                                                     </li>
                                                     <li>
-                                                        <img src="images/img.jpg" class="avatar" alt="Avatar">
+                                                        <img src="/images/img.jpg" class="avatar" alt="Avatar">
                                                         <div class="message_date">
                                                             <h3 class="date text-error">21</h3>
                                                             <p class="month">May</p>
@@ -167,7 +167,7 @@
                                                         </div>
                                                     </li>
                                                     <li>
-                                                        <img src="images/img.jpg" class="avatar" alt="Avatar">
+                                                        <img src="/images/img.jpg" class="avatar" alt="Avatar">
                                                         <div class="message_date">
                                                             <h3 class="date text-info">24</h3>
                                                             <p class="month">May</p>
@@ -183,7 +183,7 @@
                                                         </div>
                                                     </li>
                                                     <li>
-                                                        <img src="images/img.jpg" class="avatar" alt="Avatar">
+                                                        <img src="/images/img.jpg" class="avatar" alt="Avatar">
                                                         <div class="message_date">
                                                             <h3 class="date text-error">21</h3>
                                                             <p class="month">May</p>
