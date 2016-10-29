@@ -27,11 +27,11 @@
                 <ul class="nav side-menu">
 
 
-                    <li><a href="/"><i class="fa fa-laptop"></i> Patients</a></li>
-                    <li><a href="/patients"><i class="fa fa-laptop"></i> Patients</a></li>
-                    <li><a href="/"><i class="fa fa-laptop"></i> Appointments </a></li>
-                    <li><a href="/"><i class="fa fa-laptop"></i> Inventory </a></li>
-                    <li><a href="/"><i class="fa fa-laptop"></i> Statistics </a></li>
+                    <li><a href="/"><i class="fa fa-home"></i> Home </a></li>
+                    <li><a href="/patients"><i class="fa fa-group"></i> Patients</a></li>
+                    <li><a href="/yolo"><i class="fa fa-calendar"></i> Appointments </a></li>
+                    <li><a href="/swag"><i class="fa fa-inbox"></i> Inventory </a></li>
+                    <li><a href="/tests"><i class="fa fa-bar-chart-o"></i> Statistics </a></li>
 
 
 
