@@ -40,7 +40,7 @@ public class TeamController {
     @RequestMapping("/login")
     public ModelAndView fetchLoginView(Model model){
 
-        model.addAttribute("name", "THIS IS NOT NECESSARY");
+        model.addAttribute("name", "THIS IS NOT NECE");
 
         return new ModelAndView("/users/login_register");
     }
