@@ -18,6 +18,9 @@
                         <input name="password" type="password" class="form-control" placeholder="Password" required="" />
                     </div>
                     <div>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    </div>
+                    <div>
                         <input type="submit" class="btn btn-default submit">Log in</input>
                         <a class="reset_pass" href="#">Lost your password?</a>
                     </div>
