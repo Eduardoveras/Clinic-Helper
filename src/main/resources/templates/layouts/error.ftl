@@ -1,4 +1,4 @@
-<#include "/header.ftl">
+<#include "/layouts/header.ftl">
 <style>
     .demo-card-wide.mdl-card {
         width: 512px;
