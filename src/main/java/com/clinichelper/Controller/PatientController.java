@@ -7,6 +7,7 @@ import com.clinichelper.Entity.Patient;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +30,7 @@ public class PatientController {
     @Autowired
     private DataQueryService DQS;
 
-
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     @GetMapping("/patients")
     public ModelAndView fetchAllPatientsView(Model model){
 
@@ -39,6 +40,7 @@ public class PatientController {
         return new ModelAndView("patients/allPatients");
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     @GetMapping("/patient/{jascId}")
     public ModelAndView fetchPatientview(Model model,@PathVariable(value="jascId") String jascId){
 
