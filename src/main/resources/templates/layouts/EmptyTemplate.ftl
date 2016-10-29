@@ -1,10 +1,10 @@
-<#include "/header.ftl">
+<#include "/layouts/header.ftl">
 
 <body class="nav-md">
 <div class="container body">
     <div class="main_container">
-    <#include "/sidebar.ftl">
-    <#include "/navbar.ftl">
+    <#include "/layouts/sidebar.ftl">
+    <#include "/layouts/navbar.ftl">
 
 
 
@@ -20,14 +20,14 @@
             </div>
         </div>
         <!-- /page content -->
-    <#include "/Copyright.ftl">
+    <#include "/layouts/Copyright.ftl">
 
 
     </div>
 </div>
 
-<#include "/footer.ftl">
-<#include "/pageCloser.ftl">
+<#include "/layouts/footer.ftl">
+<#include "/layouts/pageCloser.ftl">
 
 
 

@@ -1,4 +1,4 @@
-<#include "/header.ftl">
+<#include "/layouts/header.ftl">
 
 
 <body class="login">

@@ -12,14 +12,14 @@ public class IndexController {
     @RequestMapping("/")
     public ModelAndView home(Model model, @RequestParam(value="name", required=false, defaultValue="home") String name) {
         model.addAttribute("name", name);
-        return new ModelAndView("index");
+        return new ModelAndView("homepage/index");
     }
 
 
-    /*@RequestMapping("/*")
+    @RequestMapping("/*")
     public ModelAndView err(Model model, @RequestParam(value="name", required=false, defaultValue="404") String name) {
         model.addAttribute("name", name);
-        return new ModelAndView("404");
-    }*/
+        return new ModelAndView("layouts/error");
+    }
 
 }
