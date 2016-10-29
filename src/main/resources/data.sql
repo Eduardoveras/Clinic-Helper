@@ -98,7 +98,7 @@ appointment_date,
 appointment_description,
 appointment_time,
 patient_jasc_id) VALUES
-('JASC-A-BYUYHE8I3WE', 'present', '2016-11-02', 'Checkup', '2016-11-02 08:00:00', 'JASC-P-BVN309WDHN3');
+('JASC-A-BYUYHE8I3WE', 'present', '2016-11-02', 'Checkup', '2016-11-02 08:00:00', 'JASC-P-BVN309WDHN32');
 
 INSERT INTO appointments (jasc_id,
 appointment_access_from,
@@ -106,7 +106,7 @@ appointment_date,
 appointment_description,
 appointment_time,
 patient_jasc_id) VALUES
-('JASC-A-BYUYHE8I3WE', 'present', '2016-12-14', 'MamoPlasti', '2016-11-02 10:45:00', 'JASC-P-BVN309WDHN3');
+('JASC-A-BYU123453WE', 'present', '2016-12-14', 'MamoPlasti', '2016-11-02 10:45:00', 'JASC-P-BVN309WDHN32');
 
 INSERT INTO appointments (jasc_id,
 appointment_access_from,
@@ -114,7 +114,7 @@ appointment_date,
 appointment_description,
 appointment_time,
 patient_jasc_id) VALUES
-('JASC-A-BYUYHE8I3WE', 'present', '2016-02-20', 'Checkup', '2016-11-02 08:00:00', 'JASC-P-BVN3DF43WED32');
+('JASC-A-BYU3HE8I3WE', 'present', '2016-02-20', 'Checkup', '2016-11-02 08:00:00', 'JASC-P-BVN3DF43WED32');
 
 INSERT INTO appointments (jasc_id,
 appointment_access_from,
@@ -122,4 +122,4 @@ appointment_date,
 appointment_description,
 appointment_time,
 patient_jasc_id) VALUES
-('JASC-A-BYUYHE8I3WE', 'present', '2016-02-20', 'Botox', '2016-11-02 09:45:00', 'JASC-P-BVN309WJHN32');
+('JASC-A-BYUYHE8I22E', 'present', '2016-02-20', 'Botox', '2016-11-02 09:45:00', 'JASC-P-BVN309WJHN32');
