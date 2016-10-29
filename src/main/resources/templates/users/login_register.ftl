@@ -33,7 +33,7 @@
                         <br />
 
                         <div>
-                            <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
+                            <h1><i class="fa fa-plus-circle"></i> Gentelella Alela!</h1>
                             <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
                         </div>
                     </div>
@@ -70,8 +70,8 @@
                         <br />
 
                         <div>
-                            <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                            <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+                            <h1><i class="fa fa-plus-circle"></i> Clinic helper!</h1>
+                            <p>©2016 All Rights Reserved. Clinic Helper. Privacy and Terms</p>
                         </div>
                     </div>
                 </form>
