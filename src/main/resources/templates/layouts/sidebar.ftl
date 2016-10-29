@@ -25,25 +25,16 @@
             <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                    <li><a><i class="fa plus-square-o"></i> Dashboard <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="">Dashboard</a></li>
-
-                        </ul>
-                    </li>
-                    <li><a><i href="allPatients.ftl" class="fa fa-line-chart"></i>  Patients  <span class="fa fa-chevron-down"></span></a>
-
-                    </li>
-                    <li><a><i href="" class="fa fa-desktop"></i> Appointments  <span class="fa fa-chevron-down"></span></a>
 
 
-                    </li>
-                    <li><a><i href="" class="fa fa-calculator"></i> Inventory <span class="fa fa-chevron-down"></span></a>
+                    <li><a href="/"><i class="fa fa-laptop"></i> Patients</a></li>
+                    <li><a href="/patients"><i class="fa fa-laptop"></i> Patients</a></li>
+                    <li><a href="/"><i class="fa fa-laptop"></i> Appointments </a></li>
+                    <li><a href="/"><i class="fa fa-laptop"></i> Inventory </a></li>
+                    <li><a href="/"><i class="fa fa-laptop"></i> Statistics </a></li>
 
-                    </li>
-                    <li><a><i href="" class="fa fa-bar-chart-o"></i> Statistics<span class="fa fa-chevron-down"></span></a>
 
-                    
+
                 </ul>
             </div>
             <div class="menu_section">
