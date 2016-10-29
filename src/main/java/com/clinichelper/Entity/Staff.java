@@ -59,6 +59,8 @@ public class Staff implements Serializable{
         return staffFirstName;
     }
 
+    public String getStaffFullName() { return staffFirstName.toUpperCase() + " " + staffLastName; }
+
     public void setStaffFirstName(String staffFirstName) {
         this.staffFirstName = staffFirstName;
     }
