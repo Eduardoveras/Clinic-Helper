@@ -19,7 +19,7 @@ import java.sql.Date;
 /**
  * Created by Eduardo veras on 02-Oct-16.
  */
-@Controller
+
 public class TeamController {
     // Services
     @Autowired
@@ -37,21 +37,8 @@ public class TeamController {
         return new ModelAndView("");
     }
 
-    @RequestMapping("/login")
-    public ModelAndView fetchLoginView(Model model){
 
-        model.addAttribute("name", "THIS IS NOT NECE");
 
-        return new ModelAndView("/users/login_register");
-    }
-
-    @RequestMapping("/profile")
-    public ModelAndView fetchUserProfile(Model model, @RequestParam("username") String username){
-
-        model.addAttribute("user", DQS.findRegisteredUserAccount(username));
-
-        return new ModelAndView("");
-    }
 
     // Post
     @PostMapping("/newStaff")
@@ -120,27 +107,7 @@ public class TeamController {
         return "redirect:/team";
     }
 
-    @PostMapping("/uploadProfilePhoto")
-    public String uploadProfilePicture(@RequestParam() String jascId, @RequestParam("photo") MultipartFile file){
 
-        Staff staff = DQS.findRegisteredStaff(jascId);
-
-        try {
-            staff.setStaffPhoto(processImageFile(file.getBytes()));
-
-            DEAMS.editStaff(staff);
-        } catch (PersistenceException exp){
-            //
-        } catch (IllegalArgumentException exp) {
-            //
-        } catch (NullPointerException exp) {
-            //
-        } catch (Exception exp){
-            //
-        }
-
-        return "redirect:/profile?username=" + DQS.findRegisteredUserAccountOfRegisteredStaff(jascId).getUsername();
-    }
 
     @PostMapping("/newUser")
     public String newUser(@RequestParam("username") String username, @RequestParam("staff") String staff, @RequestParam("password") String password){
@@ -160,56 +127,11 @@ public class TeamController {
         return "redirect:/team";
     }
 
-    @PostMapping("/userlogin")
-    public String loginUser(@RequestParam("username") String username, @RequestParam("password") String password){
 
-        if (DQS.validateUserAccountCredentials(username, password))
-            return "redirect:/appointments"; // TODO: filter which user is login in to redirect them to the correct url
-        else
-            return "redirect:/login"; // TODO: Implement error exception or message to login
-    }
 
-    @PostMapping("/deleteUser")
-    public String deleteUser (@RequestParam("username") String username){
 
-        try {
-            DEAMS.deleteRegisterdUserAccount(username);
-        } catch (PersistenceException exp){
-            //
-        } catch (IllegalArgumentException exp) {
-            //
-        } catch (NullPointerException exp) {
-            //
-        } catch (Exception exp){
-            //
-        }
 
-        return "redirect/team";
-    }
 
-    @PostMapping("/editUserPassword")
-    public String editUserPassword(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("newPassword") String newPassword){
-
-        if (DQS.validateUserAccountCredentials(username.toLowerCase(), password)){
-
-            User user = DQS.findRegisteredUserAccount(username.toLowerCase());
-
-            try {
-                DEAMS.editUserAccountCredentials(user.getUsername(), newPassword, user.getRole());
-            } catch (PersistenceException exp){
-                //
-            } catch (IllegalArgumentException exp) {
-                //
-            } catch (NullPointerException exp) {
-                //
-            } catch (Exception exp){
-                //
-            }
-            return "redirect:/team";
-        }
-        else
-            return "redirect:/editUserPassword"; // TODO: Implement error exception or message to edit password
-    }
 
     @PostMapping("/makeAdmin")
     public String makeUserAdmin(@RequestParam("username") String username){
@@ -234,16 +156,5 @@ public class TeamController {
         else
             return "redirect:/team";  // TODO: Implement error exception or message to make admin
     }
-
-    //Auxiliary Functions
-    private Byte[] processImageFile(byte[] buffer) {
-        Byte[] bytes = new Byte[buffer.length];
-        int i = 0;
-
-        for (byte b :
-                buffer)
-            bytes[i++] = b; // Autoboxing
-
-        return bytes;
-    }
+    
 }
