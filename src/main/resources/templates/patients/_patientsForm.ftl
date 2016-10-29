@@ -21,36 +21,30 @@
         </div>
         <div class="x_content">
             <br />
-            <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+            <form action="/newPatient" METHOD="POST" enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
                 <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">First Name <span class="required">*</span>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="firstName">First Name <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
+                        <input type="text" id="firstName" name="firstName" required="required" class="form-control col-md-7 col-xs-12">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Last Name <span class="required">*</span>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="lastName">Last Name <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="last-name" name="last-name" required="required" class="form-control col-md-7 col-xs-12">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Middle Name / Initial</label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="middle-name">
+                        <input type="text" id="lastName" name="lastName" required="required" class="form-control col-md-7 col-xs-12">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                         <div class="radio">
-                            <label><input type="radio" name="optradio">Male</label>
+                            <label><input type="radio" name="gender" id="gender">Male</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="optradio">Female</label>
+                            <label><input type="radio" name="gender" id="gender">Female</label>
                         </div>
                     </div>
                 </div>
@@ -58,7 +52,7 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="birthday" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                        <input id="dateOfBirth" name="dateOfBirth" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
                     </div>
                 </div>
 
@@ -66,25 +60,25 @@
 
 
                 <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cedula">ID/Passport <span class="required">*</span>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="idCard">ID/Passport <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="cedula" required="required" class="form-control col-md-7 col-xs-12">
+                        <input type="text" id="idCard" name="idCard" required="required" class="form-control col-md-7 col-xs-12">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phone">Phone <span class="required">*</span>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="telephoneNumber">Phone <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="phone" required="required" class="form-control col-md-7 col-xs-12">
+                        <input type="text" id="telephoneNumber" name="telephoneNumber" required="required" class="form-control col-md-7 col-xs-12">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cell-phone">Cell Phone <span class="required">*</span>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="contactTelephoneNumber">Contact Phone <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="cell-phone" required="required" class="form-control col-md-7 col-xs-12">
+                        <input type="text" id="contactTelephoneNumber" name="contactTelephoneNumber" required="required" class="form-control col-md-7 col-xs-12">
                     </div>
                 </div>
 
@@ -92,15 +86,15 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="email" required="required" class="form-control col-md-7 col-xs-12">
+                        <input type="text" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ocupation">Ocupation <span class="required">*</span>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="occupation">Ocupation <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="ocupation" required="required" class="form-control col-md-7 col-xs-12">
+                        <input type="text" id="occupation" name="occupation" required="required" class="form-control col-md-7 col-xs-12">
                     </div>
                 </div>
 
@@ -108,15 +102,31 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nationality">Nationality <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="nationality" required="required" class="form-control col-md-7 col-xs-12">
+                        <input type="text" id="nationality" name="nationality" required="required" class="form-control col-md-7 col-xs-12">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="adress">Adress <span class="required">*</span>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address">Adress <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="adress" required="required" class="form-control col-md-7 col-xs-12">
+                        <input type="text" id="address" name="address" required="required" class="form-control col-md-7 col-xs-12">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="city">City <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="city" name="city" required="required" class="form-control col-md-7 col-xs-12">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="country">Country <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="country" name="country" required="required" class="form-control col-md-7 col-xs-12">
                     </div>
                 </div>
 

@@ -62,9 +62,8 @@ public class PatientController {
             @RequestParam("dateOfBirth")String dateOfBirth,
             @RequestParam("gender") String gender,
             @RequestParam("nationality") String nationality,
-            @RequestParam("countries") String countries,
-            @RequestParam("cities") String cities){
-        System.out.println("THIS IS A PROOF THAT YOLO IS SWAG");
+            @RequestParam("country") String countries,
+            @RequestParam("city") String cities){
 
         try {
 

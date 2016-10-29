@@ -37,7 +37,7 @@
 <!-- bootstrap-daterangepicker -->
 <script>
     $(document).ready(function() {
-        $('#birthday').daterangepicker({
+        $('#dateOfBirth').daterangepicker({
             singleDatePicker: true,
             calender_style: "picker_4"
         }, function(start, end, label) {
