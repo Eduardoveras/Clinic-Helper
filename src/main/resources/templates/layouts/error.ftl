@@ -1,29 +1,46 @@
 <#include "/layouts/header.ftl">
-<style>
-    .demo-card-wide.mdl-card {
-        width: 512px;
-    }
-    .demo-card-wide > .mdl-card__title {
-        color: #fff;
-        height: 176px;
-        background: url('https://cdn.colorlib.com/wp/wp-content/uploads/sites/2/404-not-found-error-page-examples.png') center / cover;
-    }
-    .demo-card-wide > .mdl-card__menu {
-        color: #fff;
-    }
-</style>
 
-<div class="demo-card-wide mdl-card mdl-shadow--2dp" style="margin-top:25%; margin:0 auto;">
-    <div class="mdl-card__title">
-        <h2 class="mdl-card__title-text">Sorry, we are...</h2>
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <!-- page content -->
+        <div class="col-md-12">
+            <div class="col-middle">
+                <div class="text-center text-center">
+                    <h1 class="error-number">404</h1>
+                    <h2>Sorry but we couldn't find this page</h2>
+                    <p>This page you are looking for does not exist <a href="#">Report this?</a>
+                    </p>
+                    <div class="mid_center">
+                        <h3>Search</h3>
+                        <form>
+                            <div class="col-xs-12 form-group pull-right top_search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search for...">
+                                    <span class="input-group-btn">
+                              <button class="btn btn-default" type="button">Go!</button>
+                          </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /page content -->
     </div>
-    <div class="mdl-card__supporting-text">
-        This should not have happened, maybe you were doing something you were not supposed to? Lets direct you back in the way of the force
-    </div>
-    <div class="mdl-card__actions mdl-card--border">
-        <a href="/" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-            Return to the Jedi path
-        </a>
-    </div>
-
 </div>
+
+<!-- jQuery -->
+<script src="../vendors/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- FastClick -->
+<script src="../vendors/fastclick/lib/fastclick.js"></script>
+<!-- NProgress -->
+<script src="../vendors/nprogress/nprogress.js"></script>
+
+<!-- Custom Theme Scripts -->
+<script src="../build/js/custom.min.js"></script>
+</body>
+</html>
