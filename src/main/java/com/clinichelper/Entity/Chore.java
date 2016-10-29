@@ -54,6 +54,23 @@ public class Chore implements Serializable{
         return type;
     }
 
+    public  String getTypeString() {
+        switch (type){
+            case PATIENT_BIRTHDAY:
+                return "Patient's Birthday";
+            case STAFF_BIRTHDAY:
+                return "Staff's Birthday";
+            case REGISTRATIONDATE:
+                return "Registration Birthday";
+            case MEETING:
+                return "Meeting";
+            case SURGERY:
+                return "Surgery";
+            default:
+                return "Reminder";
+        }
+    }
+
     public void setType(Task type) {
         this.type = type;
     }

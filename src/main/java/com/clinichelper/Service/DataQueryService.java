@@ -5,6 +5,7 @@ package com.clinichelper.Service;
 
 import com.clinichelper.Entity.*;
 import com.clinichelper.Repository.*;
+import com.clinichelper.Tools.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,8 @@ public class DataQueryService {
     // Repositories
     @Autowired
     private AppointmentRepository appointmentRepository;
+    @Autowired
+    private ChoreRepository choreRepository;
     @Autowired
     private ConsultationRepository consultationRepository;
     @Autowired
@@ -56,7 +59,12 @@ public class DataQueryService {
 
     public List<Appointment> findAllRegisteredAppointmentsByTimePeriod(Date beginningOfTimePeriod, Date endOfTimePeriod){ return appointmentRepository.findByDateRange(beginningOfTimePeriod, endOfTimePeriod); }
 
+    // Chores Queries
+    public Chore findRegisteredCustomTask(String jascId){ return choreRepository.findByJascId(jascId); }
 
+    public List<Chore> findAllRegisteredCustomTasks(){ return choreRepository.findAll(); }
+
+    public List<Chore> findRegisteredCustomTaksByType(Task type) { return choreRepository.findByType(type); }
 
 
     // Consultation Queries
@@ -69,17 +77,12 @@ public class DataQueryService {
     public  List<Consultation> findAllRegisteredConsultationsByTimePeriod(Date beginningOfTimePeriod, Date endOfTimePeriod){ return consultationRepository.findByConsultationDateRange(beginningOfTimePeriod, endOfTimePeriod); }
 
 
-
-
     // Equipment Queries
     public Equipment findRegisteredEquipment(String jascId) { return equipmentRepository.findByJascId(jascId); }
 
     public List<Equipment> findAllRegisteredEquipments(){ return equipmentRepository.findAll(); }
 
     public List<Equipment> findRegisteredEquipmentByName(String searchName){ return equipmentRepository.findByEquipmentName(searchName); }
-
-
-
 
 
     // Insurance Queries
@@ -92,8 +95,6 @@ public class DataQueryService {
     public List<Insurance> findRegisteredInsuranceByOwner(String searchID){ return insuranceRepository.findByOwnerJascId(searchID); }
 
 
-
-
     // Meeting Queries
     public Meeting findRegisteredMeeting(String jascId){ return meetingRepository.findByJascId(jascId);}
 
@@ -104,8 +105,6 @@ public class DataQueryService {
     public List<Meeting> findRegisteredMeetingByDate (Date searchDate){ return meetingRepository.findByMeetingDate(searchDate); }
 
     public List<Meeting> findRegisteredMeetingByPlace (String searchPlace){ return meetingRepository.findByMeetingPlace(searchPlace); }
-
-
 
 
     // Patient Queries
@@ -127,8 +126,6 @@ public class DataQueryService {
     }
 
 
-
-
     // Record Queries
     public Record findRegisteredRecord(String jascId){ return recordRepository.findByJascId(jascId); }
 
@@ -143,8 +140,6 @@ public class DataQueryService {
     }
 
 
-
-
     // Staff Queries
     public Staff findRegisteredStaff(String jascId){ return staffRepository.findByJascId(jascId); }
 
@@ -153,8 +148,6 @@ public class DataQueryService {
     public Staff findRegisteredStaffByEmail(String staffEmail){ return staffRepository.findByStaffEmail(staffEmail); }
 
     public List<Staff> findRegisteredStaffByFirstNameAndLastName(String searchFirstName, String searchLastName){ return staffRepository.findByFirstNameAndLastName(searchFirstName,searchLastName); }
-
-
 
 
     // Surgery Queries
@@ -173,8 +166,6 @@ public class DataQueryService {
     public List<Surgery> findRegisteredSurgeryByRoom(String searchRoom){ return surgeryRepository.findBySurgeryRoom(searchRoom); }
 
     public List<Surgery> findResgisteredSurgeryByDateAndRoom(String searchRoom, Date searchDate){ return surgeryRepository.findBySurgeryDateAndSurgeryRoom(searchDate,searchRoom); }
-
-
 
 
     // User Queries
