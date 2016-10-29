@@ -85,14 +85,14 @@ public class UserController {
             //
         }
 
-        return "redirect:/team";
+        return "redirect:/";
     }
 
-    @PostMapping("/userlogin")
+    @PostMapping("/userLogin")
     public String loginUser(@RequestParam("username") String username, @RequestParam("password") String password){
 
         if (DQS.validateUserAccountCredentials(username, password))
-            return "redirect:/appointments"; // TODO: filter which user is login in to redirect them to the correct url
+            return "redirect:/"; // TODO: filter which user is login in to redirect them to the correct url
         else
             return "redirect:/login"; // TODO: Implement error exception or message to login
     }

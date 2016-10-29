@@ -156,5 +156,5 @@ public class TeamController {
         else
             return "redirect:/team";  // TODO: Implement error exception or message to make admin
     }
-    
+
 }
