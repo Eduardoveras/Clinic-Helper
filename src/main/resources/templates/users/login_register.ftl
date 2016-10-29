@@ -9,13 +9,13 @@
     <div class="login_wrapper">
         <div class="animate form login_form">
             <section class="login_content">
-                <form method="post" >
+                <form method="post" action="/userlogin" >
                     <h1>Login Form</h1>
                     <div>
-                        <input type="text" class="form-control" placeholder="Username" required="" />
+                        <input name="username" type="text" class="form-control" placeholder="Username" required="" />
                     </div>
                     <div>
-                        <input type="password" class="form-control" placeholder="Password" required="" />
+                        <input name="password" type="password" class="form-control" placeholder="Password" required="" />
                     </div>
                     <div>
                         <input type="submit" class="btn btn-default submit">Log in</input>

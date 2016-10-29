@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.PersistenceException;
+import java.util.Optional;
 
 /**
  * Created by Eduardo veras on 28-Oct-16.
@@ -30,11 +31,11 @@ public class UserController {
 
 
     @RequestMapping("/login")
-    public ModelAndView fetchLoginView(Model model){
+    public ModelAndView fetchLoginView(Model model, @RequestParam Optional<String> error){
 
         model.addAttribute("name", "THIS IS NOT NECESSARY");
 
-        return new ModelAndView("/users/login_register");
+        return new ModelAndView("/users/login_register", "error", error);
     }
 
 
@@ -92,9 +93,9 @@ public class UserController {
     public String loginUser(@RequestParam("username") String username, @RequestParam("password") String password){
 
         if (DQS.validateUserAccountCredentials(username, password))
-            return "redirect:/appointments"; // TODO: filter which user is login in to redirect them to the correct url
+            return "redirect:/patients"; // TODO: filter which user is login in to redirect them to the correct url
         else
-            return "redirect:/login"; // TODO: Implement error exception or message to login
+            return "redirect:/appointments"; // TODO: Implement error exception or message to login
     }
 
 
