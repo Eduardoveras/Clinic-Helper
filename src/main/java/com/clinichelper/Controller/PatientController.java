@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -35,17 +36,15 @@ public class PatientController {
         model.addAttribute("patientList", DQS.findAllRegisteredPatients());
         model.addAttribute("amount", DQS.findAllRegisteredPatients().size());
 
-        return new ModelAndView("patients/patientPage");
+        return new ModelAndView("patients/allPatients");
     }
 
-    @GetMapping("/patient")
-    public ModelAndView fetchPatientview(Model model, @RequestParam("jascId") String jascId){
+    @GetMapping("/patient/{jascId}")
+    public ModelAndView fetchPatientview(Model model,@PathVariable(value="jascId") String jascId){
 
         model.addAttribute("patient", DQS.findRegisteredPatient(jascId));
         model.addAttribute("appointments", DQS.findPatientsRegisteredAppointments(jascId));
-        model.addAttribute("today", new Date(Calendar.getInstance().getTime().getTime()));
-
-        return new ModelAndView("");
+        return new ModelAndView("patients/patientsProfile");
     }
 
     // Posts

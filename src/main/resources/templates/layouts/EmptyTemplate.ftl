@@ -17,6 +17,12 @@
                     </div>
                 </div>
                 <div class="clearfix"></div>
+                <div class="row">
+
+
+            <!--CONTENT GOES HERE-->
+
+                </div>
             </div>
         </div>
         <!-- /page content -->
