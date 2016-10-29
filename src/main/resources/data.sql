@@ -55,7 +55,7 @@ INSERT INTO patients (jasc_id,
   patient_nationality,
   patient_registered_date,
   patient_telephone_number) VALUES
-('JASC-P-BVN309WDHN32', 'Crazy cat lady', 'Sience', '1982-04-11', 'Paris',
+('JASC-P-BVN309WDHN32', 'Crazy cat lady', 'Siene', '1982-04-11', 'Paris',
 '829xxxyyyy', 'FR', 'eva@gmail.com', 'Eva', 'F', '12oih7g 323',
 'Soraya', 'Dominicana', '2015-10-28', '809xxxyyyy');
 
@@ -78,7 +78,6 @@ INSERT INTO  meetings_attendees (meeting_jasc_id, attendees_jasc_id) VALUES ('JA
 INSERT INTO  meetings_attendees (meeting_jasc_id, attendees_jasc_id) VALUES ('JASC-M-NY934WHRC3', 'JASC-STAFF-SICARD');
 INSERT INTO  meetings_attendees (meeting_jasc_id, attendees_jasc_id) VALUES ('JASC-M-NY934WHRC3', 'JASC-STAFF-ADELSO');
 
-
 INSERT INTO meetings (jasc_id,
 meeting_date,
 meeting_objective,
@@ -92,3 +91,35 @@ INSERT INTO  meetings_attendees (meeting_jasc_id, attendees_jasc_id) VALUES ('JA
 
 INSERT INTO chore (jasc_id, description, title, type) VALUES ('JASC-M-9URHFDN', 'By more Bras', 'Inventory refill', 4);
 INSERT INTO chore (jasc_id, description, title, type) VALUES ('JASC-M-9UR23DN', 'Call Accountant', 'Finance', 6);
+
+INSERT INTO appointments (jasc_id,
+appointment_access_from,
+appointment_date,
+appointment_description,
+appointment_time,
+patient_jasc_id) VALUES
+('JASC-A-BYUYHE8I3WE', 'present', '2016-11-02', 'Checkup', '2016-11-02 08:00:00', 'JASC-P-BVN309WDHN3');
+
+INSERT INTO appointments (jasc_id,
+appointment_access_from,
+appointment_date,
+appointment_description,
+appointment_time,
+patient_jasc_id) VALUES
+('JASC-A-BYUYHE8I3WE', 'present', '2016-12-14', 'MamoPlasti', '2016-11-02 10:45:00', 'JASC-P-BVN309WDHN3');
+
+INSERT INTO appointments (jasc_id,
+appointment_access_from,
+appointment_date,
+appointment_description,
+appointment_time,
+patient_jasc_id) VALUES
+('JASC-A-BYUYHE8I3WE', 'present', '2016-02-20', 'Checkup', '2016-11-02 08:00:00', 'JASC-P-BVN3DF43WED32');
+
+INSERT INTO appointments (jasc_id,
+appointment_access_from,
+appointment_date,
+appointment_description,
+appointment_time,
+patient_jasc_id) VALUES
+('JASC-A-BYUYHE8I3WE', 'present', '2016-02-20', 'Botox', '2016-11-02 09:45:00', 'JASC-P-BVN309WJHN32');
