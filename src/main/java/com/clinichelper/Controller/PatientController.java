@@ -67,10 +67,10 @@ public class PatientController {
 
         try {
 
-            SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
+            SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyy");
 
             DEAMS.createNewPatient(firstName, lastName, idCard, telephoneNumber,
-                    contactTelephoneNumber, occupation, gender, mail, new Date(sdf1.parse(dateOfBirth).getTime()), nationality, address, cities, countries);
+                    contactTelephoneNumber, occupation, gender, mail, new Date(sdf1.parse(dateOfBirth).getDate()), nationality, address, cities, countries);
         } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
             System.out.println("ERROR EN CREAR PACIENTE");
         } catch (Exception exp){
