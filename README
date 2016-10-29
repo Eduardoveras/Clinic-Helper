@@ -17,6 +17,11 @@ Language: Java
 Framework(s): Java SE 8 - JDK 1.8, Spring Boot, FreeMarker, JPA-ORM, Hibernate
 Database: PostgreSQL 9
 
+Version: v0.9.0
+** Refactor Database to include custom created Tasks
+** Add TodoList functionality to ToolkitService
+** Fix bug with Meeting entity with @ManyToMany to allow staff to attend more then one meeting
+
 Version: v0.8.0
 ** Functional Demo
 ** Implements creation of patients and appointments with client-server union
