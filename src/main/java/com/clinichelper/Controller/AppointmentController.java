@@ -7,6 +7,7 @@ import com.clinichelper.Entity.Appointment;
 import com.clinichelper.Entity.Patient;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
+import com.clinichelper.Tools.AppointmentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,7 +43,7 @@ public class AppointmentController {
 
     // Posts
     @PostMapping("/newAppointment")
-    public String createNweApointment(@RequestParam("clinic") String clinicId,@RequestParam("date") String appointmentDate, @RequestParam("time") String  appointmentTime, @RequestParam("jascId") String patientJascId, @RequestParam("description") String appointmentDescription, @RequestParam("access") String appointmentAccessFrom){
+    public String createNweApointment(@RequestParam("clinic") String clinicId,@RequestParam("date") String appointmentDate, @RequestParam("time") String  appointmentTime, @RequestParam("jascId") String patientJascId, @RequestParam("description") String appointmentDescription, @RequestParam("access") String appointmentAccessFrom, @RequestParam("type") String appointmentType){
 
         try {
             SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
@@ -50,7 +51,7 @@ public class AppointmentController {
 
             Patient patient = DQS.findRegisteredPatientByIdCard(patientJascId);
 
-            DEAMS.createNewAppointment(clinicId, new Date(sdf1.parse(appointmentDate).getTime()), new Timestamp(sdf2.parse(appointmentTime).getTime()), patient.getJascId(), appointmentDescription, appointmentAccessFrom);
+            DEAMS.createNewAppointment(clinicId, new Date(sdf1.parse(appointmentDate).getTime()), new Timestamp(sdf2.parse(appointmentTime).getTime()), patient.getJascId(), appointmentDescription, appointmentAccessFrom, appointmentType.toLowerCase().equals("consultation") ? AppointmentType.CONSULTATION : AppointmentType.SURGERY);
         } catch (PersistenceException exp){
             //
         } catch(IllegalArgumentException exp){

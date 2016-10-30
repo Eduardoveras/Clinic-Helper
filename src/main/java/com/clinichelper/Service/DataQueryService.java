@@ -5,7 +5,6 @@ package com.clinichelper.Service;
 
 import com.clinichelper.Entity.*;
 import com.clinichelper.Repository.*;
-import com.clinichelper.Tools.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -65,7 +64,7 @@ public class DataQueryService {
     public List<Appointment> findAllRegisteredAppointmentsByTimePeriod(String clinicId, Date beginningOfTimePeriod, Date endOfTimePeriod){ return appointmentRepository.findByDateRange(beginningOfTimePeriod, endOfTimePeriod, clinicId); }
 
     // Chores Queries
-    public Chore findRegisteredCustomTask(String jascId){ return choreRepository.findByChoreId(jascId); }
+    public Chore findRegisteredCustomTask(String choreId){ return choreRepository.findByChoreId(choreId); }
 
     public List<Chore> findAllRegisteredCustomTasks(){ return choreRepository.findAll(); }
 
@@ -73,14 +72,13 @@ public class DataQueryService {
     public Clinic findRegisteredClinicByClinicId(String clinicId){ return clinicRepository.findByClinicId(clinicId); }
 
     // Consultation Queries
-    public Consultation findRegisteredConsultation(String jascId){ return consultationRepository.findByJascId(jascId);}
+    public Consultation findRegisteredConsultation(String consultationId){ return consultationRepository.findByConsultationId(consultationId);}
 
-    public List<Consultation> findAllRegisteredConsultations(){ return consultationRepository.findAll(); }
+    public List<Consultation> findAllRegisteredConsultations(String clinicId){ return consultationRepository.findByClinicId(clinicId); }
 
-    public List<Consultation> findResgisteredConcultationByDate(Date searchDate){ return consultationRepository.findByConsultationDate(searchDate); }
+    public List<Consultation> findResgisteredConcultationByDate(String clinicId, Date searchDate){ return consultationRepository.findByConsultationDate(searchDate, clinicId); }
 
-    public  List<Consultation> findAllRegisteredConsultationsByTimePeriod(Date beginningOfTimePeriod, Date endOfTimePeriod){ return consultationRepository.findByConsultationDateRange(beginningOfTimePeriod, endOfTimePeriod); }
-
+    public  List<Consultation> findAllRegisteredConsultationsByTimePeriod(String clinicId, Date beginningOfTimePeriod, Date endOfTimePeriod){ return consultationRepository.findByConsultationDateRange(beginningOfTimePeriod, endOfTimePeriod, clinicId); }
 
     // Equipment Queries
     public Equipment findRegisteredEquipment(String jascId) { return equipmentRepository.findByJascId(jascId); }
