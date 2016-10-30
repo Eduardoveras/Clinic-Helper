@@ -31,7 +31,7 @@ public class Insurance implements Serializable{
     }
 
     public Insurance(Patient owner, String insuranceSerialCode, String insurancePlan){
-        this.setInsuranceId("I-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+        this.setInsuranceId( owner.getPatientId() + "-I-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setOwner(owner);
         this.setInsuranceSerialCode(insuranceSerialCode);
         this.setInsurancePlan(insurancePlan);
