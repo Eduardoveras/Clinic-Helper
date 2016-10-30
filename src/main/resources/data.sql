@@ -1,6 +1,8 @@
 INSERT INTO staff (jasc_id, staff_first_name, staff_last_name, staff_email, staff_clinic_id, staff_birth_date) VALUES ('JASC-STAFF-ADMIN', 'administrator', 'ADMIN', 'djidjellypas92@gmail.com', '1', '2016-11-4');
 
-INSERT INTO users (username, password, role, staff_jasc_id) VALUES ('admin', 'admin', 'ADMIN', 'JASC-STAFF-ADMIN');
+INSERT INTO clinic (clinic_id, account_type, clinic_name, clinic_prefix, registered_date) VALUES ('CH-PLATINUM-JASC', 100, 'JASC', 'JASC', '2016-10-30');
+
+INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-YOLO', '1980-02-03', 'djidjellypas92@gmail.com', 'djijdelly', 0, 'SICLAIT', '1234', 0, 'CH-PLATINUM-JASC');
 
 INSERT INTO patients (jasc_id,
   occupation,

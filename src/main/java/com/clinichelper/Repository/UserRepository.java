@@ -8,14 +8,20 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 public interface UserRepository  extends JpaRepository<User, String>{
 
-    User findByUsername(String username);
+    User findByUserId(String userId);
 
-    @Query("select u from User u where u.staff.jascId = :jascId")
-    User findByStaffJascId(@Param("jascId") String staffJascId);
+    @Query("select u from User u where u.firstName = :first and u.lastName = :last")
+    List<User> findByFullName(@Param("first") String firstName, @Param("last") String lastName);
 
-    @Query("select u from User u where u.username = :username and u.password = :password")
-    User findUserAccountWithUsernameAndPassword(@Param("username") String username, @Param("password") String password);
+    @Query("select u from User u where u.email = :email and u.clinic.clinicId = :clinic")
+    User findUserAccountWithUsernameAndClinicID(@Param("email") String email, @Param("clinic") String clinicId);
+
+
+    @Query("select u from User u where u.email = :email and u.password = :password and u.clinic.clinicId = :clinic")
+    User findUserAccountWithUsernameAndClinicIdAndPassword(@Param("email") String email, @Param("clinic") String clinicId, @Param("password") String password);
 
 }

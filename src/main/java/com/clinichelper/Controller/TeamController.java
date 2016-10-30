@@ -4,17 +4,18 @@ import com.clinichelper.Entity.Staff;
 import com.clinichelper.Entity.User;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
+import com.clinichelper.Tools.Gender;
+import com.clinichelper.Tools.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.PersistenceException;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 /**
  * Created by Eduardo veras on 02-Oct-16.
@@ -37,15 +38,12 @@ public class TeamController {
         return new ModelAndView("");
     }
 
-
-
-
     // Post
-    @PostMapping("/newStaff")
-    public String newStaff(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("birthDate") Date birthDate, @RequestParam("email") String mail, @RequestParam("clinicId") String clinicId){
+    @PostMapping("/newUser")
+    public String newUser(@RequestParam("email") String email, @RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("birthDate") String  birthDate, @RequestParam("gender") String gender, @RequestParam("password") String password, @RequestParam("role") String role, @RequestParam("clinic") String clinicId){
 
         try{
-            DEAMS.createNewStaffMember(firstName, lastName, birthDate, mail, clinicId);
+            DEAMS.createNewUserAccount(email, firstName, lastName, new Date(new SimpleDateFormat("yyyy-MM-dd").parse(birthDate).getTime()), gender.toLowerCase().equals("female") ? Gender.F : Gender.M, password, role.toLowerCase().equals("medic") ? Permission.MEDIC : Permission.ASSISTANT, clinicId);
         } catch (PersistenceException exp){
             //
         } catch (IllegalArgumentException exp) {
@@ -59,17 +57,11 @@ public class TeamController {
         return "redirect:/team";
     }
 
-    @PostMapping("/deleteStaff")
-    public String deleteStaff (@RequestParam("jascID") String jascId){
+    @PostMapping("/deleteUser")
+    public String deleteUser (@RequestParam("id") String userId){
 
         try {
-
-            User user = DQS.findRegisteredUserAccountOfRegisteredStaff(jascId);
-
-            if (user != null)
-                DEAMS.deleteRegisterdUserAccount(user.getUsername());
-
-            DEAMS.deleteRegisteredStaff(jascId);
+            DEAMS.deleteRegisteredUserAccount(userId);
         } catch (PersistenceException exp){
             //
         } catch (IllegalArgumentException exp) {
@@ -83,78 +75,25 @@ public class TeamController {
         return "redirect/team";
     }
 
-    @PostMapping("/editStaff")
-    public String editStaff(@RequestParam("jascId") String jascId, @RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("mail") String mail, @RequestParam("clinicId") String clinicId){
+    @PostMapping("/makUserAdmin") //Only accessed by the admin of the clinic account
+    public String makeUserDamin(@RequestParam("id") String userId){
 
-        Staff staff = DQS.findRegisteredStaff(jascId);
-        staff.setStaffClinicId(clinicId);
-        staff.setStaffEmail(mail.toLowerCase());
-        staff.setStaffFirstName(firstName.toLowerCase());
-        staff.setStaffLastName(lastName.toUpperCase());
+        User user = DQS.findUserInformation(userId);
 
         try {
-            DEAMS.editStaff(staff);
-        } catch (PersistenceException exp){
-            //
-        } catch (IllegalArgumentException exp) {
-            //
-        } catch (NullPointerException exp) {
-            //
-        } catch (Exception exp){
-            //
-        }
-
-        return "redirect:/team";
-    }
-
-
-
-    @PostMapping("/newUser")
-    public String newUser(@RequestParam("username") String username, @RequestParam("staff") String staff, @RequestParam("password") String password){
-
-        try{
-            DEAMS.createNewUserAccount(username,staff,password,"user");
-        } catch (PersistenceException exp){
-            //
-        } catch (IllegalArgumentException exp) {
-            //
-        } catch (NullPointerException exp) {
-            //
-        } catch (Exception exp){
-            //
-        }
-
-        return "redirect:/team";
-    }
-
-
-
-
-
-
-
-    @PostMapping("/makeAdmin")
-    public String makeUserAdmin(@RequestParam("username") String username){
-
-        User user = DQS.findRegisteredUserAccount(username);
-
-        if (user != null) {
-            try {
-                DEAMS.editUserAccountCredentials(user.getUsername(), user.getPassword(), "admin");
-            } catch (PersistenceException exp) {
-                //
-            } catch (IllegalArgumentException exp) {
-                //
-            } catch (NullPointerException exp) {
-                //
-            } catch (Exception exp) {
-                //
-            }
-
+            DEAMS.editUserAccountCredentials(user.getEmail(), user.getClinic().getClinicId(), user.getPassword(), Permission.ADMIN);
             return "redirect:/team";
+        } catch (PersistenceException exp){
+            //
+        } catch (IllegalArgumentException exp) {
+            //
+        } catch (NullPointerException exp) {
+            //
+        } catch (Exception exp){
+            //
         }
-        else
-            return "redirect:/team";  // TODO: Implement error exception or message to make admin
+
+        return "redirect:/team"; // TODO: Implement error exception or message to edit password
     }
 
 }
