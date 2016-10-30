@@ -37,7 +37,7 @@ public class AppointmentController {
         model.addAttribute("appointmentList", DQS.findAllRegisteredAppointments());
         model.addAttribute("amount", DQS.findAllRegisteredAppointments().size());
 
-        return new ModelAndView("appointment");
+        return new ModelAndView("appointments/allAppointment");
     }
 
     // Posts
