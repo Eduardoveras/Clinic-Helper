@@ -81,7 +81,7 @@ public class DataQueryService {
     public  List<Consultation> findAllRegisteredConsultationsByTimePeriod(String clinicId, Date beginningOfTimePeriod, Date endOfTimePeriod){ return consultationRepository.findByConsultationDateRange(beginningOfTimePeriod, endOfTimePeriod, clinicId); }
 
     // Equipment Queries
-    public Equipment findRegisteredEquipment(String jascId) { return equipmentRepository.findByJascId(jascId); }
+    public Equipment findRegisteredEquipment(String jascId) { return equipmentRepository.findByEquipmentId(jascId); }
 
     public List<Equipment> findAllRegisteredEquipments(){ return equipmentRepository.findAll(); }
 
@@ -175,8 +175,6 @@ public class DataQueryService {
     public User findUserInformation(String userId) { return userRepository.findByUserId(userId); }
 
     public User findRegisteredUserAccount(String email, String clinicId){ return userRepository.findUserAccountWithUsernameAndClinicID(email, clinicId); }
-
-    public  List<User> findAllRegisteredUserAccounts(){ return userRepository.findAll(); }
 
     public List<User> findAllAllRegisteredUsersForClinic(String clinicId) { return userRepository.findByClinicId(clinicId); }
 

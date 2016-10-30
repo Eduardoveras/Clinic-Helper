@@ -566,7 +566,7 @@ public class DataEntryAndManagementService {
     }
 
     private boolean doesEquipmentJascIdExist(String jascId){
-        Equipment equipment = equipmentRepository.findByJascId(jascId);
+        Equipment equipment = equipmentRepository.findByEquipmentId(jascId);
 
         return (equipment != null);
     }
