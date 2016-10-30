@@ -20,7 +20,7 @@
             <div class="clearfix"></div>
         </div>
         <div class="x_content">
-            <table class="table table-hover">
+            <table id="datatable-responsive" class="table table-hover table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>
                 <tr>
                     <th>Name</th>
