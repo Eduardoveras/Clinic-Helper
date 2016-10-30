@@ -2,6 +2,7 @@ package com.clinichelper.Entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -14,30 +15,35 @@ import java.util.UUID;
 @Table(name="equipments")
 public class Equipment implements Serializable{
     @Id
-    private String jascId;
+    private String equipmentId;
     @NotNull
     private String equipmentName;
     @NotNull
     private String equipmentUse;
     private String equipmentDescription;
+    @ManyToOne
+    private Clinic clinic;
 
-   public  Equipment(){
+    // Constructores
+    public  Equipment(){
 
-   }
+    }
 
-    public Equipment(String equipmentName, String equipmentUse, String equipmentDescription) {
-        this.setJascId("JASC-E-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+    public Equipment(Clinic clinic, String equipmentName, String equipmentUse, String equipmentDescription) {
+        this.setEquipmentId(clinic.getClinicPrefix() + "-E-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setEquipmentName(equipmentName.toUpperCase());
         this.setEquipmentUse(equipmentUse);
         this.setEquipmentDescription(equipmentDescription);
+        this.clinic = clinic;
     }
 
-    public String getJascId() {
-        return jascId;
+    //Getters and Setters
+    public String getEquipmentId() {
+        return equipmentId;
     }
 
-    public void setJascId(String jascId) {
-        this.jascId = jascId;
+    public void setEquipmentId(String equipmentId) {
+        this.equipmentId = equipmentId;
     }
 
     public String getEquipmentName() {

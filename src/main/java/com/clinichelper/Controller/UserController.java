@@ -28,11 +28,11 @@ public class UserController {
     private DataQueryService DQS;
 
     // TODO: this can only be used by SUPERADMIN
-    @GetMapping("/users")
-    public ModelAndView fetchAllPatientsView(Model model){
+    @GetMapping("/users/{clinic")
+    public ModelAndView fetchAllPatientsView(Model model, @RequestParam("clinic") String clinicId){
 
-        model.addAttribute("userList", DQS.findAllRegisteredUserAccounts());
-        model.addAttribute("amount", DQS.findAllRegisteredUserAccounts().size());
+        model.addAttribute("userList", DQS.findAllAllRegisteredUsersForClinic(clinicId));
+        model.addAttribute("amount", DQS.findAllAllRegisteredUsersForClinic(clinicId).size());
 
         return new ModelAndView("users/allUsers");
     }
@@ -46,7 +46,7 @@ public class UserController {
         return new ModelAndView("/users/login_register");
     }
 
-    @GetMapping("/user/{username}")
+    @GetMapping("/user/{id}")
     public ModelAndView fetchUserProfile(Model model, @RequestParam("id") String userId){
 
         model.addAttribute("user", DQS.findUserInformation(userId));
@@ -91,7 +91,7 @@ public class UserController {
 
             try {
                 DEAMS.editUserAccountCredentials(user.getEmail(), user.getClinic().getClinicId(), newPassword, user.getRole());
-                return "redirect:/profile/?id=" + user.getUserId();
+                return "redirect:/user/" + user.getUserId();
             } catch (PersistenceException exp){
                 //
             } catch (IllegalArgumentException exp) {
