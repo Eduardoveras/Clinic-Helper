@@ -49,6 +49,9 @@
 <script src="../vendors/jszip/dist/jszip.min.js"></script>
 <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
 <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+<!-- FullCalendar -->
+<script src="../vendors/moment/min/moment.min.js"></script>
+<script src="../vendors/fullcalendar/dist/fullcalendar.min.js"></script>
 
 
 

@@ -19,8 +19,8 @@
                 <div class="clearfix"></div>
                 <!--ADD CONTENT HERE-->
                 <div class="row">
-                <#include "/patients/_patientsForm.ftl">
-                <#include "/patients/_patientsTable.ftl">
+                <#include "/users/_usersForm.ftl">
+                <#include "/users/_usersTable.ftl">
 
 
 
@@ -34,7 +34,7 @@
     </div>
 </div>
 <#include "/layouts/footer.ftl">
-<#include "/patients/_patientsScripts.ftl">
+<#include "/users/_usersScripts.ftl">
 <!-- /Datatables -->
 <#include "/layouts/pageCloser.ftl">
 

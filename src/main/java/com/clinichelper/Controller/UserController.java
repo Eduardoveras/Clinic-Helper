@@ -7,10 +7,7 @@ import com.clinichelper.Service.DataQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,6 +26,16 @@ public class UserController {
     private DataQueryService DQS;
 
 
+    @GetMapping("/users")
+    public ModelAndView fetchAllPatientsView(Model model){
+
+        model.addAttribute("userList", DQS.findAllRegisteredUserAccounts());
+        model.addAttribute("amount", DQS.findAllRegisteredUserAccounts().size());
+
+        return new ModelAndView("users/allUsers");
+    }
+
+
     @RequestMapping("/login")
     public ModelAndView fetchLoginView(Model model){
 
@@ -39,12 +46,13 @@ public class UserController {
 
 
 
-    @RequestMapping("/profile")
-    public ModelAndView fetchUserProfile(Model model, @RequestParam("username") String username){
+
+    @GetMapping("/user/{username}")
+    public ModelAndView fetchUserProfile(Model model,@PathVariable(value="username") String username){
+
 
         model.addAttribute("user", DQS.findRegisteredUserAccount(username));
-
-        return new ModelAndView("");
+        return new ModelAndView("users/userProfile");
     }
 
 
