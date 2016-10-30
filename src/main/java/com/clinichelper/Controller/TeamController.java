@@ -7,6 +7,7 @@ import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Tools.Gender;
 import com.clinichelper.Tools.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,7 @@ import java.text.SimpleDateFormat;
  * Created by Eduardo veras on 02-Oct-16.
  */
 
+@Controller
 public class TeamController {
     // Services
     @Autowired

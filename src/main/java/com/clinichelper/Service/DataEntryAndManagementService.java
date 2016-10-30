@@ -102,7 +102,7 @@ public class DataEntryAndManagementService {
     public Consultation createNewConsultation(Date date, Timestamp time, String detail, String appointmentId) throws Exception{
 
         if (!doesAppointmentIdExist(appointmentId))
-            throw new IllegalArgumentException("\n\nThis appointment jasc id is not valid");
+            throw new IllegalArgumentException("\n\nThis appointment id is not valid");
 
         try {
             return consultationRepository.save(new Consultation(date, time, detail, appointmentRepository.findByAppointmentId(appointmentId)));
@@ -118,10 +118,13 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public Equipment createNewEquipment(String equipmentName, String equipmentUse, String equipmentDescription) throws Exception {
+    public Equipment createNewEquipment(String clinicId, String equipmentName, String equipmentUse, String equipmentDescription) throws Exception {
+
+        if (!doesClinicIdExist(clinicId))
+            throw new IllegalArgumentException("\n\nThis is an invalid clinic id");
 
         try {
-            return equipmentRepository.save(new Equipment(equipmentName, equipmentUse, equipmentDescription));
+            return equipmentRepository.save(new Equipment(clinicRepository.findByClinicId(clinicId), equipmentName, equipmentUse, equipmentDescription));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis equipment was not able to persist -> " + exp.getMessage());

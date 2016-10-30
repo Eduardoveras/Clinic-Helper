@@ -32,11 +32,11 @@ public class AppointmentController {
     private DataQueryService DQS;
 
     // Gets
-    @GetMapping("/appointments/{clinicId}")
-    public ModelAndView fetchAppointmentView(Model model, @RequestParam("clinic") String clinicId) throws Exception{
+    @GetMapping("/appointments")
+    public ModelAndView fetchAppointmentView(Model model) throws Exception{
 
-        model.addAttribute("appointmentList", DQS.findAllRegisteredAppointmentsForClinic(clinicId));
-        model.addAttribute("amount", DQS.findAllRegisteredAppointmentsForClinic(clinicId).size());
+        model.addAttribute("appointmentList", DQS.findAllRegisteredAppointmentsForClinic("CH-PLATINUM-JASC"));
+        model.addAttribute("amount", DQS.findAllRegisteredAppointmentsForClinic("CH-PLATINUM-JASC").size());
 
         return new ModelAndView("appointments/allAppointment");
     }
