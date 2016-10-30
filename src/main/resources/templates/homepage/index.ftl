@@ -14,7 +14,9 @@
                  <#include "/homepage/_topBoxes.ftl">
                 <div class="row">
                     <#include "/homepage/_calendar.ftl">
+
                     <#include "/homepage/_toDoList.ftl">
+                    <#include "/homepage/_appointmentList.ftl">
 
 
                     <!--ADD CONTENT HERE-->

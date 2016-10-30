@@ -38,6 +38,7 @@ public class AppointmentController {
         model.addAttribute("appointmentList", DQS.findAllRegisteredAppointmentsForClinic("CH-PLATINUM-JASC"));
         model.addAttribute("amount", DQS.findAllRegisteredAppointmentsForClinic("CH-PLATINUM-JASC").size());
 
+
         return new ModelAndView("appointments/allAppointment");
     }
 

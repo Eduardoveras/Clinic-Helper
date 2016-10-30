@@ -20,10 +20,10 @@ public class IndexController {
     @RequestMapping("/")
     public ModelAndView home(Model model, @RequestParam(value="name", required=false, defaultValue="home") String name) {
         model.addAttribute("name", name);
-        model.addAttribute("todoList",DQS.findAllRegisteredCustomTasksForClinic("CH-PLATINUM-JASC"));
+        model.addAttribute("todoList",DQS.findAllRegisteredCustomTasksForClinic("CH-PLATINUM-JASC")); // TODO: replace this service for ToolKitService
+        model.addAttribute("todays_appointments", DQS.findAllRegisteredAppointmentsForToday("CH-PLATINUM-JASC"));
         return new ModelAndView("homepage/index");
     }
-
 
     @RequestMapping("/*")
     public ModelAndView err(Model model, @RequestParam(value="name", required=false, defaultValue="404") String name) {
