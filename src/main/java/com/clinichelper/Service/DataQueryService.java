@@ -46,8 +46,8 @@ public class DataQueryService {
         return appointmentRepository.findByAppointmentId(appointmentId);
     }
 
-    public List<Appointment> findAllRegisteredAppointments(){
-        return appointmentRepository.findAll();
+    public List<Appointment> findAllRegisteredAppointmentsForClinic(String clinicId){
+        return appointmentRepository.findByClinicId(clinicId);
     }
 
     public List<Appointment> findPatientsRegisteredAppointments(String patientJascId){
@@ -58,11 +58,11 @@ public class DataQueryService {
         return appointmentRepository.findByPatientJascId(patientJascId);
     }
 
-    public List<Appointment> findAllRegisteredAppointmentsForToday(){ return findAllRegisteredAppointmentsByGivenDate(new Date(Calendar.getInstance().getTime().getTime())); }
+    public List<Appointment> findAllRegisteredAppointmentsForToday(String clinicId){ return findAllRegisteredAppointmentsByGivenDate(new Date(Calendar.getInstance().getTime().getTime()), clinicId); }
 
-    public List<Appointment> findAllRegisteredAppointmentsByGivenDate(Date searchDate){ return appointmentRepository.findByDate(searchDate); }
+    public List<Appointment> findAllRegisteredAppointmentsByGivenDate(Date searchDate, String clinicId){ return appointmentRepository.findByDate(searchDate, clinicId); }
 
-    public List<Appointment> findAllRegisteredAppointmentsByTimePeriod(Date beginningOfTimePeriod, Date endOfTimePeriod){ return appointmentRepository.findByDateRange(beginningOfTimePeriod, endOfTimePeriod); }
+    public List<Appointment> findAllRegisteredAppointmentsByTimePeriod(String clinicId, Date beginningOfTimePeriod, Date endOfTimePeriod){ return appointmentRepository.findByDateRange(beginningOfTimePeriod, endOfTimePeriod, clinicId); }
 
     // Chores Queries
     public Chore findRegisteredCustomTask(String jascId){ return choreRepository.findByJascId(jascId); }

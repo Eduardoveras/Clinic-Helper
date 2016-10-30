@@ -27,27 +27,31 @@ public class Appointment implements Serializable{
     @Column(length = 500)
     private String appointmentDescription;
     private String appointmentAccessFrom;
+    @ManyToOne
+    private Clinic clinic;
 
     // Constructors
     public Appointment(){
 
     }
 
-    public Appointment(String clinicPrefix, Date appointmentDate, Patient patient, String appointmentDescription, String appointmentAccessFrom){
-        this.setAppointmentId(clinicPrefix + "-SOLICIT-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+    public Appointment(Clinic clinic, Date appointmentDate, Patient patient, String appointmentDescription, String appointmentAccessFrom){
+        this.setAppointmentId(clinic.getClinicPrefix() + "-SOLICIT-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setAppointmentDate(appointmentDate);
         this.setPatient(patient);
         this.setAppointmentDescription(appointmentDescription);
         this.setAppointmentAccessFrom(appointmentAccessFrom);
+        this.setClinic(clinic);
     }
 
-    public Appointment(String clinicPrefix, Date appointmentDate, Timestamp appointmentTime, Patient patient, String appointmentDescription, String appointmentAccessFrom){
-        this.setAppointmentId(clinicPrefix + "-A-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+    public Appointment(Clinic clinic, Date appointmentDate, Timestamp appointmentTime, Patient patient, String appointmentDescription, String appointmentAccessFrom){
+        this.setAppointmentId(clinic.getClinicPrefix() + "-A-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setAppointmentDate(appointmentDate);
         this.setAppointmentTime(appointmentTime);
         this.setPatient(patient);
         this.setAppointmentDescription(appointmentDescription);
         this.setAppointmentAccessFrom(appointmentAccessFrom);
+        this.setClinic(clinic);
     }
 
     //Getters and Setters
@@ -103,5 +107,13 @@ public class Appointment implements Serializable{
 
     public void setAppointmentDescription(String appointmentDescription) {
         this.appointmentDescription = appointmentDescription;
+    }
+
+    public Clinic getClinic() {
+        return clinic;
+    }
+
+    public void setClinic(Clinic clinic) {
+        this.clinic = clinic;
     }
 }
