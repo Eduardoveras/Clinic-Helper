@@ -65,11 +65,9 @@ public class DataQueryService {
     public List<Appointment> findAllRegisteredAppointmentsByTimePeriod(String clinicId, Date beginningOfTimePeriod, Date endOfTimePeriod){ return appointmentRepository.findByDateRange(beginningOfTimePeriod, endOfTimePeriod, clinicId); }
 
     // Chores Queries
-    public Chore findRegisteredCustomTask(String jascId){ return choreRepository.findByJascId(jascId); }
+    public Chore findRegisteredCustomTask(String jascId){ return choreRepository.findByChoreId(jascId); }
 
     public List<Chore> findAllRegisteredCustomTasks(){ return choreRepository.findAll(); }
-
-    public List<Chore> findRegisteredCustomTaksByType(Task type) { return choreRepository.findByType(type); }
 
     // Clinic Queries
     public Clinic findRegisteredClinicByClinicId(String clinicId){ return clinicRepository.findByClinicId(clinicId); }

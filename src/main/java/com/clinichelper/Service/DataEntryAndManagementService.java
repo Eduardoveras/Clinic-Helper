@@ -79,10 +79,13 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public Chore createNewCustomTask(String title, Task type, String description) throws Exception{
+    public Chore createNewCustomTask(String clinicId, String title, Task type, String description) throws Exception{
+
+        if (!doesClinicIdExist(clinicId))
+            throw new IllegalArgumentException("\n\nThis is an invalid clinic id");
 
         try {
-            return choreRepository.save(new Chore(title, type, description));
+            return choreRepository.save(new Chore(clinicRepository.findByClinicId(clinicId), title, type, description));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis consultation was not able to persist -> " + exp.getMessage());
@@ -556,7 +559,7 @@ public class DataEntryAndManagementService {
     }
 
     private boolean doesCustomTaskJascIdExist(String jascId){
-        Chore chore = choreRepository.findByJascId(jascId);
+        Chore chore = choreRepository.findByChoreId(jascId);
 
         return (chore != null);
     }
