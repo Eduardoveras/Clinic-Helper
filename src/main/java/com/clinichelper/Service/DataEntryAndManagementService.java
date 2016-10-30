@@ -5,6 +5,8 @@ package com.clinichelper.Service;
 
 import com.clinichelper.Entity.*;
 import com.clinichelper.Repository.*;
+import com.clinichelper.Tools.Gender;
+import com.clinichelper.Tools.Permission;
 import com.clinichelper.Tools.Task;
 import freemarker.template.utility.NullArgumentException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,8 @@ public class DataEntryAndManagementService {
     private AppointmentRepository appointmentRepository;
     @Autowired
     private ChoreRepository choreRepository;
+    @Autowired
+    private ClinicRepository clinicRepository;
     @Autowired
     private ConsultationRepository consultationRepository;
     @Autowired
@@ -255,16 +259,13 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public User createNewUserAccount(String username, String staffJascId, String password, String role) throws Exception {
+    public User createNewUserAccount(String email, String firstName, String lastName, Date birthDate, Gender gender, String password, Permission role, String clinicId) throws Exception {
 
-        if (isUsernameAlreadyTaken(username))
-            throw new IllegalArgumentException("\n\nThis username is already taken. Please choose another one!");
-
-        if (!doesStaffJascIdExist(staffJascId))
-            throw new IllegalArgumentException("\n\nThis staff jasc id is invalid");
+        if (isUsernameAlreadyTaken(email, clinicId))
+            throw new IllegalArgumentException("\n\nThis email is already taken. Please choose another one!");
 
         try {
-            return userRepository.save(new User(username, staffRepository.findByJascId(staffJascId), password, role));
+            return userRepository.save(new User(email, firstName, lastName, birthDate, gender, password, role, clinicRepository.findByClinicId(clinicId)));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis user was not able to persist -> " + exp.getMessage());
@@ -374,16 +375,16 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public void deleteRegisterdUserAccount(String username) throws Exception {
+    public void deleteRegisteredUserAccount(String userId) throws Exception {
 
-        if (!isUsernameAlreadyTaken(username))
+        if (!doesUserIdExist(userId))
             throw new IllegalArgumentException("\n\nThis user account does not exist");
 
-        if (username.equals("admin"))
+        if (userRepository.findByUserId(userId).getRole().equals(Permission.ADMIN))
             throw new IllegalArgumentException("\n\nDANGER: YOU CAN NOT ERASE ADMIN ACCOUNT!");
 
         try {
-            userRepository.delete(username);
+            userRepository.delete(userId);
         } catch (NullPointerException exp) {
             System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
             throw new NullPointerException("\n\nAN object or process has risen a null value -> " + exp.getMessage());
@@ -483,12 +484,30 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public void editUserAccountCredentials(String username, String password, String role) throws Exception{
+    public void editUserAccountCredentials(String email, String clinicId, String password, Permission role) throws Exception{
 
         try {
-            User user = userRepository.findByUsername(username);
+            User user = userRepository.findUserAccountWithUsernameAndClinicID(email, clinicId);
             user.setPassword(password);
             user.setRole(role);
+            userRepository.save(user);
+        } catch (PersistenceException exp){
+            System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
+            throw new PersistenceException("\n\nThis username was not able to persist -> " + exp.getMessage());
+        } catch (NullPointerException exp) {
+            System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
+            throw new NullPointerException("\n\nAn object or process has risen a null value -> " + exp.getMessage());
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred when trying to edit username-> " + exp.getMessage());
+        }
+    }
+
+    public void editUserPhoto(String email, String clinic, Byte[] photo) throws Exception{
+
+        try {
+            User user = userRepository.findUserAccountWithUsernameAndClinicID(email, clinic);
+            user.setPhoto(photo);
             userRepository.save(user);
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
@@ -563,8 +582,14 @@ public class DataEntryAndManagementService {
         return (staff != null);
     }
 
-    private boolean isUsernameAlreadyTaken(String username){
-        User user = userRepository.findByUsername(username);
+    private boolean isUsernameAlreadyTaken(String email, String clinicId){
+        User user = userRepository.findUserAccountWithUsernameAndClinicID(email, clinicId);
+
+        return (user != null);
+    }
+
+    private boolean doesUserIdExist(String userId){
+        User user = userRepository.findByUserId(userId);
 
         return (user != null);
     }
