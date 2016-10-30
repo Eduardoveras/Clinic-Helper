@@ -14,8 +14,9 @@ import java.util.UUID;
 @Entity
 @Table(name="appointments")
 public class Appointment implements Serializable{
+    // Attributes
     @Id
-    private String jascId;
+    private String appointmentId;
     @NotNull
     private Date appointmentDate;
     @NotNull
@@ -27,20 +28,21 @@ public class Appointment implements Serializable{
     private String appointmentDescription;
     private String appointmentAccessFrom;
 
+    // Constructors
     public Appointment(){
 
     }
 
-    public Appointment(Date appointmentDate, Patient patient, String appointmentDescription, String appointmentAccessFrom){
-        this.setJascId("Request-" + UUID.randomUUID().toString().split("-")[0]);
+    public Appointment(String clinicPrefix, Date appointmentDate, Patient patient, String appointmentDescription, String appointmentAccessFrom){
+        this.setAppointmentId(clinicPrefix + "-SOLICIT-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setAppointmentDate(appointmentDate);
         this.setPatient(patient);
         this.setAppointmentDescription(appointmentDescription);
         this.setAppointmentAccessFrom(appointmentAccessFrom);
     }
 
-    public Appointment(Date appointmentDate, Timestamp appointmentTime, Patient patient, String appointmentDescription, String appointmentAccessFrom){
-        this.setJascId("JASC-A-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+    public Appointment(String clinicPrefix, Date appointmentDate, Timestamp appointmentTime, Patient patient, String appointmentDescription, String appointmentAccessFrom){
+        this.setAppointmentId(clinicPrefix + "-A-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setAppointmentDate(appointmentDate);
         this.setAppointmentTime(appointmentTime);
         this.setPatient(patient);
@@ -48,12 +50,13 @@ public class Appointment implements Serializable{
         this.setAppointmentAccessFrom(appointmentAccessFrom);
     }
 
-    public String getJascId() {
-        return jascId;
+    //Getters and Setters
+    public String getAppointmentId() {
+        return appointmentId;
     }
 
-    public void setJascId(String jascId) {
-        this.jascId = jascId;
+    public void setAppointmentId(String appointmentId) {
+        this.appointmentId = appointmentId;
     }
 
     public Date getAppointmentDate() {

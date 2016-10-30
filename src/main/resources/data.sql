@@ -66,7 +66,7 @@ INSERT INTO staff (jasc_id, staff_first_name, staff_last_name, staff_email, staf
 INSERT INTO staff (jasc_id, staff_first_name, staff_last_name, staff_email, staff_clinic_id, staff_birth_date) VALUES ('JASC-STAFF-ADELSO', 'Adelso', 'Tejada', 'at@gmail.com', '4', '1990-02-02');
 INSERT INTO staff (jasc_id, staff_first_name, staff_last_name, staff_email, staff_clinic_id, staff_birth_date) VALUES ('JASC-STAFF-ASTRID', 'Astrid', 'Incarnacion', 'ai@gmail.com', '5', '1990-02-02');
 
-INSERT INTO appointments(jasc_id,appointment_date,appointment_time,patient_jasc_id,appointment_description,appointment_access_from) VALUES (
+INSERT INTO appointments(appointment_id, appointment_date, appointment_time, patient_jasc_id, appointment_description, appointment_access_from) VALUES (
 'JASC123456',
 '2016-10-04',
 '2016-10-04 10:10:00',
@@ -86,7 +86,6 @@ INSERT INTO  meetings_attendees (meeting_jasc_id, attendees_jasc_id) VALUES ('JA
 INSERT INTO  meetings_attendees (meeting_jasc_id, attendees_jasc_id) VALUES ('JASC-M-NY934WHRC3', 'JASC-STAFF-ASTRID');
 INSERT INTO  meetings_attendees (meeting_jasc_id, attendees_jasc_id) VALUES ('JASC-M-NY934WHRC3', 'JASC-STAFF-SICARD');
 INSERT INTO  meetings_attendees (meeting_jasc_id, attendees_jasc_id) VALUES ('JASC-M-NY934WHRC3', 'JASC-STAFF-ADELSO');
-
 
 INSERT INTO meetings (jasc_id,
 meeting_date,

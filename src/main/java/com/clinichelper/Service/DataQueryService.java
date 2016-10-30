@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 @Service
@@ -41,8 +42,8 @@ public class DataQueryService {
     private UserRepository userRepository;
 
     // Appointment Queries
-    public Appointment findRegisteredAppointment(String jascId){
-        return appointmentRepository.findByJascId(jascId);
+    public Appointment findRegisteredAppointment(String appointmentId){
+        return appointmentRepository.findByAppointmentId(appointmentId);
     }
 
     public List<Appointment> findAllRegisteredAppointments(){
@@ -56,6 +57,8 @@ public class DataQueryService {
 
         return appointmentRepository.findByPatientJascId(patientJascId);
     }
+
+    public List<Appointment> findAllRegisteredAppointmentsForToday(){ return findAllRegisteredAppointmentsByGivenDate(new Date(Calendar.getInstance().getTime().getTime())); }
 
     public List<Appointment> findAllRegisteredAppointmentsByGivenDate(Date searchDate){ return appointmentRepository.findByDate(searchDate); }
 
