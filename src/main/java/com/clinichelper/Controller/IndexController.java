@@ -20,8 +20,8 @@ public class IndexController {
     @RequestMapping("/")
     public ModelAndView home(Model model, @RequestParam(value="name", required=false, defaultValue="home") String name) {
         model.addAttribute("name", name);
-        model.addAttribute("todoList",DQS.findAllRegisteredCustomTasks());
-        model.addAttribute("todays_appointments", DQS.findAllRegisteredAppointmentsForToday());
+        model.addAttribute("todoList",DQS.findAllRegisteredCustomTasks()); // TODO: replace this service for ToolKitService
+        model.addAttribute("todays_appointments", DQS.findAllRegisteredAppointmentsForToday("CH-PLATINUM-JASC"));
         return new ModelAndView("homepage/index");
     }
 
