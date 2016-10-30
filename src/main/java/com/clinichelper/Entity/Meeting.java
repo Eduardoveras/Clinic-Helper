@@ -31,7 +31,7 @@ public class Meeting implements Serializable{
     private String meetingPlace;//
     @ManyToMany
     @NotNull
-    private Set<Staff> attendees;
+    private Set<Contact> attendees;
     @ManyToOne
     private Clinic clinic;
 
@@ -40,7 +40,7 @@ public class Meeting implements Serializable{
 
     }
 
-    public Meeting(Clinic clinic, String meetingTitle, String meetingObjective, Date meetingDate, Timestamp meetingTime, String meetingPlace, Set<Staff> attendees){
+    public Meeting(Clinic clinic, String meetingTitle, String meetingObjective, Date meetingDate, Timestamp meetingTime, String meetingPlace, Set<Contact> attendees){
         this.setMeetingId(clinic.getClinicPrefix() + "-M-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setMeetingTitle(meetingTitle.toUpperCase());
         this.setMeetingObjective(meetingObjective.toUpperCase());
@@ -106,11 +106,11 @@ public class Meeting implements Serializable{
         this.meetingPlace = meetingPlace;
     }
 
-    public Set<Staff> getAttendees() {
+    public Set<Contact> getAttendees() {
         return attendees;
     }
 
-    public void setAttendees(Set<Staff> attendees) {
+    public void setAttendees(Set<Contact> attendees) {
         this.attendees = attendees;
     }
 

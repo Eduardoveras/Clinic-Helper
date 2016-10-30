@@ -5,13 +5,10 @@ package com.clinichelper.Service;
 
 import com.clinichelper.Entity.*;
 import com.clinichelper.Repository.*;
-import com.clinichelper.Tools.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 @Service
@@ -32,7 +29,7 @@ public class ToolKitService {
     @Autowired
     private PatientRepository patientRepository;
     @Autowired
-    private StaffRepository staffRepository;
+    private ContactRepository contactRepository;
 
 /*
     public void InitializeTodoList(String clinicId){

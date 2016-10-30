@@ -44,7 +44,7 @@ public class DataEntryAndManagementService {
     @Autowired
     private RecordRepository recordRepository;
     @Autowired
-    private StaffRepository staffRepository;
+    private ContactRepository contactRepository;
     @Autowired
     private SurgeryRepository surgeryRepository;
     @Autowired
@@ -157,7 +157,7 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public Meeting createNewMeeting(String clinicId, String title, String objective, Date date, Timestamp time, String place, Set<Staff> attendees) throws Exception {
+    public Meeting createNewMeeting(String clinicId, String title, String objective, Date date, Timestamp time, String place, Set<Contact> attendees) throws Exception {
 
         if (!doesClinicIdExist(clinicId))
             throw new IllegalArgumentException("\n\nThis is an invalid clinic id");
@@ -230,10 +230,13 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public Staff createNewStaffMember(String staffFirstName,String staffLastName, Date staffBirthDate, String staffEmail, String staffClinicId) throws Exception {
+    public Contact createNewStaffMember(String clinicId, String staffFirstName, String staffLastName, Date staffBirthDate, String staffEmail) throws Exception {
+
+        if (!doesClinicIdExist(clinicId))
+            throw new IllegalArgumentException("\n\nThis is an invalid clinic id");
 
         try{
-            return staffRepository.save(new Staff(staffFirstName, staffLastName, staffBirthDate, staffEmail, staffClinicId));
+            return contactRepository.save(new Contact(clinicRepository.findByClinicId(clinicId), staffFirstName, staffLastName, staffBirthDate, staffEmail));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis patient was not able to persist -> " + exp.getMessage());
@@ -246,7 +249,7 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public Surgery createNewSurgery(String name, String description, String patientJascId, Date date, Timestamp time, String surgeryRoom, Set<Staff> staffs, Set<Equipment> equipments, String appointmentId) throws Exception {
+    public Surgery createNewSurgery(String name, String description, String patientJascId, Date date, Timestamp time, String surgeryRoom, Set<Contact> contacts, Set<Equipment> equipments, String appointmentId) throws Exception {
 
         if (!doesPatientJascIdExist(patientJascId))
             throw new IllegalArgumentException("\n\nThis is an invalid patient jascId");
@@ -254,11 +257,11 @@ public class DataEntryAndManagementService {
         if (!doesAppointmentIdExist(appointmentId))
             throw new IllegalArgumentException("\n\nThis appointment jasc id is not valid");
 
-        if (staffs.isEmpty())
+        if (contacts.isEmpty())
             throw new NullArgumentException("\n\nYou may not preform a surgery without staff. Please Choose at least one staff member.");
 
         try {
-            return surgeryRepository.save(new Surgery(name, description, patientRepository.findByPatientId(patientJascId), date, time, surgeryRoom, staffs, equipments, appointmentRepository.findByAppointmentId(appointmentId)));
+            return surgeryRepository.save(new Surgery(name, description, patientRepository.findByPatientId(patientJascId), date, time, surgeryRoom, contacts, equipments, appointmentRepository.findByAppointmentId(appointmentId)));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis surgery was not able to persist -> " + exp.getMessage());
@@ -377,7 +380,7 @@ public class DataEntryAndManagementService {
             throw new IllegalArgumentException("\n\nDANGER: YOU CAN NOT ERASE ADMIN ACCOUNT!");
 
         try {
-            staffRepository.delete(jascId);
+            contactRepository.delete(jascId);
         } catch (NullPointerException exp) {
             System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
             throw new NullPointerException("\n\nAN object or process has risen a null value -> " + exp.getMessage());
@@ -533,10 +536,10 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public void editStaff(Staff staff) throws Exception{
+    public void editStaff(Contact contact) throws Exception{
 
         try {
-            staffRepository.save(staff);
+            contactRepository.save(contact);
 
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
@@ -595,9 +598,9 @@ public class DataEntryAndManagementService {
     }
 
     private boolean doesStaffJascIdExist(String jascId){
-        Staff staff = staffRepository.findByJascId(jascId);
+        Contact contact = contactRepository.findByContactId(jascId);
 
-        return (staff != null);
+        return (contact != null);
     }
 
     private boolean isUsernameAlreadyTaken(String email, String clinicId){

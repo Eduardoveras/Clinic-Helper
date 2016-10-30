@@ -1,6 +1,5 @@
 package com.clinichelper.Controller;
 
-import com.clinichelper.Entity.Staff;
 import com.clinichelper.Entity.User;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
@@ -34,7 +33,7 @@ public class TeamController {
     @RequestMapping("/team")
     public ModelAndView fetchStaffView(Model model, @RequestParam("clinic") String clinicId){
 
-        model.addAttribute("staffList", DQS.findAllRegisteredStaffs());
+        model.addAttribute("staffList", DQS.findAllRegisteredContactsForClinic(clinicId));
         model.addAttribute("userList", DQS.findAllAllRegisteredUsersForClinic(clinicId));
 
         return new ModelAndView("");

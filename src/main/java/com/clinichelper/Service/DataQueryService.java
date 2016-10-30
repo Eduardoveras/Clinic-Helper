@@ -34,7 +34,7 @@ public class DataQueryService {
     @Autowired
     private RecordRepository recordRepository;
     @Autowired
-    private StaffRepository staffRepository;
+    private ContactRepository contactRepository;
     @Autowired
     private SurgeryRepository surgeryRepository;
     @Autowired
@@ -148,13 +148,13 @@ public class DataQueryService {
 
 
     // Staff Queries
-    public Staff findRegisteredStaff(String jascId){ return staffRepository.findByJascId(jascId); }
+    public Contact findRegisteredContact(String contactId){ return contactRepository.findByContactId(contactId); }
 
-    public List<Staff> findAllRegisteredStaffs(){ return staffRepository.findAll(); }
+    public List<Contact> findAllRegisteredContactsForClinic(String clinicId){ return contactRepository.findByClinicId(clinicId); }
 
-    public Staff findRegisteredStaffByEmail(String staffEmail){ return staffRepository.findByStaffEmail(staffEmail); }
+    public Contact findRegisteredStaffByEmail(String clinicId, String staffEmail){ return contactRepository.findByStaffEmail(staffEmail, clinicId); }
 
-    public List<Staff> findRegisteredStaffByFirstNameAndLastName(String searchFirstName, String searchLastName){ return staffRepository.findByFirstNameAndLastName(searchFirstName,searchLastName); }
+    public List<Contact> findRegisteredStaffByFirstNameAndLastName(String clinicId, String searchFirstName, String searchLastName){ return contactRepository.findByFirstNameAndLastName(searchFirstName, searchLastName, clinicId); }
 
 
     // Surgery Queries

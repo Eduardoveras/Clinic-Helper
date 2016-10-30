@@ -1,6 +1,6 @@
-INSERT INTO staff (jasc_id, staff_first_name, staff_last_name, staff_email, staff_clinic_id, staff_birth_date) VALUES ('JASC-STAFF-ADMIN', 'administrator', 'ADMIN', 'djidjellypas92@gmail.com', '1', '2016-11-4');
-
 INSERT INTO clinic (clinic_id, account_type, clinic_name, clinic_prefix, registered_date) VALUES ('CH-PLATINUM-JASC', 3, 'JASC', 'JASC', '2016-10-30');
+
+INSERT INTO staff (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-ADMIN', 'administrator', 'ADMIN', 'djidjellypas92@gmail.com', '2016-11-4');
 
 INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-YOLO', '1980-02-03', 'djidjellypas92@gmail.com', 'djijdelly', 0, 'SICLAIT', '1234', 0, 'CH-PLATINUM-JASC');
 
@@ -67,10 +67,10 @@ patient_id,
 '829xxxyyyy', 'FR', 'eva@gmail.com', 'Eva', 'F', '12oih7g 323',
 'Soraya', 'Dominicana', '2015-10-28', '809xxxyyyy');
 
-INSERT INTO staff (jasc_id, staff_first_name, staff_last_name, staff_email, staff_clinic_id, staff_birth_date) VALUES ('JASC-STAFF-PAULINA', 'Paulina', 'Reyes', 'p@gmail.com', '2', '1985-03-23');
-INSERT INTO staff (jasc_id, staff_first_name, staff_last_name, staff_email, staff_clinic_id, staff_birth_date) VALUES ('JASC-STAFF-SICARD', 'Julio', 'Sicard', 'js@gmail.com', '3', '1980-11-3');
-INSERT INTO staff (jasc_id, staff_first_name, staff_last_name, staff_email, staff_clinic_id, staff_birth_date) VALUES ('JASC-STAFF-ADELSO', 'Adelso', 'Tejada', 'at@gmail.com', '4', '1990-02-02');
-INSERT INTO staff (jasc_id, staff_first_name, staff_last_name, staff_email, staff_clinic_id, staff_birth_date) VALUES ('JASC-STAFF-ASTRID', 'Astrid', 'Incarnacion', 'ai@gmail.com', '5', '1990-02-02');
+INSERT INTO staff (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-PAULINA', 'Paulina', 'Reyes', 'p@gmail.com', '1985-03-23');
+INSERT INTO staff (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-SICARD', 'Julio', 'Sicard', 'js@gmail.com', '1980-11-3');
+INSERT INTO staff (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-ADELSO', 'Adelso', 'Tejada', 'at@gmail.com', '1990-02-02');
+INSERT INTO staff (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-ASTRID', 'Astrid', 'Incarnacion', 'ai@gmail.com', '1990-02-02');
 
 INSERT INTO appointments(clinic_clinic_id, appointment_id, appointment_date, appointment_time, patient_patient_id, appointment_description, appointment_access_from) VALUES (
 'CH-PLATINUM-JASC',
@@ -91,10 +91,10 @@ meeting_time,
 meeting_title) VALUES
 ('CH-PLATINUM-JASC', 'JASC-M-NY934WHRC3', '2016-10-28', 'Make plans for charity event', 'Meeting Room 102', '2016-10-28 08:00:00', 'JASC Cancer Charity');
 
-INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_jasc_id) VALUES ('JASC-M-NY934WHRC3', 'JASC-STAFF-PAULINA');
-INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_jasc_id) VALUES ('JASC-M-NY934WHRC3', 'JASC-STAFF-ASTRID');
-INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_jasc_id) VALUES ('JASC-M-NY934WHRC3', 'JASC-STAFF-SICARD');
-INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_jasc_id) VALUES ('JASC-M-NY934WHRC3', 'JASC-STAFF-ADELSO');
+INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_contact_id) VALUES ('JASC-M-NY934WHRC3', 'JASC-STAFF-PAULINA');
+INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_contact_id) VALUES ('JASC-M-NY934WHRC3', 'JASC-STAFF-ASTRID');
+INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_contact_id) VALUES ('JASC-M-NY934WHRC3', 'JASC-STAFF-SICARD');
+INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_contact_id) VALUES ('JASC-M-NY934WHRC3', 'JASC-STAFF-ADELSO');
 
 INSERT INTO meetings (
 clinic_clinic_id,
@@ -106,8 +106,8 @@ meeting_time,
 meeting_title) VALUES
 ('CH-PLATINUM-JASC', 'JASC-M-NY934UINRC3', '2016-10-28', 'Prepare for seminar', 'Main Office', '2016-10-28 16:30:00', 'Seminar Prep');
 
-INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_jasc_id) VALUES ('JASC-M-NY934UINRC3', 'JASC-STAFF-SICARD');
-INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_jasc_id) VALUES ('JASC-M-NY934UINRC3', 'JASC-STAFF-ADELSO');
+INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_contact_id) VALUES ('JASC-M-NY934UINRC3', 'JASC-STAFF-SICARD');
+INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_contact_id) VALUES ('JASC-M-NY934UINRC3', 'JASC-STAFF-ADELSO');
 
 INSERT INTO chore (clinic_clinic_id, chore_id, description, title, type) VALUES ('CH-PLATINUM-JASC', 'JASC-M-9URHFDN', 'By more Bras', 'Inventory refill', 4);
 INSERT INTO chore (clinic_clinic_id, chore_id, description, title, type) VALUES ('CH-PLATINUM-JASC', 'JASC-M-9UR23DN', 'Call Accountant', 'Finance', 6);
