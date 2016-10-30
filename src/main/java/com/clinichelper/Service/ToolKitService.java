@@ -34,42 +34,42 @@ public class ToolKitService {
     @Autowired
     private StaffRepository staffRepository;
 
-
-    public void InitializeTodoList(){
+/*
+    public void InitializeTodoList(String clinicId){
 
         // Adding Custom created tasks
-        FetchCustomTasks();
+        FetchCustomTasks(clinicId);
 
         // Adding Birthday reminder tasks
-        FetchBirthAndRegistrationDatesReminders();
+        FetchBirthAndRegistrationDatesReminders(clinicId);
 
         // Adding all of today's meeting;
-        FetchMeetings();
+        FetchMeetings(clinicId);
 
         // TODO: Add surgery mechanic
     }
 
     // TodoList Functions
-    private void FetchCustomTasks(){
+    private void FetchCustomTasks(String clinicId){
 
-        todoList.addAll(choreRepository.findAll());
+        todoList.addAll(choreRepository.findByClinicId(clinicId));
     }
 
-    private void FetchBirthAndRegistrationDatesReminders(){
+    private void FetchBirthAndRegistrationDatesReminders(String clinicId){
 
-        todoList.addAll(findAllPatientBirthdayForNextWeek());
+        todoList.addAll(findAllPatientBirthdayForNextWeek(clinicId));
 
-        todoList.addAll(findAllStaffBirthdayForNextWeek());
+        todoList.addAll(findAllStaffBirthdayForNextWeek(clinicId));
 
-        todoList.addAll(findAllPatientWhoCompletedAnotherYear());
+        todoList.addAll(findAllPatientWhoCompletedAnotherYear(clinicId));
     }
 
-    private void FetchMeetings(){
-        todoList.addAll(findAllOfTodaysMeetings());
+    private void FetchMeetings(String clinicId){
+        todoList.addAll(findAllOfTodaysMeetings(clinicId));
     }
 
     // Auxiliary Function
-    private List<Chore> findAllOfTodaysMeetings(){
+    private List<Chore> findAllOfTodaysMeetings(String clinicId){
 
         List<Chore> chores = new ArrayList<>();
 
@@ -225,5 +225,5 @@ public class ToolKitService {
             default:
                 return "Incorrect Value!";
         }
-    }
+    } */
 }

@@ -98,6 +98,5 @@ meeting_title) VALUES
 INSERT INTO  meetings_attendees (meeting_jasc_id, attendees_jasc_id) VALUES ('JASC-M-NY934UINRC3', 'JASC-STAFF-SICARD');
 INSERT INTO  meetings_attendees (meeting_jasc_id, attendees_jasc_id) VALUES ('JASC-M-NY934UINRC3', 'JASC-STAFF-ADELSO');
 
-INSERT INTO chore (jasc_id, description, title, type) VALUES ('JASC-M-9URHFDN', 'By more Bras', 'Inventory refill', 4);
-INSERT INTO chore (jasc_id, description, title, type) VALUES ('JASC-M-9UR23DN', 'Call Accountant', 'Finance', 6);
-INSERT INTO chore (jasc_id, description, title, type) VALUES ('JASC-M-9UR26DN', 'Buy Pizza for everyone', 'Pizza time', 6);
+INSERT INTO chore (clinic_clinic_id, chore_id, description, title, type) VALUES ('CH-PLATINUM-JASC', 'JASC-M-9URHFDN', 'By more Bras', 'Inventory refill', 4);
+INSERT INTO chore (clinic_clinic_id, chore_id, description, title, type) VALUES ('CH-PLATINUM-JASC', 'JASC-M-9UR23DN', 'Call Accountant', 'Finance', 6);

@@ -7,6 +7,7 @@ import com.clinichelper.Entity.Appointment;
 import com.clinichelper.Entity.Patient;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
+import com.clinichelper.Tools.AppointmentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,18 +32,18 @@ public class AppointmentController {
     private DataQueryService DQS;
 
     // Gets
-    @GetMapping("/appointments")
-    public ModelAndView fetchAppointmentView(Model model) throws Exception{
+    @GetMapping("/appointments/{clinicId}")
+    public ModelAndView fetchAppointmentView(Model model, @RequestParam("clinic") String clinicId) throws Exception{
 
-        model.addAttribute("appointmentList", DQS.findAllRegisteredAppointments());
-        model.addAttribute("amount", DQS.findAllRegisteredAppointments().size());
+        model.addAttribute("appointmentList", DQS.findAllRegisteredAppointmentsForClinic(clinicId));
+        model.addAttribute("amount", DQS.findAllRegisteredAppointmentsForClinic(clinicId).size());
 
         return new ModelAndView("appointments/allAppointment");
     }
 
     // Posts
     @PostMapping("/newAppointment")
-    public String createNweApointment(@RequestParam("clinic") String clinicId,@RequestParam("date") String appointmentDate, @RequestParam("time") String  appointmentTime, @RequestParam("jascId") String patientJascId, @RequestParam("description") String appointmentDescription, @RequestParam("access") String appointmentAccessFrom){
+    public String createNweApointment(@RequestParam("clinic") String clinicId,@RequestParam("date") String appointmentDate, @RequestParam("time") String  appointmentTime, @RequestParam("jascId") String patientJascId, @RequestParam("description") String appointmentDescription, @RequestParam("access") String appointmentAccessFrom, @RequestParam("type") String appointmentType){
 
         try {
             SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
@@ -50,7 +51,7 @@ public class AppointmentController {
 
             Patient patient = DQS.findRegisteredPatientByIdCard(patientJascId);
 
-            DEAMS.createNewAppointment(clinicId, new Date(sdf1.parse(appointmentDate).getTime()), new Timestamp(sdf2.parse(appointmentTime).getTime()), patient.getJascId(), appointmentDescription, appointmentAccessFrom);
+            DEAMS.createNewAppointment(clinicId, new Date(sdf1.parse(appointmentDate).getTime()), new Timestamp(sdf2.parse(appointmentTime).getTime()), patient.getJascId(), appointmentDescription, appointmentAccessFrom, appointmentType.toLowerCase().equals("consultation") ? AppointmentType.CONSULTATION : AppointmentType.SURGERY);
         } catch (PersistenceException exp){
             //
         } catch(IllegalArgumentException exp){
@@ -61,14 +62,14 @@ public class AppointmentController {
             //
         }
         
-        return "redirect:/appointments";
+        return "redirect:/appointments/" + clinicId;
     }
 
     @PostMapping("/cancelAppointment")
-    public String cancelRegisteredAppointment(@RequestParam("jascId") String appointmentJascId){
+    public String cancelRegisteredAppointment(@RequestParam("clinic") String clinicId, @RequestParam("id") String appointmentId){
 
         try {
-            DEAMS.deleteRegisteredAppointment(appointmentJascId);
+            DEAMS.deleteRegisteredAppointment(appointmentId);
         } catch (PersistenceException exp){
             //
         } catch(IllegalArgumentException exp){
@@ -79,13 +80,13 @@ public class AppointmentController {
             //
         }
 
-        return "redirect:/appointments";
+        return "redirect:/appointments/" + clinicId;
     }
 
     @PostMapping("/changeDateAndTime")
-    public String editDateAndTimeOfRegisteredAppointment(@RequestParam("jascId") String appointmentJascId, @RequestParam("date") String newDate, @RequestParam("time") String newTime){
+    public String editDateAndTimeOfRegisteredAppointment(@RequestParam("id") String appointmentId, @RequestParam("date") String newDate, @RequestParam("time") String newTime){
 
-        Appointment appointment = DQS.findRegisteredAppointment(appointmentJascId);
+        Appointment appointment = DQS.findRegisteredAppointment(appointmentId);
 
         try {
 
@@ -106,7 +107,7 @@ public class AppointmentController {
             //
         }
 
-        return "redirect:/appointments";
+        return "redirect:/appointments/" + appointment.getClinic().getClinicId();
     }
 
 }

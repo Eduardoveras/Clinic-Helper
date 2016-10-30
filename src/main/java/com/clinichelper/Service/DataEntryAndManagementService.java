@@ -5,6 +5,7 @@ package com.clinichelper.Service;
 
 import com.clinichelper.Entity.*;
 import com.clinichelper.Repository.*;
+import com.clinichelper.Tools.AppointmentType;
 import com.clinichelper.Tools.Gender;
 import com.clinichelper.Tools.Permission;
 import com.clinichelper.Tools.Task;
@@ -49,7 +50,7 @@ public class DataEntryAndManagementService {
     private UserRepository userRepository;
 
     // Creation functions
-    public Appointment createNewAppointment(String clinicId, Date appointmentDate, Timestamp appointmentTime, String patientJascId, String appointmentDescription, String appointmentAccessFrom) throws Exception {
+    public Appointment createNewAppointment(String clinicId, Date appointmentDate, Timestamp appointmentTime, String patientJascId, String appointmentDescription, String appointmentAccessFrom, AppointmentType appointmentType) throws Exception {
 
         if(!doesClinicIdExist(clinicId))
             throw new IllegalArgumentException("\n\nThis is an invalid clinic id");
@@ -66,7 +67,7 @@ public class DataEntryAndManagementService {
             throw new IllegalArgumentException("The appointment date must be a future date");
 
         try {
-            return appointmentRepository.save(new Appointment(clinicId, appointmentDate, appointmentTime, patientRepository.findByJascId(patientJascId), appointmentDescription, appointmentAccessFrom));
+            return appointmentRepository.save(new Appointment(clinicRepository.findByClinicId(clinicId), appointmentDate, appointmentTime, patientRepository.findByJascId(patientJascId), appointmentDescription, appointmentAccessFrom, appointmentType));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis appointment was not able to persist -> " + exp.getMessage());
@@ -79,10 +80,13 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public Chore createNewCustomTask(String title, Task type, String description) throws Exception{
+    public Chore createNewCustomTask(String clinicId, String title, Task type, String description) throws Exception{
+
+        if (!doesClinicIdExist(clinicId))
+            throw new IllegalArgumentException("\n\nThis is an invalid clinic id");
 
         try {
-            return choreRepository.save(new Chore(title, type, description));
+            return choreRepository.save(new Chore(clinicRepository.findByClinicId(clinicId), title, type, description));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis consultation was not able to persist -> " + exp.getMessage());
@@ -556,13 +560,13 @@ public class DataEntryAndManagementService {
     }
 
     private boolean doesCustomTaskJascIdExist(String jascId){
-        Chore chore = choreRepository.findByJascId(jascId);
+        Chore chore = choreRepository.findByChoreId(jascId);
 
         return (chore != null);
     }
 
     private boolean doesEquipmentJascIdExist(String jascId){
-        Equipment equipment = equipmentRepository.findByJascId(jascId);
+        Equipment equipment = equipmentRepository.findByEquipmentId(jascId);
 
         return (equipment != null);
     }
