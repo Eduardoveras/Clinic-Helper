@@ -43,23 +43,26 @@ public class Patient implements Serializable{
     private String patientCity;
     @NotNull
     private String patientCountry;
+    @ManyToOne
+    private Clinic clinic;
 
     public Patient(){
 
     }
 
     // Used only for registration waiting list
-    public Patient(String patientFirstName, String patientLastName, String patientTelephoneNumber, String patientEmail){
-        this.setJascId(UUID.randomUUID().toString().split("-")[0]);
+    public Patient(Clinic clinic, String patientFirstName, String patientLastName, String patientTelephoneNumber, String patientEmail){
+        this.setPatientId(UUID.randomUUID().toString().split("-")[0]);
         this.setPatientFirstName(patientFirstName.toLowerCase());
         this.setPatientLastName(patientLastName.toUpperCase());
         this.setPatientTelephoneNumber(patientTelephoneNumber);
         this.setPatientEmail(patientEmail.toLowerCase());
+        this.setClinic(clinic);
     }
 
     // Used to create and register new patients
-    public Patient(String patientFirstName, String patientLastName, String patientIdCard, String patientTelephoneNumber, String patientContactTelephoneNumber,String occupation, String patientGender, String patientEmail, Date patientBirthDate, String patientNationality, String patientAddress, String patientCity, String patientCountry) {
-        this.setJascId("JASC-P-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+    public Patient(Clinic clinic, String patientFirstName, String patientLastName, String patientIdCard, String patientTelephoneNumber, String patientContactTelephoneNumber,String occupation, String patientGender, String patientEmail, Date patientBirthDate, String patientNationality, String patientAddress, String patientCity, String patientCountry) {
+        this.setPatientId(clinic.getClinicPrefix() + "-P-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setPatientFirstName(patientFirstName.toLowerCase());
         this.setPatientLastName(patientLastName.toUpperCase());
         this.setPatientIdCard(patientIdCard);
@@ -74,14 +77,16 @@ public class Patient implements Serializable{
         this.setPatientCity(patientCity.toUpperCase());
         this.setPatientCountry(patientCountry.toUpperCase());
         this.setPatientRegisteredDate(new Date(Calendar.getInstance().getTime().getTime())); // current date
+        this.setClinic(clinic);
     }
 
-    public String getJascId() {
-        return jascId;
+    // Getters and Setters
+    public String getPatientId() {
+        return patientId;
     }
 
-    public void setJascId(String jascId) {
-        this.jascId = jascId;
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
     }
 
     public String getPatientFirstName() {
@@ -206,6 +211,14 @@ public class Patient implements Serializable{
 
         byte[] imgBytesAsBase64 = Base64.encodeBase64(toPrimitives(this.patientPhoto));
         return new String(imgBytesAsBase64);
+    }
+
+    public Clinic getClinic() {
+        return clinic;
+    }
+
+    public void setClinic(Clinic clinic) {
+        this.clinic = clinic;
     }
 
     // Auxiliary Function

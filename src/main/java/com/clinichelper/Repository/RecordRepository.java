@@ -14,6 +14,6 @@ import java.util.List;
 public interface RecordRepository extends JpaRepository<Record, String > {
     Record findByJascId(String jascId);
 
-    @Query("select r from Record r where r.patient.jascId = :jascId" )
-    List<Record> findByPatientJascId(@Param("jascId") String patientJascId);
+    @Query("select r from Record r where r.patient.patientId = :id" )
+    List<Record> findByPatientId(@Param("id") String patientId);
 }

@@ -43,15 +43,15 @@ public class AppointmentController {
 
     // Posts
     @PostMapping("/newAppointment")
-    public String createNweApointment(@RequestParam("clinic") String clinicId,@RequestParam("date") String appointmentDate, @RequestParam("time") String  appointmentTime, @RequestParam("jascId") String patientJascId, @RequestParam("description") String appointmentDescription, @RequestParam("access") String appointmentAccessFrom, @RequestParam("type") String appointmentType){
+    public String createNweApointment(@RequestParam("clinic") String clinicId,@RequestParam("date") String appointmentDate, @RequestParam("time") String  appointmentTime, @RequestParam("id") String patientId, @RequestParam("description") String appointmentDescription, @RequestParam("access") String appointmentAccessFrom, @RequestParam("type") String appointmentType){
 
         try {
             SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
             SimpleDateFormat sdf2 = new SimpleDateFormat("hh:mm:ss");
 
-            Patient patient = DQS.findRegisteredPatientByIdCard(patientJascId);
+            Patient patient = DQS.findRegisteredPatientByIdCard(clinicId, patientId);
 
-            DEAMS.createNewAppointment(clinicId, new Date(sdf1.parse(appointmentDate).getTime()), new Timestamp(sdf2.parse(appointmentTime).getTime()), patient.getJascId(), appointmentDescription, appointmentAccessFrom, appointmentType.toLowerCase().equals("consultation") ? AppointmentType.CONSULTATION : AppointmentType.SURGERY);
+            DEAMS.createNewAppointment(clinicId, new Date(sdf1.parse(appointmentDate).getTime()), new Timestamp(sdf2.parse(appointmentTime).getTime()), patient.getPatientId(), appointmentDescription, appointmentAccessFrom, appointmentType.toLowerCase().equals("consultation") ? AppointmentType.CONSULTATION : AppointmentType.SURGERY);
         } catch (PersistenceException exp){
             //
         } catch(IllegalArgumentException exp){

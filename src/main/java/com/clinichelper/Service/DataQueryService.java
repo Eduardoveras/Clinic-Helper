@@ -54,7 +54,7 @@ public class DataQueryService {
         if (!doesPatientJascIdExist(patientJascId))
             throw new IllegalArgumentException("\n\nThis is an invalid patient jascId");
 
-        return appointmentRepository.findByPatientJascId(patientJascId);
+        return appointmentRepository.findByPatientId(patientJascId);
     }
 
     public List<Appointment> findAllRegisteredAppointmentsForToday(String clinicId){ return findAllRegisteredAppointmentsByGivenDate(new Date(Calendar.getInstance().getTime().getTime()), clinicId); }
@@ -99,7 +99,7 @@ public class DataQueryService {
 
     public List<Insurance> findRegisteredInsyranceByInsuranceSerialCode(String insuranceSerialCode){ return insuranceRepository.findByInsuranceSerialCode(insuranceSerialCode); }
 
-    public List<Insurance> findRegisteredInsuranceByOwner(String searchID){ return insuranceRepository.findByOwnerJascId(searchID); }
+    public List<Insurance> findRegisteredInsuranceByOwner(String searchID){ return insuranceRepository.findByOwnerId(searchID); }
 
 
     // Meeting Queries
@@ -115,22 +115,23 @@ public class DataQueryService {
 
 
     // Patient Queries
-    public Patient findRegisteredPatient(String jascId){ return patientRepository.findByJascId(jascId);}
+    public Patient findRegisteredPatient(String patientId){ return patientRepository.findByPatientId(patientId);}
 
-    public List<Patient> findAllRegisteredPatients(){ return patientRepository.findAll(); }
+    public List<Patient> findAllRegisteredPatientsForClinic(String clinicId){ return patientRepository.findByCLinicId(clinicId); }
 
-    public Patient findRegisteredPatientByIdCard(String searchIdCard){ return patientRepository.findByPatientIdCard(searchIdCard); }
+    public Patient findRegisteredPatientByIdCard(String clinicId, String searchIdCard){ return patientRepository.findByPatientIdCard(searchIdCard, clinicId); }
 
-    public List<Patient> findRegisteredPatientByEmail(String patientEmail){ return patientRepository.findByPatientEmail(patientEmail); }
+    public List<Patient> findRegisteredPatientByEmail(String clinicId, String patientEmail){ return patientRepository.findByPatientEmail(patientEmail, clinicId); }
 
-    public List<Patient> findRegisteredPatientByBirthDate(Date patientBirthDate){ return patientRepository.findByPatientBirthDate(patientBirthDate); }
+    public List<Patient> findRegisteredPatientByBirthDate(String clinicId, Date patientBirthDate){ return patientRepository.findByPatientBirthDate(patientBirthDate, clinicId); }
 
-    public List<Patient> findRegisteredPatientByFullName(String searchFistName, String searchLastName){ return patientRepository.findByFullName(searchFistName, searchLastName); }
+    public List<Patient> findRegisteredPatientByFullName(String clinicId, String searchFistName, String searchLastName){ return patientRepository.findByFullName(searchFistName, searchLastName, clinicId); }
 
-    public List<Patient> findRegisteredPatientByGeneralInfomation(String searchFistName, String searchLastName,
+    public List<Patient> findRegisteredPatientByGeneralInfomation(String clinicId, String searchFistName, String searchLastName,
                                                                   String searchTelephone,String searchEmail ){
-        return patientRepository.findByFLTEFields(searchFistName,searchLastName,searchTelephone,searchEmail);
+        return patientRepository.findByFLTEFields(searchFistName,searchLastName,searchTelephone,searchEmail, clinicId);
     }
+
 
     // Record Queries
     public Record findRegisteredRecord(String jascId){ return recordRepository.findByJascId(jascId); }
@@ -142,7 +143,7 @@ public class DataQueryService {
         if (!doesPatientJascIdExist(patientJascId))
             throw new IllegalArgumentException("\n\nThis is an invalid patient jascId");
 
-        return recordRepository.findByPatientJascId(patientJascId);
+        return recordRepository.findByPatientId(patientJascId);
     }
 
     // Staff Queries
@@ -162,7 +163,7 @@ public class DataQueryService {
 
     public List<Surgery> findRegisteredSurgeryByName(String searchSurgeryName){ return surgeryRepository.findBySurgeryName(searchSurgeryName); }
 
-    public List<Surgery> findRegisteredSurgeryByPatient(String patientJascId){ return surgeryRepository.findByPatientJascId(patientJascId);}
+    public List<Surgery> findRegisteredSurgeryByPatient(String patientJascId){ return surgeryRepository.findByPatientId(patientJascId);}
 
     public List<Surgery> findRegisteredSurgeryByDate(Date searchDate){ return surgeryRepository.findBySurgeryDate(searchDate); }
 
@@ -190,7 +191,7 @@ public class DataQueryService {
 
     // Auxiliary Functions
     private boolean doesPatientJascIdExist(String jascId){
-        Patient patient = patientRepository.findByJascId(jascId);
+        Patient patient = patientRepository.findByPatientId(jascId);
 
         return (patient != null);
     }

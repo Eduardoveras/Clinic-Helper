@@ -17,6 +17,6 @@ public interface InsuranceRepository extends JpaRepository<Insurance, String>{
     @Query("select i from Insurance i where i.insuranceSerialCode = :code")
     List<Insurance> findByInsuranceSerialCode(@Param("code") String insuranceSerialCode);
 
-    @Query("select i from Insurance i where i.owner.jascId = :owner")
-    List<Insurance> findByOwnerJascId(@Param("owner") String patientJascId);
+    @Query("select i from Insurance i where i.owner.patientId = :owner")
+    List<Insurance> findByOwnerId(@Param("owner") String patientId);
 }

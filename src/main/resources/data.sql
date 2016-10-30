@@ -4,7 +4,9 @@ INSERT INTO clinic (clinic_id, account_type, clinic_name, clinic_prefix, registe
 
 INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-YOLO', '1980-02-03', 'djidjellypas92@gmail.com', 'djijdelly', 0, 'SICLAIT', '1234', 0, 'CH-PLATINUM-JASC');
 
-INSERT INTO patients (jasc_id,
+INSERT INTO patients (
+clinic_clinic_id,
+patient_id,
   occupation,
   patient_address,
   patient_birth_date,
@@ -19,11 +21,13 @@ INSERT INTO patients (jasc_id,
   patient_nationality,
   patient_registered_date,
   patient_telephone_number) VALUES
-('JASC-P-BVN309WJHN32', 'Stripper', 'Villa Olga', '1992-10-28', 'Santiago',
+('CH-PLATINUM-JASC', 'JASC-P-BVN309WJHN32', 'Stripper', 'Villa Olga', '1992-10-28', 'Santiago',
 '829xxxyyyy', 'RD', 'djidjellypas92@gmail.com', 'Djidjelly', 'M', '1234rfg 323',
 'Siclait', 'Haitiano', '2015-10-23', '809xxxyyyy');
 
-INSERT INTO patients (jasc_id,
+INSERT INTO patients (
+clinic_clinic_id,
+patient_id,
   occupation,
   patient_address,
   patient_birth_date,
@@ -38,11 +42,13 @@ INSERT INTO patients (jasc_id,
   patient_nationality,
   patient_registered_date,
   patient_telephone_number) VALUES
-('JASC-P-BVN3DF43WED32', 'Hobo', 'Queens', '1996-11-01', 'NYC',
+('CH-PLATINUM-JASC', 'JASC-P-BVN3DF43WED32', 'Hobo', 'Queens', '1996-11-01', 'NYC',
 '829xxxyyyy', 'USA', 'eduardo2@gmail.com', 'Eduardo', 'M', '12343eg 323',
 'Veras', 'Dominicana', '2011-10-28', '809xxxyyyy');
 
-INSERT INTO patients (jasc_id,
+INSERT INTO patients (
+clinic_clinic_id,
+patient_id,
   occupation,
   patient_address,
   patient_birth_date,
@@ -57,7 +63,7 @@ INSERT INTO patients (jasc_id,
   patient_nationality,
   patient_registered_date,
   patient_telephone_number) VALUES
-('JASC-P-BVN309WDHN32', 'Crazy cat lady', 'Sience', '1982-04-11', 'Paris',
+('CH-PLATINUM-JASC', 'JASC-P-BVN309WDHN32', 'Crazy cat lady', 'Sience', '1982-04-11', 'Paris',
 '829xxxyyyy', 'FR', 'eva@gmail.com', 'Eva', 'F', '12oih7g 323',
 'Soraya', 'Dominicana', '2015-10-28', '809xxxyyyy');
 
@@ -66,7 +72,7 @@ INSERT INTO staff (jasc_id, staff_first_name, staff_last_name, staff_email, staf
 INSERT INTO staff (jasc_id, staff_first_name, staff_last_name, staff_email, staff_clinic_id, staff_birth_date) VALUES ('JASC-STAFF-ADELSO', 'Adelso', 'Tejada', 'at@gmail.com', '4', '1990-02-02');
 INSERT INTO staff (jasc_id, staff_first_name, staff_last_name, staff_email, staff_clinic_id, staff_birth_date) VALUES ('JASC-STAFF-ASTRID', 'Astrid', 'Incarnacion', 'ai@gmail.com', '5', '1990-02-02');
 
-INSERT INTO appointments(clinic_clinic_id, appointment_id, appointment_date, appointment_time, patient_jasc_id, appointment_description, appointment_access_from) VALUES (
+INSERT INTO appointments(clinic_clinic_id, appointment_id, appointment_date, appointment_time, patient_patient_id, appointment_description, appointment_access_from) VALUES (
 'CH-PLATINUM-JASC',
 'JASC123456',
 '2016-10-04',
