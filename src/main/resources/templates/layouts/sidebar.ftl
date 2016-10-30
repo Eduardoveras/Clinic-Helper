@@ -23,29 +23,15 @@
         <!-- sidebar menu -->
         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
+                <br>
                 <h3>General</h3>
                 <ul class="nav side-menu">
 
-                    <li>
-                        <a href="/patients" ><i class="fa fa-users"></i> Patients  <span ></span>
-                        </a>
-
-                    </li>
-                    <li>
-                        <a href=""><i  class="fa fa-plus-square-o"></i> Dashboard <span ></span>
-                    </a>
-
-                    </li>
-                  
-
-                    <li><a href="/appointments"><i  class="fa fa-desktop"></i> Appointments  <span ></span></a>
-
-
-                    </li>
-                    <li><a href=""><i  class="fa fa-calculator"></i> Inventory <span ></span></a>
-
-                    </li>
-                    <li><a  href=""><i class="fa fa-bar-chart-o"></i> Statistics<span></span></a>
+                    <li><a href="/"><i  class="fa fa-plus-square-o"></i> Dashboard <span ></span></a></li>
+                    <li><a href="/patients" ><i class="fa fa-users"></i> Patients  <span ></span></a></li>
+                    <li><a href="/appointments"><i  class="fa fa-desktop"></i> Appointments  <span ></span></a></li>
+                    <li><a href="/Inventory"><i  class="fa fa-calculator"></i> Inventory <span ></span></a></li>
+                    <li><a  href="/Stats"><i class="fa fa-bar-chart-o"></i> Statistics<span></span></a></li>
 
 
                 </ul>
