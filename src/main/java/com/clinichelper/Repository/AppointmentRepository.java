@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface AppointmentRepository extends JpaRepository<Appointment, String> {
 
-    Appointment findByJascId(String jascID);
+    Appointment findByAppointmentId(String appointmentId);
 
     @Query("select a from Appointment a where a.appointmentDate = :appointmentDate")
     List<Appointment> findByDate(@Param("appointmentDate") Date searchDate);

@@ -42,7 +42,7 @@ public class AppointmentController {
 
     // Posts
     @PostMapping("/newAppointment")
-    public String createNweApointment(@RequestParam("date") String appointmentDate, @RequestParam("time") String  appointmentTime, @RequestParam("jascId") String patientJascId, @RequestParam("description") String appointmentDescription, @RequestParam("access") String appointmentAccessFrom){
+    public String createNweApointment(@RequestParam("clinic") String clinicId,@RequestParam("date") String appointmentDate, @RequestParam("time") String  appointmentTime, @RequestParam("jascId") String patientJascId, @RequestParam("description") String appointmentDescription, @RequestParam("access") String appointmentAccessFrom){
 
         try {
             SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
@@ -50,7 +50,7 @@ public class AppointmentController {
 
             Patient patient = DQS.findRegisteredPatientByIdCard(patientJascId);
 
-            DEAMS.createNewAppointment(new Date(sdf1.parse(appointmentDate).getTime()), new Timestamp(sdf2.parse(appointmentTime).getTime()), patient.getJascId(), appointmentDescription, appointmentAccessFrom);
+            DEAMS.createNewAppointment(clinicId, new Date(sdf1.parse(appointmentDate).getTime()), new Timestamp(sdf2.parse(appointmentTime).getTime()), patient.getJascId(), appointmentDescription, appointmentAccessFrom);
         } catch (PersistenceException exp){
             //
         } catch(IllegalArgumentException exp){

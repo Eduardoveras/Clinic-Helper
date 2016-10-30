@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 @Service
@@ -19,6 +20,8 @@ public class DataQueryService {
     private AppointmentRepository appointmentRepository;
     @Autowired
     private ChoreRepository choreRepository;
+    @Autowired
+    private ClinicRepository clinicRepository;
     @Autowired
     private ConsultationRepository consultationRepository;
     @Autowired
@@ -39,8 +42,8 @@ public class DataQueryService {
     private UserRepository userRepository;
 
     // Appointment Queries
-    public Appointment findRegisteredAppointment(String jascId){
-        return appointmentRepository.findByJascId(jascId);
+    public Appointment findRegisteredAppointment(String appointmentId){
+        return appointmentRepository.findByAppointmentId(appointmentId);
     }
 
     public List<Appointment> findAllRegisteredAppointments(){
@@ -55,6 +58,8 @@ public class DataQueryService {
         return appointmentRepository.findByPatientJascId(patientJascId);
     }
 
+    public List<Appointment> findAllRegisteredAppointmentsForToday(){ return findAllRegisteredAppointmentsByGivenDate(new Date(Calendar.getInstance().getTime().getTime())); }
+
     public List<Appointment> findAllRegisteredAppointmentsByGivenDate(Date searchDate){ return appointmentRepository.findByDate(searchDate); }
 
     public List<Appointment> findAllRegisteredAppointmentsByTimePeriod(Date beginningOfTimePeriod, Date endOfTimePeriod){ return appointmentRepository.findByDateRange(beginningOfTimePeriod, endOfTimePeriod); }
@@ -66,6 +71,8 @@ public class DataQueryService {
 
     public List<Chore> findRegisteredCustomTaksByType(Task type) { return choreRepository.findByType(type); }
 
+    // Clinic Queries
+    public Clinic findRegisteredClinicByClinicId(String clinicId){ return clinicRepository.findByClinicId(clinicId); }
 
     // Consultation Queries
     public Consultation findRegisteredConsultation(String jascId){ return consultationRepository.findByJascId(jascId);}
@@ -169,15 +176,17 @@ public class DataQueryService {
 
 
     // User Queries
-    public User findRegisteredUserAccount(String username){ return userRepository.findByUsername(username); }
+    public User findUserInformation(String userId) { return userRepository.findByUserId(userId); }
+
+    public User findRegisteredUserAccount(String email, String clinicId){ return userRepository.findUserAccountWithUsernameAndClinicID(email, clinicId); }
 
     public  List<User> findAllRegisteredUserAccounts(){ return userRepository.findAll(); }
 
-    public User findRegisteredUserAccountOfRegisteredStaff(String staffJascId){ return userRepository.findByStaffJascId(staffJascId); }
+    public List<User> findAllAllRegisteredUsersForClinic(String clinicId) { return userRepository.findByClinicId(clinicId); }
 
-    public boolean validateUserAccountCredentials(String username, String password) {
+    public boolean validateUserAccountCredentials(String username, String clinicId, String password) {
 
-        User user = userRepository.findUserAccountWithUsernameAndPassword(username.toLowerCase(), password);
+        User user = userRepository.findUserAccountWithUsernameAndClinicIdAndPassword(username.toLowerCase(), clinicId, password);
 
         return (user != null);
     }
