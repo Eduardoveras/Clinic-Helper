@@ -71,6 +71,26 @@ public class Chore implements Serializable{
         }
     }
 
+    @Transient
+    public  String getColorHtml() {
+        switch (type){
+            case PATIENT_BIRTHDAY:
+                return "AntiqueWhite";
+            case STAFF_BIRTHDAY:
+                return "Khaki";
+            case REGISTRATIONDATE:
+                return "DarkSeaGreen";
+            case MEETING:
+                return "LightCoral";
+            case SURGERY:
+                return "Aqua ";
+            default:
+                return "LightSkyBlue";
+        }
+    }
+
+
+
     public void setType(Task type) {
         this.type = type;
     }
