@@ -1,8 +1,7 @@
-<!-- Start to do list -->
-<div class="col-md-5 col-sm-5 col-xs-12">
+<div class="col-md-8 col-sm-6 col-xs-12">
     <div class="x_panel">
         <div class="x_title">
-            <h2>To Do List <small>Sample tasks</small></h2>
+            <h2>Hover rows <small>Try hovering over the rows</small></h2>
             <ul class="nav navbar-right panel_toolbox">
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                 </li>
@@ -21,23 +20,30 @@
             <div class="clearfix"></div>
         </div>
         <div class="x_content">
-
-            <div class="">
-                <ul class="to_do">
-                <#list todoList as todo>
-                    <li>
-                        <p><input type="checkbox" class="flat"> ${todo.title}${todo.type} ${todo.description}</p>
-                    </li>
+            <table id="datatable-responsive" class="table table-hover table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Cedula/pasaporte</th>
+                    <th>Phone</th>
+                </tr>
+                </thead>
+                <tbody>
+                <#list userList as user>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
                 <#else>
-                    <li>
-                        <p><h3>You have no items to do</h3></p>
-                    </li>
+                <tr>
+                    <th scope="row">NO userS AVAIBLE</th>
+
+                </tr>
                 </#list>
+                </tbody>
+            </table>
 
-
-                </ul>
-            </div>
         </div>
     </div>
 </div>
-<!-- End to do list -->
