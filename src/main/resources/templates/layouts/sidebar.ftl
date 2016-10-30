@@ -25,12 +25,19 @@
             <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                    <li><a href=""><i  class="fa fa-plus-square-o"></i> Dashboard <span ></span></a>
+
+                    <li>
+                        <a href="/patients" ><i class="fa fa-users"></i> Patients  <span ></span>
+                        </a>
 
                     </li>
-                    <li><a href="/patients" ><i class="fa fa-users"></i>  Patients  <span ></span></a>
+                    <li>
+                        <a href=""><i  class="fa fa-plus-square-o"></i> Dashboard <span ></span>
+                    </a>
 
                     </li>
+                  
+
                     <li><a href="/appointments"><i  class="fa fa-desktop"></i> Appointments  <span ></span></a>
 
 

@@ -24,35 +24,32 @@
             <form action="/newAppointment" METHOD="POST" enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
                 <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="appointmentDate">Appointment Date: <span class="required">*</span>
+                    <label class="text-left" class="control-label col-md-6 col-sm-6 col-xs-12" for="appointmentDate">Appointment Date: <span class="required">*</span>
                     </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-md-10 col-sm-10 col-xs-16">
                         <input type="text" id="appointmentDate" name="appointmentDate" required="required" class="form-control col-md-7 col-xs-12">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" class="date-picker" for="appointmentTime"> appointmentTime: <span class="required">*</span>
+                    <label class="text-left" class="control-label col-md-6 col-sm-6 col-xs-12" class="date-picker" for="appointmentTime"> Appointment Time: <span class="required">*</span>
                     </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-md-10 col-sm-10 col-xs-16">
                         <input type="text" id="appointmentTime" name="appointmentTime" required="required" class="form-control col-md-7 col-xs-12">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Patient: <span class="required">*</span>
+                    <label class="text-left" class="control-label col-md-6 col-sm-6 col-xs-12 " for="patient">Patient: <span class="required">*</span>
                     </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="patient" name="patient"  form-control col-md-7 col-xs-12" required="required" type="text">
+                    <div class="col-md-10 col-sm-10 col-xs-16">
+                        <input type="text" id="patient" name="patient" required="required" class="form-control col-md-7 col-xs-12" >
                     </div>
                 </div>
 
-
-
-
                 <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="idCard"> Description <span class="required">*</span>
+                    <label class="text-left" class="control-label col-md-6 col-sm-6 col-xs-12" for="description"> Description <span class="required">*</span>
                     </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-md-10 col-sm-10 col-xs-16">
                         <input type="text" id="description" name="description" required="required" class="form-control col-md-7 col-xs-12">
                     </div>
                 </div>
