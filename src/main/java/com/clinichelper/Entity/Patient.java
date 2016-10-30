@@ -16,7 +16,7 @@ import java.util.UUID;
 @Table(name="patients")
 public class Patient implements Serializable{
     @Id
-    private String jascId;
+    private String patientId;
     @NotNull
     private String patientFirstName; //
     @NotNull

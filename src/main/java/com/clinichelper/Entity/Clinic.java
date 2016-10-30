@@ -6,8 +6,10 @@ package com.clinichelper.Entity;
 import com.clinichelper.Tools.AccountType;
 import org.apache.tomcat.util.codec.binary.Base64;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Calendar;
@@ -19,8 +21,11 @@ public class Clinic implements Serializable{
     @Id
     private String clinicId;
     private Date registeredDate;
+    @NotNull
     private String clinicName;
+    @NotNull
     private String clinicPrefix;
+    @Column(length = 5000000)
     private Byte[] clinicLogo;
     private AccountType accountType;
 
