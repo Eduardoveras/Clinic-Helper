@@ -31,7 +31,7 @@ public class UserController {
     @GetMapping("/users")
     public ModelAndView fetchAllPatientsView(Model model){
 
-        model.addAttribute("userList", DQS.findAllRegisteredUserAccounts());
+        model.addAttribute("userList", DQS.findAllAllRegisteredUsersForClinic("CH-PLATINUM-JASC"));
         model.addAttribute("amount", DQS.findAllRegisteredUserAccounts().size());
 
         return new ModelAndView("users/allUsers");

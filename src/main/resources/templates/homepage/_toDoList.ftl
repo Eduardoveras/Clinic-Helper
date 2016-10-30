@@ -21,11 +21,10 @@
             <div class="clearfix"></div>
         </div>
         <div class="x_content">
-
             <div class="">
                 <ul class="to_do">
                 <#list todoList as todo>
-                    <li style="background: ${todo.getColorHtml()};">
+                    <li>
                         <p><h5> ${todo.title}</h5><input type="checkbox" class="flat"> ${todo.type} ${todo.description}</p>
                     </li>
                 <#else>
