@@ -20,8 +20,7 @@
                 <!--ADD CONTENT HERE-->
                 <div class="row">
                 <#include "/appointments/_appointmentForm.ftl">
-
-
+                <#include "/appointments/_appointmentsTable.ftl">
 
 
                 </div>

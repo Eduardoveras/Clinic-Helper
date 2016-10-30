@@ -64,6 +64,13 @@ INSERT INTO staff (jasc_id, staff_first_name, staff_last_name, staff_email, staf
 INSERT INTO staff (jasc_id, staff_first_name, staff_last_name, staff_email, staff_clinic_id, staff_birth_date) VALUES ('JASC-STAFF-ADELSO', 'Adelso', 'Tejada', 'at@gmail.com', '4', '1990-02-02');
 INSERT INTO staff (jasc_id, staff_first_name, staff_last_name, staff_email, staff_clinic_id, staff_birth_date) VALUES ('JASC-STAFF-ASTRID', 'Astrid', 'Incarnacion', 'ai@gmail.com', '5', '1990-02-02');
 
+INSERT INTO appointments(jasc_id,appointment_date,appointment_time,patient_jasc_id,appointment_description,appointment_access_from) VALUES (
+'JASC123456',
+'2016-10-04',
+'2016-10-04 10:10:00',
+'JASC-P-BVN309WJHN32',
+'cita para bala bla bla bla',
+'web');
 
 INSERT INTO meetings (jasc_id,
 meeting_date,
