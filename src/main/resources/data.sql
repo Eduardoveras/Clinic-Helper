@@ -75,29 +75,33 @@ INSERT INTO appointments(clinic_clinic_id, appointment_id, appointment_date, app
 'cita para bala bla bla bla',
 'web');
 
-INSERT INTO meetings (jasc_id,
+INSERT INTO meetings (
+clinic_clinic_id,
+meeting_id,
 meeting_date,
 meeting_objective,
 meeting_place,
 meeting_time,
 meeting_title) VALUES
-('JASC-M-NY934WHRC3', '2016-10-28', 'Make plans for charity event', 'Meeting Room 102', '2016-10-28 08:00:00', 'JASC Cancer Charity');
+('CH-PLATINUM-JASC', 'JASC-M-NY934WHRC3', '2016-10-28', 'Make plans for charity event', 'Meeting Room 102', '2016-10-28 08:00:00', 'JASC Cancer Charity');
 
-INSERT INTO  meetings_attendees (meeting_jasc_id, attendees_jasc_id) VALUES ('JASC-M-NY934WHRC3', 'JASC-STAFF-PAULINA');
-INSERT INTO  meetings_attendees (meeting_jasc_id, attendees_jasc_id) VALUES ('JASC-M-NY934WHRC3', 'JASC-STAFF-ASTRID');
-INSERT INTO  meetings_attendees (meeting_jasc_id, attendees_jasc_id) VALUES ('JASC-M-NY934WHRC3', 'JASC-STAFF-SICARD');
-INSERT INTO  meetings_attendees (meeting_jasc_id, attendees_jasc_id) VALUES ('JASC-M-NY934WHRC3', 'JASC-STAFF-ADELSO');
+INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_jasc_id) VALUES ('JASC-M-NY934WHRC3', 'JASC-STAFF-PAULINA');
+INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_jasc_id) VALUES ('JASC-M-NY934WHRC3', 'JASC-STAFF-ASTRID');
+INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_jasc_id) VALUES ('JASC-M-NY934WHRC3', 'JASC-STAFF-SICARD');
+INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_jasc_id) VALUES ('JASC-M-NY934WHRC3', 'JASC-STAFF-ADELSO');
 
-INSERT INTO meetings (jasc_id,
+INSERT INTO meetings (
+clinic_clinic_id,
+meeting_id,
 meeting_date,
 meeting_objective,
 meeting_place,
 meeting_time,
 meeting_title) VALUES
-('JASC-M-NY934UINRC3', '2016-10-28', 'Prepare for seminar', 'Main Office', '2016-10-28 16:30:00', 'Seminar Prep');
+('CH-PLATINUM-JASC', 'JASC-M-NY934UINRC3', '2016-10-28', 'Prepare for seminar', 'Main Office', '2016-10-28 16:30:00', 'Seminar Prep');
 
-INSERT INTO  meetings_attendees (meeting_jasc_id, attendees_jasc_id) VALUES ('JASC-M-NY934UINRC3', 'JASC-STAFF-SICARD');
-INSERT INTO  meetings_attendees (meeting_jasc_id, attendees_jasc_id) VALUES ('JASC-M-NY934UINRC3', 'JASC-STAFF-ADELSO');
+INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_jasc_id) VALUES ('JASC-M-NY934UINRC3', 'JASC-STAFF-SICARD');
+INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_jasc_id) VALUES ('JASC-M-NY934UINRC3', 'JASC-STAFF-ADELSO');
 
 INSERT INTO chore (clinic_clinic_id, chore_id, description, title, type) VALUES ('CH-PLATINUM-JASC', 'JASC-M-9URHFDN', 'By more Bras', 'Inventory refill', 4);
 INSERT INTO chore (clinic_clinic_id, chore_id, description, title, type) VALUES ('CH-PLATINUM-JASC', 'JASC-M-9UR23DN', 'Call Accountant', 'Finance', 6);

@@ -20,7 +20,7 @@ public class IndexController {
     @RequestMapping("/")
     public ModelAndView home(Model model, @RequestParam(value="name", required=false, defaultValue="home") String name) {
         model.addAttribute("name", name);
-        model.addAttribute("todoList",DQS.findAllRegisteredCustomTasks());
+        model.addAttribute("todoList",DQS.findAllRegisteredCustomTasksForClinic("CH-PLATINUM-JASC"));
         return new ModelAndView("homepage/index");
     }
 

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.PersistenceException;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Set;
 
 @Service
@@ -156,19 +157,19 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public Meeting createNewMeeting(String title, String objective, Date date, Timestamp time, String place, Set<Staff> attendees) throws Exception {
+    public Meeting createNewMeeting(String clinicId, String title, String objective, Date date, Timestamp time, String place, Set<Staff> attendees) throws Exception {
+
+        if (!doesClinicIdExist(clinicId))
+            throw new IllegalArgumentException("\n\nThis is an invalid clinic id");
 
         if (attendees.isEmpty())
             throw new NullArgumentException("\n\nYou can not schedule a meeting without any staff attending. Please choose who will attend");
 
-
-        java.util.Date utilDate = new java.util.Date();
-
-        if (differenceInDays(new Date(utilDate.getTime()), date) <= 0)
+        if (differenceInDays(new Date(Calendar.getInstance().getTime().getTime()), date) <= 0)
             throw new IllegalArgumentException("The meeting date must be a future date");
 
         try {
-            return meetingRepository.save(new Meeting(title,objective, date, time, place, attendees));
+            return meetingRepository.save(new Meeting(clinicRepository.findByClinicId(clinicId), title,objective, date, time, place, attendees));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis insurance was not able to persist -> " + exp.getMessage());
@@ -581,7 +582,7 @@ public class DataEntryAndManagementService {
     }
 
     private boolean doesMeetingJascIdExist(String jascId){
-        Meeting meeting = meetingRepository.findByJascId(jascId);
+        Meeting meeting = meetingRepository.findByMeetingId(jascId);
 
         return (meeting != null);
     }
