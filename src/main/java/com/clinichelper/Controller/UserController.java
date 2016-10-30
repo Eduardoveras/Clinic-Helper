@@ -39,7 +39,6 @@ public class UserController {
         return new ModelAndView("/users/allUsers");
     }
 
-
     @RequestMapping("/login")
     public ModelAndView fetchLoginView(Model model){
 

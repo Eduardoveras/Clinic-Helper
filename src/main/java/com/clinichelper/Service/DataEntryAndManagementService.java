@@ -575,7 +575,7 @@ public class DataEntryAndManagementService {
     }
 
     private boolean doesInsuranceJascIdExist(String jascId){
-        Insurance insurance = insuranceRepository.findByJascId(jascId);
+        Insurance insurance = insuranceRepository.findByInsuranceId(jascId);
 
         return (insurance != null);
     }

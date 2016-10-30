@@ -63,10 +63,12 @@ public class DataQueryService {
 
     public List<Appointment> findAllRegisteredAppointmentsByTimePeriod(String clinicId, Date beginningOfTimePeriod, Date endOfTimePeriod){ return appointmentRepository.findByDateRange(beginningOfTimePeriod, endOfTimePeriod, clinicId); }
 
+    
     // Chores Queries
     public Chore findRegisteredCustomTask(String choreId){ return choreRepository.findByChoreId(choreId); }
 
     public List<Chore> findAllRegisteredCustomTasks(){ return choreRepository.findAll(); }
+
 
     // Clinic Queries
     public Clinic findRegisteredClinicByClinicId(String clinicId){ return clinicRepository.findByClinicId(clinicId); }
@@ -80,6 +82,7 @@ public class DataQueryService {
 
     public  List<Consultation> findAllRegisteredConsultationsByTimePeriod(String clinicId, Date beginningOfTimePeriod, Date endOfTimePeriod){ return consultationRepository.findByConsultationDateRange(beginningOfTimePeriod, endOfTimePeriod, clinicId); }
 
+
     // Equipment Queries
     public Equipment findRegisteredEquipment(String equipmentId) { return equipmentRepository.findByEquipmentId(equipmentId); }
 
@@ -89,7 +92,7 @@ public class DataQueryService {
 
 
     // Insurance Queries
-    public Insurance findRegisteredInsurance(String jascId){ return insuranceRepository.findByJascId(jascId); }
+    public Insurance findRegisteredInsurance(String insuranceId){ return insuranceRepository.findByInsuranceId(insuranceId); }
 
     public List<Insurance> findAllRegisteredInsurances(){ return insuranceRepository.findAll(); }
 
@@ -128,7 +131,6 @@ public class DataQueryService {
         return patientRepository.findByFLTEFields(searchFistName,searchLastName,searchTelephone,searchEmail);
     }
 
-
     // Record Queries
     public Record findRegisteredRecord(String jascId){ return recordRepository.findByJascId(jascId); }
 
@@ -141,7 +143,6 @@ public class DataQueryService {
 
         return recordRepository.findByPatientJascId(patientJascId);
     }
-
 
     // Staff Queries
     public Staff findRegisteredStaff(String jascId){ return staffRepository.findByJascId(jascId); }
