@@ -47,7 +47,7 @@ public class ToolKitService {
         FetchBirthAndRegistrationDatesReminders(clinicId);
 
         // Adding all of today's meeting;
-        //FetchMeetings(clinicId);
+        FetchMeetings(clinicId);
 
         // TODO: Add surgery mechanic
     }
@@ -68,34 +68,34 @@ public class ToolKitService {
     }
 
     private void FetchMeetings(String clinicId){
-        //todoList.addAll(findAllOfTodaysMeetings(clinicId));
+        todoList.addAll(findAllMeetingsForToday(clinicId));
     }
 
     // Auxiliary Function
-   /* private List<Chore> findAllOfTodaysMeetings(String clinicId){
+    private List<Chore> findAllMeetingsForToday(String clinicId){
 
         List<Chore> chores = new ArrayList<>();
 
         java.util.Date utilDate = new java.util.Date();
 
         for (Meeting m:
-             meetingRepository.findByMeetingDate(new Date(utilDate.getTime()))) {
+             meetingRepository.findByMeetingDate(new Date(utilDate.getTime()), clinicId)) {
 
             String staff = "**";
 
-            for (Staff s:
+            for (Contact s:
                  m.getAttendees()) {
-                staff += s.getStaffFullName() + "** ";
+                staff += s.getFullName() + "** ";
             }
 
-            chores.add(new Chore("Meeting Today: " + m.getMeetingTitle() + " At " + m.getMeetingTime().toString().substring(10),
+            chores.add(new Chore(clinicRepository.findByClinicId(clinicId), "Meeting Today: " + m.getMeetingTitle() + " At " + m.getMeetingTime().toString().substring(10),
                     Task.MEETING,
                     "Place: " + m.getMeetingPlace() + "\nAttendees: " + staff + "\nObjective: " + m.getMeetingObjective()));
         }
 
         return chores;
     }
-*/
+
     private List<Chore> findAllPatientBirthdayForNextWeek(String clinicId){
         Calendar today = Calendar.getInstance();
         Calendar seventhDay = Calendar.getInstance();
@@ -181,17 +181,17 @@ public class ToolKitService {
             if (!s.getContactId().equals("JASC-STAFF-ADMIN")) {
                 if ((today.get(Calendar.MONTH) - birthDate.get(Calendar.MONTH)) == 0) {
                     if ((today.get(Calendar.DAY_OF_MONTH) - birthDate.get(Calendar.DAY_OF_MONTH)) == 0)
-                        chores.add(new Chore(clinicRepository.findByClinicId(clinicId), "Happy Birthday " + s.getStaffFullName() + "!",
+                        chores.add(new Chore(clinicRepository.findByClinicId(clinicId), "Happy Birthday " + s.getFullName() + "!",
                                 Task.STAFF_BIRTHDAY,
-                                "Celebrate " + s.getStaffFullName() + "'s special day! We thank you for being part of the team!"));
+                                "Celebrate " + s.getFullName() + "'s special day! We thank you for being part of the team!"));
                     else if ((birthDate.get(Calendar.DAY_OF_MONTH) - today.get(Calendar.DAY_OF_MONTH)) > 0 && (seventhDay.get(Calendar.DAY_OF_MONTH) - birthDate.get(Calendar.DAY_OF_MONTH)) <= 7)
                         chores.add(new Chore(clinicRepository.findByClinicId(clinicId), "It's almost someone's special day!",
                                 Task.STAFF_BIRTHDAY,
-                                "In" + (birthDate.get(Calendar.DAY_OF_MONTH) - today.get(Calendar.DAY_OF_MONTH)) + "day(s) it will be " + s.getStaffFullName() + "'s special day! Don't forget to celebrate their contribution as a valued member of the JASC Team!"));
+                                "In" + (birthDate.get(Calendar.DAY_OF_MONTH) - today.get(Calendar.DAY_OF_MONTH)) + "day(s) it will be " + s.getFullName() + "'s special day! Don't forget to celebrate their contribution as a valued member of the JASC Team!"));
                 } else if ((birthDate.get(Calendar.MONTH) - today.get(Calendar.MONTH)) == 1 && Math.abs(today.get(Calendar.DAY_OF_MONTH) - birthDate.get(Calendar.DAY_OF_MONTH)) >= 23) // In there is a change of month during the week
                     chores.add(new Chore(clinicRepository.findByClinicId(clinicId), "It's almost someone's special day!",
                             Task.STAFF_BIRTHDAY,
-                            "It will soon be " + s.getStaffFullName() + "'s special day! Be Ready for " + birthDate.get(Calendar.DAY_OF_MONTH) + " of " + getMonthName(birthDate.get(Calendar.MONTH)) + "!"));
+                            "It will soon be " + s.getFullName() + "'s special day! Be Ready for " + birthDate.get(Calendar.DAY_OF_MONTH) + " of " + getMonthName(birthDate.get(Calendar.MONTH)) + "!"));
             }
         }
 
