@@ -12,8 +12,9 @@ import java.util.UUID;
 @Entity
 @Table(name="records")
 public class Record implements Serializable{
+    // Attributes
     @Id
-    private String jascId;
+    private String recordId;
     @OneToOne
     @NotNull
     private Patient patient;
@@ -23,25 +24,26 @@ public class Record implements Serializable{
     @OneToMany
     private Set<Consultation> consultations;
 
-
+    // Constructors
     public Record(){
 
     }
 
     public Record(Patient patient, String recordDetails, Set<Surgery> surgeries, Set<Consultation> consultations) {
-        this.setJascId("JASC-R-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+        this.setRecordId(patient.getPatientId() + "-R-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setPatient(patient);
         this.setRecordDetails(recordDetails);
         this.setSurgeries(surgeries);
         this.setConsultations(consultations);
     }
 
-    public String getJascId() {
-        return jascId;
+    //Getters and Setters
+    public String getRecordId() {
+        return recordId;
     }
 
-    public void setJascId(String jascId) {
-        this.jascId = jascId;
+    public void setRecordId(String recordId) {
+        this.recordId = recordId;
     }
 
     public Patient getPatient() {

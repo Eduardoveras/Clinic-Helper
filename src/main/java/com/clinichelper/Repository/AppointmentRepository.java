@@ -24,6 +24,6 @@ public interface AppointmentRepository extends JpaRepository<Appointment, String
     @Query("select a from Appointment a where a.clinic.clinicId = :clinic and a.appointmentDate between :beginning and :ending")
     List<Appointment> findByDateRange(@Param("beginning") Date startDate, @Param("ending") Date endDate, @Param("clinic") String clinicId);
 
-    @Query("select a from Appointment a where a.patient.jascId = :id")
-    List<Appointment> findByPatientJascId(@Param("id") String patientJascId);
+    @Query("select a from Appointment a where a.patient.patientId = :id")
+    List<Appointment> findByPatientId(@Param("id") String patientId);
 }

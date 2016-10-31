@@ -18,7 +18,7 @@ public class Meeting implements Serializable{
 
     // Attributes
     @Id
-    private String jascId;
+    private String meetingId;
     @NotNull
     private String meetingTitle; //
     @NotNull
@@ -31,29 +31,33 @@ public class Meeting implements Serializable{
     private String meetingPlace;//
     @ManyToMany
     @NotNull
-    private Set<Staff> attendees;
+    private Set<Contact> attendees;
+    @ManyToOne
+    private Clinic clinic;
 
     // Constructores
     public Meeting(){
 
     }
 
-    public Meeting(String meetingTitle, String meetingObjective, Date meetingDate, Timestamp meetingTime, String meetingPlace, Set<Staff> attendees){
-        this.setJascId("JASC-M-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+    public Meeting(Clinic clinic, String meetingTitle, String meetingObjective, Date meetingDate, Timestamp meetingTime, String meetingPlace, Set<Contact> attendees){
+        this.setMeetingId(clinic.getClinicPrefix() + "-M-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setMeetingTitle(meetingTitle.toUpperCase());
         this.setMeetingObjective(meetingObjective.toUpperCase());
         this.setMeetingDate(meetingDate);
         this.setMeetingTime(meetingTime);
         this.setMeetingPlace(meetingPlace);
         this.setAttendees(attendees);
+        this.setClinic(clinic);
     }
 
-    public String getJascId() {
-        return jascId;
+    // Getters and Setters
+    public String getMeetingId() {
+        return meetingId;
     }
 
-    public void setJascId(String jascId) {
-        this.jascId = jascId;
+    public void setMeetingId(String meetingId) {
+        this.meetingId = meetingId;
     }
 
     public String getMeetingTitle() {
@@ -102,11 +106,19 @@ public class Meeting implements Serializable{
         this.meetingPlace = meetingPlace;
     }
 
-    public Set<Staff> getAttendees() {
+    public Set<Contact> getAttendees() {
         return attendees;
     }
 
-    public void setAttendees(Set<Staff> attendees) {
+    public void setAttendees(Set<Contact> attendees) {
         this.attendees = attendees;
+    }
+
+    public Clinic getClinic() {
+        return clinic;
+    }
+
+    public void setClinic(Clinic clinic) {
+        this.clinic = clinic;
     }
 }

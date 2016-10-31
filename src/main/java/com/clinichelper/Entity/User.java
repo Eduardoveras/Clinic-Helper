@@ -34,6 +34,7 @@ public class User implements Serializable{
     private Permission role;
     @ManyToOne
     private Clinic clinic;
+    @Column(length = 5000000)
     private Byte[] photo;
 
 
