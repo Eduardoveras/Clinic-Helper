@@ -32,6 +32,15 @@ public class Chore implements Serializable{
 
     }
 
+    public Chore(String title, Task type, String description){
+        this.setChoreId(clinic.getClinicPrefix() + "-TASK-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+        this.setTitle(title);
+        this.setType(type);
+        this.setDescription(description);
+        this.setCompleted(false);
+    }
+
+    // only used for custom task
     public Chore(Clinic clinic, String title, Task type, String description){
         this.setChoreId(clinic.getClinicPrefix() + "-TASK-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setTitle(title);
