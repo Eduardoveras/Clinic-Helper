@@ -41,7 +41,7 @@
                 <tbody>
                 <#list patientList as patient>
                 <tr>
-                    <td><a href="/patient/${patient.jascId}">${patient.patientFirstName} ${patient.patientLastName}</a></td>
+                    <td><a href="/patient/${patient.patientId}">${patient.patientFullName}</a></td>
                     <td>${patient.patientIdCard}</td>
                     <td>${patient.patientTelephoneNumber}</td>
                     <td>${patient.patientContactTelephoneNumber}</td>
@@ -54,7 +54,6 @@
                     <td>${patient.patientAddress}</td>
                     <td>${patient.patientCity}</td>
                     <td>${patient.patientCountry}</td>
-
                 </tr>
                 <#else>
                 <tr>
