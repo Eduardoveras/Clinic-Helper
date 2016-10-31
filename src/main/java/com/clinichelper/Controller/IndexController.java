@@ -26,10 +26,9 @@ public class IndexController {
 
     @RequestMapping("/")
     public ModelAndView home(Model model, @RequestParam(value="name", required=false, defaultValue="home") String name) {
-        TKS.InitializeTodoList("CH-PLATINUM-JASC");
-        int s = DQS.findAllRegisteredAppointmentsForToday("CH-PLATINUM-JASC").size();
+
         model.addAttribute("name", name);
-        model.addAttribute("todoList", TKS.getTodoList()); // TODO: replace this service for ToolKitService
+        model.addAttribute("todoList", TKS.InitializeTodoList("CH-PLATINUM-JASC"));
         model.addAttribute("todays_appointments", DQS.findAllRegisteredAppointmentsForToday("CH-PLATINUM-JASC"));
         return new ModelAndView("homepage/index");
     }

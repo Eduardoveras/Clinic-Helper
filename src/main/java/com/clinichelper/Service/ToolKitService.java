@@ -20,10 +20,6 @@ public class ToolKitService {
     // Attributes
     private List<Chore> todoList;
 
-    public List<Chore> getTodoList() {
-        return todoList;
-    }
-
     // Repositories
     @Autowired
     private ChoreRepository choreRepository;
@@ -36,7 +32,7 @@ public class ToolKitService {
     @Autowired
     private ContactRepository contactRepository;
 
-    public void InitializeTodoList(String clinicId){
+    public List<Chore> InitializeTodoList(String clinicId){
 
         todoList = new ArrayList<>();
 
@@ -50,6 +46,8 @@ public class ToolKitService {
         FetchMeetings(clinicId);
 
         // TODO: Add surgery mechanic
+
+        return todoList;
     }
 
     // TodoList Functions
