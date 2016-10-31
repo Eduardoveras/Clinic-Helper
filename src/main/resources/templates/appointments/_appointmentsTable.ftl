@@ -36,7 +36,7 @@
                     <td>${appointment.appointmentDate}</td>
                     <td>${appointment.appointmentTime}</td>
 
-                    <td><a href="/patient/${appointment.patient.jascId}">${appointment.patient.jascId}</a></td>
+                    <td><a href="/patient/${appointment.patient.patientId}">${appointment.patient.patientFullName}</a></td>
                     <td>${appointment.appointmentDescription}</td>
 
 
