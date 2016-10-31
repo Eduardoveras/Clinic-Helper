@@ -49,12 +49,12 @@ public class DataQueryService {
         return appointmentRepository.findByClinicId(clinicId);
     }
 
-    public List<Appointment> findPatientsRegisteredAppointments(String patientJascId){
+    public List<Appointment> findPatientsRegisteredAppointments(String patientId){
 
-        if (!doesPatientJascIdExist(patientJascId))
-            throw new IllegalArgumentException("\n\nThis is an invalid patient jascId");
+        if (!doesPatientIdExist(patientId))
+            throw new IllegalArgumentException("\n\nThis is an invalid patient Id");
 
-        return appointmentRepository.findByPatientId(patientJascId);
+        return appointmentRepository.findByPatientId(patientId);
     }
 
     public List<Appointment> findAllRegisteredAppointmentsForToday(String clinicId){ return findAllRegisteredAppointmentsByGivenDate(new Date(Calendar.getInstance().getTime().getTime()), clinicId); }
@@ -140,8 +140,8 @@ public class DataQueryService {
 
     public List<Record> findPatientsRegisteredRecord(String patientId){
 
-        if (!doesPatientJascIdExist(patientId))
-            throw new IllegalArgumentException("\n\nThis is an invalid patient jascId");
+        if (!doesPatientIdExist(patientId))
+            throw new IllegalArgumentException("\n\nThis is an invalid patient Id");
 
         return recordRepository.findByPatientId(patientId);
     }
@@ -164,7 +164,7 @@ public class DataQueryService {
 
     public List<Surgery> findRegisteredSurgeryByName(String clinicId, String searchSurgeryName){ return surgeryRepository.findBySurgeryName(searchSurgeryName, clinicId); }
 
-    public List<Surgery> findRegisteredSurgeryByPatient(String patientJascId){ return surgeryRepository.findByPatientId(patientJascId);}
+    public List<Surgery> findRegisteredSurgeryByPatient(String patientId){ return surgeryRepository.findByPatientId(patientId);}
 
     public List<Surgery> findRegisteredSurgeryByDate(String clinicId, Date searchDate){ return surgeryRepository.findBySurgeryDate(searchDate, clinicId); }
 
@@ -191,8 +191,8 @@ public class DataQueryService {
 
 
     // Auxiliary Functions
-    private boolean doesPatientJascIdExist(String jascId){
-        Patient patient = patientRepository.findByPatientId(jascId);
+    private boolean doesPatientIdExist(String patientId){
+        Patient patient = patientRepository.findByPatientId(patientId);
 
         return (patient != null);
     }

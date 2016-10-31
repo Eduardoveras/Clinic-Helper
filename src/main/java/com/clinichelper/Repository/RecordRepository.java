@@ -1,6 +1,5 @@
 package com.clinichelper.Repository;
 
-import com.clinichelper.Entity.Patient;
 import com.clinichelper.Entity.Record;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

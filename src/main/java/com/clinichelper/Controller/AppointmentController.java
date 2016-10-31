@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -45,14 +44,16 @@ public class AppointmentController {
     public String createNewApointment(/*@RequestParam("clinic") String clinicId,*/@RequestParam("appointmentDate") String appointmentDate, @RequestParam("appointmentTime") String  appointmentTime, @RequestParam("patient") String patientId, @RequestParam("description") String appointmentDescription/*, @RequestParam("type") String appointmentType*/){
 
         try {
-            SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
+            SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy");
             SimpleDateFormat sdf2 = new SimpleDateFormat("hh:mm:ss");
 
             //Patient patient = DQS.findRegisteredPatientByIdCard(clinicId, patientId);
             Patient patient = DQS.findRegisteredPatientByIdCard("CH-PLATINUM-JASC", patientId);
 
             Appointment appointment = DEAMS.createNewAppointment("CH-PLATINUM-JASC", new Date(sdf1.parse(appointmentDate).getTime()), new Timestamp(sdf2.parse(appointmentTime).getTime()), patient.getPatientId(), appointmentDescription, /*appointmentType.toLowerCase().equals("consultation") ? */AppointmentType.CONSULTATION/* : AppointmentType.SURGERY*/);
-            int s = DQS.findAllRegisteredAppointmentsForClinic("CH-PLATINUM-JASC").size();
+
+            //return "redirect:/appointments/" + clinicId;
+            return "redirect:/appointments";
         } catch (PersistenceException exp){
             //
         } catch(IllegalArgumentException exp){
@@ -64,7 +65,7 @@ public class AppointmentController {
         }
 
         //return "redirect:/appointments/" + clinicId;
-        return "redirect:/appointments";
+        return "redirect:/appointments"; // TODO: add error message handling
     }
 
     @PostMapping("/cancelAppointment")

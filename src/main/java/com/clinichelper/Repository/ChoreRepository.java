@@ -4,7 +4,6 @@
 package com.clinichelper.Repository;
 
 import com.clinichelper.Entity.Chore;
-import com.clinichelper.Tools.Task;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
