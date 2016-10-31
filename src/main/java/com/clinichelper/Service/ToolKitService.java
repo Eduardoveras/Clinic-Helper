@@ -62,7 +62,7 @@ public class ToolKitService {
 
         todoList.addAll(findAllPatientBirthdayForNextWeek(clinicId));
 
-        //todoList.addAll(findAllStaffBirthdayForNextWeek(clinicId));
+        todoList.addAll(findAllStaffBirthdayForNextWeek(clinicId));
 
         todoList.addAll(findAllPatientWhoCompletedAnotherYear(clinicId));
     }
@@ -160,8 +160,8 @@ public class ToolKitService {
 
         return chores;
     }
-/*
-    private List<Chore> findAllStaffBirthdayForNextWeek(){
+
+    private List<Chore> findAllStaffBirthdayForNextWeek(String clinicId){
         Calendar today = Calendar.getInstance();
         Calendar seventhDay = Calendar.getInstance();
         Calendar birthDate = Calendar.getInstance();
@@ -174,30 +174,29 @@ public class ToolKitService {
         seventhDay.setTime(today.getTime());
         seventhDay.add(Calendar.DATE, 7);
 
-        for (Staff s:
-             staffRepository.findAll()) {
+        for (Contact s:
+             contactRepository.findByClinicId(clinicId)) {
 
-            birthDate.setTime(s.getStaffBirthDate());
-            if (!s.getJascId().equals("JASC-STAFF-ADMIN")) {
+            birthDate.setTime(s.getBirthDate());
+            if (!s.getContactId().equals("JASC-STAFF-ADMIN")) {
                 if ((today.get(Calendar.MONTH) - birthDate.get(Calendar.MONTH)) == 0) {
                     if ((today.get(Calendar.DAY_OF_MONTH) - birthDate.get(Calendar.DAY_OF_MONTH)) == 0)
-                        chores.add(new Chore("Happy Birthday " + s.getStaffFullName() + "!",
+                        chores.add(new Chore(clinicRepository.findByClinicId(clinicId), "Happy Birthday " + s.getStaffFullName() + "!",
                                 Task.STAFF_BIRTHDAY,
                                 "Celebrate " + s.getStaffFullName() + "'s special day! We thank you for being part of the team!"));
                     else if ((birthDate.get(Calendar.DAY_OF_MONTH) - today.get(Calendar.DAY_OF_MONTH)) > 0 && (seventhDay.get(Calendar.DAY_OF_MONTH) - birthDate.get(Calendar.DAY_OF_MONTH)) <= 7)
-                        chores.add(new Chore("It's almost someone's special day!",
+                        chores.add(new Chore(clinicRepository.findByClinicId(clinicId), "It's almost someone's special day!",
                                 Task.STAFF_BIRTHDAY,
                                 "In" + (birthDate.get(Calendar.DAY_OF_MONTH) - today.get(Calendar.DAY_OF_MONTH)) + "day(s) it will be " + s.getStaffFullName() + "'s special day! Don't forget to celebrate their contribution as a valued member of the JASC Team!"));
                 } else if ((birthDate.get(Calendar.MONTH) - today.get(Calendar.MONTH)) == 1 && Math.abs(today.get(Calendar.DAY_OF_MONTH) - birthDate.get(Calendar.DAY_OF_MONTH)) >= 23) // In there is a change of month during the week
-                    chores.add(new Chore("It's almost someone's special day!",
-                            Task.PATIENT_BIRTHDAY,
+                    chores.add(new Chore(clinicRepository.findByClinicId(clinicId), "It's almost someone's special day!",
+                            Task.STAFF_BIRTHDAY,
                             "It will soon be " + s.getStaffFullName() + "'s special day! Be Ready for " + birthDate.get(Calendar.DAY_OF_MONTH) + " of " + getMonthName(birthDate.get(Calendar.MONTH)) + "!"));
             }
         }
 
         return chores;
     }
-*/
 
     private String getMonthName(int monthId){
         switch (monthId){

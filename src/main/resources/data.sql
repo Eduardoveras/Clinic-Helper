@@ -68,9 +68,9 @@ patient_id,
 'Soraya', 'Dominicana', '2015-10-28', '809xxxyyyy');
 
 INSERT INTO staff (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-PAULINA', 'Paulina', 'Reyes', 'p@gmail.com', '1985-03-23');
-INSERT INTO staff (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-SICARD', 'Julio', 'Sicard', 'js@gmail.com', '1980-11-3');
+INSERT INTO staff (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-SICARD', 'Julio', 'Sicard', 'js@gmail.com', '1980-11-03');
 INSERT INTO staff (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-ADELSO', 'Adelso', 'Tejada', 'at@gmail.com', '1990-02-02');
-INSERT INTO staff (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-ASTRID', 'Astrid', 'Incarnacion', 'ai@gmail.com', '1990-02-02');
+INSERT INTO staff (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-ASTRID', 'Astrid', 'Incarnacion', 'ai@gmail.com', '1990-10-31');
 
 INSERT INTO appointments(clinic_clinic_id, appointment_id, appointment_date, appointment_time, patient_patient_id, appointment_description, appointment_access_from, appointment_type) VALUES (
 'CH-PLATINUM-JASC',
