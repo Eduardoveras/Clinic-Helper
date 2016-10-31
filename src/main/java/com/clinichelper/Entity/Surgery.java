@@ -31,7 +31,7 @@ public class Surgery implements Serializable{
     private String surgeryRoom;
     @ManyToMany
     @NotNull
-    private Set<Staff> staffs;
+    private Set<Contact> contacts;
     @OneToMany
     private Set<Equipment> equipments;
     @OneToOne
@@ -42,7 +42,7 @@ public class Surgery implements Serializable{
 
     }
 
-    public Surgery(String surgeryName, String surgeryDescription, Patient patient, Date surgeryDate, Timestamp surgeryTime, String surgeryRoom, Set<Staff> staffs, Set<Equipment> equipments, Appointment appointment) {
+    public Surgery(String surgeryName, String surgeryDescription, Patient patient, Date surgeryDate, Timestamp surgeryTime, String surgeryRoom, Set<Contact> contacts, Set<Equipment> equipments, Appointment appointment) {
         this.setJascId("JASC-S-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setSurgeryName(surgeryName);
         this.setSurgeryDescription(surgeryDescription);
@@ -50,7 +50,7 @@ public class Surgery implements Serializable{
         this.setSurgeryDate(surgeryDate);
         this.setSurgeryTime(surgeryTime);
         this.setSurgeryRoom(surgeryRoom);
-        this.setStaffs(staffs);
+        this.setContacts(contacts);
         this.setEquipments(equipments);
         this.setAppointment(appointment);
     }
@@ -109,12 +109,12 @@ public class Surgery implements Serializable{
         this.surgeryRoom = surgeryRoom;
     }
 
-    public Set<Staff> getStaffs() {
-        return staffs;
+    public Set<Contact> getContacts() {
+        return contacts;
     }
 
-    public void setStaffs(Set<Staff> staffs) {
-        this.staffs = staffs;
+    public void setContacts(Set<Contact> contacts) {
+        this.contacts = contacts;
     }
 
     public Appointment getAppointment() {

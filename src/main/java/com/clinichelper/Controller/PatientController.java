@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.persistence.PersistenceException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 @Controller
 public class PatientController {
@@ -32,25 +32,24 @@ public class PatientController {
     @GetMapping("/patients")
     public ModelAndView fetchAllPatientsView(Model model){
 
-        model.addAttribute("patientList", DQS.findAllRegisteredPatients());
-        model.addAttribute("amount", DQS.findAllRegisteredPatients().size());
+        model.addAttribute("patientList", DQS.findAllRegisteredPatientsForClinic("CH-PLATINUM-JASC"));
+        model.addAttribute("amount", DQS.findAllRegisteredPatientsForClinic("CH-PLATINUM-JASC").size());
 
-        return new ModelAndView("allPatients");
+        return new ModelAndView("patients/allPatients");
     }
 
-    @GetMapping("/patient")
-    public ModelAndView fetchPatientview(Model model, @RequestParam("jascId") String jascId){
+    @GetMapping("/patient/{id}")
+    public ModelAndView fetchPatientview(Model model,@PathVariable(value="id") String patientId){
 
-        model.addAttribute("patient", DQS.findRegisteredPatient(jascId));
-        model.addAttribute("appointments", DQS.findPatientsRegisteredAppointments(jascId));
-        model.addAttribute("today", new Date(Calendar.getInstance().getTime().getTime()));
-
-        return new ModelAndView("");
+        model.addAttribute("patient", DQS.findRegisteredPatient(patientId));
+        model.addAttribute("appointments", DQS.findPatientsRegisteredAppointments(patientId));
+        return new ModelAndView("patients/patientsProfile");
     }
 
     // Posts
     @PostMapping("/newPatient")
     public String registerNewPatient(
+            @RequestParam("clinic") String clinicId,
             @RequestParam("firstName") String firstName,
             @RequestParam("lastName") String lastName,
             @RequestParam("idCard") String idCard,
@@ -62,15 +61,14 @@ public class PatientController {
             @RequestParam("dateOfBirth")String dateOfBirth,
             @RequestParam("gender") String gender,
             @RequestParam("nationality") String nationality,
-            @RequestParam("countries") String countries,
-            @RequestParam("cities") String cities){
-        System.out.println("THIS IS A PROOF THAT YOLO IS SWAG");
+            @RequestParam("country") String countries,
+            @RequestParam("city") String cities){
 
         try {
 
-            SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
+            SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyy");
 
-            DEAMS.createNewPatient(firstName, lastName, idCard, telephoneNumber,
+            DEAMS.createNewPatient(clinicId, firstName, lastName, idCard, telephoneNumber,
                     contactTelephoneNumber, occupation, gender, mail, new Date(sdf1.parse(dateOfBirth).getTime()), nationality, address, cities, countries);
         } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
             System.out.println("ERROR EN CREAR PACIENTE");
@@ -82,11 +80,11 @@ public class PatientController {
     }
 
     @PostMapping("/editPatient")
-    public String deletePatient(@RequestParam("jascId") String jascId, @RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("idCard") String idCard, @RequestParam("mail") String mail, @RequestParam("telephoneNumer") String telephoneNumber, @RequestParam("contactTelephoneNumber") String contactTelephoneNumber, @RequestParam("address") String address, @RequestParam("occupation") String occupation, @RequestParam("dateOfBirth")Date dateOfBirth, @RequestParam("gender") String gender, @RequestParam("nationality") String nationality, @RequestParam("countries") String countries, @RequestParam("cities") String cities){
+    public String editPatient(@RequestParam("id") String patientId, @RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("idCard") String idCard, @RequestParam("mail") String mail, @RequestParam("telephoneNumer") String telephoneNumber, @RequestParam("contactTelephoneNumber") String contactTelephoneNumber, @RequestParam("address") String address, @RequestParam("occupation") String occupation, @RequestParam("dateOfBirth")Date dateOfBirth, @RequestParam("gender") String gender, @RequestParam("nationality") String nationality, @RequestParam("countries") String countries, @RequestParam("cities") String cities){
 
         try {
+            Patient patient = DQS.findRegisteredPatient(patientId);
 
-            Patient patient = DQS.findRegisteredPatient(jascId);
             patient.setPatientFirstName(firstName.toLowerCase());
             patient.setPatientLastName(lastName.toUpperCase());
             patient.setPatientIdCard(idCard);
@@ -101,6 +99,7 @@ public class PatientController {
             patient.setPatientCountry(countries.toUpperCase());
             patient.setPatientCity(cities.toUpperCase());
             DEAMS.editPatient(patient);
+            return "redirect:/patient" + patient.getPatientId();
         } catch (PersistenceException exp){
             //
         } catch(IllegalArgumentException exp){
@@ -111,19 +110,19 @@ public class PatientController {
             //
         }
 
-        return "redirect:/patient";
+        return "redirect:/patient/" + patientId; // TODO: Implement Error exceptions for edit patient
     }
 
     @PostMapping("/uploadPhoto")
-    public String uploadPatientPhoto(@RequestParam("jascId") String jascId ,@RequestParam("photo")MultipartFile file){
-        Patient patient = DQS.findRegisteredPatient(jascId);
+    public String uploadPatientPhoto(@RequestParam("id") String patientId ,@RequestParam("photo")MultipartFile file){
+        Patient patient = DQS.findRegisteredPatient(patientId);
 
         try {
 
             patient.setPatientPhoto(processImageFile(file.getBytes()));
 
             DEAMS.editPatient(patient);
-
+            return "redirect:/patient/" + patient.getPatientId();
         } catch (PersistenceException exp){
             //
         } catch(IllegalArgumentException exp){
@@ -134,7 +133,7 @@ public class PatientController {
             //
         }
 
-        return "redirect:/patient?jascId=" + jascId;
+        return "redirect:/patient/" + patientId;// TODO: Implement Error exceptions for upload patient photo
     }
 
     //Auxiliary Functions

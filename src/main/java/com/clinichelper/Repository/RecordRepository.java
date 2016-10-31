@@ -12,8 +12,11 @@ import java.util.List;
  * Created by eva_c on 10/8/2016.
  */
 public interface RecordRepository extends JpaRepository<Record, String > {
-    Record findByJascId(String jascId);
+    Record findByRecordId(String recordId);
 
-    @Query("select r from Record r where r.patient.jascId = :jascId" )
-    List<Record> findByPatientJascId(@Param("jascId") String patientJascId);
+    @Query("select r from Record r where r.patient.clinic.clinicId = :clinic")
+    List<Record> findByClinicId(@Param("clinic") String clinicId);
+
+    @Query("select r from Record r where r.patient.patientId = :id" )
+    List<Record> findByPatientId(@Param("id") String patientId);
 }

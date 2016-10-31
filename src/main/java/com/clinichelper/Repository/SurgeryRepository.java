@@ -17,8 +17,8 @@ public interface SurgeryRepository extends JpaRepository<Surgery, String> {
     @Query("select s from Surgery s where s.surgeryName = :surgeryName " )
     List<Surgery> findBySurgeryName(@Param("surgeryName") String surgeryName);
 
-    @Query("select s from Surgery s where s.patient.jascId = :jascId")
-    List<Surgery> findByPatientJascId(@Param("jascId") String patientJascId);
+    @Query("select s from Surgery s where s.patient.patientId = :id")
+    List<Surgery> findByPatientId(@Param("id") String patientId);
 
     @Query("select s from Surgery s where s.surgeryDate = :surgeryDate " )
     List<Surgery> findBySurgeryDate(@Param("surgeryDate") Date surgeryDate);

@@ -13,14 +13,17 @@ import java.util.List;
 
 public interface AppointmentRepository extends JpaRepository<Appointment, String> {
 
-    Appointment findByJascId(String jascID);
+    Appointment findByAppointmentId(String appointmentId);
 
-    @Query("select a from Appointment a where a.appointmentDate = :appointmentDate")
-    List<Appointment> findByDate(@Param("appointmentDate") Date searchDate);
+    @Query("select a from Appointment a where a.clinic.clinicId = :clinic")
+    List<Appointment> findByClinicId(@Param("clinic") String clinicId);
 
-    @Query("select a from Appointment a where a.appointmentDate between :beginning and :ending")
-    List<Appointment> findByDateRange(@Param("beginning") Date startDate, @Param("ending") Date endDate);
+    @Query("select a from Appointment a where a.appointmentDate = :appointmentDate and a.clinic.clinicId = :clinic")
+    List<Appointment> findByDate(@Param("appointmentDate") Date searchDate, @Param("clinic") String clinicId);
 
-    @Query("select a from Appointment a where a.patient.jascId = :id")
-    List<Appointment> findByPatientJascId(@Param("id") String patientJascId);
+    @Query("select a from Appointment a where a.clinic.clinicId = :clinic and a.appointmentDate between :beginning and :ending")
+    List<Appointment> findByDateRange(@Param("beginning") Date startDate, @Param("ending") Date endDate, @Param("clinic") String clinicId);
+
+    @Query("select a from Appointment a where a.patient.patientId = :id")
+    List<Appointment> findByPatientId(@Param("id") String patientId);
 }
