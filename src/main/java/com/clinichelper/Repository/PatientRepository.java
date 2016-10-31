@@ -19,7 +19,7 @@ public interface PatientRepository extends JpaRepository<Patient, String>{
     Patient findByPatientIdCard(@Param("patientIdCard") String identificationNumber,@Param("clinic") String clinicId);
 
     @Query("select p from Patient p where p.clinic.clinicId = :clinic")
-    List<Patient> findByCLinicId(@Param("clinic") String clinicId);
+    List<Patient> findByClinicId(@Param("clinic") String clinicId);
 
     @Query("select p from Patient p where p.patientEmail = :email and p.clinic.clinicId = :clinic")
     List<Patient> findByPatientEmail(@Param("email") String patientEmail, @Param("clinic") String clinicId);

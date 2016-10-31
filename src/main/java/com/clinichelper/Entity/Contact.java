@@ -47,7 +47,7 @@ public class Contact implements Serializable{
         return firstName;
     }
 
-    public String getStaffFullName() { return firstName.toUpperCase() + " " + lastName; }
+    public String getFullName() { return firstName.toUpperCase() + " " + lastName; }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;

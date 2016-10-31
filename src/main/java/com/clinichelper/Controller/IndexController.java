@@ -2,6 +2,7 @@ package com.clinichelper.Controller;
 
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
+import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,11 +21,14 @@ public class IndexController {
     private DataEntryAndManagementService DEAMS;
     @Autowired
     private DataQueryService DQS;
+    @Autowired
+    private ToolKitService TKS;
 
     @RequestMapping("/")
     public ModelAndView home(Model model, @RequestParam(value="name", required=false, defaultValue="home") String name) {
+
         model.addAttribute("name", name);
-        model.addAttribute("todoList",DQS.findAllRegisteredCustomTasksForClinic("CH-PLATINUM-JASC")); // TODO: replace this service for ToolKitService
+        model.addAttribute("todoList", TKS.InitializeTodoList("CH-PLATINUM-JASC"));
         model.addAttribute("todays_appointments", DQS.findAllRegisteredAppointmentsForToday("CH-PLATINUM-JASC"));
         return new ModelAndView("homepage/index");
     }
