@@ -79,7 +79,7 @@ INSERT INTO appointments(clinic_clinic_id, appointment_id, appointment_date, app
 '2016-10-31 10:10:00',
 'JASC-P-BVN309WJHN32',
 'cita para bala bla bla bla',
-'web',
+0,
 0);
 
 INSERT INTO meetings (

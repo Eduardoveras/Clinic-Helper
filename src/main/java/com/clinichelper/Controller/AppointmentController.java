@@ -36,23 +36,23 @@ public class AppointmentController {
     public ModelAndView fetchAppointmentView(Model model) throws Exception{
 
         model.addAttribute("appointmentList", DQS.findAllRegisteredAppointmentsForClinic("CH-PLATINUM-JASC"));
-        model.addAttribute("amount", DQS.findAllRegisteredAppointmentsForClinic("CH-PLATINUM-JASC").size());
-
 
         return new ModelAndView("appointments/allAppointment");
     }
 
     // Posts
     @PostMapping("/newAppointment")
-    public String createNweApointment(@RequestParam("clinic") String clinicId,@RequestParam("date") String appointmentDate, @RequestParam("time") String  appointmentTime, @RequestParam("id") String patientId, @RequestParam("description") String appointmentDescription, @RequestParam("access") String appointmentAccessFrom, @RequestParam("type") String appointmentType){
+    public String createNewApointment(/*@RequestParam("clinic") String clinicId,*/@RequestParam("appointmentDate") String appointmentDate, @RequestParam("appointmentTime") String  appointmentTime, @RequestParam("patient") String patientId, @RequestParam("description") String appointmentDescription/*, @RequestParam("type") String appointmentType*/){
 
         try {
             SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
             SimpleDateFormat sdf2 = new SimpleDateFormat("hh:mm:ss");
 
-            Patient patient = DQS.findRegisteredPatientByIdCard(clinicId, patientId);
+            //Patient patient = DQS.findRegisteredPatientByIdCard(clinicId, patientId);
+            Patient patient = DQS.findRegisteredPatientByIdCard("CH-PLATINUM-JASC", patientId);
 
-            DEAMS.createNewAppointment(clinicId, new Date(sdf1.parse(appointmentDate).getTime()), new Timestamp(sdf2.parse(appointmentTime).getTime()), patient.getPatientId(), appointmentDescription, appointmentAccessFrom, appointmentType.toLowerCase().equals("consultation") ? AppointmentType.CONSULTATION : AppointmentType.SURGERY);
+            Appointment appointment = DEAMS.createNewAppointment("CH-PLATINUM-JASC", new Date(sdf1.parse(appointmentDate).getTime()), new Timestamp(sdf2.parse(appointmentTime).getTime()), patient.getPatientId(), appointmentDescription, /*appointmentType.toLowerCase().equals("consultation") ? */AppointmentType.CONSULTATION/* : AppointmentType.SURGERY*/);
+            int s = DQS.findAllRegisteredAppointmentsForClinic("CH-PLATINUM-JASC").size();
         } catch (PersistenceException exp){
             //
         } catch(IllegalArgumentException exp){
@@ -62,8 +62,9 @@ public class AppointmentController {
         } catch (Exception exp){
             //
         }
-        
-        return "redirect:/appointments/" + clinicId;
+
+        //return "redirect:/appointments/" + clinicId;
+        return "redirect:/appointments";
     }
 
     @PostMapping("/cancelAppointment")

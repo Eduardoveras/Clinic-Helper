@@ -51,7 +51,7 @@ public class DataEntryAndManagementService {
     private UserRepository userRepository;
 
     // Creation functions
-    public Appointment createNewAppointment(String clinicId, Date appointmentDate, Timestamp appointmentTime, String patientJascId, String appointmentDescription, AppointmentType appointmentType) throws Exception {
+    public Appointment createNewAppointment(String clinicId, Date appointmentDate, Timestamp appointmentTime, String patientId, String appointmentDescription, AppointmentType appointmentType) throws Exception {
 
         if(!doesClinicIdExist(clinicId))
             throw new IllegalArgumentException("\n\nThis is an invalid clinic id");
@@ -59,16 +59,14 @@ public class DataEntryAndManagementService {
         if (isRequestedDateExpired(appointmentDate))
             throw new IllegalArgumentException("\n\nThe requested date has passed; it is no longer valid");
 
-        if (!doesPatientJascIdExist(patientJascId))
+        if (!doesPatientJascIdExist(patientId))
             throw new IllegalArgumentException("\n\nThis is an invalid patient jascId");
 
-        java.util.Date utilDate = new java.util.Date();
-
-        if (differenceInDays(new Date(utilDate.getTime()), appointmentDate) <= 0)
+        if (differenceInDays(new Date(Calendar.getInstance().getTime().getTime()), appointmentDate) <= 0)
             throw new IllegalArgumentException("The appointment date must be a future date");
 
         try {
-            return appointmentRepository.save(new Appointment(clinicRepository.findByClinicId(clinicId), appointmentDate, appointmentTime, patientRepository.findByPatientId(patientJascId), appointmentDescription, appointmentType));
+            return appointmentRepository.save(new Appointment(clinicRepository.findByClinicId(clinicId), appointmentDate, appointmentTime, patientRepository.findByPatientId(patientId), appointmentDescription, appointmentType));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis appointment was not able to persist -> " + exp.getMessage());
