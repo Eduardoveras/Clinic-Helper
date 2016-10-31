@@ -182,7 +182,7 @@ public class DataEntryAndManagementService {
 
     public Patient createNewPatient(String clinicId, String patientFirstName, String patientLastName, String patientIdCard,
                                     String patientTelephoneNumber, String patientContactTelephoneNumber,
-                                    String occupation, String patientGender, String patientEmail,
+                                    String occupation, Gender patientGender, String patientEmail,
                                     Date patientBirthDate, String patientNationality, String patientAddress,
                                     String patientCity, String patientCountry) throws Exception {
 

@@ -41,10 +41,10 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                         <div class="radio">
-                            <label><input type="radio" name="gender" id="gender">Male</label>
+                            <label><input type="radio" name="gender" id="gender" value="M">Male</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="gender" id="gender">Female</label>
+                            <label><input type="radio" name="gender" id="gender" value="F">Female</label>
                         </div>
                     </div>
                 </div>
@@ -55,9 +55,6 @@
                         <input id="dateOfBirth" name="dateOfBirth" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
                     </div>
                 </div>
-
-
-
 
                 <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="idCard">ID/Passport <span class="required">*</span>

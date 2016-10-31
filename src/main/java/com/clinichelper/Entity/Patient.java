@@ -1,5 +1,6 @@
 package com.clinichelper.Entity;
 
+import com.clinichelper.Tools.Gender;
 import org.apache.tomcat.util.codec.binary.Base64;
 
 import javax.persistence.*;
@@ -33,7 +34,7 @@ public class Patient implements Serializable{
     @NotNull
     private Date patientBirthDate;//
     @NotNull
-    private String patientGender;//
+    private Gender patientGender;//
     private Date patientRegisteredDate;
     private String occupation;
     private String patientNationality;
@@ -61,7 +62,7 @@ public class Patient implements Serializable{
     }
 
     // Used to create and register new patients
-    public Patient(Clinic clinic, String patientFirstName, String patientLastName, String patientIdCard, String patientTelephoneNumber, String patientContactTelephoneNumber,String occupation, String patientGender, String patientEmail, Date patientBirthDate, String patientNationality, String patientAddress, String patientCity, String patientCountry) {
+    public Patient(Clinic clinic, String patientFirstName, String patientLastName, String patientIdCard, String patientTelephoneNumber, String patientContactTelephoneNumber, String occupation, Gender patientGender, String patientEmail, Date patientBirthDate, String patientNationality, String patientAddress, String patientCity, String patientCountry) {
         this.setPatientId(clinic.getClinicPrefix() + "-P-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setPatientFirstName(patientFirstName.toLowerCase());
         this.setPatientLastName(patientLastName.toUpperCase());
@@ -69,7 +70,7 @@ public class Patient implements Serializable{
         this.setPatientTelephoneNumber(patientTelephoneNumber);
         this.setPatientContactTelephoneNumber(patientContactTelephoneNumber);
         this.setOccupation(occupation.toUpperCase());
-        this.setPatientGender(patientGender.toUpperCase());
+        this.setPatientGender(patientGender);
         this.setPatientEmail(patientEmail.toLowerCase());
         this.setPatientBirthDate(patientBirthDate);
         this.setPatientNationality(patientNationality.toUpperCase());
@@ -135,11 +136,11 @@ public class Patient implements Serializable{
         this.patientBirthDate = patientBirthDate;
     }
 
-    public String getPatientGender() {
+    public Gender getPatientGender() {
         return patientGender;
     }
 
-    public void setPatientGender(String patientGender) {
+    public void setPatientGender(Gender patientGender) {
         this.patientGender = patientGender;
     }
 
