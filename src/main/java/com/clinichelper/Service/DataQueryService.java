@@ -117,7 +117,7 @@ public class DataQueryService {
     // Patient Queries
     public Patient findRegisteredPatient(String patientId){ return patientRepository.findByPatientId(patientId);}
 
-    public List<Patient> findAllRegisteredPatientsForClinic(String clinicId){ return patientRepository.findByCLinicId(clinicId); }
+    public List<Patient> findAllRegisteredPatientsForClinic(String clinicId){ return patientRepository.findByClinicId(clinicId); }
 
     public Patient findRegisteredPatientByIdCard(String clinicId, String searchIdCard){ return patientRepository.findByPatientIdCard(searchIdCard, clinicId); }
 
