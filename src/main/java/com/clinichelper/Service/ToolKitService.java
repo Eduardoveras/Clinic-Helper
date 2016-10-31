@@ -18,7 +18,7 @@ import java.util.List;
 public class ToolKitService {
 
     // Attributes
-    private List<Chore> todoList = new ArrayList<>();
+    private List<Chore> todoList;
 
     public List<Chore> getTodoList() {
         return todoList;
@@ -36,8 +36,9 @@ public class ToolKitService {
     @Autowired
     private ContactRepository contactRepository;
 
-
     public void InitializeTodoList(String clinicId){
+
+        todoList = new ArrayList<>();
 
         // Adding Custom created tasks
         FetchCustomTasks(clinicId);
@@ -61,9 +62,9 @@ public class ToolKitService {
 
         todoList.addAll(findAllPatientBirthdayForNextWeek(clinicId));
 
-       // todoList.addAll(findAllStaffBirthdayForNextWeek(clinicId));
+        //todoList.addAll(findAllStaffBirthdayForNextWeek(clinicId));
 
-        //todoList.addAll(findAllPatientWhoCompletedAnotherYear(clinicId));
+        todoList.addAll(findAllPatientWhoCompletedAnotherYear(clinicId));
     }
 
     private void FetchMeetings(String clinicId){
@@ -197,7 +198,7 @@ public class ToolKitService {
         return chores;
     }
 */
-    // Auxiliary Functions
+
     private String getMonthName(int monthId){
         switch (monthId){
             case 0:

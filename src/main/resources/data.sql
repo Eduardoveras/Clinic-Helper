@@ -44,7 +44,7 @@ patient_id,
   patient_telephone_number) VALUES
 ('CH-PLATINUM-JASC', 'JASC-P-BVN3DF43WED32', 'Hobo', 'Queens', '1996-11-01', 'NYC',
 '829xxxyyyy', 'USA', 'eduardo2@gmail.com', 'Eduardo', 'M', '12343eg 323',
-'Veras', 'Dominicana', '2011-10-28', '809xxxyyyy');
+'Veras', 'Dominicana', '2011-10-31', '809xxxyyyy');
 
 INSERT INTO patients (
 clinic_clinic_id,
