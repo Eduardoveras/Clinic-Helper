@@ -17,7 +17,7 @@ Language: Java
 Framework(s): Java SE 8 - JDK 1.8, Spring Boot, FreeMarker, JPA-ORM, Hibernate
 Database: PostgreSQL 9
 
-Version: 0.10.0
+Version: v0.10.0
 ** Redesigned account and users mechanics
 ** Implemented new clinic account system
 ** Establish base for reserved feature system of accounts
@@ -30,6 +30,9 @@ Version: 0.10.0
 ** New organizational features
     Calendar
     Customizable Todo list
+        v0.10.1
+** Fix view Patients lists interface
+** Fix user views
 
 Version: v0.9.0
 ** Refactor Database to include custom created Tasks
