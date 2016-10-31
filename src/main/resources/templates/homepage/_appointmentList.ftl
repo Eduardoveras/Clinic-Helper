@@ -26,7 +26,7 @@
                     <i class="fa fa-user aero"></i>
                 </a>
                 <div class="media-body">
-                    <a class="title" href="#">${appointment.patient.getFullName()}</a>
+                    <a class="title" href="#">${appointment.patient.getPatientFullName()}</a>
                     <p>${appointment.appointmentDescription} </p>
                     <p> <small>${appointment.appointmentTime}</small>
                     </p>
