@@ -3,10 +3,7 @@
  */
 package com.clinichelper.Tools;
 
-public enum AccountType {
-    BASIC,
-    SILVER,
-    GOLD,
-    PLATINUM,
-    SUPERADMIN
+public enum AppointmentType {
+    CONSULTATION,
+    SURGERY
 }

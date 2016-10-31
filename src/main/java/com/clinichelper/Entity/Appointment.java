@@ -1,5 +1,7 @@
 package com.clinichelper.Entity;
 
+import com.clinichelper.Tools.AppointmentType;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -27,27 +29,34 @@ public class Appointment implements Serializable{
     @Column(length = 500)
     private String appointmentDescription;
     private String appointmentAccessFrom;
+    private AppointmentType appointmentType;
+    @ManyToOne
+    private Clinic clinic;
 
     // Constructors
     public Appointment(){
 
     }
 
-    public Appointment(String clinicPrefix, Date appointmentDate, Patient patient, String appointmentDescription, String appointmentAccessFrom){
-        this.setAppointmentId(clinicPrefix + "-SOLICIT-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+    public Appointment(Clinic clinic, Date appointmentDate, Patient patient, String appointmentDescription, String appointmentAccessFrom){
+        this.setAppointmentId(clinic.getClinicPrefix() + "-SOLICIT-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setAppointmentDate(appointmentDate);
         this.setPatient(patient);
         this.setAppointmentDescription(appointmentDescription);
         this.setAppointmentAccessFrom(appointmentAccessFrom);
+        this.setClinic(clinic);
+        this.setAppointmentType(AppointmentType.CONSULTATION);
     }
 
-    public Appointment(String clinicPrefix, Date appointmentDate, Timestamp appointmentTime, Patient patient, String appointmentDescription, String appointmentAccessFrom){
-        this.setAppointmentId(clinicPrefix + "-A-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+    public Appointment(Clinic clinic, Date appointmentDate, Timestamp appointmentTime, Patient patient, String appointmentDescription, String appointmentAccessFrom, AppointmentType appointmentType){
+        this.setAppointmentId(clinic.getClinicPrefix() + "-A-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setAppointmentDate(appointmentDate);
         this.setAppointmentTime(appointmentTime);
         this.setPatient(patient);
         this.setAppointmentDescription(appointmentDescription);
         this.setAppointmentAccessFrom(appointmentAccessFrom);
+        this.setClinic(clinic);
+        this.setAppointmentType(appointmentType);
     }
 
     //Getters and Setters
@@ -103,5 +112,21 @@ public class Appointment implements Serializable{
 
     public void setAppointmentDescription(String appointmentDescription) {
         this.appointmentDescription = appointmentDescription;
+    }
+
+    public Clinic getClinic() {
+        return clinic;
+    }
+
+    public void setClinic(Clinic clinic) {
+        this.clinic = clinic;
+    }
+
+    public AppointmentType getAppointmentType() {
+        return appointmentType;
+    }
+
+    public void setAppointmentType(AppointmentType appointmentType) {
+        this.appointmentType = appointmentType;
     }
 }

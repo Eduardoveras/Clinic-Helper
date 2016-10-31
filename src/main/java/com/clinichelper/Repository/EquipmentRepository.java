@@ -11,8 +11,11 @@ import java.util.List;
  * Created by eva_c on 10/8/2016.
  */
 public interface EquipmentRepository extends JpaRepository<Equipment, String> {
-    Equipment findByJascId (String jascId);
+    Equipment findByEquipmentId(String equipmentId);
 
-    @Query("select E from Equipment E where E.equipmentName = :equipmentName")
-    List<Equipment> findByEquipmentName(@Param("equipmentName") String equipmentName);
+    @Query("select E from Equipment E where E.clinic.clinicId = :clinic")
+    List<Equipment> findByClinic(@Param("clinic") String clinicId);
+
+    @Query("select E from Equipment E where E.equipmentName = :equipmentName and E.clinic.clinicId = :clinic")
+    List<Equipment> findByEquipmentName(@Param("equipmentName") String equipmentName, @Param("clinic") String clinicId);
 }

@@ -5,7 +5,6 @@ package com.clinichelper.Service;
 
 import com.clinichelper.Entity.*;
 import com.clinichelper.Repository.*;
-import com.clinichelper.Tools.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,8 +45,8 @@ public class DataQueryService {
         return appointmentRepository.findByAppointmentId(appointmentId);
     }
 
-    public List<Appointment> findAllRegisteredAppointments(){
-        return appointmentRepository.findAll();
+    public List<Appointment> findAllRegisteredAppointmentsForClinic(String clinicId){
+        return appointmentRepository.findByClinicId(clinicId);
     }
 
     public List<Appointment> findPatientsRegisteredAppointments(String patientJascId){
@@ -58,38 +57,35 @@ public class DataQueryService {
         return appointmentRepository.findByPatientJascId(patientJascId);
     }
 
-    public List<Appointment> findAllRegisteredAppointmentsForToday(){ return findAllRegisteredAppointmentsByGivenDate(new Date(Calendar.getInstance().getTime().getTime())); }
+    public List<Appointment> findAllRegisteredAppointmentsForToday(String clinicId){ return findAllRegisteredAppointmentsByGivenDate(new Date(Calendar.getInstance().getTime().getTime()), clinicId); }
 
-    public List<Appointment> findAllRegisteredAppointmentsByGivenDate(Date searchDate){ return appointmentRepository.findByDate(searchDate); }
+    public List<Appointment> findAllRegisteredAppointmentsByGivenDate(Date searchDate, String clinicId){ return appointmentRepository.findByDate(searchDate, clinicId); }
 
-    public List<Appointment> findAllRegisteredAppointmentsByTimePeriod(Date beginningOfTimePeriod, Date endOfTimePeriod){ return appointmentRepository.findByDateRange(beginningOfTimePeriod, endOfTimePeriod); }
+    public List<Appointment> findAllRegisteredAppointmentsByTimePeriod(String clinicId, Date beginningOfTimePeriod, Date endOfTimePeriod){ return appointmentRepository.findByDateRange(beginningOfTimePeriod, endOfTimePeriod, clinicId); }
 
     // Chores Queries
-    public Chore findRegisteredCustomTask(String jascId){ return choreRepository.findByJascId(jascId); }
+    public Chore findRegisteredCustomTask(String choreId){ return choreRepository.findByChoreId(choreId); }
 
     public List<Chore> findAllRegisteredCustomTasks(){ return choreRepository.findAll(); }
-
-    public List<Chore> findRegisteredCustomTaksByType(Task type) { return choreRepository.findByType(type); }
 
     // Clinic Queries
     public Clinic findRegisteredClinicByClinicId(String clinicId){ return clinicRepository.findByClinicId(clinicId); }
 
     // Consultation Queries
-    public Consultation findRegisteredConsultation(String jascId){ return consultationRepository.findByJascId(jascId);}
+    public Consultation findRegisteredConsultation(String consultationId){ return consultationRepository.findByConsultationId(consultationId);}
 
-    public List<Consultation> findAllRegisteredConsultations(){ return consultationRepository.findAll(); }
+    public List<Consultation> findAllRegisteredConsultations(String clinicId){ return consultationRepository.findByClinicId(clinicId); }
 
-    public List<Consultation> findResgisteredConcultationByDate(Date searchDate){ return consultationRepository.findByConsultationDate(searchDate); }
+    public List<Consultation> findResgisteredConcultationByDate(String clinicId, Date searchDate){ return consultationRepository.findByConsultationDate(searchDate, clinicId); }
 
-    public  List<Consultation> findAllRegisteredConsultationsByTimePeriod(Date beginningOfTimePeriod, Date endOfTimePeriod){ return consultationRepository.findByConsultationDateRange(beginningOfTimePeriod, endOfTimePeriod); }
-
+    public  List<Consultation> findAllRegisteredConsultationsByTimePeriod(String clinicId, Date beginningOfTimePeriod, Date endOfTimePeriod){ return consultationRepository.findByConsultationDateRange(beginningOfTimePeriod, endOfTimePeriod, clinicId); }
 
     // Equipment Queries
-    public Equipment findRegisteredEquipment(String jascId) { return equipmentRepository.findByJascId(jascId); }
+    public Equipment findRegisteredEquipment(String equipmentId) { return equipmentRepository.findByEquipmentId(equipmentId); }
 
-    public List<Equipment> findAllRegisteredEquipments(){ return equipmentRepository.findAll(); }
+    public List<Equipment> findAllRegisteredEquipments(String clinicId){ return equipmentRepository.findByClinic(clinicId); }
 
-    public List<Equipment> findRegisteredEquipmentByName(String searchName){ return equipmentRepository.findByEquipmentName(searchName); }
+    public List<Equipment> findRegisteredEquipmentByName(String clinicId, String searchName){ return equipmentRepository.findByEquipmentName(searchName, clinicId); }
 
 
     // Insurance Queries
@@ -179,8 +175,6 @@ public class DataQueryService {
     public User findUserInformation(String userId) { return userRepository.findByUserId(userId); }
 
     public User findRegisteredUserAccount(String email, String clinicId){ return userRepository.findUserAccountWithUsernameAndClinicID(email, clinicId); }
-
-    public  List<User> findAllRegisteredUserAccounts(){ return userRepository.findAll(); }
 
     public List<User> findAllAllRegisteredUsersForClinic(String clinicId) { return userRepository.findByClinicId(clinicId); }
 

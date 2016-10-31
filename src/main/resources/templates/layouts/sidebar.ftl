@@ -28,8 +28,9 @@
                 <ul class="nav side-menu">
 
                     <li><a href="/"><i  class="fa fa-plus-square-o"></i> Dashboard <span ></span></a></li>
-                    <li><a href="/patients" ><i class="fa fa-users"></i> Patients  <span ></span></a></li>
+                    <li><a href="/patients" ><i class="fa fa-user-md"></i> Patients  <span ></span></a></li>
                     <li><a href="/appointments"><i  class="fa fa-desktop"></i> Appointments  <span ></span></a></li>
+                    <li><a  href="/users"><i class="fa fa-users"></i> Users<span></span></a></li>
                     <li><a href="/Inventory"><i  class="fa fa-calculator"></i> Inventory <span ></span></a></li>
                     <li><a  href="/Stats"><i class="fa fa-bar-chart-o"></i> Statistics<span></span></a></li>
 

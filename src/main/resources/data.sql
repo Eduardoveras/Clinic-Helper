@@ -1,6 +1,6 @@
 INSERT INTO staff (jasc_id, staff_first_name, staff_last_name, staff_email, staff_clinic_id, staff_birth_date) VALUES ('JASC-STAFF-ADMIN', 'administrator', 'ADMIN', 'djidjellypas92@gmail.com', '1', '2016-11-4');
 
-INSERT INTO clinic (clinic_id, account_type, clinic_name, clinic_prefix, registered_date) VALUES ('CH-PLATINUM-JASC', 100, 'JASC', 'JASC', '2016-10-30');
+INSERT INTO clinic (clinic_id, account_type, clinic_name, clinic_prefix, registered_date) VALUES ('CH-PLATINUM-JASC', 3, 'JASC', 'JASC', '2016-10-30');
 
 INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-YOLO', '1980-02-03', 'djidjellypas92@gmail.com', 'djijdelly', 0, 'SICLAIT', '1234', 0, 'CH-PLATINUM-JASC');
 
@@ -66,7 +66,8 @@ INSERT INTO staff (jasc_id, staff_first_name, staff_last_name, staff_email, staf
 INSERT INTO staff (jasc_id, staff_first_name, staff_last_name, staff_email, staff_clinic_id, staff_birth_date) VALUES ('JASC-STAFF-ADELSO', 'Adelso', 'Tejada', 'at@gmail.com', '4', '1990-02-02');
 INSERT INTO staff (jasc_id, staff_first_name, staff_last_name, staff_email, staff_clinic_id, staff_birth_date) VALUES ('JASC-STAFF-ASTRID', 'Astrid', 'Incarnacion', 'ai@gmail.com', '5', '1990-02-02');
 
-INSERT INTO appointments(appointment_id, appointment_date, appointment_time, patient_jasc_id, appointment_description, appointment_access_from) VALUES (
+INSERT INTO appointments(clinic_clinic_id, appointment_id, appointment_date, appointment_time, patient_jasc_id, appointment_description, appointment_access_from) VALUES (
+'CH-PLATINUM-JASC',
 'JASC123456',
 '2016-10-04',
 '2016-10-04 10:10:00',
@@ -106,6 +107,5 @@ meeting_title) VALUES
 INSERT INTO  meetings_attendees (meeting_jasc_id, attendees_jasc_id) VALUES ('JASC-M-NY934UINRC3', 'JASC-STAFF-SICARD');
 INSERT INTO  meetings_attendees (meeting_jasc_id, attendees_jasc_id) VALUES ('JASC-M-NY934UINRC3', 'JASC-STAFF-ADELSO');
 
-INSERT INTO chore (jasc_id, description, title, type) VALUES ('JASC-M-9URHFDN', 'By more Bras', 'Inventory refill', 4);
-INSERT INTO chore (jasc_id, description, title, type) VALUES ('JASC-M-9UR23DN', 'Call Accountant', 'Finance', 6);
-INSERT INTO chore (jasc_id, description, title, type) VALUES ('JASC-M-9UR26DN', 'Buy Pizza for everyone', 'Pizza time', 6);
+INSERT INTO chore (clinic_clinic_id, chore_id, description, title, type) VALUES ('CH-PLATINUM-JASC', 'JASC-M-9URHFDN', 'By more Bras', 'Inventory refill', 4);
+INSERT INTO chore (clinic_clinic_id, chore_id, description, title, type) VALUES ('CH-PLATINUM-JASC', 'JASC-M-9UR23DN', 'Call Accountant', 'Finance', 6);
