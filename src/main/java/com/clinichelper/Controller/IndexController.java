@@ -21,6 +21,7 @@ public class IndexController {
     public ModelAndView home(Model model, @RequestParam(value="name", required=false, defaultValue="home") String name) {
         model.addAttribute("name", name);
         model.addAttribute("todoList",DQS.findAllRegisteredCustomTasks());
+        model.addAttribute("todays_appointments", DQS.findAllRegisteredAppointmentsForToday());
         return new ModelAndView("homepage/index");
     }
 

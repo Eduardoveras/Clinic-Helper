@@ -74,6 +74,14 @@ INSERT INTO appointments(appointment_id, appointment_date, appointment_time, pat
 'cita para bala bla bla bla',
 'web');
 
+INSERT INTO appointments(appointment_id, appointment_date, appointment_time, patient_jasc_id, appointment_description, appointment_access_from) VALUES (
+'JASC1234',
+'2016-10-30',
+'2016-10-30 12:10:00',
+'JASC-P-BVN309WJHN32',
+'cita para bala bla bla bla',
+'web');
+
 INSERT INTO meetings (jasc_id,
 meeting_date,
 meeting_objective,

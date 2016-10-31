@@ -8,7 +8,7 @@ public enum Task {
     STAFF_BIRTHDAY,
     REGISTRATIONDATE,
     MEETING,
-    MISC,
+    URGENT,
     SURGERY,
-    TASK
+    REMINDER
 }

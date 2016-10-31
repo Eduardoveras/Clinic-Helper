@@ -1,7 +1,7 @@
 <div class="col-md-3 col-sm-12 col-xs-12">
     <div>
         <div class="x_title">
-            <h2>Top Profiles</h2>
+            <h2>Today's appointments</h2>
             <ul class="nav navbar-right panel_toolbox">
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                 </li>
@@ -19,62 +19,26 @@
             </ul>
             <div class="clearfix"></div>
         </div>
-        <ul class="list-unstyled top_profiles scroll-view">
+        <ul class="list-unstyled appointments_list scroll-view">
+            <#list todays_appointments as appointment>
             <li class="media event">
                 <a class="pull-left border-aero profile_thumb">
                     <i class="fa fa-user aero"></i>
                 </a>
                 <div class="media-body">
-                    <a class="title" href="#">Ms. Mary Jane</a>
-                    <p><strong>$2300. </strong> Agent Avarage Sales </p>
-                    <p> <small>12 Sales Today</small>
+                    <a class="title" href="#">${appointment.patient.getFullName()}</a>
+                    <p>${appointment.appointmentDescription} </p>
+                    <p> <small>${appointment.appointmentTime}</small>
                     </p>
                 </div>
             </li>
-            <li class="media event">
-                <a class="pull-left border-green profile_thumb">
-                    <i class="fa fa-user green"></i>
-                </a>
-                <div class="media-body">
-                    <a class="title" href="#">Ms. Mary Jane</a>
-                    <p><strong>$2300. </strong> Agent Avarage Sales </p>
-                    <p> <small>12 Sales Today</small>
-                    </p>
-                </div>
-            </li>
-            <li class="media event">
-                <a class="pull-left border-blue profile_thumb">
-                    <i class="fa fa-user blue"></i>
-                </a>
-                <div class="media-body">
-                    <a class="title" href="#">Ms. Mary Jane</a>
-                    <p><strong>$2300. </strong> Agent Avarage Sales </p>
-                    <p> <small>12 Sales Today</small>
-                    </p>
-                </div>
-            </li>
-            <li class="media event">
-                <a class="pull-left border-aero profile_thumb">
-                    <i class="fa fa-user aero"></i>
-                </a>
-                <div class="media-body">
-                    <a class="title" href="#">Ms. Mary Jane</a>
-                    <p><strong>$2300. </strong> Agent Avarage Sales </p>
-                    <p> <small>12 Sales Today</small>
-                    </p>
-                </div>
-            </li>
-            <li class="media event">
-                <a class="pull-left border-green profile_thumb">
-                    <i class="fa fa-user green"></i>
-                </a>
-                <div class="media-body">
-                    <a class="title" href="#">Ms. Mary Jane</a>
-                    <p><strong>$2300. </strong> Agent Avarage Sales </p>
-                    <p> <small>12 Sales Today</small>
-                    </p>
-                </div>
-            </li>
+                <#else>
+                <li>
+                    <p><h4>You have don't have more appointments to show</h4></p>
+                </li>
+            </#list>
+
+
         </ul>
     </div>
 </div>
