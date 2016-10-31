@@ -158,21 +158,21 @@ public class DataQueryService {
 
 
     // Surgery Queries
-    public Surgery findRegisteredSurgery (String jascId){ return surgeryRepository.findByJascId(jascId); }
+    public Surgery findRegisteredSurgery (String surgeryId){ return surgeryRepository.findBySurgeryId(surgeryId); }
 
-    public List<Surgery> findAllRegisteredSurgeries(){ return surgeryRepository.findAll(); }
+    public List<Surgery> findAllRegisteredSurgeries(String clinicId){ return surgeryRepository.findByClinicId(clinicId); }
 
-    public List<Surgery> findRegisteredSurgeryByName(String searchSurgeryName){ return surgeryRepository.findBySurgeryName(searchSurgeryName); }
+    public List<Surgery> findRegisteredSurgeryByName(String clinicId, String searchSurgeryName){ return surgeryRepository.findBySurgeryName(searchSurgeryName, clinicId); }
 
     public List<Surgery> findRegisteredSurgeryByPatient(String patientJascId){ return surgeryRepository.findByPatientId(patientJascId);}
 
-    public List<Surgery> findRegisteredSurgeryByDate(Date searchDate){ return surgeryRepository.findBySurgeryDate(searchDate); }
+    public List<Surgery> findRegisteredSurgeryByDate(String clinicId, Date searchDate){ return surgeryRepository.findBySurgeryDate(searchDate, clinicId); }
 
-    public List<Surgery> findRegisteredSurgeryByTimePeriod(Date startDate, Date endDate){ return surgeryRepository.findyDateRange(startDate, endDate);}
+    public List<Surgery> findRegisteredSurgeryByTimePeriod(String clinicId, Date startDate, Date endDate){ return surgeryRepository.findyDateRange(startDate, endDate, clinicId);}
 
-    public List<Surgery> findRegisteredSurgeryByRoom(String searchRoom){ return surgeryRepository.findBySurgeryRoom(searchRoom); }
+    public List<Surgery> findRegisteredSurgeryByRoom(String clinicId, String searchRoom){ return surgeryRepository.findBySurgeryRoom(searchRoom, clinicId); }
 
-    public List<Surgery> findResgisteredSurgeryByDateAndRoom(String searchRoom, Date searchDate){ return surgeryRepository.findBySurgeryDateAndSurgeryRoom(searchDate,searchRoom); }
+    public List<Surgery> findResgisteredSurgeryByDateAndRoom(String clinicId, String searchRoom, Date searchDate){ return surgeryRepository.findBySurgeryDateAndSurgeryRoom(searchDate, searchRoom, clinicId); }
 
 
     // User Queries

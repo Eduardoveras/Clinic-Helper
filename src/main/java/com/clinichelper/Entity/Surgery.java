@@ -15,8 +15,9 @@ import java.util.UUID;
 @Entity
 @Table(name="surgeries")
 public class Surgery implements Serializable{
+    // Attributes
     @Id
-    private String jascId;
+    private String surgeryId;
     @NotNull
     private String surgeryName;
     private String surgeryDescription;
@@ -32,18 +33,19 @@ public class Surgery implements Serializable{
     @ManyToMany
     @NotNull
     private Set<Contact> contacts;
-    @OneToMany
+    @ManyToMany
     private Set<Equipment> equipments;
     @OneToOne
     @NotNull
     private Appointment appointment;
 
+    // Constructors
     public Surgery(){
 
     }
 
     public Surgery(String surgeryName, String surgeryDescription, Patient patient, Date surgeryDate, Timestamp surgeryTime, String surgeryRoom, Set<Contact> contacts, Set<Equipment> equipments, Appointment appointment) {
-        this.setJascId("JASC-S-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+        this.setSurgeryId(appointment.getClinic().getClinicPrefix() + "-S-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setSurgeryName(surgeryName);
         this.setSurgeryDescription(surgeryDescription);
         this.setPatient(patient);
@@ -55,12 +57,13 @@ public class Surgery implements Serializable{
         this.setAppointment(appointment);
     }
 
-    public String getJascId() {
-        return jascId;
+    // Getters and Setters
+    public String getSurgeryId() {
+        return surgeryId;
     }
 
-    public void setJascId(String jascId) {
-        this.jascId = jascId;
+    public void setSurgeryId(String surgeryId) {
+        this.surgeryId = surgeryId;
     }
 
     public String getSurgeryName() {

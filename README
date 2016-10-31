@@ -17,6 +17,20 @@ Language: Java
 Framework(s): Java SE 8 - JDK 1.8, Spring Boot, FreeMarker, JPA-ORM, Hibernate
 Database: PostgreSQL 9
 
+Version: 0.10.0
+** Redesigned account and users mechanics
+** Implemented new clinic account system
+** Establish base for reserved feature system of accounts
+    Basic
+    Silver
+    Gold
+    Platinum
+** Establish SuperAdmin permissions
+** Implementation of new dynamic interfaces
+** New organizational features
+    Calendar
+    Customizable Todo list
+
 Version: v0.9.0
 ** Refactor Database to include custom created Tasks
 ** Add TodoList functionality to ToolkitService
