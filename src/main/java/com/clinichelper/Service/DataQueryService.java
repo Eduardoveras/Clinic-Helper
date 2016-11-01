@@ -28,9 +28,13 @@ public class DataQueryService {
     @Autowired
     private InsuranceRepository insuranceRepository;
     @Autowired
+    private MedicationRepository medicationRepository;
+    @Autowired
     private MeetingRepository meetingRepository;
     @Autowired
     private PatientRepository patientRepository;
+    @Autowired
+    private ProductRepository productRepository;
     @Autowired
     private RecordRepository recordRepository;
     @Autowired
@@ -61,17 +65,13 @@ public class DataQueryService {
 
     public List<Appointment> findAllRegisteredAppointmentsByGivenDate(Date searchDate, String clinicId){ return appointmentRepository.findByDate(searchDate, clinicId); }
 
-    public List<Appointment> findAllRegisteredAppointmentsByTimePeriod(String clinicId, Date beginningOfTimePeriod, Date endOfTimePeriod){ return appointmentRepository.findByDateRange(beginningOfTimePeriod, endOfTimePeriod, clinicId); }
+    //public List<Appointment> findAllRegisteredAppointmentsByTimePeriod(String clinicId, Date beginningOfTimePeriod, Date endOfTimePeriod){ return appointmentRepository.findByDateRange(beginningOfTimePeriod, endOfTimePeriod, clinicId); }
 
 
     // Chores Queries
-    public Chore findRegisteredCustomTask(String choreId){ return choreRepository.findByChoreId(choreId); }
+    //public Chore findRegisteredCustomTask(String choreId){ return choreRepository.findByChoreId(choreId); }
 
-    public List<Chore> findAllRegisteredCustomTasksForClinic(String clinicId){ return choreRepository.findByClinicId(clinicId); }
-
-
-    // Clinic Queries
-    public Clinic findRegisteredClinicByClinicId(String clinicId){ return clinicRepository.findByClinicId(clinicId); }
+    //public List<Chore> findAllRegisteredCustomTasksForClinic(String clinicId){ return choreRepository.findByClinicId(clinicId); }
 
 
     // Consultation Queries
@@ -101,6 +101,15 @@ public class DataQueryService {
 
     public List<Insurance> findRegisteredInsuranceByOwner(String searchID){ return insuranceRepository.findByOwnerId(searchID); }
 
+    // Medication Queries
+    public Medication findRegisteredMedication(String medicationId) { return medicationRepository.findByMedicationId(medicationId); }
+
+    public List<Medication> findRegisteredMedicationByClinic(String clinicId) { return medicationRepository.findByClinic(clinicId); }
+
+    public List<Medication> findRegisteredMedicationByName(String clinicId, String medicationName) { return medicationRepository.findByMedicationName(medicationName, clinicId); }
+
+    public List<Medication> findRegisteredMedicationBySupplier(String clinicId, String supplier) { return medicationRepository.findBySupplier(supplier, clinicId); }
+
 
     // Meeting Queries
     public Meeting findRegisteredMeeting(String meetingId){ return meetingRepository.findByMeetingId(meetingId);}
@@ -121,16 +130,24 @@ public class DataQueryService {
 
     public Patient findRegisteredPatientByIdCard(String clinicId, String searchIdCard){ return patientRepository.findByPatientIdCard(searchIdCard, clinicId); }
 
-    public List<Patient> findRegisteredPatientByEmail(String clinicId, String patientEmail){ return patientRepository.findByPatientEmail(patientEmail, clinicId); }
+    //public List<Patient> findRegisteredPatientByEmail(String clinicId, String patientEmail){ return patientRepository.findByPatientEmail(patientEmail, clinicId); }
 
-    public List<Patient> findRegisteredPatientByBirthDate(String clinicId, Date patientBirthDate){ return patientRepository.findByPatientBirthDate(patientBirthDate, clinicId); }
+    //public List<Patient> findRegisteredPatientByBirthDate(String clinicId, Date patientBirthDate){ return patientRepository.findByPatientBirthDate(patientBirthDate, clinicId); }
 
-    public List<Patient> findRegisteredPatientByFullName(String clinicId, String searchFistName, String searchLastName){ return patientRepository.findByFullName(searchFistName, searchLastName, clinicId); }
-
-    public List<Patient> findRegisteredPatientByGeneralInfomation(String clinicId, String searchFistName, String searchLastName,
+    //public List<Patient> findRegisteredPatientByFullName(String clinicId, String searchFistName, String searchLastName){ return patientRepository.findByFullName(searchFistName, searchLastName, clinicId); }
+/*
+    public List<Patient> findRegisteredPatientByGeneralInformation(String clinicId, String searchFistName, String searchLastName,
                                                                   String searchTelephone,String searchEmail ){
         return patientRepository.findByFLTEFields(searchFistName,searchLastName,searchTelephone,searchEmail, clinicId);
     }
+*/
+
+    // Product Queries
+    public Product findRegisteredProduct(String productId) { return productRepository.findByProductId(productId); }
+
+    public List<Product> findRegisteredProductForClinic(String clinicId) { return productRepository.findByClinic(clinicId); }
+
+    public List<Product> findRegisteredProductByName(String clinicId, String productName) { return productRepository.findByProductName(productName, clinicId); }
 
 
     // Record Queries
