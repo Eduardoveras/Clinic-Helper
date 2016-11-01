@@ -17,6 +17,7 @@ public class Medication implements Serializable{
     private String supplier;
     @Column(length = 500)
     private String medicationDescription;
+    private Float medicationPrice;
     private Integer medicationInStock;
     @ManyToOne
     private Clinic clinic;
@@ -26,11 +27,12 @@ public class Medication implements Serializable{
 
     }
 
-    public Medication(Clinic clinic, String medicationName, String supplier, String medicationDescription, Integer medicationInStock){
+    public Medication(Clinic clinic, String medicationName, String supplier, String medicationDescription, Float medicationPrice, Integer medicationInStock){
         this.setMedicationId(clinic.getClinicPrefix() + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setMedicationName(medicationName);
         this.setSupplier(supplier);
         this.setMedicationDescription(medicationDescription);
+        this.setMedicationPrice(medicationPrice);
         this.setMedicationInStock(medicationInStock);
     }
 
@@ -81,5 +83,13 @@ public class Medication implements Serializable{
 
     public void setClinic(Clinic clinic) {
         this.clinic = clinic;
+    }
+
+    public Float getMedicationPrice() {
+        return medicationPrice;
+    }
+
+    public void setMedicationPrice(Float medicationPrice) {
+        this.medicationPrice = medicationPrice;
     }
 }
