@@ -23,7 +23,7 @@
             <table id="datatable-responsive" class="table table-hover table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <th>${user.clinic.clinicPrefix} Id</th>
+                    <th>${clinicId} Id</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Role</th>

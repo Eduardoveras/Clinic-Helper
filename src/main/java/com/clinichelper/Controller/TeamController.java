@@ -44,6 +44,7 @@ public class TeamController {
     public ModelAndView fetchAllPatientsView(Model model){
 
         model.addAttribute("userList", DQS.findAllAllRegisteredUsersForClinic("CH-PLATINUM-JASC"));
+        model.addAttribute("clinicId", DQS.findAllAllRegisteredUsersForClinic("CH-PLATINUM-JASC").get(0).getClinic().getClinicPrefix());
         // model.addAttribute("userList", DQS.findAllAllRegisteredUsersForClinic(clinicId));
         //model.addAttribute("amount", DQS.findAllAllRegisteredUsersForClinic(clinicId).size());
 
