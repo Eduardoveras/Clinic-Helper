@@ -22,7 +22,7 @@ patient_id,
   patient_registered_date,
   patient_telephone_number) VALUES
 ('CH-PLATINUM-JASC', 'JASC-P-BVN309WJHN32', 'Stripper', 'Villa Olga', '1992-10-31', 'Santiago',
-'829xxxyyyy', 'RD', 'djidjellypas92@gmail.com', 'Djidjelly', 'M', '1234rfg 323',
+'829xxxyyyy', 'RD', 'djidjellypas92@gmail.com', 'Djidjelly', 1, '1234rfg 323',
 'Siclait', 'Haitiano', '2015-10-23', '809xxxyyyy');
 
 INSERT INTO patients (
@@ -43,7 +43,7 @@ patient_id,
   patient_registered_date,
   patient_telephone_number) VALUES
 ('CH-PLATINUM-JASC', 'JASC-P-BVN3DF43WED32', 'Hobo', 'Queens', '1996-11-01', 'NYC',
-'829xxxyyyy', 'USA', 'eduardo2@gmail.com', 'Eduardo', 'M', '12343eg 323',
+'829xxxyyyy', 'USA', 'eduardo2@gmail.com', 'Eduardo', 1, '12343eg 323',
 'Veras', 'Dominicana', '2011-10-31', '809xxxyyyy');
 
 INSERT INTO patients (
@@ -64,7 +64,7 @@ patient_id,
   patient_registered_date,
   patient_telephone_number) VALUES
 ('CH-PLATINUM-JASC', 'JASC-P-BVN309WDHN32', 'Crazy cat lady', 'Sience', '1982-04-11', 'Paris',
-'829xxxyyyy', 'FR', 'eva@gmail.com', 'Eva', 'F', '12oih7g 323',
+'829xxxyyyy', 'FR', 'eva@gmail.com', 'Eva', 0, '12oih7g 323',
 'Soraya', 'Dominicana', '2015-10-28', '809xxxyyyy');
 
 INSERT INTO staff (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-PAULINA', 'Paulina', 'Reyes', 'p@gmail.com', '1985-03-23');

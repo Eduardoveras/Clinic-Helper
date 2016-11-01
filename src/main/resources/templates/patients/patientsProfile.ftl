@@ -13,7 +13,7 @@
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3>Plain Page</h3>
+                        <h3>Patient Report: ${patient.patientId}</h3>
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -21,7 +21,7 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>User Report <small>Activity report</small></h2>
+                                <h2>Patient Profile</h2>
                                 <ul class="nav navbar-right panel_toolbox">
                                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                     </li>
@@ -47,7 +47,7 @@
                                             <img class="img-responsive avatar-view" src="/images/user.png" alt="Avatar" title="Change the avatar">
                                         </div>
                                     </div>
-                                    <h3>${patient.patientFirstName} ${patient.patientLastName}</h3>
+                                    <h3>${patient.patientFullName}</h3>
 
                                     <ul class="list-unstyled user_data">
                                         <li><i class="fa fa-map-marker user-profile-icon"></i> ${patient.patientAddress},${patient.patientCity},${patient.patientCountry}
@@ -66,7 +66,7 @@
                                     <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
                                     <br>
 
-                                    <!-- start skills -->
+                                    <!-- start skills
                                     <h4>Skills</h4>
                                     <ul class="list-unstyled user_data">
                                         <li>
@@ -98,8 +98,9 @@
 
                                 </div>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <h6>ID:</h6><h6>${patient.patientFirstName} </h6><br>
-                                    <h4>First Name:</h4><h3>${patient.patientFirstName} </h3><br>
+                                    <h1>Basic Information</h1><br>
+                                    <h4>${patient.clinic.clinicPrefix} ID:</h4><h3>${patient.patientId}</h3><br>
+                                    <h4>First Name:</h4><h3>${patient.patientFirstName}</h3><br>
                                     <h4>Last Name:</h4><h3>${patient.patientLastName}</h3><br>
                                     <h4>ID Card:</h4><h3>${patient.patientIdCard}</h3><br>
                                     <h4>Phone:</h4><h3>${patient.patientTelephoneNumber}</h3><br>
@@ -108,7 +109,7 @@
                                     <h4>Birth day:</h4><h3>${patient.patientBirthDate}</h3><br>
                                     <h4>Gender:</h4><h3>${patient.patientGender}</h3><br>
                                     <h4>Date Registered</h4><h3>${patient.patientRegisteredDate}</h3><br>
-                                    <h4>Ocupation:</h4><h3>${patient.occupation}</h3><br>
+                                    <h4>Occupation:</h4><h3>${patient.occupation}</h3><br>
                                     <h4>Nationality:</h4><h3>${patient.patientNationality}</h3><br>
                                     <h4>Address:</h4><h3>${patient.patientAddress}</h3><br>
                                     <h4>City:</h4><h3>${patient.patientCity}</h3><br>
