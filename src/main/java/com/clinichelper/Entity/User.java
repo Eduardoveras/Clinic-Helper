@@ -43,7 +43,7 @@ public class User implements Serializable{
 
     }
 
-    public User(String email, String firstName, String lastName, Date birthDate, Gender gender, String password, Permission role, Clinic clinic){
+    public User(Clinic clinic, String email, String firstName, String lastName, Date birthDate, Gender gender, String password, Permission role){
         this.setUserId("CH-" + clinic.getClinicPrefix() + "-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setEmail(email.toLowerCase());
         this.setFirstName(firstName.toLowerCase());

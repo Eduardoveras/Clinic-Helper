@@ -272,13 +272,13 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public User createNewUserAccount(String email, String firstName, String lastName, Date birthDate, Gender gender, String password, Permission role, String clinicId) throws Exception {
+    public User createNewUserAccount(String clinicId, String email, String firstName, String lastName, Date birthDate, Gender gender, String password, Permission role) throws Exception {
 
         if (isUsernameAlreadyTaken(email, clinicId))
             throw new IllegalArgumentException("\n\nThis email is already taken. Please choose another one!");
 
         try {
-            return userRepository.save(new User(email, firstName, lastName, birthDate, gender, password, role, clinicRepository.findByClinicId(clinicId)));
+            return userRepository.save(new User(clinicRepository.findByClinicId(clinicId), email, firstName, lastName, birthDate, gender, password, role));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis user was not able to persist -> " + exp.getMessage());
