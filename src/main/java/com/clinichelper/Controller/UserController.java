@@ -28,11 +28,11 @@ public class UserController {
     private DataQueryService DQS;
 
     // TODO: this can only be used by SUPERADMIN
-    @GetMapping("/users")
+    @GetMapping("/admin/users")
     public ModelAndView fetchAllPatientsView(Model model){
 
-        model.addAttribute("userList", DQS.findAllAllRegisteredUsersForClinic("CH-PLATINUM-JASC"));
-        model.addAttribute("amount", DQS.findAllAllRegisteredUsersForClinic("CH-PLATINUM-JASC").size());
+        //model.addAttribute("userList", DQS.findAllAllRegisteredUsersForClinic("CH-PLATINUM-JASC"));
+        //model.addAttribute("amount", DQS.findAllAllRegisteredUsersForClinic("CH-PLATINUM-JASC").size());
        // model.addAttribute("userList", DQS.findAllAllRegisteredUsersForClinic(clinicId));
         //model.addAttribute("amount", DQS.findAllAllRegisteredUsersForClinic(clinicId).size());
 

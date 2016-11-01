@@ -23,11 +23,11 @@
             <table id="datatable-responsive" class="table table-hover table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>${user.clinic.clinicPrefix} Id</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Role</th>
-                    <th>Clinic</th>
+                    <th>Birth Date</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -37,11 +37,11 @@
                     <td>${user.fullName}</td>
                     <td>${user.email}</td>
                     <td>${user.role}</td>
-                    <td>${user.clinic.clinicName}</td>
+                    <td>${user.birthDate}</td>
                 </tr>
                 <#else>
                 <tr>
-                    <th scope="row">NO userS AVAILABLE</th>
+                    <th scope="row">NO USERS AVAILABLE</th>
 
                 </tr>
                 </#list>

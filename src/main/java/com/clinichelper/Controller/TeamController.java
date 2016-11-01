@@ -8,6 +8,7 @@ import com.clinichelper.Tools.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,23 +40,30 @@ public class TeamController {
         return new ModelAndView("");
     }
 
+    @GetMapping("/users")
+    public ModelAndView fetchAllPatientsView(Model model){
+
+        model.addAttribute("userList", DQS.findAllAllRegisteredUsersForClinic("CH-PLATINUM-JASC"));
+        // model.addAttribute("userList", DQS.findAllAllRegisteredUsersForClinic(clinicId));
+        //model.addAttribute("amount", DQS.findAllAllRegisteredUsersForClinic(clinicId).size());
+
+        return new ModelAndView("/users/allUsers");
+    }
+
     // Post
     @PostMapping("/newUser")
-    public String newUser(@RequestParam("email") String email, @RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("birthDate") String  birthDate, @RequestParam("gender") String gender, @RequestParam("password") String password, @RequestParam("role") String role, @RequestParam("clinic") String clinicId){
+    public String newUser(/* @RequestParam("clinic") String clinicId,*/@RequestParam("email") String email, @RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("dateOfBirth") String  birthDate, @RequestParam("gender") String gender, @RequestParam("password") String password, @RequestParam("role") String role){
 
         try{
-            DEAMS.createNewUserAccount(email, firstName, lastName, new Date(new SimpleDateFormat("yyyy-MM-dd").parse(birthDate).getTime()), gender.toLowerCase().equals("female") ? Gender.F : Gender.M, password, role.toLowerCase().equals("medic") ? Permission.MEDIC : Permission.ASSISTANT, clinicId);
-        } catch (PersistenceException exp){
-            //
-        } catch (IllegalArgumentException exp) {
-            //
-        } catch (NullPointerException exp) {
+            DEAMS.createNewUserAccount("CH-PLATINUM-JASC", email, firstName, lastName, new Date(new SimpleDateFormat("MM/dd/yyyy").parse(birthDate).getTime()), gender.toUpperCase().equals("F") ? Gender.F : Gender.M, password, role.toUpperCase().equals("M") ? Permission.MEDIC : Permission.ASSISTANT);
+            return "redirect:/users";
+        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
             //
         } catch (Exception exp){
             //
         }
 
-        return "redirect:/team";
+        return "redirect:/users"; // TODO: add error exception handler
     }
 
     @PostMapping("/deleteUser")
@@ -63,11 +71,7 @@ public class TeamController {
 
         try {
             DEAMS.deleteRegisteredUserAccount(userId);
-        } catch (PersistenceException exp){
-            //
-        } catch (IllegalArgumentException exp) {
-            //
-        } catch (NullPointerException exp) {
+        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
             //
         } catch (Exception exp){
             //
@@ -84,11 +88,7 @@ public class TeamController {
         try {
             DEAMS.editUserAccountCredentials(user.getEmail(), user.getClinic().getClinicId(), user.getPassword(), Permission.ADMIN);
             return "redirect:/team";
-        } catch (PersistenceException exp){
-            //
-        } catch (IllegalArgumentException exp) {
-            //
-        } catch (NullPointerException exp) {
+        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
             //
         } catch (Exception exp){
             //
