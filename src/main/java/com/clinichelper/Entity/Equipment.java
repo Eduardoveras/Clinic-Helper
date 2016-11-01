@@ -1,9 +1,6 @@
 package com.clinichelper.Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.UUID;
@@ -21,7 +18,7 @@ public class Equipment implements Serializable{
     @NotNull
     private String equipmentUse;
     private String equipmentDescription;
-    @ManyToOne
+    @ManyToMany
     private Clinic clinic;
 
     // Constructores
