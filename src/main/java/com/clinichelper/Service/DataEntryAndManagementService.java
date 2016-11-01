@@ -117,13 +117,13 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public Equipment createNewEquipment(String clinicId, String equipmentName, String equipmentUse, String equipmentDescription) throws Exception {
+    public Equipment createNewEquipment(String clinicId, String equipmentName, String equipmentUse, String equipmentDescription, Integer stock) throws Exception {
 
         if (!doesClinicIdExist(clinicId))
             throw new IllegalArgumentException("\n\nThis is an invalid clinic id");
 
         try {
-            return equipmentRepository.save(new Equipment(clinicRepository.findByClinicId(clinicId), equipmentName, equipmentUse, equipmentDescription));
+            return equipmentRepository.save(new Equipment(clinicRepository.findByClinicId(clinicId), equipmentName, equipmentUse, equipmentDescription, stock));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis equipment was not able to persist -> " + exp.getMessage());
