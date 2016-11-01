@@ -28,7 +28,7 @@ public class Medication implements Serializable{
     }
 
     public Medication(Clinic clinic, String medicationName, String supplier, String medicationDescription, Float medicationPrice, Integer medicationInStock){
-        this.setMedicationId(clinic.getClinicPrefix() + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+        this.setMedicationId(clinic.getClinicPrefix() + "-MED-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setMedicationName(medicationName);
         this.setSupplier(supplier);
         this.setMedicationDescription(medicationDescription);

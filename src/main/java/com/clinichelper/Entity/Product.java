@@ -29,7 +29,7 @@ public class Product implements Serializable {
     }
 
     public Product(Clinic clinic, String productName, String productDescription, Float productPrice, Integer productInStock){
-        this.setProductId(clinic.getClinicPrefix() + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+        this.setProductId(clinic.getClinicPrefix() + "-ITEM-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setProductName(productName);
         this.setProductDescription(productDescription);
         this.setProductPrice(productPrice);
