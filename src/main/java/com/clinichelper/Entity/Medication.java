@@ -18,7 +18,7 @@ public class Medication implements Serializable{
     @Column(length = 500)
     private String medicationDescription;
     private Integer medicationInStock;
-    @ManyToMany
+    @ManyToOne
     private Clinic clinic;
 
     // Constructors
