@@ -19,7 +19,7 @@ public class Equipment implements Serializable{
     private String equipmentUse;
     private String equipmentDescription;
     private Integer equipmentInStock;
-    @ManyToMany
+    @ManyToOne
     private Clinic clinic;
 
     // Constructores
