@@ -4,14 +4,17 @@
 package com.clinichelper.Entity;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.UUID;
 
 @Entity
 @Table(name = "items")
-public class Product {
+public class Product implements Serializable {
     //Attributes
+    @Id
     private String productId;
     private String productName;
     private String productDescription;
