@@ -5,10 +5,7 @@ package com.clinichelper.Entity;
 
 import com.clinichelper.Tools.Task;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.UUID;
@@ -17,7 +14,7 @@ import java.util.UUID;
 public class Chore implements Serializable{
     // Attributes
     @Id
-    private String jascId;
+    private String choreId;
     @NotNull
     private String title;
     @NotNull
@@ -25,6 +22,8 @@ public class Chore implements Serializable{
     @NotNull
     @Column(length = 500)
     private String description;
+    @ManyToOne
+    private Clinic clinic;
     @Transient
     private boolean completed;
 
@@ -33,21 +32,22 @@ public class Chore implements Serializable{
 
     }
 
-    public Chore(String title, Task type, String description){
-        this.setJascId("JASC-CH-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+    public Chore(Clinic clinic, String title, Task type, String description){
+        this.setChoreId(clinic.getClinicPrefix() + "-TASK-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setTitle(title);
         this.setType(type);
         this.setDescription(description);
         this.setCompleted(false);
+        this.setClinic(clinic);
     }
 
     // Getters and Setters
-    public String getJascId() {
-        return jascId;
+    public String getChoreId() {
+        return choreId;
     }
 
-    public void setJascId(String jascId) {
-        this.jascId = jascId;
+    public void setChoreId(String choreId) {
+        this.choreId = choreId;
     }
 
     public Task getType() {
@@ -70,6 +70,26 @@ public class Chore implements Serializable{
                 return "Reminder";
         }
     }
+
+    @Transient
+    public  String getColorHtml() {
+        switch (type){
+            case PATIENT_BIRTHDAY:
+                return "AntiqueWhite";
+            case STAFF_BIRTHDAY:
+                return "Khaki";
+            case REGISTRATIONDATE:
+                return "DarkSeaGreen";
+            case MEETING:
+                return "LightCoral";
+            case SURGERY:
+                return "Aqua ";
+            default:
+                return "LightSkyBlue";
+        }
+    }
+
+
 
     public void setType(Task type) {
         this.type = type;
@@ -97,5 +117,13 @@ public class Chore implements Serializable{
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Clinic getClinic() {
+        return clinic;
+    }
+
+    public void setClinic(Clinic clinic) {
+        this.clinic = clinic;
     }
 }

@@ -13,7 +13,7 @@
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3>Plain Page</h3>
+                        <h3>Patient Registration</h3>
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -34,18 +34,8 @@
     </div>
 </div>
 <#include "/layouts/footer.ftl">
-<!-- bootstrap-daterangepicker -->
-<script>
-    $(document).ready(function() {
-        $('#dateOfBirth').daterangepicker({
-            singleDatePicker: true,
-            calender_style: "picker_4"
-        }, function(start, end, label) {
-            console.log(start.toISOString(), end.toISOString(), label);
-        });
-    });
-</script>
-<!-- /bootstrap-daterangepicker -->
+<#include "/patients/_patientsScripts.ftl">
+<!-- /Datatables -->
 <#include "/layouts/pageCloser.ftl">
 
 

@@ -13,9 +13,9 @@ import java.util.UUID;
 @Entity
 @Table(name="consultation")
 public class Consultation implements Serializable{
+    // Attributes
     @Id
-    @GeneratedValue
-    private String jascId;
+    private String consultationId;
     @NotNull
     private Date consultationDate;//
     @NotNull
@@ -25,11 +25,13 @@ public class Consultation implements Serializable{
     @NotNull
     private Appointment appointment;
 
+    // Constructors
     public Consultation(){
 
     }
+
     public Consultation(Date consultationDate, Timestamp consultationTime, String consultationDetail, Appointment appointment){
-        this.setJascId("JASC-C-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+        this.setConsultationId(appointment.getClinic().getClinicPrefix() + "-C-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setConsultationDate(consultationDate);
         this.setConsultationTime(consultationTime);
         this.setConsultationDetail(consultationDetail);
@@ -37,12 +39,13 @@ public class Consultation implements Serializable{
 
     }
 
-    public String getJascId() {
-        return jascId;
+    //Getters and Setters
+    public String getConsultationId() {
+        return consultationId;
     }
 
-    public void setJascId(String jascId) {
-        this.jascId = jascId;
+    public void setConsultationId(String consultationId) {
+        this.consultationId = consultationId;
     }
 
     public Date getConsultationDate() {

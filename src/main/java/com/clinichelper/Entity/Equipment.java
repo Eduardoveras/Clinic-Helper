@@ -1,8 +1,6 @@
 package com.clinichelper.Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.UUID;
@@ -14,30 +12,37 @@ import java.util.UUID;
 @Table(name="equipments")
 public class Equipment implements Serializable{
     @Id
-    private String jascId;
+    private String equipmentId;
     @NotNull
     private String equipmentName;
     @NotNull
     private String equipmentUse;
     private String equipmentDescription;
+    private Integer equipmentInStock;
+    @ManyToOne
+    private Clinic clinic;
 
-   public  Equipment(){
+    // Constructores
+    public  Equipment(){
 
-   }
+    }
 
-    public Equipment(String equipmentName, String equipmentUse, String equipmentDescription) {
-        this.setJascId("JASC-E-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+    public Equipment(Clinic clinic, String equipmentName, String equipmentUse, String equipmentDescription, Integer equipmentInStock) {
+        this.setEquipmentId(clinic.getClinicPrefix() + "-E-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setEquipmentName(equipmentName.toUpperCase());
         this.setEquipmentUse(equipmentUse);
         this.setEquipmentDescription(equipmentDescription);
+        this.clinic = clinic;
+        this.setEquipmentInStock(equipmentInStock);
     }
 
-    public String getJascId() {
-        return jascId;
+    //Getters and Setters
+    public String getEquipmentId() {
+        return equipmentId;
     }
 
-    public void setJascId(String jascId) {
-        this.jascId = jascId;
+    public void setEquipmentId(String equipmentId) {
+        this.equipmentId = equipmentId;
     }
 
     public String getEquipmentName() {
@@ -62,5 +67,13 @@ public class Equipment implements Serializable{
 
     public void setEquipmentDescription(String equipmentDescription) {
         this.equipmentDescription = equipmentDescription;
+    }
+
+    public Integer getEquipmentInStock() {
+        return equipmentInStock;
+    }
+
+    public void setEquipmentInStock(Integer equipmentInStock) {
+        this.equipmentInStock = equipmentInStock;
     }
 }

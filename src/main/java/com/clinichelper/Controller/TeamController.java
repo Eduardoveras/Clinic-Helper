@@ -1,24 +1,27 @@
 package com.clinichelper.Controller;
 
-import com.clinichelper.Entity.Staff;
 import com.clinichelper.Entity.User;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
+import com.clinichelper.Tools.Gender;
+import com.clinichelper.Tools.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.PersistenceException;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 /**
  * Created by Eduardo veras on 02-Oct-16.
  */
+
 @Controller
 public class TeamController {
     // Services
@@ -29,156 +32,47 @@ public class TeamController {
 
     // Gets
     @RequestMapping("/team")
-    public ModelAndView fetchStaffView(Model model){
+    public ModelAndView fetchStaffView(Model model, @RequestParam("clinic") String clinicId){
 
-        model.addAttribute("staffList", DQS.findAllRegisteredStaffs());
-        model.addAttribute("userList", DQS.findAllRegisteredUserAccounts());
+        model.addAttribute("staffList", DQS.findAllRegisteredContactsForClinic(clinicId));
+        model.addAttribute("userList", DQS.findAllAllRegisteredUsersForClinic(clinicId));
 
         return new ModelAndView("");
     }
 
-    @RequestMapping("/login")
-    public ModelAndView fetchLoginView(Model model){
+    @GetMapping("/users")
+    public ModelAndView fetchAllPatientsView(Model model){
 
-        model.addAttribute("name", "THIS IS NOT NECESSARY");
+        model.addAttribute("userList", DQS.findAllAllRegisteredUsersForClinic("CH-PLATINUM-JASC"));
+        model.addAttribute("clinicId", DQS.findAllAllRegisteredUsersForClinic("CH-PLATINUM-JASC").get(0).getClinic().getClinicPrefix());
+        // model.addAttribute("userList", DQS.findAllAllRegisteredUsersForClinic(clinicId));
+        //model.addAttribute("amount", DQS.findAllAllRegisteredUsersForClinic(clinicId).size());
 
-        return new ModelAndView("/users/login_register");
-    }
-
-    @RequestMapping("/profile")
-    public ModelAndView fetchUserProfile(Model model, @RequestParam("username") String username){
-
-        model.addAttribute("user", DQS.findRegisteredUserAccount(username));
-
-        return new ModelAndView("");
+        return new ModelAndView("/users/allUsers");
     }
 
     // Post
-    @PostMapping("/newStaff")
-    public String newStaff(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("birthDate") Date birthDate, @RequestParam("email") String mail, @RequestParam("clinicId") String clinicId){
-
-        try{
-            DEAMS.createNewStaffMember(firstName, lastName, birthDate, mail, clinicId);
-        } catch (PersistenceException exp){
-            //
-        } catch (IllegalArgumentException exp) {
-            //
-        } catch (NullPointerException exp) {
-            //
-        } catch (Exception exp){
-            //
-        }
-
-        return "redirect:/team";
-    }
-
-    @PostMapping("/deleteStaff")
-    public String deleteStaff (@RequestParam("jascID") String jascId){
-
-        try {
-
-            User user = DQS.findRegisteredUserAccountOfRegisteredStaff(jascId);
-
-            if (user != null)
-                DEAMS.deleteRegisterdUserAccount(user.getUsername());
-
-            DEAMS.deleteRegisteredStaff(jascId);
-        } catch (PersistenceException exp){
-            //
-        } catch (IllegalArgumentException exp) {
-            //
-        } catch (NullPointerException exp) {
-            //
-        } catch (Exception exp){
-            //
-        }
-
-        return "redirect/team";
-    }
-
-    @PostMapping("/editStaff")
-    public String editStaff(@RequestParam("jascId") String jascId, @RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("mail") String mail, @RequestParam("clinicId") String clinicId){
-
-        Staff staff = DQS.findRegisteredStaff(jascId);
-        staff.setStaffClinicId(clinicId);
-        staff.setStaffEmail(mail.toLowerCase());
-        staff.setStaffFirstName(firstName.toLowerCase());
-        staff.setStaffLastName(lastName.toUpperCase());
-
-        try {
-            DEAMS.editStaff(staff);
-        } catch (PersistenceException exp){
-            //
-        } catch (IllegalArgumentException exp) {
-            //
-        } catch (NullPointerException exp) {
-            //
-        } catch (Exception exp){
-            //
-        }
-
-        return "redirect:/team";
-    }
-
-    @PostMapping("/uploadProfilePhoto")
-    public String uploadProfilePicture(@RequestParam() String jascId, @RequestParam("photo") MultipartFile file){
-
-        Staff staff = DQS.findRegisteredStaff(jascId);
-
-        try {
-            staff.setStaffPhoto(processImageFile(file.getBytes()));
-
-            DEAMS.editStaff(staff);
-        } catch (PersistenceException exp){
-            //
-        } catch (IllegalArgumentException exp) {
-            //
-        } catch (NullPointerException exp) {
-            //
-        } catch (Exception exp){
-            //
-        }
-
-        return "redirect:/profile?username=" + DQS.findRegisteredUserAccountOfRegisteredStaff(jascId).getUsername();
-    }
-
     @PostMapping("/newUser")
-    public String newUser(@RequestParam("username") String username, @RequestParam("staff") String staff, @RequestParam("password") String password){
+    public String newUser(/* @RequestParam("clinic") String clinicId,*/@RequestParam("email") String email, @RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("dateOfBirth") String  birthDate, @RequestParam("gender") String gender, @RequestParam("password") String password, @RequestParam("role") String role){
 
         try{
-            DEAMS.createNewUserAccount(username,staff,password,"user");
-        } catch (PersistenceException exp){
-            //
-        } catch (IllegalArgumentException exp) {
-            //
-        } catch (NullPointerException exp) {
+            DEAMS.createNewUserAccount("CH-PLATINUM-JASC", email, firstName, lastName, new Date(new SimpleDateFormat("MM/dd/yyyy").parse(birthDate).getTime()), gender.toUpperCase().equals("F") ? Gender.F : Gender.M, password, role.toUpperCase().equals("M") ? Permission.MEDIC : Permission.ASSISTANT);
+            return "redirect:/users";
+        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
             //
         } catch (Exception exp){
             //
         }
 
-        return "redirect:/team";
-    }
-
-    @PostMapping("/userlogin")
-    public String loginUser(@RequestParam("username") String username, @RequestParam("password") String password){
-
-        if (DQS.validateUserAccountCredentials(username, password))
-            return "redirect:/appointments"; // TODO: filter which user is login in to redirect them to the correct url
-        else
-            return "redirect:/login"; // TODO: Implement error exception or message to login
+        return "redirect:/users"; // TODO: add error exception handler
     }
 
     @PostMapping("/deleteUser")
-    public String deleteUser (@RequestParam("username") String username){
+    public String deleteUser (@RequestParam("id") String userId){
 
         try {
-            DEAMS.deleteRegisterdUserAccount(username);
-        } catch (PersistenceException exp){
-            //
-        } catch (IllegalArgumentException exp) {
-            //
-        } catch (NullPointerException exp) {
+            DEAMS.deleteRegisteredUserAccount(userId);
+        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
             //
         } catch (Exception exp){
             //
@@ -187,63 +81,21 @@ public class TeamController {
         return "redirect/team";
     }
 
-    @PostMapping("/editUserPassword")
-    public String editUserPassword(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("newPassword") String newPassword){
+    @PostMapping("/makUserAdmin") //Only accessed by the admin of the clinic account
+    public String makeUserDamin(@RequestParam("id") String userId){
 
-        if (DQS.validateUserAccountCredentials(username.toLowerCase(), password)){
+        User user = DQS.findUserInformation(userId);
 
-            User user = DQS.findRegisteredUserAccount(username.toLowerCase());
-
-            try {
-                DEAMS.editUserAccountCredentials(user.getUsername(), newPassword, user.getRole());
-            } catch (PersistenceException exp){
-                //
-            } catch (IllegalArgumentException exp) {
-                //
-            } catch (NullPointerException exp) {
-                //
-            } catch (Exception exp){
-                //
-            }
+        try {
+            DEAMS.editUserAccountCredentials(user.getEmail(), user.getClinic().getClinicId(), user.getPassword(), Permission.ADMIN);
             return "redirect:/team";
+        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
+            //
+        } catch (Exception exp){
+            //
         }
-        else
-            return "redirect:/editUserPassword"; // TODO: Implement error exception or message to edit password
+
+        return "redirect:/team"; // TODO: Implement error exception or message to edit password
     }
 
-    @PostMapping("/makeAdmin")
-    public String makeUserAdmin(@RequestParam("username") String username){
-
-        User user = DQS.findRegisteredUserAccount(username);
-
-        if (user != null) {
-            try {
-                DEAMS.editUserAccountCredentials(user.getUsername(), user.getPassword(), "admin");
-            } catch (PersistenceException exp) {
-                //
-            } catch (IllegalArgumentException exp) {
-                //
-            } catch (NullPointerException exp) {
-                //
-            } catch (Exception exp) {
-                //
-            }
-
-            return "redirect:/team";
-        }
-        else
-            return "redirect:/team";  // TODO: Implement error exception or message to make admin
-    }
-
-    //Auxiliary Functions
-    private Byte[] processImageFile(byte[] buffer) {
-        Byte[] bytes = new Byte[buffer.length];
-        int i = 0;
-
-        for (byte b :
-                buffer)
-            bytes[i++] = b; // Autoboxing
-
-        return bytes;
-    }
 }

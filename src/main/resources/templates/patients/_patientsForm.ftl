@@ -1,7 +1,7 @@
 <div class="col-md-4 col-xs-12">
     <div class="x_panel">
         <div class="x_title">
-            <h2>Form Design <small>different form elements</small></h2>
+            <h2>Register New Patient</h2>
             <ul class="nav navbar-right panel_toolbox">
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                 </li>
@@ -41,10 +41,10 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                         <div class="radio">
-                            <label><input type="radio" name="gender" id="gender">Male</label>
+                            <label><input type="radio" name="gender" id="gender" value="M">Male</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="gender" id="gender">Female</label>
+                            <label><input type="radio" name="gender" id="gender" value="F">Female</label>
                         </div>
                     </div>
                 </div>
@@ -55,9 +55,6 @@
                         <input id="dateOfBirth" name="dateOfBirth" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
                     </div>
                 </div>
-
-
-
 
                 <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="idCard">ID/Passport <span class="required">*</span>
@@ -91,7 +88,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="occupation">Ocupation <span class="required">*</span>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="occupation">Occupation <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                         <input type="text" id="occupation" name="occupation" required="required" class="form-control col-md-7 col-xs-12">
@@ -107,7 +104,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address">Adress <span class="required">*</span>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address">Address <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                         <input type="text" id="address" name="address" required="required" class="form-control col-md-7 col-xs-12">

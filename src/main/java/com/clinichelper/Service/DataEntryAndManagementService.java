@@ -5,14 +5,19 @@ package com.clinichelper.Service;
 
 import com.clinichelper.Entity.*;
 import com.clinichelper.Repository.*;
+import com.clinichelper.Tools.AppointmentType;
+import com.clinichelper.Tools.Gender;
+import com.clinichelper.Tools.Permission;
 import com.clinichelper.Tools.Task;
 import freemarker.template.utility.NullArgumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.PersistenceException;
+import javax.validation.constraints.Null;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Set;
 
 @Service
@@ -26,40 +31,47 @@ public class DataEntryAndManagementService {
     @Autowired
     private ChoreRepository choreRepository;
     @Autowired
+    private ClinicRepository clinicRepository;
+    @Autowired
     private ConsultationRepository consultationRepository;
     @Autowired
     private EquipmentRepository equipmentRepository;
     @Autowired
     private InsuranceRepository insuranceRepository;
     @Autowired
+    private MedicationRepository medicationRepository;
+    @Autowired
     private MeetingRepository meetingRepository;
     @Autowired
     private PatientRepository patientRepository;
     @Autowired
+    private ProductRepository productRepository;
+    @Autowired
     private RecordRepository recordRepository;
     @Autowired
-    private StaffRepository staffRepository;
+    private ContactRepository contactRepository;
     @Autowired
     private SurgeryRepository surgeryRepository;
     @Autowired
     private UserRepository userRepository;
 
     // Creation functions
-    public Appointment createNewAppointment(Date appointmentDate, Timestamp appointmentTime, String patientJascId, String appointmentDescription, String appointmentAccessFrom) throws Exception {
+    public Appointment createNewAppointment(String clinicId, Date appointmentDate, Timestamp appointmentTime, String patientId, String appointmentDescription, AppointmentType appointmentType) throws Exception {
+
+        if(!doesClinicIdExist(clinicId))
+            throw new IllegalArgumentException("\n\nThis is an invalid clinic id");
 
         if (isRequestedDateExpired(appointmentDate))
             throw new IllegalArgumentException("\n\nThe requested date has passed; it is no longer valid");
 
-        if (!doesPatientJascIdExist(patientJascId))
+        if (!doesPatientIdExist(patientId))
             throw new IllegalArgumentException("\n\nThis is an invalid patient jascId");
 
-        java.util.Date utilDate = new java.util.Date();
-
-        if (differenceInDays(new Date(utilDate.getTime()), appointmentDate) <= 0)
+        if (differenceInDays(new Date(Calendar.getInstance().getTime().getTime()), appointmentDate) <= 0)
             throw new IllegalArgumentException("The appointment date must be a future date");
 
         try {
-            return appointmentRepository.save(new Appointment(appointmentDate, appointmentTime, patientRepository.findByJascId(patientJascId), appointmentDescription, appointmentAccessFrom));
+            return appointmentRepository.save(new Appointment(clinicRepository.findByClinicId(clinicId), appointmentDate, appointmentTime, patientRepository.findByPatientId(patientId), appointmentDescription, appointmentType));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis appointment was not able to persist -> " + exp.getMessage());
@@ -72,10 +84,16 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public Chore createNewCustomTask(String title, Task type, String description) throws Exception{
+
+
+
+    public Chore createNewCustomTask(String clinicId, String title, Task type, String description) throws Exception{
+
+        if (!doesClinicIdExist(clinicId))
+            throw new IllegalArgumentException("\n\nThis is an invalid clinic id");
 
         try {
-            return choreRepository.save(new Chore(title, type, description));
+            return choreRepository.save(new Chore(clinicRepository.findByClinicId(clinicId), title, type, description));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis consultation was not able to persist -> " + exp.getMessage());
@@ -88,13 +106,16 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public Consultation createNewConsultation(Date date, Timestamp time, String detail, String appointmentJascId) throws Exception{
 
-        if (!doesAppointmentJascIdExist(appointmentJascId))
-            throw new IllegalArgumentException("\n\nThis appointment jasc id is not valid");
+
+
+    public Consultation createNewConsultation(Date date, Timestamp time, String detail, String appointmentId) throws Exception{
+
+        if (!doesAppointmentIdExist(appointmentId))
+            throw new IllegalArgumentException("\n\nThis appointment id is not valid");
 
         try {
-            return consultationRepository.save(new Consultation(date, time, detail, appointmentRepository.findByJascId(appointmentJascId)));
+            return consultationRepository.save(new Consultation(date, time, detail, appointmentRepository.findByAppointmentId(appointmentId)));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis consultation was not able to persist -> " + exp.getMessage());
@@ -107,10 +128,16 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public Equipment createNewEquipment(String equipmentName, String equipmentUse, String equipmentDescription) throws Exception {
+
+
+
+    public Equipment createNewEquipment(String clinicId, String equipmentName, String equipmentUse, String equipmentDescription, Integer stock) throws Exception {
+
+        if (!doesClinicIdExist(clinicId))
+            throw new IllegalArgumentException("\n\nThis is an invalid clinic id");
 
         try {
-            return equipmentRepository.save(new Equipment(equipmentName, equipmentUse, equipmentDescription));
+            return equipmentRepository.save(new Equipment(clinicRepository.findByClinicId(clinicId), equipmentName, equipmentUse, equipmentDescription, stock));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis equipment was not able to persist -> " + exp.getMessage());
@@ -123,38 +150,74 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public Insurance createNewInsurance(String ownerJascId, String insuranceSerialCode, String insurancePlan) throws Exception{
 
-        if (!doesPatientJascIdExist(ownerJascId))
+
+
+
+    public Insurance createNewInsurance(String ownerId, String insuranceSerialCode, String insurancePlan) throws Exception{
+
+        if (!doesPatientIdExist(ownerId))
             throw new IllegalArgumentException("\n\nThis is an invalid patient jascId");
 
         try {
-            return insuranceRepository.save(new Insurance(patientRepository.findByJascId(ownerJascId), insuranceSerialCode, insurancePlan));
+            return insuranceRepository.save(new Insurance(patientRepository.findByPatientId(ownerId), insuranceSerialCode, insurancePlan));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis insurance was not able to persist -> " + exp.getMessage());
         } catch (NullPointerException exp) {
             System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
-            throw new NullPointerException("\n\nAN object or process has risen a null value -> " + exp.getMessage());
+            throw new NullPointerException("\n\nAn object or process has risen a null value -> " + exp.getMessage());
         } catch (Exception exp){
             System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
             throw new Exception("\n\nAn error occurred when trying to create an insurance -> " + exp.getMessage());
         }
     }
 
-    public Meeting createNewMeeting(String title, String objective, Date date, Timestamp time, String place, Set<Staff> attendees) throws Exception {
+
+
+
+    public Medication createNewMedication(String clinicId, String medicationName, String supplier, String medicationDescription, Float medicationPrice, Integer stock) throws Exception{
+
+        if (!doesClinicIdExist(clinicId))
+            throw new IllegalArgumentException("\n\nThis is an invalid clinic id");
+
+        if (medicationPrice < 0.00f)
+            throw new IllegalArgumentException("\n\nThe price must be a positive number bigger than 0.00");
+
+        if (stock < 1)
+            throw new IllegalArgumentException("\n\nYou cannot register ZERO or less medication");
+
+        try {
+            return medicationRepository.save(new Medication(clinicRepository.findByClinicId(clinicId), medicationName, supplier, medicationDescription, medicationPrice, stock));
+        } catch (PersistenceException exp){
+            System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
+            throw new PersistenceException("\n\nThis medication was not able to persist -> " + exp.getMessage());
+        } catch (NullPointerException exp) {
+            System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
+            throw new NullPointerException("\n\nAn object or process has risen a null value -> " + exp.getMessage());
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred when trying to create an medication -> " + exp.getMessage());
+        }
+    }
+
+
+
+
+
+    public Meeting createNewMeeting(String clinicId, String title, String objective, Date date, Timestamp time, String place, Set<Contact> attendees) throws Exception {
+
+        if (!doesClinicIdExist(clinicId))
+            throw new IllegalArgumentException("\n\nThis is an invalid clinic id");
 
         if (attendees.isEmpty())
             throw new NullArgumentException("\n\nYou can not schedule a meeting without any staff attending. Please choose who will attend");
 
-
-        java.util.Date utilDate = new java.util.Date();
-
-        if (differenceInDays(new Date(utilDate.getTime()), date) <= 0)
+        if (differenceInDays(new Date(Calendar.getInstance().getTime().getTime()), date) <= 0)
             throw new IllegalArgumentException("The meeting date must be a future date");
 
         try {
-            return meetingRepository.save(new Meeting(title,objective, date, time, place, attendees));
+            return meetingRepository.save(new Meeting(clinicRepository.findByClinicId(clinicId), title,objective, date, time, place, attendees));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis insurance was not able to persist -> " + exp.getMessage());
@@ -167,57 +230,26 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public Patient createNewPatient(String patientFirstName, String patientLastName, String patientIdCard,
+
+
+
+    public Patient createNewPatient(String clinicId, String patientFirstName, String patientLastName, String patientIdCard,
                                     String patientTelephoneNumber, String patientContactTelephoneNumber,
-                                    String occupation, String patientGender, String patientEmail,
+                                    String occupation, Gender patientGender, String patientEmail,
                                     Date patientBirthDate, String patientNationality, String patientAddress,
                                     String patientCity, String patientCountry) throws Exception {
 
-        java.util.Date utilDate = new java.util.Date();
+        if (!doesClinicIdExist(clinicId))
+            throw new IllegalArgumentException("\n\nThis is an invalid clinic id");
 
-        if (differenceInDays(patientBirthDate ,new Date(utilDate.getTime())) <= 0)
+        if (differenceInDays(patientBirthDate ,new Date(Calendar.getInstance().getTime().getTime())) <= 0)
             throw new IllegalArgumentException("The birth date must be a past date");
 
         try {
-            return patientRepository.save(new Patient(patientFirstName, patientLastName, patientIdCard,
+            return patientRepository.save(new Patient(clinicRepository.findByClinicId(clinicId), patientFirstName, patientLastName, patientIdCard,
                     patientTelephoneNumber, patientContactTelephoneNumber,
                     occupation, patientGender, patientEmail, patientBirthDate, patientNationality,
                     patientAddress, patientCity, patientCountry));
-        } catch (PersistenceException exp){
-            System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
-            throw new PersistenceException("\n\nThis patient was not able to persist -> " + exp.getMessage());
-        } catch (NullPointerException exp) {
-            System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
-            throw new NullPointerException("\n\nAN object or process has risen a null value -> " + exp.getMessage());
-        } catch (Exception exp){
-            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
-            throw new Exception("\n\nAn error occurred when trying to create a patient -> " + exp.getMessage());
-        }
-    }
-
-    public Record createNewRecord(String patientJascId, String recordDetails, Set<Surgery> surgeries, Set<Consultation> consultations) throws Exception {
-
-        if (!doesPatientJascIdExist(patientJascId))
-            throw new IllegalArgumentException("\n\nThis is an invalid patient jascId");
-
-        try {
-            return recordRepository.save(new Record(patientRepository.findByJascId(patientJascId), recordDetails, surgeries, consultations));
-        } catch (PersistenceException exp){
-            System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
-            throw new PersistenceException("\n\nThis record was not able to persist -> " + exp.getMessage());
-        } catch (NullPointerException exp) {
-            System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
-            throw new NullPointerException("\n\nAN object or process has risen a null value -> " + exp.getMessage());
-        } catch (Exception exp){
-            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
-            throw new Exception("\n\nAn error occurred when trying to create a record -> " + exp.getMessage());
-        }
-    }
-
-    public Staff createNewStaffMember(String staffFirstName,String staffLastName, Date staffBirthDate, String staffEmail, String staffClinicId) throws Exception {
-
-        try{
-            return staffRepository.save(new Staff(staffFirstName, staffLastName, staffBirthDate, staffEmail, staffClinicId));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis patient was not able to persist -> " + exp.getMessage());
@@ -230,19 +262,93 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public Surgery createNewSurgery(String name, String description, String patientJascId, Date date, Timestamp time, String surgeryRoom, Set<Staff> staffs, Set<Equipment> equipments, String appointmentJascId) throws Exception {
 
-        if (!doesPatientJascIdExist(patientJascId))
+
+    public Product createNewProduct(String clinicId, String productName, String productDescription, Float productPrice, Integer stock) throws Exception{
+        if (!doesClinicIdExist(clinicId))
+            throw new IllegalArgumentException("\n\n\nThis clinic id is not valid");
+
+        if (productPrice < 0.00f)
+            throw new IllegalArgumentException("\n\nThe price must be a positive number bigger than 0.00");
+
+        if (stock < 1)
+            throw new IllegalArgumentException("\n\nYou cannot register ZERO or less medication");
+
+        try {
+            return productRepository.save(new Product(clinicRepository.findByClinicId(clinicId), productName, productDescription, productPrice, stock));
+        } catch (PersistenceException exp){
+            System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
+            throw new PersistenceException("\n\nThis product was not able to persist -> " + exp.getMessage());
+        } catch (NullPointerException exp) {
+            System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
+            throw new NullPointerException("\n\nAn object or process has risen a null value -> " + exp.getMessage());
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred when trying to create a product -> " + exp.getMessage());
+        }
+    }
+
+
+
+
+    public Record createNewRecord(String patientId, String recordDetails, Set<Surgery> surgeries, Set<Consultation> consultations) throws Exception {
+
+        if (!doesPatientIdExist(patientId))
+            throw new IllegalArgumentException("\n\nThis is an invalid patient id");
+
+        try {
+            return recordRepository.save(new Record(patientRepository.findByPatientId(patientId), recordDetails, surgeries, consultations));
+        } catch (PersistenceException exp){
+            System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
+            throw new PersistenceException("\n\nThis record was not able to persist -> " + exp.getMessage());
+        } catch (NullPointerException exp) {
+            System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
+            throw new NullPointerException("\n\nAn object or process has risen a null value -> " + exp.getMessage());
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred when trying to create a record -> " + exp.getMessage());
+        }
+    }
+
+
+
+
+    public Contact createNewStaffMember(String clinicId, String staffFirstName, String staffLastName, Date staffBirthDate, String staffEmail) throws Exception {
+
+        if (!doesClinicIdExist(clinicId))
+            throw new IllegalArgumentException("\n\nThis is an invalid clinic id");
+
+        try{
+            return contactRepository.save(new Contact(clinicRepository.findByClinicId(clinicId), staffFirstName, staffLastName, staffBirthDate, staffEmail));
+        } catch (PersistenceException exp){
+            System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
+            throw new PersistenceException("\n\nThis patient was not able to persist -> " + exp.getMessage());
+        } catch (NullPointerException exp) {
+            System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
+            throw new NullPointerException("\n\nAn object or process has risen a null value -> " + exp.getMessage());
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred when trying to create a patient -> " + exp.getMessage());
+        }
+    }
+
+
+
+
+
+    public Surgery createNewSurgery(String name, String description, String patientJascId, Date date, Timestamp time, String surgeryRoom, Set<Contact> contacts, Set<Equipment> equipments, String appointmentId) throws Exception {
+
+        if (!doesPatientIdExist(patientJascId))
             throw new IllegalArgumentException("\n\nThis is an invalid patient jascId");
 
-        if (!doesAppointmentJascIdExist(appointmentJascId))
+        if (!doesAppointmentIdExist(appointmentId))
             throw new IllegalArgumentException("\n\nThis appointment jasc id is not valid");
 
-        if (staffs.isEmpty())
+        if (contacts.isEmpty())
             throw new NullArgumentException("\n\nYou may not preform a surgery without staff. Please Choose at least one staff member.");
 
         try {
-            return surgeryRepository.save(new Surgery(name, description, patientRepository.findByJascId(patientJascId), date, time, surgeryRoom, staffs, equipments, appointmentRepository.findByJascId(appointmentJascId)));
+            return surgeryRepository.save(new Surgery(name, description, patientRepository.findByPatientId(patientJascId), date, time, surgeryRoom, contacts, equipments, appointmentRepository.findByAppointmentId(appointmentId)));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis surgery was not able to persist -> " + exp.getMessage());
@@ -255,36 +361,41 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public User createNewUserAccount(String username, String staffJascId, String password, String role) throws Exception {
 
-        if (isUsernameAlreadyTaken(username))
-            throw new IllegalArgumentException("\n\nThis username is already taken. Please choose another one!");
 
-        if (!doesStaffJascIdExist(staffJascId))
-            throw new IllegalArgumentException("\n\nThis staff jasc id is invalid");
+
+
+    public User createNewUserAccount(String clinicId, String email, String firstName, String lastName, Date birthDate, Gender gender, String password, Permission role) throws Exception {
+
+        if (isUsernameAlreadyTaken(email, clinicId))
+            throw new IllegalArgumentException("\n\nThis email is already taken. Please choose another one!");
 
         try {
-            return userRepository.save(new User(username, staffRepository.findByJascId(staffJascId), password, role));
+            return userRepository.save(new User(clinicRepository.findByClinicId(clinicId), email, firstName, lastName, birthDate, gender, password, role));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis user was not able to persist -> " + exp.getMessage());
         } catch (NullPointerException exp) {
             System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
-            throw new NullPointerException("\n\nAN object or process has risen a null value -> " + exp.getMessage());
+            throw new NullPointerException("\n\nAn object or process has risen a null value -> " + exp.getMessage());
         } catch (Exception exp){
             System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
             throw new Exception("\n\nAn error occurred when trying to create a user -> " + exp.getMessage());
         }
     }
 
-    // Elimination Functions
-    public void deleteRegisteredAppointment(String jascId) throws Exception {
 
-        if (!doesAppointmentJascIdExist(jascId))
+
+
+
+    // Elimination Functions
+    public void deleteRegisteredAppointment(String appointmentId) throws Exception {
+
+        if (!doesAppointmentIdExist(appointmentId))
             throw new IllegalArgumentException("\n\nThis appointment jasc id is not valid");
 
         try {
-            appointmentRepository.delete(jascId);
+            appointmentRepository.delete(appointmentId);
         } catch (NullPointerException exp) {
             System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
             throw new NullPointerException("\n\nAN object or process has risen a null value -> " + exp.getMessage());
@@ -294,13 +405,16 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public void deleteCustomTask(String jascId) throws Exception{
 
-        if (!doesCustomTaskJascIdExist(jascId))
+
+
+    public void deleteCustomTask(String taskId) throws Exception{
+
+        if (!doesCustomTaskIdExist(taskId))
             throw new IllegalArgumentException("This Task jasc id is invalid");
 
         try{
-            choreRepository.delete(jascId);
+            choreRepository.delete(taskId);
         } catch (NullPointerException exp) {
             System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
             throw new NullPointerException("\n\nAN object or process has risen a null value -> " + exp.getMessage());
@@ -310,13 +424,16 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public void deleteRegisteredEquipment(String jascId) throws Exception {
 
-        if (!doesEquipmentJascIdExist(jascId))
+
+
+    public void deleteRegisteredEquipment(String equipmentId) throws Exception {
+
+        if (!doesEquipmentIdExist(equipmentId))
             throw new IllegalArgumentException("\n\nThis equipment jasc id is not valid");
 
         try {
-            equipmentRepository.delete(jascId);
+            equipmentRepository.delete(equipmentId);
         } catch (NullPointerException exp) {
             System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
             throw new NullPointerException("\n\nAN object or process has risen a null value -> " + exp.getMessage());
@@ -326,64 +443,113 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public void deleteRegisteredInsurance(String jascId) throws Exception {
 
-        if (!doesInsuranceJascIdExist(jascId))
+
+
+    public void deleteRegisteredInsurance(String insuranceId) throws Exception {
+
+        if (!doesInsuranceIdExist(insuranceId))
             throw new IllegalArgumentException("\n\nThis insurance jasc Id is invalid,! Please try again.");
 
         try {
-            insuranceRepository.delete(jascId);
+            insuranceRepository.delete(insuranceId);
         } catch (NullPointerException exp) {
             System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
-            throw new NullPointerException("\n\nAN object or process has risen a null value -> " + exp.getMessage());
+            throw new NullPointerException("\n\nAn object or process has risen a null value -> " + exp.getMessage());
         } catch (Exception exp){
             System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
             throw new Exception("\n\nAn error occurred while deleting an insurance -> " + exp.getMessage());
         }
     }
 
-    public void deleteRegisteredMeeting(String jascId) throws Exception {
 
-        if (!doesMeetingJascIdExist(jascId))
-            throw new IllegalArgumentException("\n\nThis meeting jasc id is invalid");
+
+
+    public void deleteRegisteredMedication(String medicationId) throws Exception{
+        if (!doesMedicationIdExist(medicationId))
+            throw new IllegalArgumentException("\n\nThis is an invalid medication id");
 
         try {
-            meetingRepository.delete(jascId);
+            medicationRepository.delete(medicationId);
         } catch (NullPointerException exp) {
             System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
-            throw new NullPointerException("\n\nAN object or process has risen a null value -> " + exp.getMessage());
+            throw new NullPointerException("\n\nAn object or process has risen a null value -> " + exp.getMessage());
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred while deleting a medication -> " + exp.getMessage());
         }
     }
 
-    public void deleteRegisteredStaff(String jascId) throws Exception {
 
-        if (!doesStaffJascIdExist(jascId))
-            throw new IllegalArgumentException("\n\nThis staff jasc id is invalid");
 
-        if (jascId.equals("JASC-STAFF-ADMIN"))
+
+    public void deleteRegisteredMeeting(String meetingId) throws Exception {
+
+        if (!doesMeetingIdExist(meetingId))
+            throw new IllegalArgumentException("\n\nThis meeting id is invalid");
+
+        try {
+            meetingRepository.delete(meetingId);
+        } catch (NullPointerException exp) {
+            System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
+            throw new NullPointerException("\n\nAn object or process has risen a null value -> " + exp.getMessage());
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred while deleting a meeting -> " + exp.getMessage());
+        }
+    }
+
+
+
+
+    public void deleteRegisteredStaff(String staffId) throws Exception {
+
+        if (!doesStaffIdExist(staffId))
+            throw new IllegalArgumentException("\n\nThis staff id is not valid");
+
+        if (staffId.equals("JASC-STAFF-ADMIN"))
             throw new IllegalArgumentException("\n\nDANGER: YOU CAN NOT ERASE ADMIN ACCOUNT!");
 
         try {
-            staffRepository.delete(jascId);
+            contactRepository.delete(staffId);
         } catch (NullPointerException exp) {
             System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
-            throw new NullPointerException("\n\nAN object or process has risen a null value -> " + exp.getMessage());
+            throw new NullPointerException("\n\nAn object or process has risen a null value -> " + exp.getMessage());
         } catch (Exception exp){
             System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
             throw new Exception("\n\nAn error occurred while deleting a staff member -> " + exp.getMessage());
         }
     }
 
-    public void deleteRegisterdUserAccount(String username) throws Exception {
 
-        if (!isUsernameAlreadyTaken(username))
+
+    public void deleteRegisteredProduct(String productId) throws Exception{
+        if (!doesProductIdExist(productId))
+            throw new IllegalArgumentException("\n\nThis is an invalid productId");
+
+        try {
+            productRepository.delete(productId);
+        } catch (NullPointerException exp) {
+            System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
+            throw new NullPointerException("\n\nAn object or process has risen a null value -> " + exp.getMessage());
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred while deleting a product -> " + exp.getMessage());
+        }
+    }
+
+
+
+    public void deleteRegisteredUserAccount(String userId) throws Exception {
+
+        if (!doesUserIdExist(userId))
             throw new IllegalArgumentException("\n\nThis user account does not exist");
 
-        if (username.equals("admin"))
+        if (userRepository.findByUserId(userId).getRole().equals(Permission.ADMIN))
             throw new IllegalArgumentException("\n\nDANGER: YOU CAN NOT ERASE ADMIN ACCOUNT!");
 
         try {
-            userRepository.delete(username);
+            userRepository.delete(userId);
         } catch (NullPointerException exp) {
             System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
             throw new NullPointerException("\n\nAN object or process has risen a null value -> " + exp.getMessage());
@@ -392,6 +558,9 @@ public class DataEntryAndManagementService {
             throw new Exception("\n\nAn error occurred while deleting a user -> " + exp.getMessage());
         }
     }
+
+
+
 
     // Editing Functions
     public void editAppointment(Appointment appointment) throws Exception {
@@ -406,12 +575,15 @@ public class DataEntryAndManagementService {
             throw new PersistenceException("\n\nThis appointment was not able to persist -> " + exp.getMessage());
         } catch (NullPointerException exp) {
             System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
-            throw new NullPointerException("\n\nAN object or process has risen a null value -> " + exp.getMessage());
+            throw new NullPointerException("\n\nAn object or process has risen a null value -> " + exp.getMessage());
         } catch (Exception exp){
             System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
             throw new Exception("\n\nAn error occurred when trying to edit an appointment -> " + exp.getMessage());
         }
     }
+
+
+
 
     public void editEquipment(Equipment equipment) throws Exception {
 
@@ -425,12 +597,15 @@ public class DataEntryAndManagementService {
             throw new PersistenceException("\n\nThis equipment was not able to persist -> " + exp.getMessage());
         } catch (NullPointerException exp) {
             System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
-            throw new NullPointerException("\n\nAN object or process has risen a null value -> " + exp.getMessage());
+            throw new NullPointerException("\n\nAn object or process has risen a null value -> " + exp.getMessage());
         } catch (Exception exp){
             System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
             throw new Exception("\n\nAn error occurred when trying to edit an equipment -> " + exp.getMessage());
         }
     }
+
+
+
 
     public void editInsurance(Insurance insurance) throws Exception {
 
@@ -438,18 +613,40 @@ public class DataEntryAndManagementService {
             throw new NullArgumentException("\n\nThis insurance has a NULL value");
 
         try {
-
+            insuranceRepository.save(insurance);
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis insurance was not able to persist -> " + exp.getMessage());
         } catch (NullPointerException exp) {
             System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
-            throw new NullPointerException("\n\nAN object or process has risen a null value -> " + exp.getMessage());
+            throw new NullPointerException("\n\nAn object or process has risen a null value -> " + exp.getMessage());
         } catch (Exception exp){
             System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
             throw new Exception("\n\nAn error occurred when trying to edit an insurance -> " + exp.getMessage());
         }
     }
+
+
+
+    public void editMedication(Medication medication) throws Exception{
+        if (medication == null)
+            throw new NullArgumentException("\n\nThis medication has a NULL value");
+
+        try {
+            medicationRepository.save(medication);
+        } catch (PersistenceException exp){
+            System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
+            throw new PersistenceException("\n\nThis medication was not able to persist -> " + exp.getMessage());
+        } catch (NullPointerException exp) {
+            System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
+            throw new NullPointerException("\n\nAn object or process has risen a null value -> " + exp.getMessage());
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred when trying to edit a medication -> " + exp.getMessage());
+        }
+    }
+
+
 
     public void editMeeting(Meeting meeting) throws Exception {
 
@@ -457,12 +654,21 @@ public class DataEntryAndManagementService {
             throw new NullArgumentException("\n\nthe meeting object was sent with a NULL value");
 
         try {
-
+            meetingRepository.save(meeting);
+        } catch (PersistenceException exp){
+            System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
+            throw new PersistenceException("\n\nThis meeting was not able to persist -> " + exp.getMessage());
         } catch (NullPointerException exp) {
             System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
             throw new NullPointerException("\n\nAn object or process has risen a null value -> " + exp.getMessage());
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred when trying to edit a meeting -> " + exp.getMessage());
         }
     }
+
+
+
 
     public void editPatient(Patient patient) throws Exception {
 
@@ -476,17 +682,39 @@ public class DataEntryAndManagementService {
             throw new PersistenceException("\n\nThis patient was not able to persist -> " + exp.getMessage());
         } catch (NullPointerException exp) {
             System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
-            throw new NullPointerException("\n\nAN object or process has risen a null value -> " + exp.getMessage());
+            throw new NullPointerException("\n\nAn object or process has risen a null value -> " + exp.getMessage());
         } catch (Exception exp){
             System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
             throw new Exception("\n\nAn error occurred when trying to edit a patient -> " + exp.getMessage());
         }
     }
 
-    public void editUserAccountCredentials(String username, String password, String role) throws Exception{
+
+
+    public void editProduct(Product product) throws Exception{
+        if (product == null)
+            throw new NullArgumentException("\n\nThis product has a NULL value");
 
         try {
-            User user = userRepository.findByUsername(username);
+            productRepository.save(product);
+        } catch (PersistenceException exp){
+            System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
+            throw new PersistenceException("\n\nThis product was not able to persist -> " + exp.getMessage());
+        } catch (NullPointerException exp) {
+            System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
+            throw new NullPointerException("\n\nAn object or process has risen a null value -> " + exp.getMessage());
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred when trying to edit a product -> " + exp.getMessage());
+        }
+    }
+
+
+
+    public void editUserAccountCredentials(String email, String clinicId, String password, Permission role) throws Exception{
+
+        try {
+            User user = userRepository.findUserAccountWithUsernameAndClinicID(email, clinicId);
             user.setPassword(password);
             user.setRole(role);
             userRepository.save(user);
@@ -502,10 +730,31 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public void editStaff(Staff staff) throws Exception{
+
+
+
+    public void editUserPhoto(String email, String clinic, Byte[] photo) throws Exception{
 
         try {
-            staffRepository.save(staff);
+            User user = userRepository.findUserAccountWithUsernameAndClinicID(email, clinic);
+            user.setPhoto(photo);
+            userRepository.save(user);
+        } catch (PersistenceException exp){
+            System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
+            throw new PersistenceException("\n\nThis username was not able to persist -> " + exp.getMessage());
+        } catch (NullPointerException exp) {
+            System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
+            throw new NullPointerException("\n\nAn object or process has risen a null value -> " + exp.getMessage());
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred when trying to edit username-> " + exp.getMessage());
+        }
+    }
+
+    public void editStaff(Contact contact) throws Exception{
+
+        try {
+            contactRepository.save(contact);
 
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
@@ -521,50 +770,74 @@ public class DataEntryAndManagementService {
 
 
     // Auxiliary Functions
-    private boolean doesAppointmentJascIdExist(String jascId) {
-        Appointment appointment = appointmentRepository.findByJascId(jascId);
+    private boolean doesAppointmentIdExist(String appointmentId) {
+        Appointment appointment = appointmentRepository.findByAppointmentId(appointmentId);
 
         return (appointment != null);
     }
 
-    private boolean doesCustomTaskJascIdExist(String jascId){
-        Chore chore = choreRepository.findByJascId(jascId);
+    private boolean doesClinicIdExist(String clinicId){
+        Clinic clinic = clinicRepository.findByClinicId(clinicId);
+
+        return (clinic != null);
+    }
+
+    private boolean doesCustomTaskIdExist(String taskId){
+        Chore chore = choreRepository.findByChoreId(taskId);
 
         return (chore != null);
     }
 
-    private boolean doesEquipmentJascIdExist(String jascId){
-        Equipment equipment = equipmentRepository.findByJascId(jascId);
+    private boolean doesEquipmentIdExist(String equipmentId){
+        Equipment equipment = equipmentRepository.findByEquipmentId(equipmentId);
 
         return (equipment != null);
     }
 
-    private boolean doesInsuranceJascIdExist(String jascId){
-        Insurance insurance = insuranceRepository.findByJascId(jascId);
+    private boolean doesInsuranceIdExist(String insuranceId){
+        Insurance insurance = insuranceRepository.findByInsuranceId(insuranceId);
 
         return (insurance != null);
     }
 
-    private boolean doesMeetingJascIdExist(String jascId){
-        Meeting meeting = meetingRepository.findByJascId(jascId);
+    private boolean doesMedicationIdExist(String medicationId){
+        Medication medication = medicationRepository.findByMedicationId(medicationId);
+
+        return (medication != null);
+    }
+
+    private boolean doesMeetingIdExist(String meetingId){
+        Meeting meeting = meetingRepository.findByMeetingId(meetingId);
 
         return (meeting != null);
     }
 
-    private boolean doesPatientJascIdExist(String jascId){
-        Patient patient = patientRepository.findByJascId(jascId);
+    private boolean doesPatientIdExist(String patientId){
+        Patient patient = patientRepository.findByPatientId(patientId);
 
         return (patient != null);
     }
 
-    private boolean doesStaffJascIdExist(String jascId){
-        Staff staff = staffRepository.findByJascId(jascId);
+    private boolean doesStaffIdExist(String staffId){
+        Contact contact = contactRepository.findByContactId(staffId);
 
-        return (staff != null);
+        return (contact != null);
     }
 
-    private boolean isUsernameAlreadyTaken(String username){
-        User user = userRepository.findByUsername(username);
+    private boolean doesProductIdExist(String productId){
+        Product product = productRepository.findByProductId(productId);
+
+        return (product != null);
+    }
+
+    private boolean isUsernameAlreadyTaken(String email, String clinicId){
+        User user = userRepository.findUserAccountWithUsernameAndClinicID(email, clinicId);
+
+        return (user != null);
+    }
+
+    private boolean doesUserIdExist(String userId){
+        User user = userRepository.findByUserId(userId);
 
         return (user != null);
     }

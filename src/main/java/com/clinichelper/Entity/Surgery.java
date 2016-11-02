@@ -15,8 +15,9 @@ import java.util.UUID;
 @Entity
 @Table(name="surgeries")
 public class Surgery implements Serializable{
+    // Attributes
     @Id
-    private String jascId;
+    private String surgeryId;
     @NotNull
     private String surgeryName;
     private String surgeryDescription;
@@ -31,36 +32,38 @@ public class Surgery implements Serializable{
     private String surgeryRoom;
     @ManyToMany
     @NotNull
-    private Set<Staff> staffs;
-    @OneToMany
+    private Set<Contact> contacts;
+    @ManyToMany
     private Set<Equipment> equipments;
     @OneToOne
     @NotNull
     private Appointment appointment;
 
+    // Constructors
     public Surgery(){
 
     }
 
-    public Surgery(String surgeryName, String surgeryDescription, Patient patient, Date surgeryDate, Timestamp surgeryTime, String surgeryRoom, Set<Staff> staffs, Set<Equipment> equipments, Appointment appointment) {
-        this.setJascId("JASC-S-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+    public Surgery(String surgeryName, String surgeryDescription, Patient patient, Date surgeryDate, Timestamp surgeryTime, String surgeryRoom, Set<Contact> contacts, Set<Equipment> equipments, Appointment appointment) {
+        this.setSurgeryId(appointment.getClinic().getClinicPrefix() + "-S-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setSurgeryName(surgeryName);
         this.setSurgeryDescription(surgeryDescription);
         this.setPatient(patient);
         this.setSurgeryDate(surgeryDate);
         this.setSurgeryTime(surgeryTime);
         this.setSurgeryRoom(surgeryRoom);
-        this.setStaffs(staffs);
+        this.setContacts(contacts);
         this.setEquipments(equipments);
         this.setAppointment(appointment);
     }
 
-    public String getJascId() {
-        return jascId;
+    // Getters and Setters
+    public String getSurgeryId() {
+        return surgeryId;
     }
 
-    public void setJascId(String jascId) {
-        this.jascId = jascId;
+    public void setSurgeryId(String surgeryId) {
+        this.surgeryId = surgeryId;
     }
 
     public String getSurgeryName() {
@@ -109,12 +112,12 @@ public class Surgery implements Serializable{
         this.surgeryRoom = surgeryRoom;
     }
 
-    public Set<Staff> getStaffs() {
-        return staffs;
+    public Set<Contact> getContacts() {
+        return contacts;
     }
 
-    public void setStaffs(Set<Staff> staffs) {
-        this.staffs = staffs;
+    public void setContacts(Set<Contact> contacts) {
+        this.contacts = contacts;
     }
 
     public Appointment getAppointment() {
