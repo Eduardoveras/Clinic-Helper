@@ -40,24 +40,19 @@ public class IndexController {
     }
 
     @PostMapping("/newTask")
-    public String registerNewPatient(
-            @RequestParam("title") String title,
-            @RequestParam("type") Task type,
-            @RequestParam("description") String description,
-            @RequestParam("clinic") String clinicId
-           )
-            {
+    public String registerNewPatient(/*@RequestParam("clinic") String clinicId,*/@RequestParam("title") String title, @RequestParam("type") String type, @RequestParam("description") String description){
 
         try {
-
-           DEAMS.createNewCustomTask(clinicId, title, type, description);
+            String y = title;
+           DEAMS.createNewCustomTask("CH-PLATINUM-JASC", title, type.toUpperCase().equals("U") ? Task.URGENT : Task.REMINDER, description);
+            return "redirect:/";
         } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
             System.out.println("ERROR EN CREAR PACIENTE");
         } catch (Exception exp){
             System.out.println("ERROR EN CREAR PACIENTE");
         }
 
-        return "redirect:/patients";
+        return "redirect:/";
     }
 
 }
