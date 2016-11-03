@@ -27,23 +27,13 @@ public class IndexController {
     private ToolKitService TKS;
 
 
-    /*@RequestMapping(value="/*", method = RequestMethod.GET)
-    public String verify(Model model, HttpSession session) {
-        if (null == session.getAttribute("user"))
-        {
-            return "redirect:/login";
-        }
-        else
-        {
-            return "redirect:/home";
-        }
-
-    }*/
-
     @RequestMapping("/")
-    public ModelAndView home(Model model, @RequestParam(value="name", required=false, defaultValue="home") String name,HttpSession session) {
-        if (!DQS.isUserLoggedIn(session))
+    public ModelAndView home(Model model, @RequestParam(value="name", required=false, defaultValue="home") String name) {
+        if (!DQS.isUserLoggedIn())
+        {
+            System.out.println("\n\n\n\n\nERROR DETECTING LOGGIN AT INDEX\n\n\n\n\n");
             return new ModelAndView("redirect:/login");
+        }
         model.addAttribute("name", name);
         model.addAttribute("todoList", TKS.InitializeTodoList("CH-PLATINUM-JASC"));
         model.addAttribute("todays_appointments", DQS.findAllRegisteredAppointmentsForToday("CH-PLATINUM-JASC"));

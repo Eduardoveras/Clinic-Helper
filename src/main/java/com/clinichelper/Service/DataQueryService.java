@@ -44,6 +44,19 @@ public class DataQueryService {
     private SurgeryRepository surgeryRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private HttpSession session;
+
+
+    public Object getSessionAttr(String name)
+    {
+        return session.getAttribute(name);
+    }
+
+    public void setSessionAttr(String name,Object obj)
+    {
+        session.setAttribute(name,obj);
+    }
 
     // Appointment Queries
     public Appointment findRegisteredAppointment(String appointmentId){
@@ -200,9 +213,9 @@ public class DataQueryService {
 
     public List<User> findAllAllRegisteredUsersForClinic(String clinicId) { return userRepository.findByClinicId(clinicId); }
 
-    public boolean validateUserAccountCredentials(String username, String clinicId, String password) {
+    public boolean validateUserAccountCredentials(String username, String password) {
 
-        User user = userRepository.findUserAccountWithUsernameAndClinicIdAndPassword(username.toLowerCase(), clinicId, password);
+        User user = userRepository.findUserAccountWithUsernameAndClinicIdAndPassword(username.toLowerCase(), password);
 
         return (user != null);
     }
@@ -215,11 +228,8 @@ public class DataQueryService {
         return (patient != null);
     }
 
-    public boolean isUserLoggedIn(HttpSession session) {
-        if (null == session.getAttribute("user"))
-            return false;
-        else
-            return true;
+    public boolean isUserLoggedIn() {
+        return null != session.getAttribute("user");
     }
 }
 

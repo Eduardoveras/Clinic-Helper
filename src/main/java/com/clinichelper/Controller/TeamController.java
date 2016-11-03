@@ -28,7 +28,7 @@ public class TeamController {
     // Services
     @Autowired
     private DataEntryAndManagementService DEAMS;
-    @Autowired
+    //@Autowired
     private DataQueryService DQS;
 
     // Gets
@@ -42,8 +42,8 @@ public class TeamController {
     }
 
     @GetMapping("/users")
-    public ModelAndView fetchAllPatientsView(Model model, HttpSession session){
-        if (!DQS.isUserLoggedIn(session))
+    public ModelAndView fetchAllPatientsView(Model model){
+        if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
         model.addAttribute("userList", DQS.findAllAllRegisteredUsersForClinic("CH-PLATINUM-JASC"));

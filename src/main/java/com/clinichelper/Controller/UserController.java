@@ -75,15 +75,18 @@ public class UserController {
     }
 
     @PostMapping("/userLogin")
-    public String loginUser(@RequestParam("email") String email, @RequestParam("clinic") String clinicId, @RequestParam("password") String password,HttpSession session){
+    public String loginUser(@RequestParam("email") String email, @RequestParam("password") String password){
 
-        if (DQS.validateUserAccountCredentials(email, clinicId, password))
+
+        if (DQS.validateUserAccountCredentials(email, password))
         {
-            session.setAttribute("email",email);
-            session.setAttribute("clinicID",clinicId);
+            System.out.println("\n\n\n\n\n\n\n\n\nFUCK THIS IM LOGGED\n\n\n");
+            User u = DQS.findRegisteredUserAccount(email,password);
+            DQS.setSessionAttr("user",u);
             return "redirect:/"; // TODO: filter which user is login in to redirect them to the correct url
         }
         else {
+            System.out.println("\n\n\n\n\n\n\n\n\nFUCK THIS IM NOT LOGGED\n\n\n\n\n");
             return "redirect:/login"; // TODO: Implement error exception or message to login
         }
     }
@@ -91,7 +94,7 @@ public class UserController {
     @PostMapping("/editMyPassword")
     public String editUserPassword(@RequestParam("email") String email, @RequestParam("clinic") String clinicId, @RequestParam("password") String password, @RequestParam("newPassword") String newPassword){
 
-        if (DQS.validateUserAccountCredentials(email.toLowerCase(), clinicId, password)){
+        if (DQS.validateUserAccountCredentials(email.toLowerCase(), password)){
 
             User user = DQS.findRegisteredUserAccount(email.toLowerCase(),clinicId);
 

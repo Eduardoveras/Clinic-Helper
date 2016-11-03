@@ -27,13 +27,13 @@ public class PatientController {
     // Repositories
     @Autowired
     private DataEntryAndManagementService DEAMS;
-    @Autowired
+    //@Autowired
     private DataQueryService DQS;
 
 
     @GetMapping("/patients")
-    public ModelAndView fetchAllPatientsView(Model model, HttpSession session){
-        if (!DQS.isUserLoggedIn(session))
+    public ModelAndView fetchAllPatientsView(Model model){
+        if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
         model.addAttribute("patientList", DQS.findAllRegisteredPatientsForClinic("CH-PLATINUM-JASC"));
@@ -43,8 +43,8 @@ public class PatientController {
     }
 
     @GetMapping("/patient/{id}")
-    public ModelAndView fetchPatientview(Model model,@PathVariable(value="id") String patientId,HttpSession session){
-        if (!DQS.isUserLoggedIn(session))
+    public ModelAndView fetchPatientview(Model model,@PathVariable(value="id") String patientId){
+        if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
         model.addAttribute("patient", DQS.findRegisteredPatient(patientId));
