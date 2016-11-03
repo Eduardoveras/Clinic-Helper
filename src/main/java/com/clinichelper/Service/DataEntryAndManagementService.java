@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.PersistenceException;
-import javax.validation.constraints.Null;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Calendar;
@@ -714,7 +713,7 @@ public class DataEntryAndManagementService {
     public void editUserAccountCredentials(String email, String clinicId, String password, Permission role) throws Exception{
 
         try {
-            User user = userRepository.findUserAccountWithUsernameAndClinicID(email, clinicId);
+            User user = userRepository.findUserAccountWithUsernameAndPassword(email, clinicId);
             user.setPassword(password);
             user.setRole(role);
             userRepository.save(user);
@@ -736,7 +735,7 @@ public class DataEntryAndManagementService {
     public void editUserPhoto(String email, String clinic, Byte[] photo) throws Exception{
 
         try {
-            User user = userRepository.findUserAccountWithUsernameAndClinicID(email, clinic);
+            User user = userRepository.findUserAccountWithUsernameAndPassword(email, clinic);
             user.setPhoto(photo);
             userRepository.save(user);
         } catch (PersistenceException exp){
@@ -831,7 +830,7 @@ public class DataEntryAndManagementService {
     }
 
     private boolean isUsernameAlreadyTaken(String email, String clinicId){
-        User user = userRepository.findUserAccountWithUsernameAndClinicID(email, clinicId);
+        User user = userRepository.findUserAccountWithUsernameAndPassword(email, clinicId);
 
         return (user != null);
     }

@@ -30,7 +30,7 @@ public class SuperAdminService {
 
     public User findUserInformation(String userId) { return userRepository.findByUserId(userId); }
 
-    public User findRegisteredUserAccount(String email, String clinicId){ return userRepository.findUserAccountWithUsernameAndClinicID(email, clinicId); }
+    public User findRegisteredUserAccount(String email, String clinicId){ return userRepository.findUserAccountWithUsernameAndPassword(email, clinicId); }
 
     public List<User> findAllAllRegisteredUsersForClinic(String clinicId) { return userRepository.findByClinicId(clinicId); }
 }

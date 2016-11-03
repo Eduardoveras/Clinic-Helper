@@ -209,7 +209,7 @@ public class DataQueryService {
     // User Queries
     public User findUserInformation(String userId) { return userRepository.findByUserId(userId); }
 
-    public User findRegisteredUserAccount(String email, String clinicId){ return userRepository.findUserAccountWithUsernameAndClinicID(email, clinicId); }
+    public User findRegisteredUserAccount(String email, String password){ return userRepository.findUserAccountWithUsernameAndPassword(email, password); }
 
     public List<User> findAllAllRegisteredUsersForClinic(String clinicId) { return userRepository.findByClinicId(clinicId); }
 
