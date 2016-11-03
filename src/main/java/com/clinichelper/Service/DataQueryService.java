@@ -8,6 +8,7 @@ import com.clinichelper.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
@@ -213,4 +214,13 @@ public class DataQueryService {
 
         return (patient != null);
     }
+
+    public boolean isUserLoggedIn(HttpSession session) {
+        if (null == session.getAttribute("user"))
+            return false;
+        else
+            return true;
+    }
 }
+
+

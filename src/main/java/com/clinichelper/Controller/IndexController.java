@@ -9,10 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.PersistenceException;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class IndexController {
@@ -24,20 +26,31 @@ public class IndexController {
     @Autowired
     private ToolKitService TKS;
 
-    @RequestMapping("/")
-    public ModelAndView home(Model model, @RequestParam(value="name", required=false, defaultValue="home") String name) {
 
+    /*@RequestMapping(value="/*", method = RequestMethod.GET)
+    public String verify(Model model, HttpSession session) {
+        if (null == session.getAttribute("user"))
+        {
+            return "redirect:/login";
+        }
+        else
+        {
+            return "redirect:/home";
+        }
+
+    }*/
+
+    @RequestMapping("/")
+    public ModelAndView home(Model model, @RequestParam(value="name", required=false, defaultValue="home") String name,HttpSession session) {
+        if (!DQS.isUserLoggedIn(session))
+            return new ModelAndView("redirect:/login");
         model.addAttribute("name", name);
         model.addAttribute("todoList", TKS.InitializeTodoList("CH-PLATINUM-JASC"));
         model.addAttribute("todays_appointments", DQS.findAllRegisteredAppointmentsForToday("CH-PLATINUM-JASC"));
         return new ModelAndView("homepage/index");
     }
 
-    @RequestMapping("/*")
-    public ModelAndView err(Model model, @RequestParam(value="name", required=false, defaultValue="404") String name) {
-        model.addAttribute("name", name);
-        return new ModelAndView("layouts/error");
-    }
+
 
     @PostMapping("/newTask")
     public String registerNewPatient(
@@ -59,5 +72,6 @@ public class IndexController {
 
         return "redirect:/patients";
     }
+
 
 }

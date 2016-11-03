@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.PersistenceException;
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by Eduardo veras on 28-Oct-16.
@@ -40,9 +41,8 @@ public class UserController {
     }
 
     @RequestMapping("/login")
-    public ModelAndView fetchLoginView(Model model){
+    public ModelAndView fetchLoginView(Model model, HttpSession session){
 
-        model.addAttribute("name", "THIS IS NOT NECESSARY");
 
         return new ModelAndView("/users/login_register");
     }
@@ -75,12 +75,17 @@ public class UserController {
     }
 
     @PostMapping("/userLogin")
-    public String loginUser(@RequestParam("email") String email, @RequestParam("clinic") String clinicId, @RequestParam("password") String password){
+    public String loginUser(@RequestParam("email") String email, @RequestParam("clinic") String clinicId, @RequestParam("password") String password,HttpSession session){
 
         if (DQS.validateUserAccountCredentials(email, clinicId, password))
+        {
+            session.setAttribute("email",email);
+            session.setAttribute("clinicID",clinicId);
             return "redirect:/"; // TODO: filter which user is login in to redirect them to the correct url
-        else
+        }
+        else {
             return "redirect:/login"; // TODO: Implement error exception or message to login
+        }
     }
 
     @PostMapping("/editMyPassword")
