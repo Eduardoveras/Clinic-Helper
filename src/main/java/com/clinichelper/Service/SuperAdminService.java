@@ -33,4 +33,5 @@ public class SuperAdminService {
     public User findRegisteredUserAccount(String email, String clinicId){ return userRepository.findUserAccountWithUsernameAndPassword(email, clinicId); }
 
     public List<User> findAllAllRegisteredUsersForClinic(String clinicId) { return userRepository.findByClinicId(clinicId); }
+
 }
