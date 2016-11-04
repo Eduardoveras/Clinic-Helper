@@ -1,9 +1,6 @@
 package com.clinichelper.Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.UUID;
@@ -21,6 +18,7 @@ public class Equipment implements Serializable{
     @NotNull
     private String equipmentUse;
     private String equipmentDescription;
+    private Integer equipmentInStock;
     @ManyToOne
     private Clinic clinic;
 
@@ -29,12 +27,13 @@ public class Equipment implements Serializable{
 
     }
 
-    public Equipment(Clinic clinic, String equipmentName, String equipmentUse, String equipmentDescription) {
+    public Equipment(Clinic clinic, String equipmentName, String equipmentUse, String equipmentDescription, Integer equipmentInStock) {
         this.setEquipmentId(clinic.getClinicPrefix() + "-E-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setEquipmentName(equipmentName.toUpperCase());
         this.setEquipmentUse(equipmentUse);
         this.setEquipmentDescription(equipmentDescription);
         this.clinic = clinic;
+        this.setEquipmentInStock(equipmentInStock);
     }
 
     //Getters and Setters
@@ -68,5 +67,13 @@ public class Equipment implements Serializable{
 
     public void setEquipmentDescription(String equipmentDescription) {
         this.equipmentDescription = equipmentDescription;
+    }
+
+    public Integer getEquipmentInStock() {
+        return equipmentInStock;
+    }
+
+    public void setEquipmentInStock(Integer equipmentInStock) {
+        this.equipmentInStock = equipmentInStock;
     }
 }

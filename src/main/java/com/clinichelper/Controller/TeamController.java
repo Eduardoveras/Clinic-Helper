@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.PersistenceException;
+import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
@@ -42,6 +43,8 @@ public class TeamController {
 
     @GetMapping("/users")
     public ModelAndView fetchAllPatientsView(Model model){
+        if (!DQS.isUserLoggedIn())
+            return new ModelAndView("redirect:/login");
 
         model.addAttribute("userList", DQS.findAllAllRegisteredUsersForClinic("CH-PLATINUM-JASC"));
         model.addAttribute("clinicId", DQS.findAllAllRegisteredUsersForClinic("CH-PLATINUM-JASC").get(0).getClinic().getClinicPrefix());

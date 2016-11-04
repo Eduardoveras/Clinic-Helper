@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ToolKitService {
@@ -22,16 +20,23 @@ public class ToolKitService {
 
     // Repositories
     @Autowired
+    private EquipmentRepository equipmentRepository;
+    @Autowired
     private ChoreRepository choreRepository;
     @Autowired
     private ClinicRepository clinicRepository;
+    @Autowired
+    private MedicationRepository medicationRepository;
     @Autowired
     private MeetingRepository meetingRepository;
     @Autowired
     private PatientRepository patientRepository;
     @Autowired
+    private ProductRepository productRepository;
+    @Autowired
     private ContactRepository contactRepository;
 
+    // Services
     public List<Chore> InitializeTodoList(String clinicId){
 
         todoList = new ArrayList<>();
@@ -48,6 +53,21 @@ public class ToolKitService {
         // TODO: Add surgery mechanic
 
         return todoList;
+    }
+
+    public Map<String, List> FetchClinicInventory(String clinicId){
+        Map<String, List> inventory = new HashMap<>();
+
+        // Adding Equipments
+        inventory.put("equipments", StockEquipmentShelf(clinicId));
+
+        // Adding Products
+        inventory.put("products", StockProductSelf(clinicId));
+
+        // Adding Medications
+        inventory.put("medication", StockMedicationSelf(clinicId));
+
+        return inventory;
     }
 
     // TodoList Functions
@@ -68,6 +88,14 @@ public class ToolKitService {
     private void FetchMeetings(String clinicId){
         todoList.addAll(findAllMeetingsForToday(clinicId));
     }
+
+    // Inventory Functions
+    private List<Equipment> StockEquipmentShelf(String clinicId) { return equipmentRepository.findByClinic(clinicId); }
+
+    private List<Product> StockProductSelf(String clinicId) { return productRepository.findByClinic(clinicId); }
+
+    private List<Medication> StockMedicationSelf(String clinicId){ return medicationRepository.findByClinic(clinicId); }
+
 
     // Auxiliary Function
     private List<Chore> findAllMeetingsForToday(String clinicId){

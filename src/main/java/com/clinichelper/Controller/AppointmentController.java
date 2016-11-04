@@ -41,7 +41,7 @@ public class AppointmentController {
 
     // Posts
     @PostMapping("/newAppointment")
-    public String createNewApointment(/*@RequestParam("clinic") String clinicId,*/@RequestParam("appointmentDate") String appointmentDate, @RequestParam("appointmentTime") String  appointmentTime, @RequestParam("patient") String patientId, @RequestParam("description") String appointmentDescription/*, @RequestParam("type") String appointmentType*/){
+    public String createNewApointment(/*@RequestParam("clinic") String clinicId,*/@RequestParam("appointmentDate") String appointmentDate, @RequestParam("appointmentTime") String  appointmentTime, @RequestParam("patient") String patientId, @RequestParam("description") String appointmentDescription, @RequestParam("type") String appointmentType){
 
         try {
             SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy");
@@ -50,7 +50,7 @@ public class AppointmentController {
             //Patient patient = DQS.findRegisteredPatientByIdCard(clinicId, patientId);
             Patient patient = DQS.findRegisteredPatientByIdCard("CH-PLATINUM-JASC", patientId);
 
-            Appointment appointment = DEAMS.createNewAppointment("CH-PLATINUM-JASC", new Date(sdf1.parse(appointmentDate).getTime()), new Timestamp(sdf2.parse(appointmentTime).getTime()), patient.getPatientId(), appointmentDescription, /*appointmentType.toLowerCase().equals("consultation") ? */AppointmentType.CONSULTATION/* : AppointmentType.SURGERY*/);
+            Appointment appointment = DEAMS.createNewAppointment("CH-PLATINUM-JASC", new Date(sdf1.parse(appointmentDate).getTime()), new Timestamp(sdf2.parse(appointmentTime).getTime()), patient.getPatientId(), appointmentDescription, appointmentType.toUpperCase().equals("C") ? AppointmentType.CONSULTATION : AppointmentType.SURGERY);
 
             //return "redirect:/appointments/" + clinicId;
             return "redirect:/appointments";

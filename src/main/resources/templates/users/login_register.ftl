@@ -12,12 +12,13 @@
                 <form METHOD="POST" enctype="multipart/form-data" action="/userLogin">
                     <h1>Login Form</h1>
                     <div>
-                        <input type="text" class="form-control" name="username" id="username" placeholder="Username" required="" />
+                        <input type="text" class="form-control" name="email" id="email" placeholder="Email" required="" />
                     </div>
                     <div>
                         <input type="password" class="form-control" name="password" id="password" placeholder="Password" required="" />
                     </div>
                     <div>
+                        <input type="hidden" name="clinic" value="CH-PLATINUM-JASC">
                         <input type="submit" class="btn btn-default submit">Log in</input>
                         <a class="reset_pass" href="#">Lost your password?</a>
                     </div>

@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.PersistenceException;
+import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
@@ -29,9 +30,11 @@ public class PatientController {
     @Autowired
     private DataQueryService DQS;
 
-
+    // Gets
     @GetMapping("/patients")
     public ModelAndView fetchAllPatientsView(Model model){
+        if (!DQS.isUserLoggedIn())
+            return new ModelAndView("redirect:/login");
 
         model.addAttribute("patientList", DQS.findAllRegisteredPatientsForClinic("CH-PLATINUM-JASC"));
         model.addAttribute("amount", DQS.findAllRegisteredPatientsForClinic("CH-PLATINUM-JASC").size());
@@ -41,6 +44,8 @@ public class PatientController {
 
     @GetMapping("/patient/{id}")
     public ModelAndView fetchPatientview(Model model,@PathVariable(value="id") String patientId){
+        if (!DQS.isUserLoggedIn())
+            return new ModelAndView("redirect:/login");
 
         model.addAttribute("patient", DQS.findRegisteredPatient(patientId));
         model.addAttribute("appointments", DQS.findPatientsRegisteredAppointments(patientId));
