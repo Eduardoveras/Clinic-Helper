@@ -231,6 +231,12 @@ public class DataQueryService {
     public boolean isUserLoggedIn() {
         return null != session.getAttribute("user");
     }
+
+    public void logOut()
+    {
+        session.invalidate();
+    }
+
 }
 
 

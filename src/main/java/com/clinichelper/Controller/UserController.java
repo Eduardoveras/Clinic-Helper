@@ -41,10 +41,14 @@ public class UserController {
     }
 
     @RequestMapping("/login")
-    public ModelAndView fetchLoginView(Model model, HttpSession session){
-
-
+    public ModelAndView fetchLoginView(){
         return new ModelAndView("/users/login_register");
+    }
+
+    @RequestMapping("/logout")
+    public ModelAndView logOut(){
+        DQS.logOut();
+        return new ModelAndView("redirect:/login");
     }
 
     @GetMapping("/user/{id}")

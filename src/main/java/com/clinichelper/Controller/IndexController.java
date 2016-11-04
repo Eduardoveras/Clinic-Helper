@@ -37,6 +37,7 @@ public class IndexController implements ErrorController {
         model.addAttribute("name", name);
         model.addAttribute("todoList", TKS.InitializeTodoList("CH-PLATINUM-JASC"));
         model.addAttribute("todays_appointments", DQS.findAllRegisteredAppointmentsForToday("CH-PLATINUM-JASC"));
+        model.addAttribute("user",DQS.getSessionAttr("user"));
         return new ModelAndView("homepage/index");
     }
 

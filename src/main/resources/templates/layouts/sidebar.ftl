@@ -13,7 +13,7 @@
             </div>
             <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <h2>${user.getFirstName()} ${user.getLastName()}</h2>
             </div>
         </div>
         <!-- /menu profile quick info -->
@@ -55,7 +55,7 @@
             <a data-toggle="tooltip" data-placement="top" title="Lock">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
             </a>
-            <a data-toggle="tooltip" data-placement="top" title="Logout">
+            <a href="/logout" data-toggle="tooltip" data-placement="top" title="Logout">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
             </a>
         </div>
