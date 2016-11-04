@@ -28,7 +28,7 @@ public class TeamController {
     // Services
     @Autowired
     private DataEntryAndManagementService DEAMS;
-    //@Autowired
+    @Autowired
     private DataQueryService DQS;
 
     // Gets

@@ -5,6 +5,7 @@ import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Task;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +18,7 @@ import javax.persistence.PersistenceException;
 import javax.servlet.http.HttpSession;
 
 @Controller
-public class IndexController {
+public class IndexController implements ErrorController {
 
     @Autowired
     private DataEntryAndManagementService DEAMS;
@@ -25,6 +26,7 @@ public class IndexController {
     private DataQueryService DQS;
     @Autowired
     private ToolKitService TKS;
+    private static final String ERR_PATH = "/error";
 
 
     @RequestMapping("/")
@@ -36,6 +38,11 @@ public class IndexController {
         model.addAttribute("todoList", TKS.InitializeTodoList("CH-PLATINUM-JASC"));
         model.addAttribute("todays_appointments", DQS.findAllRegisteredAppointmentsForToday("CH-PLATINUM-JASC"));
         return new ModelAndView("homepage/index");
+    }
+
+    @RequestMapping(value = ERR_PATH)
+    public String error() {
+        return "layouts/error";
     }
 
 
@@ -62,4 +69,8 @@ public class IndexController {
     }
 
 
+    @Override
+    public String getErrorPath() {
+        return ERR_PATH;
+    }
 }
