@@ -27,10 +27,10 @@ public class PatientController {
     // Repositories
     @Autowired
     private DataEntryAndManagementService DEAMS;
-    //@Autowired
+    @Autowired
     private DataQueryService DQS;
 
-
+    // Gets
     @GetMapping("/patients")
     public ModelAndView fetchAllPatientsView(Model model){
         if (!DQS.isUserLoggedIn())

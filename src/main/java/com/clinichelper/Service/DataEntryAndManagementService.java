@@ -64,10 +64,7 @@ public class DataEntryAndManagementService {
             throw new IllegalArgumentException("\n\nThe requested date has passed; it is no longer valid");
 
         if (!doesPatientIdExist(patientId))
-            throw new IllegalArgumentException("\n\nThis is an invalid patient jascId");
-
-        if (differenceInDays(new Date(Calendar.getInstance().getTime().getTime()), appointmentDate) <= 0)
-            throw new IllegalArgumentException("The appointment date must be a future date");
+            throw new IllegalArgumentException("\n\nThis is an invalid patient Id");
 
         try {
             return appointmentRepository.save(new Appointment(clinicRepository.findByClinicId(clinicId), appointmentDate, appointmentTime, patientRepository.findByPatientId(patientId), appointmentDescription, appointmentType));
@@ -842,13 +839,8 @@ public class DataEntryAndManagementService {
     }
 
     private boolean isRequestedDateExpired(Date requestedDate){
-        java.util.Date utilDate = new java.util.Date();
-        Date today = new Date(utilDate.getTime()); // getting today's date;
-
-        if (differenceInDays(requestedDate, today) >= 0) // checking if requested date is valid
-            return true; // the requested date has expired; it is too late
-        else
-            return false; // the requested date still has not passed; date is still valid
+        Date today = new Date(Calendar.getInstance().getTime().getTime()); // getting today's date;
+        return !(differenceInDays(today, requestedDate) >= 0); // checking if requested date is valid
     }
 
     private int differenceInDays(Date start, Date end){
