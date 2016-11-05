@@ -25,11 +25,18 @@
                 categoryClass;
 
         var calendar = $('#calendar').fullCalendar({
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'month,agendaWeek,agendaDay'
+            //header: {
+                //left: 'prev,next ',
+                //right: 'listDay,listWeek,month'
+            //},
+            views: {
+                listDay: { buttonText: 'list day' },
+                listWeek: { buttonText: 'list week' }
             },
+            defaultView: 'listWeek',
+            navLinks: true, // can click day/week names to navigate views
+                //editable: true,
+            eventLimit: true, // allow "more" link when too many events
             selectable: true,
             selectHelper: true,
             select: function(start, end, allDay) {
@@ -81,7 +88,6 @@
 
                 calendar.fullCalendar('unselect');
             },
-            //editable: true,
             events: [{
                 title: 'All Day Event',
                 start: new Date(y, m, 1)
