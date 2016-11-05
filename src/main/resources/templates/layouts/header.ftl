@@ -38,6 +38,8 @@
     <!-- FullCalendar -->
     <link href="../css/fullcalendar.min.css" rel="stylesheet">
     <link href="../css/fullcalendar.print.css" rel="stylesheet" media="print">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css" />
 
 
     <!-- Custom Theme Style -->
