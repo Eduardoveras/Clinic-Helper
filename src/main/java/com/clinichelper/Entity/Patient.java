@@ -30,6 +30,12 @@ public class Patient implements Serializable{
     @NotNull
     private String patientTelephoneNumber;//
     private String patientContactTelephoneNumber;//
+    private String patientWorkphone;
+    private String patientCellphone;
+    private String patientContactName;
+    private String patientContactLastName;
+    private String patientContactAddress;
+    private String patientContactCellphone;
     @NotNull
     private String patientEmail;//
     @NotNull
@@ -43,13 +49,14 @@ public class Patient implements Serializable{
     private String patientAddress;
     @NotNull
     private String patientCity;
-
-
-
-   // @NotNull
-   // private ArrayList<String> patientAllergies;
+    private ArrayList<String> patientAllergies;
     @NotNull
     private String patientCountry;
+    private String patientReligion;
+    private String patientHeight;
+    private String patientWeight;
+    private String patientBloodType;
+    private ArrayList<String> patientConditions;
     @ManyToOne
     private Clinic clinic;
 
@@ -68,7 +75,15 @@ public class Patient implements Serializable{
     }
 
     // Used to create and register new patients
-    public Patient(Clinic clinic, String patientFirstName, String patientLastName, String patientIdCard, String patientTelephoneNumber, String patientContactTelephoneNumber, String occupation, Gender patientGender, String patientEmail, Date patientBirthDate, String patientNationality, String patientAddress, String patientCity, String patientCountry) {
+    public Patient(Clinic clinic, String patientFirstName, String patientLastName, String patientIdCard,
+                   String patientTelephoneNumber, String patientWorkphone, String patientCellphone,
+                   String patientContactName, String patientContactLastName, String patientContactAddress,
+                   String patientContactCellphone, String patientContactTelephoneNumber, String occupation,
+                   Gender patientGender, String patientEmail, Date patientBirthDate, String patientNationality,
+                   String patientAddress, String patientCity, String patientCountry, ArrayList<String> patientAllergies,
+                   String patientReligion, String patientHeight, String patientWeight, String patientBloodType,
+                   ArrayList<String> patientConditions
+                   ) {
         this.setPatientId(clinic.getClinicPrefix() + "-P-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setPatientFirstName(patientFirstName.toLowerCase());
         this.setPatientLastName(patientLastName.toUpperCase());
@@ -83,7 +98,18 @@ public class Patient implements Serializable{
         this.setPatientAddress(patientAddress.toUpperCase());
         this.setPatientCity(patientCity.toUpperCase());
         this.setPatientCountry(patientCountry.toUpperCase());
-      //  this.setPatientAllergies(patientAllergies);
+        this.setPatientAllergies(patientAllergies);
+        this.setPatientReligion(patientReligion);
+        this.setPatientHeight(patientHeight);
+        this.setPatientWeight(patientWeight);
+        this.setPatientBloodType(patientBloodType);
+        this.setPatientConditions(patientConditions);
+        this.setPatientWorkphone(patientWorkphone);
+        this.setPatientCellphone(patientCellphone);
+        this.setPatientContactName(patientContactName);
+        this.setPatientContactLastName(patientContactLastName);
+        this.setPatientContactAddress(patientContactAddress);
+        this.setPatientContatCellphone(patientContactCellphone);
         this.setPatientRegisteredDate(new Date(Calendar.getInstance().getTime().getTime())); // current date
         this.setClinic(clinic);
 
@@ -222,12 +248,109 @@ public class Patient implements Serializable{
         return new String(imgBytesAsBase64);
     }
 
+    public ArrayList<String> getPatientAllergies() {
+        return patientAllergies;
+    }
+
+    public void setPatientAllergies(ArrayList<String> patientAllergies) {
+        this.patientAllergies = patientAllergies;
+    }
+
     public Clinic getClinic() {
         return clinic;
     }
 
     public void setClinic(Clinic clinic) {
         this.clinic = clinic;
+    }
+
+    public String getPatientWorkphone() {
+        return patientWorkphone;
+    }
+
+    public void setPatientWorkphone(String patientWorkphone) {
+        this.patientWorkphone = patientWorkphone;
+    }
+
+    public String getPatientCellphone() {
+        return patientCellphone;
+    }
+
+    public void setPatientCellphone(String patientCellphone) {
+        this.patientCellphone = patientCellphone;
+    }
+
+    public String getPatientContactName() {
+        return patientContactName;
+    }
+
+    public void setPatientContactName(String patientContactName) {
+        this.patientContactName = patientContactName;
+    }
+
+    public String getPatientContactLastName() {
+        return patientContactLastName;
+    }
+
+    public void setPatientContactLastName(String patientContactLastName) {
+        this.patientContactLastName = patientContactLastName;
+    }
+
+    public String getPatientContactAddress() {
+        return patientContactAddress;
+    }
+
+    public void setPatientContactAddress(String patientContactAddress) {
+        this.patientContactAddress = patientContactAddress;
+    }
+
+
+    public String getPatientContatCellphone() {
+        return patientContactCellphone;
+    }
+
+    public void setPatientContatCellphone(String patientContatCellphone) {
+        this.patientContactCellphone = patientContatCellphone;
+    }
+
+    public String getPatientReligion() {
+        return patientReligion;
+    }
+
+    public void setPatientReligion(String patientReligion) {
+        this.patientReligion = patientReligion;
+    }
+
+    public String getPatientHeight() {
+        return patientHeight;
+    }
+
+    public void setPatientHeight(String patientHeight) {
+        this.patientHeight = patientHeight;
+    }
+
+    public String getPatientWeight() {
+        return patientWeight;
+    }
+
+    public void setPatientWeight(String patientWeight) {
+        this.patientWeight = patientWeight;
+    }
+
+    public String getPatientBloodType() {
+        return patientBloodType;
+    }
+
+    public void setPatientBloodType(String patientBloodType) {
+        this.patientBloodType = patientBloodType;
+    }
+
+    public ArrayList<String> getPatientConditions() {
+        return patientConditions;
+    }
+
+    public void setPatientConditions(ArrayList<String> patientConditions) {
+        this.patientConditions = patientConditions;
     }
 
     // Auxiliary Function
