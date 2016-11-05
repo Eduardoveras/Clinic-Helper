@@ -10,10 +10,8 @@
             <div class="">
                  <#include "/homepage/_topBoxes.ftl">
                 <div class="row">
-                    <#include "/homepage/_calendar.ftl">
-                    <#--<#include "/homepage/_toDoList.ftl">-->
-                    <#include "/homepage/_appointments.ftl">
-                    <!--ADD CONTENT HERE-->
+                <#include "/homepage/_appointments.ftl">
+                <#include "/homepage/_calendar.ftl">
                 </div>
             </div>
         </div>

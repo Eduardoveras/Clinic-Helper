@@ -40,27 +40,21 @@ public class PatientController {
         if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
-        model.addAttribute("todoList", TKS.InitializeTodoList("CH-PLATINUM-JASC"));
-        model.addAttribute("patientList", DQS.findAllRegisteredPatientsForClinic("CH-PLATINUM-JASC"));
-        model.addAttribute("amount", DQS.findAllRegisteredPatientsForClinic("CH-PLATINUM-JASC").size());
+        String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
+
+        model.addAttribute("todoList", TKS.InitializeTodoList(clinicId));
+        model.addAttribute("patientList", DQS.findAllRegisteredPatientsForClinic(clinicId));
+        model.addAttribute("amount", DQS.findAllRegisteredPatientsForClinic(clinicId).size());
 
         return new ModelAndView("patients/allPatients");
     }
-    @GetMapping("/patientstest")
-    public ModelAndView fetchAllPatientstestView(Model model){
-        if (!DQS.isUserLoggedIn())
-            return new ModelAndView("redirect:/login");
-
-        return new ModelAndView("patients/test");
-    }
-
 
     @GetMapping("/patient/{id}")
     public ModelAndView fetchPatientview(Model model,@PathVariable(value="id") String patientId){
         if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
-        model.addAttribute("todoList", TKS.InitializeTodoList("CH-PLATINUM-JASC"));
+        model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getClinic().getClinicId()));
         model.addAttribute("patient", DQS.findRegisteredPatient(patientId));
         model.addAttribute("appointments", DQS.findPatientsRegisteredAppointments(patientId));
         return new ModelAndView("patients/patientsProfile");
@@ -98,7 +92,6 @@ public class PatientController {
            ){
 
         try {
-
             SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy");
 
             DEAMS.createNewPatient("CH-PLATINUM-JASC", firstName, lastName, idCard, telephoneNumber, patientWorkphone, patientCellphone, patientContactName, patientContactLastName,
@@ -120,6 +113,8 @@ public class PatientController {
 
     @PostMapping("/editPatient")
     public String editPatient(@RequestParam("id") String patientId, @RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("idCard") String idCard, @RequestParam("mail") String mail, @RequestParam("telephoneNumber") String telephoneNumber, @RequestParam("contactTelephoneNumber") String contactTelephoneNumber, @RequestParam("address") String address, @RequestParam("occupation") String occupation, @RequestParam("dateOfBirth")Date dateOfBirth, @RequestParam("gender") String gender, @RequestParam("nationality") String nationality, @RequestParam("countries") String countries, @RequestParam("cities") String cities){
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
 
         try {
             Patient patient = DQS.findRegisteredPatient(patientId);
@@ -150,10 +145,11 @@ public class PatientController {
 
     @PostMapping("/uploadPhoto")
     public String uploadPatientPhoto(@RequestParam("id") String patientId ,@RequestParam("photo")MultipartFile file){
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
         Patient patient = DQS.findRegisteredPatient(patientId);
 
         try {
-
             patient.setPatientPhoto(processImageFile(file.getBytes()));
 
             DEAMS.editPatient(patient);

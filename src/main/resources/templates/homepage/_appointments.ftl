@@ -1,4 +1,4 @@
-<div class="col-md-8">
+<div class="col-md-7">
     <h2>Today's appointments</h2>
     <div class="x_content">
         <div class="row">
@@ -24,24 +24,24 @@
                     <div class="col-xs-12 bottom text-center">
 
                         <div class="col-xs-12 col-sm-6 emphasis">
-                            <button type="button" class="btn btn-danger btn-sm btn-round"><i class="fa fa-user">
-                            </i> DELETE </i></button>
+                            <form action="/cancelAppointment" METHOD="POST" enctype="multipart/form-data" data-parsley-validate>
+                                <input type="hidden" id="appointment_id" name="appointment_id" value="${appointment.getAppointmentId()}">
+                                <input type="submit" class="btn btn-danger btn-sm btn-round" value="Cancel">
+                            </form>
                         </div>
                         <div class="col-xs-12 col-sm-6 emphasis">
                             <button data-toggle="dropdown" class="btn btn-default dropdown-toggle btn-sm btn-round" type="button" aria-expanded="false">Options <span class="caret"></span>
                             </button>
                             <ul role="menu" class="dropdown-menu">
-                                <li><a href="#">Mark as HERE</a>
-                                </li>
-                                <li><a href="#">Mark as READY</a>
-                                </li>
-                                <li><a href="#">Something else here</a>
-                                </li>
+                                <li><a href="#">Mark as HERE</a></li>
+                                <li><a href="#">Mark as READY</a></li>
+                                <li><a href="#">Mark as Dint show up</a></li>
+                                <li><a href="#">Re-schedule</a></li>
+                                <li><a href="#">Send email reminder</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">Separated link</a>
-                                </li>
+                                <li><a href="#">Collect Payment</a></li>
                             </ul>
-                            
+
                             <button type="button" class="btn btn-primary btn-sm btn-round" >
                                 <i class="fa fa-user"> </i> View Profile
                             </button>

@@ -21,6 +21,7 @@
                 <div class="row">
                 <#include "/patients/_patientsForm.ftl">
                 <#include "/patients/_patientsTable.ftl">
+                <#include "/patients/testform.ftl">
 
 
 
