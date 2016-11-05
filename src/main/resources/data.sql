@@ -3,6 +3,8 @@ INSERT INTO clinic (clinic_id, account_type, clinic_name, clinic_prefix, registe
 INSERT INTO staff (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-ADMIN', 'administrator', 'ADMIN', 'djidjellypas92@gmail.com', '2016-11-4');
 
 INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-YOLO', '1980-02-03', 'djidjellypas92@gmail.com', 'djijdelly', 0, 'SICLAIT', '1234', 0, 'CH-PLATINUM-JASC');
+INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-SWAG', '1980-02-03', 'eva', 'eva', 0, 'SORAYA', '1234', 0, 'CH-PLATINUM-JASC');
+INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-VAPE', '1980-02-03', 'eduardo', 'eduardo', 0, 'Veras', '1234', 0, 'CH-PLATINUM-JASC');
 
 INSERT INTO patients (
 clinic_clinic_id,
@@ -72,25 +74,32 @@ INSERT INTO staff (clinic_clinic_id, contact_id, first_name, last_name, email, b
 INSERT INTO staff (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-ADELSO', 'Adelso', 'Tejada', 'at@gmail.com', '1990-02-02');
 INSERT INTO staff (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-ASTRID', 'Astrid', 'Incarnacion', 'ai@gmail.com', '1990-10-31');
 
-INSERT INTO appointments(clinic_clinic_id, appointment_id, appointment_date, appointment_time, patient_patient_id, appointment_description, appointment_access_from, appointment_type) VALUES (
+INSERT INTO appointments(clinic_clinic_id, appointment_id, appointment_time, patient_patient_id, appointment_description, appointment_access_from, appointment_type) VALUES (
 'CH-PLATINUM-JASC',
 'JASC123456',
-'2016-11-01',
-'2016-10-31 10:10:00',
+'2016-11-05 10:10:00',
 'JASC-P-BVN309WJHN32',
 'cita para bala bla bla bla',
+0,
+0);
+
+INSERT INTO appointments(clinic_clinic_id, appointment_id, appointment_time, patient_patient_id, appointment_description, appointment_access_from, appointment_type) VALUES (
+'CH-PLATINUM-JASC',
+'JASC123452',
+'2016-11-05 11:10:00',
+'JASC-P-BVN3DF43WED32',
+'Appointment for brain removal',
 0,
 0);
 
 INSERT INTO meetings (
 clinic_clinic_id,
 meeting_id,
-meeting_date,
 meeting_objective,
 meeting_place,
 meeting_time,
 meeting_title) VALUES
-('CH-PLATINUM-JASC', 'JASC-M-NY934WHRC3', '2016-10-31', 'Make plans for charity event', 'Meeting Room 102', '2016-10-28 08:00:00', 'JASC Cancer Charity');
+('CH-PLATINUM-JASC', 'JASC-M-NY934WHRC3', 'Make plans for charity event', 'Meeting Room 102', '2016-11-05 08:00:00', 'JASC Cancer Charity');
 
 INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_contact_id) VALUES ('JASC-M-NY934WHRC3', 'JASC-STAFF-PAULINA');
 INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_contact_id) VALUES ('JASC-M-NY934WHRC3', 'JASC-STAFF-ASTRID');
@@ -100,12 +109,11 @@ INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_contact_id) VALUE
 INSERT INTO meetings (
 clinic_clinic_id,
 meeting_id,
-meeting_date,
 meeting_objective,
 meeting_place,
 meeting_time,
 meeting_title) VALUES
-('CH-PLATINUM-JASC', 'JASC-M-NY934UINRC3', '2016-10-31', 'Prepare for seminar', 'Main Office', '2016-10-28 16:30:00', 'Seminar Prep');
+('CH-PLATINUM-JASC', 'JASC-M-NY934UINRC3', 'Prepare for seminar', 'Main Office', '2016-11-05 16:30:00', 'Seminar Prep');
 
 INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_contact_id) VALUES ('JASC-M-NY934UINRC3', 'JASC-STAFF-SICARD');
 INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_contact_id) VALUES ('JASC-M-NY934UINRC3', 'JASC-STAFF-ADELSO');

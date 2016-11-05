@@ -3,8 +3,8 @@
  */
 package com.clinichelper.Entity;
 
-import com.clinichelper.Tools.Gender;
-import com.clinichelper.Tools.Permission;
+import com.clinichelper.Tools.Enums.Gender;
+import com.clinichelper.Tools.Enums.Permission;
 import org.apache.tomcat.util.codec.binary.Base64;
 
 import javax.persistence.*;

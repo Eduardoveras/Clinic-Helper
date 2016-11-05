@@ -50,8 +50,9 @@
 <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
 <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
 <!-- FullCalendar -->
-<script src="../vendors/moment/min/moment.min.js"></script>
-<script src="../vendors/fullcalendar/dist/fullcalendar.min.js"></script>
+<script src="../js/moment/moment.min.js"></script>
+<script src="../js/fullcalendar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
 
 
 

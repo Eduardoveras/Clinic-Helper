@@ -60,7 +60,9 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '1.4.1.RELEASE'
     // https://mvnrepository.com/artifact/org.postgresql/postgresql
     compile group: 'org.postgresql', name: 'postgresql', version: '9.4.1211.jre7'
-    //compile("org.springframework.boot:spring-boot-devtools")
+    compile("org.springframework.boot:spring-boot-devtools")
+    // https://mvnrepository.com/artifact/com.sendgrid/sendgrid-java
+    compile 'com.sendgrid:sendgrid-java:3.1.0'
 }
 
 
@@ -87,6 +89,31 @@ clean << {
 springBoot {
     mainClass = "com.clinichelper.WebApplication"
 }
+group 'Clinic-Helper'
+version '1.0-SNAPSHOT'
 
+apply plugin: 'java'
 
+sourceCompatibility = 1.5
 
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+group 'ClinicHelper'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.5
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}

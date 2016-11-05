@@ -7,7 +7,8 @@ import com.clinichelper.Entity.Appointment;
 import com.clinichelper.Entity.Patient;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
-import com.clinichelper.Tools.AppointmentType;
+import com.clinichelper.Service.ToolKitService;
+import com.clinichelper.Tools.Enums.AppointmentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,88 +30,84 @@ public class AppointmentController {
     private DataEntryAndManagementService DEAMS;
     @Autowired
     private DataQueryService DQS;
+    @Autowired
+    private ToolKitService TKS;
 
     // Gets
     @GetMapping("/appointments")
     public ModelAndView fetchAppointmentView(Model model) throws Exception{
+        if (!DQS.isUserLoggedIn())
+            return new ModelAndView("redirect:/login");
 
-        model.addAttribute("appointmentList", DQS.findAllRegisteredAppointmentsForClinic("CH-PLATINUM-JASC"));
+        String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
+
+        model.addAttribute("todoList", TKS.InitializeTodoList(clinicId));
+        model.addAttribute("appointmentList", DQS.findAllRegisteredAppointmentsForClinic(clinicId));
 
         return new ModelAndView("appointments/allAppointment");
     }
 
     // Posts
     @PostMapping("/newAppointment")
-    public String createNewApointment(/*@RequestParam("clinic") String clinicId,*/@RequestParam("appointmentDate") String appointmentDate, @RequestParam("appointmentTime") String  appointmentTime, @RequestParam("patient") String patientId, @RequestParam("description") String appointmentDescription, @RequestParam("type") String appointmentType){
+    public String createNewApointment(@RequestParam("appointmentTime") String appointmentTime, @RequestParam("patient") String patientId, @RequestParam("description") String appointmentDescription, @RequestParam("type") String appointmentType){
+
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
 
         try {
-            SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy");
-            SimpleDateFormat sdf2 = new SimpleDateFormat("hh:mm:ss");
+            SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
+            String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
+            Patient patient = DQS.findRegisteredPatientByIdCard(clinicId, patientId);
+            DEAMS.createNewAppointment(clinicId, new Timestamp(sdf1.parse(appointmentTime).getTime()), patient.getPatientId(), appointmentDescription, appointmentType.toUpperCase().equals("C") ? AppointmentType.CONSULTATION : AppointmentType.SURGERY);
 
-            //Patient patient = DQS.findRegisteredPatientByIdCard(clinicId, patientId);
-            Patient patient = DQS.findRegisteredPatientByIdCard("CH-PLATINUM-JASC", patientId);
-
-            Appointment appointment = DEAMS.createNewAppointment("CH-PLATINUM-JASC", new Date(sdf1.parse(appointmentDate).getTime()), new Timestamp(sdf2.parse(appointmentTime).getTime()), patient.getPatientId(), appointmentDescription, appointmentType.toUpperCase().equals("C") ? AppointmentType.CONSULTATION : AppointmentType.SURGERY);
-
-            //return "redirect:/appointments/" + clinicId;
             return "redirect:/appointments";
-        } catch (PersistenceException exp){
-            //
-        } catch(IllegalArgumentException exp){
-            //
-        } catch (NullPointerException exp) {
+        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
             //
         } catch (Exception exp){
             //
         }
 
-        //return "redirect:/appointments/" + clinicId;
         return "redirect:/appointments"; // TODO: add error message handling
     }
 
     @PostMapping("/cancelAppointment")
-    public String cancelRegisteredAppointment(@RequestParam("clinic") String clinicId, @RequestParam("id") String appointmentId){
+    public String cancelRegisteredAppointment( @RequestParam("appointment_id") String appointmentId){
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
 
         try {
             DEAMS.deleteRegisteredAppointment(appointmentId);
-        } catch (PersistenceException exp){
-            //
-        } catch(IllegalArgumentException exp){
-            //
-        } catch (NullPointerException exp) {
+            return "redirect:/";
+        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
             //
         } catch (Exception exp){
             //
         }
 
-        return "redirect:/appointments/" + clinicId;
+        return "redirect:/" ; // TODO: add error message handling
     }
 
     @PostMapping("/changeDateAndTime")
     public String editDateAndTimeOfRegisteredAppointment(@RequestParam("id") String appointmentId, @RequestParam("date") String newDate, @RequestParam("time") String newTime){
 
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
+
         Appointment appointment = DQS.findRegisteredAppointment(appointmentId);
 
         try {
 
-            SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
-            appointment.setAppointmentDate(new Date(sdf1.parse(newDate).getTime()));
-
-            sdf1 = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
-            appointment.setAppointmentTime(new Timestamp(sdf1.parse(newTime).getTime()));
+            SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
+            appointment.setAppointmentTime(new Timestamp(sdf1.parse(newDate).getTime()));
 
             DEAMS.editAppointment(appointment);
-        } catch (PersistenceException exp){
-            //
-        } catch(IllegalArgumentException exp){
-            //
-        } catch (NullPointerException exp) {
+            return "redirect:/appointments";
+        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
             //
         } catch (Exception exp){
             //
         }
 
-        return "redirect:/appointments/" + appointment.getClinic().getClinicId();
+        return "redirect:/appointments"; // TODO: add error message handling
     }
-
 }

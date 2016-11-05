@@ -47,19 +47,19 @@
                                             <img class="img-responsive avatar-view" src="/images/user.png" alt="Avatar" title="Change the avatar">
                                         </div>
                                     </div>
-                                    <h3>${patient.patientFirstName} ${patient.patientLastName}</h3>
+                                    <h3>${user.firstName} ${user.lastName}</h3>
 
                                     <ul class="list-unstyled user_data">
-                                        <li><i class="fa fa-map-marker user-profile-icon"></i> ${patient.patientAddress},${patient.patientCity},${patient.patientCountry}
+                                        <li><i class="fa fa-map-marker user-profile-icon"></i> No Adress
                                         </li>
 
                                         <li>
-                                            <i class="fa fa-briefcase user-profile-icon"></i> ${patient.occupation}
+                                            <i class="fa fa-briefcase user-profile-icon"></i> ${user.getRole()}
                                         </li>
 
                                         <li class="m-top-xs">
                                             <i class="fa fa-external-link user-profile-icon"></i>
-                                            <a href="mailto:${patient.patientEmail}?subject=SweetWords" target="_blank">${patient.patientEmail}</a>
+                                            <a href="mailto:${user.email}?subject=SweetWords" target="_blank">${user.email}</a>
                                         </li>
                                     </ul>
 
@@ -98,22 +98,14 @@
 
                                 </div>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <h6>ID:</h6><h6>${patient.patientFirstName} </h6><br>
-                                    <h4>First Name:</h4><h3>${patient.patientFirstName} </h3><br>
-                                    <h4>Last Name:</h4><h3>${patient.patientLastName}</h3><br>
-                                    <h4>ID Card:</h4><h3>${patient.patientIdCard}</h3><br>
-                                    <h4>Phone:</h4><h3>${patient.patientTelephoneNumber}</h3><br>
-                                    <h4>Contact:</h4><h3>${patient.patientContactTelephoneNumber}</h3><br>
-                                    <h4>Email:</h4><h3>${patient.patientEmail}</h3><br>
-                                    <h4>Birth day:</h4><h3>${patient.patientBirthDate}</h3><br>
-                                    <h4>Gender:</h4><h3>${patient.patientGender}</h3><br>
-                                    <h4>Date Registered</h4><h3>${patient.patientRegisteredDate}</h3><br>
-                                    <h4>Ocupation:</h4><h3>${patient.occupation}</h3><br>
-                                    <h4>Nationality:</h4><h3>${patient.patientNationality}</h3><br>
-                                    <h4>Address:</h4><h3>${patient.patientAddress}</h3><br>
-                                    <h4>City:</h4><h3>${patient.patientCity}</h3><br>
-                                    <h4>Country:</h4><h3>${patient.patientCountry}</h3><br>
-
+                                    <h6>ID:</h6><h6>${user.getUserId()} </h6><br>
+                                    <h4>First Name:</h4><h3>${user.getFirstName()} </h3><br>
+                                    <h4>Last Name:</h4><h3>${user.getLastName()}</h3><br>
+                                    <h4>ID Card:</h4><h3>${user.getBirthDate()}</h3><br>
+                                    <h4>Phone:</h4><h3>${user.getGender()}</h3><br>
+                                    <h4>Contact:</h4><h3>${user.getRole()}</h3><br>
+                                    <h4>Email:</h4><h3>${user.getEmail()}</h3><br>
+                                    <h4>Birth day:</h4><h3>${user.getClinic()}</h3><br>
                                 </div>
                             </div>
                         </div>

@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -75,11 +78,21 @@ public class DataQueryService {
         return appointmentRepository.findByPatientId(patientId);
     }
 
-    public List<Appointment> findAllRegisteredAppointmentsForToday(String clinicId){ return findAllRegisteredAppointmentsByGivenDate(new Date(Calendar.getInstance().getTime().getTime()), clinicId); }
+    public List<Appointment> findAllRegisteredAppointmentsForToday(String clinicId) throws Exception{
+        try {
+            return findAllRegisteredAppointmentsByGivenDate(new Date(Calendar.getInstance().getTime().getTime()), clinicId);
+        } catch (Exception exp){
+            throw new  Exception("Error during search for appointments for today");
+        }
+     }
 
-    public List<Appointment> findAllRegisteredAppointmentsByGivenDate(Date searchDate, String clinicId){ return appointmentRepository.findByDate(searchDate, clinicId); }
-
-    //public List<Appointment> findAllRegisteredAppointmentsByTimePeriod(String clinicId, Date beginningOfTimePeriod, Date endOfTimePeriod){ return appointmentRepository.findByDateRange(beginningOfTimePeriod, endOfTimePeriod, clinicId); }
+    public List<Appointment> findAllRegisteredAppointmentsByGivenDate(Date searchDate, String clinicId) throws Exception{
+        try{
+            return appointmentRepository.findByDateRange(new Timestamp(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(searchDate.toString() + " 00:00:00").getTime()), new Timestamp(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(searchDate.toString() + " 23:59:00").getTime()), clinicId);
+        } catch (Exception exp){
+            throw new  Exception("Error during search for appointments of a specific date");
+        }
+    }
 
 
     // Chores Queries
@@ -132,7 +145,7 @@ public class DataQueryService {
 
     public List<Meeting> findRegisteredMeetingByTitle(String clinicId, String searchTitle){ return meetingRepository.findByMeetingTitle(searchTitle, clinicId); }
 
-    public List<Meeting> findRegisteredMeetingByDate (String clinicId, Date searchDate){ return meetingRepository.findByMeetingDate(searchDate, clinicId); }
+    //public List<Meeting> findRegisteredMeetingByDate (String clinicId, Date searchDate){ return meetingRepository.findByMeetingDate(searchDate, clinicId); }
 
     public List<Meeting> findRegisteredMeetingByPlace (String clinicId, String searchPlace){ return meetingRepository.findByMeetingPlace(searchPlace, clinicId); }
 
@@ -235,6 +248,11 @@ public class DataQueryService {
     public void logOut()
     {
         session.invalidate();
+    }
+
+    public User getCurrentLoggedUser()
+    {
+        return (User)session.getAttribute("user");
     }
 
 }
