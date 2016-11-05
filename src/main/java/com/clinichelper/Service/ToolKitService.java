@@ -108,11 +108,11 @@ public class ToolKitService {
 
     // Auxiliary Function
     private List<Chore> findAllMeetingsForToday(String clinicId){
-
         List<Chore> chores = new ArrayList<>();
+
         try{
             for (Meeting m:
-                    meetingRepository.findByMeetingDate(new Timestamp(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(Calendar.getInstance().getTime().getTime() + " 00:00:00").getTime()), new Timestamp(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(Calendar.getInstance().getTime().getTime() + " 23:59:00").getTime()), clinicId)) {
+                    meetingRepository.findByMeetingDate(new Timestamp(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(new Date(Calendar.getInstance().getTime().getTime()).toString() + " 00:00:00").getTime()), new Timestamp(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(new Date(Calendar.getInstance().getTime().getTime()).toString() + " 23:59:00").getTime()), clinicId)) {
 
                 String staff = "**";
 
