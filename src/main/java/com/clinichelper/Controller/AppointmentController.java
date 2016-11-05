@@ -36,6 +36,8 @@ public class AppointmentController {
     // Gets
     @GetMapping("/appointments")
     public ModelAndView fetchAppointmentView(Model model) throws Exception{
+        if (!DQS.isUserLoggedIn())
+            return new ModelAndView("redirect:/login");
 
         model.addAttribute("todoList", TKS.InitializeTodoList("CH-PLATINUM-JASC"));
         model.addAttribute("appointmentList", DQS.findAllRegisteredAppointmentsForClinic("CH-PLATINUM-JASC"));
@@ -73,7 +75,7 @@ public class AppointmentController {
     }
 
     @PostMapping("/cancelAppointment")
-    public String cancelRegisteredAppointment(@RequestParam("clinic") String clinicId, @RequestParam("id") String appointmentId){
+    public String cancelRegisteredAppointment( @RequestParam("appointment_id") String appointmentId){
 
         try {
             DEAMS.deleteRegisteredAppointment(appointmentId);
@@ -87,7 +89,7 @@ public class AppointmentController {
             //
         }
 
-        return "redirect:/appointments/" + clinicId;
+        return "redirect:/" ;
     }
 
     @PostMapping("/changeDateAndTime")

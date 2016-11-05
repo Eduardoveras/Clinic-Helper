@@ -45,13 +45,6 @@ public class PatientController {
 
         return new ModelAndView("patients/allPatients");
     }
-    @GetMapping("/patientstest")
-    public ModelAndView fetchAllPatientstestView(Model model){
-        if (!DQS.isUserLoggedIn())
-            return new ModelAndView("redirect:/login");
-
-        return new ModelAndView("patients/test");
-    }
 
 
     @GetMapping("/patient/{id}")

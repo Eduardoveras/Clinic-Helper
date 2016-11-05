@@ -24,9 +24,17 @@
             <form action="/newAppointment" METHOD="POST" enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
                 <div class="form-group">
+                    <div class='input-group date' id='datetimepicker1'>
+                        <input type='text' class="form-control" />
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="text-left" class="control-label col-md-6 col-sm-6 col-xs-12" for="appointmentDate">Appointment Date (MM/dd/yyyy): <span class="required">*</span>
                     </label>
-                    <div class="col-md-10 col-sm-10 col-xs-16">
+                    <div class="date-picker col-md-10 col-sm-10 col-xs-16">
                         <input type="text" id="appointmentDate" name="appointmentDate" required="required" class="form-control col-md-7 col-xs-12">
                     </div>
                 </div>
