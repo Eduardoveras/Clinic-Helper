@@ -5,6 +5,7 @@ package com.clinichelper.Service;
 
 import com.clinichelper.Entity.*;
 import com.clinichelper.Repository.*;
+import com.clinichelper.Tools.Classes.CalendarEvent;
 import com.clinichelper.Tools.Enums.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,6 +54,17 @@ public class ToolKitService {
         // TODO: Add surgery mechanic
 
         return todoList;
+    }
+
+    public List<CalendarEvent> InitializeClinicCalendar(String clinicId){
+        List<CalendarEvent> events = new ArrayList<>();
+
+        // Adding all Appointments
+
+        // Adding all Meetings
+
+
+        return events
     }
 
     public Map<String, List> FetchClinicInventory(String clinicId){
