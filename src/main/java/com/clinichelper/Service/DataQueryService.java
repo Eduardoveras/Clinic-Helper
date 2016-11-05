@@ -237,6 +237,11 @@ public class DataQueryService {
         session.invalidate();
     }
 
+    public User getCurrentLoggedUser()
+    {
+        return (User)session.getAttribute("user");
+    }
+
 }
 
 
