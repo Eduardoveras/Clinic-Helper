@@ -12,10 +12,9 @@ import java.io.IOException;
 public class EmailService {
 
 
-    public boolean sendEmail(String emailFrom,String emailTo, String Subject, String theContent)
+    public boolean sendEmail(String emailTo, String Subject, String theContent)
     {
-
-        Email from = new Email(emailFrom);
+        Email from = new Email("management@clinichelper.com");
         Email to = new Email(emailTo);
         Content content = new Content("text/plain", theContent+"\n\n\nEmail Service by Clinic Helper");
         Mail mail = new Mail(from, Subject, to, content);
@@ -27,9 +26,9 @@ public class EmailService {
             request.endpoint = "mail/send";
             request.body = mail.build();
             Response response = sg.api(request);
-            System.out.println(response.statusCode);
-            System.out.println(response.body);
-            System.out.println(response.headers);
+            System.out.println("Sengrid Status Code:"+response.statusCode);
+            System.out.println("Sendgrid Errpr Body:"+response.body);
+            System.out.println("Sendgrid Headers:"+response.headers);
         } catch (IOException ex) {
             System.out.println("ERROR WITH THE EMAIL SERVER, CONTAC YOUR ADMIN");
             return false;
