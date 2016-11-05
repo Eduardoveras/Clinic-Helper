@@ -41,6 +41,8 @@ public class PatientController {
 
         return new ModelAndView("patients/allPatients");
     }
+    
+
 
     @GetMapping("/patient/{id}")
     public ModelAndView fetchPatientview(Model model,@PathVariable(value="id") String patientId){
