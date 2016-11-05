@@ -130,4 +130,11 @@ public class Appointment implements Serializable{
     public void setAppointmentType(AppointmentType appointmentType) {
         this.appointmentType = appointmentType;
     }
+
+    public String getSimplifiedTime()
+    {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
+        return sdf.format(appointmentTime);
+    }
 }
