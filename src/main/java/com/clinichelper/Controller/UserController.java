@@ -60,11 +60,12 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    public ModelAndView fetchUserProfile(Model model, @RequestParam("id") String userId){
+    public ModelAndView fetchUserProfile(Model model,@PathVariable(value="id") String userId){
         if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
-
-        model.addAttribute("user", DQS.findUserInformation(userId));
+        User u = DQS.findUserInformation(userId);
+        model.addAttribute("todoList", TKS.InitializeTodoList(u.getClinic().getClinicId()));
+        model.addAttribute("user", u);
         return new ModelAndView("users/userProfile");
     }
 
