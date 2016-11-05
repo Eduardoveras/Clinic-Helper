@@ -22,8 +22,6 @@ public class Appointment implements Serializable{
     @Id
     private String appointmentId;
     @NotNull
-    private Date appointmentDate;
-    @NotNull
     private Timestamp appointmentTime;
     @ManyToOne
     @NotNull
@@ -41,20 +39,19 @@ public class Appointment implements Serializable{
 
     }
 
-    public Appointment(Clinic clinic, Date appointmentDate, Patient patient, String appointmentDescription){
+    public Appointment(Clinic clinic,Timestamp appointmentTime , Patient patient, String appointmentDescription){
         this.setAppointmentId(clinic.getClinicPrefix() + "-SOLICIT-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
-        this.setAppointmentDate(appointmentDate);
         this.setPatient(patient);
         this.setAppointmentDescription(appointmentDescription);
         this.setAppointmentAccessFrom(AccessForm.WEB);
         this.setClinic(clinic);
         this.setAppointmentType(AppointmentType.CONSULTATION);
         this.setAppointmentStatus(AppointmentStatus.PENDING);
+        this.setAppointmentTime(appointmentTime);
     }
 
-    public Appointment(Clinic clinic, Date appointmentDate, Timestamp appointmentTime, Patient patient, String appointmentDescription, AppointmentType appointmentType){
+    public Appointment(Clinic clinic,  Timestamp appointmentTime, Patient patient, String appointmentDescription, AppointmentType appointmentType){
         this.setAppointmentId(clinic.getClinicPrefix() + "-A-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
-        this.setAppointmentDate(appointmentDate);
         this.setAppointmentTime(appointmentTime);
         this.setPatient(patient);
         this.setAppointmentDescription(appointmentDescription);
@@ -73,13 +70,6 @@ public class Appointment implements Serializable{
         this.appointmentId = appointmentId;
     }
 
-    public Date getAppointmentDate() {
-        return appointmentDate;
-    }
-
-    public void setAppointmentDate(Date appointmentDate) {
-        this.appointmentDate = appointmentDate;
-    }
 
     public Timestamp getAppointmentTime() {
         return appointmentTime;

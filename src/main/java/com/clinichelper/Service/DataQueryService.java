@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.List;
 
@@ -77,7 +78,7 @@ public class DataQueryService {
 
     public List<Appointment> findAllRegisteredAppointmentsForToday(String clinicId){ return findAllRegisteredAppointmentsByGivenDate(new Date(Calendar.getInstance().getTime().getTime()), clinicId); }
 
-    public List<Appointment> findAllRegisteredAppointmentsByGivenDate(Date searchDate, String clinicId){ return appointmentRepository.findByDate(searchDate, clinicId); }
+    public List<Appointment> findAllRegisteredAppointmentsByGivenDate(Date searchDate, String clinicId){ return appointmentRepository.findByDate(new Date(searchDate.getTime()), clinicId); }
 
     //public List<Appointment> findAllRegisteredAppointmentsByTimePeriod(String clinicId, Date beginningOfTimePeriod, Date endOfTimePeriod){ return appointmentRepository.findByDateRange(beginningOfTimePeriod, endOfTimePeriod, clinicId); }
 

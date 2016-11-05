@@ -51,19 +51,16 @@ public class AppointmentController {
 
     // Posts
     @PostMapping("/newAppointment")
-    public String createNewApointment(@RequestParam("appointmentTime") Timestamp appointmentTime, @RequestParam("patient") String patientId, @RequestParam("description") String appointmentDescription, @RequestParam("type") String appointmentType){
+    public String createNewApointment(@RequestParam("appointmentTime") String appointmentTime, @RequestParam("patient") String patientId, @RequestParam("description") String appointmentDescription, @RequestParam("type") String appointmentType){
 
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
         try {
-            SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy");
-            SimpleDateFormat sdf2 = new SimpleDateFormat("hh:mm:ss");
+            SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
             String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
-
             Patient patient = DQS.findRegisteredPatientByIdCard(clinicId, patientId);
-
-            DEAMS.createNewAppointment(clinicId, new Date(sdf1.parse(appointmentTime.toString()).getTime()), new Timestamp(sdf2.parse(appointmentTime.toString()).getTime()), patient.getPatientId(), appointmentDescription, appointmentType.toUpperCase().equals("C") ? AppointmentType.CONSULTATION : AppointmentType.SURGERY);
+            DEAMS.createNewAppointment(clinicId, new Timestamp(sdf1.parse(appointmentTime).getTime()), patient.getPatientId(), appointmentDescription, appointmentType.toUpperCase().equals("C") ? AppointmentType.CONSULTATION : AppointmentType.SURGERY);
 
             return "redirect:/appointments";
         } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
@@ -102,11 +99,8 @@ public class AppointmentController {
 
         try {
 
-            SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
-            appointment.setAppointmentDate(new Date(sdf1.parse(newDate).getTime()));
-
-            sdf1 = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
-            appointment.setAppointmentTime(new Timestamp(sdf1.parse(newTime).getTime()));
+            SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
+            appointment.setAppointmentTime(new Timestamp(sdf1.parse(newDate).getTime()));
 
             DEAMS.editAppointment(appointment);
             return "redirect:/appointments";
