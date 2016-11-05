@@ -62,23 +62,31 @@ public class IndexController implements ErrorController {
     }
 
 
-
+    // Posts
     @PostMapping("/newTask")
-    public String registerNewPatient(@RequestParam("title") String title, @RequestParam("type") Task type, @RequestParam("description") String description, @RequestParam("clinic") String clinicId) {
+    public String registerNewTask(@RequestParam("title") String title, @RequestParam("type") Task type, @RequestParam("description") String description) {
 
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
         try {
-            DEAMS.createNewCustomTask(clinicId, title, type, description);
-            return "redirect:/patients";
+            DEAMS.createNewCustomTask(DQS.getCurrentLoggedUser().getClinic().getClinicId(), title, type, description);
+            return "redirect:/";
         } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
-            System.out.println("ERROR EN CREAR PACIENTE");
+            System.out.println("ERROR EN CREAR TASK");
         } catch (Exception exp){
-            System.out.println("ERROR EN CREAR PACIENTE");
+            System.out.println("ERROR EN CREAR TASK");
         }
 
-        return "redirect:/patients"; // TODO: add error handling method
+        return "redirect:/"; // TODO: add error handling method
+    }
+
+    @PostMapping("/newMeeting")
+    public String registerNewMeeting(){
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
+
+        return "redirect:/"; // TODO: add error handling method
     }
 
 
