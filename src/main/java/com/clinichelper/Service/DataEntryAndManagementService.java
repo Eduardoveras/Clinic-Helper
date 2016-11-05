@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.PersistenceException;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Set;
 
@@ -228,10 +229,15 @@ public class DataEntryAndManagementService {
 
 
     public Patient createNewPatient(String clinicId, String patientFirstName, String patientLastName, String patientIdCard,
-                                    String patientTelephoneNumber, String patientContactTelephoneNumber,
-                                    String occupation, Gender patientGender, String patientEmail,
-                                    Date patientBirthDate, String patientNationality, String patientAddress,
-                                    String patientCity, String patientCountry) throws Exception {
+                                    String patientTelephoneNumber, String patientWorkphone ,String patientCellphone,
+                                    String patientContactName, String patientContactLastName, String patientContactAddress,
+                                    String patientContactCellphone, String patientContactTelephoneNumber,String occupation,
+                                    Gender patientGender, String patientEmail, Date patientBirthDate, String patientNationality,
+                                    String patientAddress, String patientCity, String patientCountry, ArrayList<String> patientAllergies,
+                                   String patientReligion, String PatientHeight, String PatientWeight, String patientBloodType,
+                                    ArrayList<String> patientConditions
+
+                                    ) throws Exception {
 
         if (!doesClinicIdExist(clinicId))
             throw new IllegalArgumentException("\n\nThis is an invalid clinic id");
@@ -241,9 +247,12 @@ public class DataEntryAndManagementService {
 
         try {
             return patientRepository.save(new Patient(clinicRepository.findByClinicId(clinicId), patientFirstName, patientLastName, patientIdCard,
-                    patientTelephoneNumber, patientContactTelephoneNumber,
-                    occupation, patientGender, patientEmail, patientBirthDate, patientNationality,
-                    patientAddress, patientCity, patientCountry));
+                    patientTelephoneNumber, patientWorkphone,patientCellphone, patientContactName, patientContactLastName, patientContactAddress, patientContactCellphone,
+                    patientContactTelephoneNumber, occupation, patientGender, patientEmail, patientBirthDate, patientNationality,
+                    patientAddress, patientCity, patientCountry, patientAllergies, patientReligion, PatientHeight, PatientWeight,
+                    patientBloodType, patientConditions
+
+            ));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis patient was not able to persist -> " + exp.getMessage());
