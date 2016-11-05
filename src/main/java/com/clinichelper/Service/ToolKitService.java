@@ -6,6 +6,7 @@ package com.clinichelper.Service;
 import com.clinichelper.Entity.*;
 import com.clinichelper.Repository.*;
 import com.clinichelper.Tools.Classes.CalendarEvent;
+import com.clinichelper.Tools.Enums.AppointmentStatus;
 import com.clinichelper.Tools.Enums.EventStatus;
 import com.clinichelper.Tools.Enums.Task;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ public class ToolKitService {
     private List<Chore> todoList;
 
     // Repositories
+    @Autowired
+    private AppointmentRepository appointmentRepository;
     @Autowired
     private EquipmentRepository equipmentRepository;
     @Autowired
@@ -68,12 +71,15 @@ public class ToolKitService {
         List<CalendarEvent> events = new ArrayList<>();
 
         // Adding all Appointments
-
+        for (Appointment a:
+             appointmentRepository.findByClinicId(clinicId)) {
+            events.add(new CalendarEvent("Appointment With " + a.getPatient().getPatientFullName(), a.getAppointmentTime(), a.getAppointmentDescription(), a.getAppointmentStatus() == AppointmentStatus.PENDING ? EventStatus.PENDING : a.getAppointmentStatus() == AppointmentStatus.COMPLETED ? EventStatus.COMPLETED : EventStatus.EXPIRED));
+        }
 
         // Adding all Meetings
         for (Meeting m:
-             FetchMeetings(clinicId)) {
-            events.add(new CalendarEvent("MEETING: " + m.getMeetingTitle(), m.getMeetingTime(), m.getMeetingObjective(), differenceInDays(new Date(Calendar.getInstance().getTime().getTime()), new Date(m.getMeetingTime().getTime())) <= 0 ? EventStatus.EXPIRED : EventStatus.PENDING));
+                meetingRepository.findByClinicId(clinicId)) {
+            events.add(new CalendarEvent("MEETING: " + m.getMeetingTitle(), m.getMeetingTime(), m.getMeetingObjective(), differenceInDays(new Date(Calendar.getInstance().getTime().getTime()), new Date(m.getMeetingTime().getTime())) <= 0 ? EventStatus.COMPLETED : EventStatus.PENDING));
         }
 
         return events;
@@ -93,10 +99,6 @@ public class ToolKitService {
 
         return inventory;
     }
-
-    // Calendar Functions
-    private List<Meeting> FetchMeetings(String clinicId) { return meetingRepository.findByClinicId(clinicId); }
-
 
     // Inventory Functions
     private List<Equipment> StockEquipmentShelf(String clinicId) { return equipmentRepository.findByClinic(clinicId); }
