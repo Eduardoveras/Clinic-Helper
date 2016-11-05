@@ -1,6 +1,7 @@
 package com.clinichelper.Entity;
 
 import com.clinichelper.Tools.AccessForm;
+import com.clinichelper.Tools.AppointmentStatus;
 import com.clinichelper.Tools.AppointmentType;
 
 import javax.persistence.*;
@@ -31,6 +32,7 @@ public class Appointment implements Serializable{
     private String appointmentDescription;
     private AccessForm appointmentAccessFrom;
     private AppointmentType appointmentType;
+    private AppointmentStatus appointmentStatus;
     @ManyToOne
     private Clinic clinic;
 
@@ -47,6 +49,7 @@ public class Appointment implements Serializable{
         this.setAppointmentAccessFrom(AccessForm.WEB);
         this.setClinic(clinic);
         this.setAppointmentType(AppointmentType.CONSULTATION);
+        this.setAppointmentStatus(AppointmentStatus.PENDING);
     }
 
     public Appointment(Clinic clinic, Date appointmentDate, Timestamp appointmentTime, Patient patient, String appointmentDescription, AppointmentType appointmentType){
@@ -58,6 +61,7 @@ public class Appointment implements Serializable{
         this.setAppointmentAccessFrom(AccessForm.CLINIC);
         this.setClinic(clinic);
         this.setAppointmentType(appointmentType);
+        this.setAppointmentStatus(AppointmentStatus.PENDING);
     }
 
     //Getters and Setters
@@ -136,5 +140,13 @@ public class Appointment implements Serializable{
 
         SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
         return sdf.format(appointmentTime);
+    }
+
+    public AppointmentStatus getAppointmentStatus() {
+        return appointmentStatus;
+    }
+
+    public void setAppointmentStatus(AppointmentStatus appointmentStatus) {
+        this.appointmentStatus = appointmentStatus;
     }
 }
