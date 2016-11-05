@@ -39,23 +39,14 @@ public class PatientController {
         if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
-        String cliniId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
+        String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
 
-        model.addAttribute("todoList", TKS.InitializeTodoList(cliniId));
-        model.addAttribute("patientList", DQS.findAllRegisteredPatientsForClinic(cliniId));
-        model.addAttribute("amount", DQS.findAllRegisteredPatientsForClinic(cliniId).size());
+        model.addAttribute("todoList", TKS.InitializeTodoList(clinicId));
+        model.addAttribute("patientList", DQS.findAllRegisteredPatientsForClinic(clinicId));
+        model.addAttribute("amount", DQS.findAllRegisteredPatientsForClinic(clinicId).size());
 
         return new ModelAndView("patients/allPatients");
     }
-
-    @GetMapping("/patientstest")
-    public ModelAndView fetchAllPatientstestView(Model model){
-        if (!DQS.isUserLoggedIn())
-            return new ModelAndView("redirect:/login");
-
-        return new ModelAndView("patients/test");
-    }
-
 
     @GetMapping("/patient/{id}")
     public ModelAndView fetchPatientview(Model model,@PathVariable(value="id") String patientId){

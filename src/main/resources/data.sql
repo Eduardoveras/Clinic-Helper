@@ -84,6 +84,16 @@ INSERT INTO appointments(clinic_clinic_id, appointment_id, appointment_date, app
 0,
 0);
 
+INSERT INTO appointments(clinic_clinic_id, appointment_id, appointment_date, appointment_time, patient_patient_id, appointment_description, appointment_access_from, appointment_type) VALUES (
+'CH-PLATINUM-JASC',
+'JASC123452',
+'2016-11-05',
+'2016-11-05 11:10:00',
+'JASC-P-BVN3DF43WED32',
+'Appointment for brain removal',
+0,
+0);
+
 INSERT INTO meetings (
 clinic_clinic_id,
 meeting_id,

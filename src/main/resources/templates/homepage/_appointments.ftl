@@ -1,4 +1,4 @@
-<div class="col-md-8">
+<div class="col-md-7">
     <h2>Today's appointments</h2>
     <div class="x_content">
         <div class="row">
@@ -24,8 +24,10 @@
                     <div class="col-xs-12 bottom text-center">
 
                         <div class="col-xs-12 col-sm-6 emphasis">
-                            <button type="button" class="btn btn-danger btn-sm btn-round"><i class="fa fa-user">
-                            </i> DELETE </i></button>
+                            <form action="/cancelAppointment" METHOD="POST" enctype="multipart/form-data" data-parsley-validate>
+                                <input type="hidden" id="appointment_id" name="appointment_id" value="${appointment.getAppointmentId()}">
+                                <input type="submit" class="btn btn-danger btn-sm btn-round" value="Cancel">
+                            </form>
                         </div>
                         <div class="col-xs-12 col-sm-6 emphasis">
                             <button data-toggle="dropdown" class="btn btn-default dropdown-toggle btn-sm btn-round" type="button" aria-expanded="false">Options <span class="caret"></span>

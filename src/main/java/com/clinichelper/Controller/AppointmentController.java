@@ -76,21 +76,20 @@ public class AppointmentController {
     }
 
     @PostMapping("/cancelAppointment")
-    public String cancelRegisteredAppointment(@RequestParam("id") String appointmentId){
-
+    public String cancelRegisteredAppointment( @RequestParam("appointment_id") String appointmentId){
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
         try {
             DEAMS.deleteRegisteredAppointment(appointmentId);
-            return "redirect:/appointments";
+            return "redirect:/";
         } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
             //
         } catch (Exception exp){
             //
         }
 
-        return "redirect:/appointments"; // TODO: add error message handling
+        return "redirect:/" ; // TODO: add error message handling
     }
 
     @PostMapping("/changeDateAndTime")
