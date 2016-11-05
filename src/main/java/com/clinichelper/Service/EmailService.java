@@ -1,8 +1,10 @@
 package com.clinichelper.Service;
 
+import com.clinichelper.Tools.Classes.CalendarEvent;
 import com.sendgrid.*;
 import org.springframework.stereotype.Service;
 
+import java.awt.*;
 import java.io.IOException;
 
 /**
@@ -14,6 +16,7 @@ public class EmailService {
 
     public boolean sendEmail(String emailTo, String Subject, String theContent)
     {
+
         Email from = new Email("management@clinichelper.com");
         Email to = new Email(emailTo);
         Content content = new Content("text/plain", theContent+"\n\n\nEmail Service by Clinic Helper");

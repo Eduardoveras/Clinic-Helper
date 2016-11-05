@@ -52,6 +52,7 @@ public class IndexController implements ErrorController {
         //model.addAttribute("inOffice", countConditions(appointments, AppointmentStatus.IN_OFFICE));
         //model.addAttribute("completed", countConditions(appointments, AppointmentStatus.COMPLETED));
         model.addAttribute("user",DQS.getSessionAttr("user"));
+        model.addAttribute("events",TKS.InitializeClinicCalendar(clinicId));
 
         return new ModelAndView("homepage/index");
     }
