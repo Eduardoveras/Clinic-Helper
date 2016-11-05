@@ -32,9 +32,13 @@ public class InventoryController {
     // Gets
     @RequestMapping("/inventory")
     public ModelAndView FetchInventoryView(Model model/*, @RequestParam("clinic") String clinicId*/){
+        if (!DQS.isUserLoggedIn())
+            return new ModelAndView("redirect:/login");
 
-        Map<String, List> inventory = TKS.FetchClinicInventory("CH-PLATINUM-JASC");
+        String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
 
+        Map<String, List> inventory = TKS.FetchClinicInventory(clinicId);
+        model.addAttribute("todoList", TKS.InitializeTodoList(clinicId));
         model.addAttribute("equipmentList", inventory.get("equipments"));
         model.addAttribute("productList", inventory.get("products"));
         model.addAttribute("medication", inventory.get("medication"));
@@ -45,10 +49,13 @@ public class InventoryController {
 
     // Posts
     @PostMapping("/newEquipment")
-    public String registerNewEquipment(/*@RequestParam("clinic") String clinicId,*/ @RequestParam("name") String equipmentName, @RequestParam("use") String equipmentUse, @RequestParam("description") String equipmentDescription, @RequestParam("quantity") Integer stock){
+    public String registerNewEquipment(@RequestParam("name") String equipmentName, @RequestParam("use") String equipmentUse, @RequestParam("description") String equipmentDescription, @RequestParam("quantity") Integer stock){
+
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
 
         try {
-            DEAMS.createNewEquipment("CH-PLATINUM-JASC", equipmentName, equipmentUse, equipmentDescription, stock);
+            DEAMS.createNewEquipment(DQS.getCurrentLoggedUser().getClinic().getClinicId(), equipmentName, equipmentUse, equipmentDescription, stock);
             return "redirect:/inventory";
         } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
             //
@@ -60,10 +67,13 @@ public class InventoryController {
     }
 
     @PostMapping("/newProduct")
-    public String registerNewProduct(/*@RequestParam("clinic") String clinicId,*/ @RequestParam("name") String productName, @RequestParam("description") String productDescription, @RequestParam("price") Float productPrice, @RequestParam("quantity") Integer stock){
+    public String registerNewProduct(@RequestParam("name") String productName, @RequestParam("description") String productDescription, @RequestParam("price") Float productPrice, @RequestParam("quantity") Integer stock){
+
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
 
         try {
-            DEAMS.createNewProduct("CH-PLATINUM-JASC", productName, productDescription, productPrice, stock);
+            DEAMS.createNewProduct(DQS.getCurrentLoggedUser().getClinic().getClinicId(), productName, productDescription, productPrice, stock);
         } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
             //
         } catch (Exception exp){
@@ -74,10 +84,13 @@ public class InventoryController {
     }
 
     @PostMapping("/newMedication")
-    public String registerNewMedication(/*@RequestParam("clinic") String clinicId,*/@RequestParam("name")  String medicationName, @RequestParam("supplier") String supplier, @RequestParam("description") String medicationDescription, @RequestParam("price") Float medicationPrice, @RequestParam("quantity") Integer stock){
+    public String registerNewMedication(@RequestParam("name")  String medicationName, @RequestParam("supplier") String supplier, @RequestParam("description") String medicationDescription, @RequestParam("price") Float medicationPrice, @RequestParam("quantity") Integer stock){
+
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
 
         try {
-            DEAMS.createNewMedication("CH-PLATINUM-JASC", medicationName, supplier, medicationDescription, medicationPrice, stock);
+            DEAMS.createNewMedication(DQS.getCurrentLoggedUser().getClinic().getClinicId(), medicationName, supplier, medicationDescription, medicationPrice, stock);
         } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
             //
         } catch (Exception exp){

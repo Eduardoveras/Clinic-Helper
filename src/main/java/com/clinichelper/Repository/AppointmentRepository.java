@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 public interface AppointmentRepository extends JpaRepository<Appointment, String> {
@@ -18,10 +19,10 @@ public interface AppointmentRepository extends JpaRepository<Appointment, String
     @Query("select a from Appointment a where a.clinic.clinicId = :clinic")
     List<Appointment> findByClinicId(@Param("clinic") String clinicId);
 
-    @Query("select a from Appointment a where a.appointmentDate = :appointmentDate and a.clinic.clinicId = :clinic")
-    List<Appointment> findByDate(@Param("appointmentDate") Date searchDate, @Param("clinic") String clinicId);
+    @Query("select a from Appointment a where a.appointmentTime = :appointmentTime and a.clinic.clinicId = :clinic")
+    List<Appointment> findByDate(@Param("appointmentTime") Date searchDate, @Param("clinic") String clinicId);
 
-    @Query("select a from Appointment a where a.clinic.clinicId = :clinic and a.appointmentDate between :beginning and :ending")
+    @Query("select a from Appointment a where a.clinic.clinicId = :clinic and a.appointmentTime between :beginning and :ending")
     List<Appointment> findByDateRange(@Param("beginning") Date startDate, @Param("ending") Date endDate, @Param("clinic") String clinicId);
 
     @Query("select a from Appointment a where a.patient.patientId = :id")

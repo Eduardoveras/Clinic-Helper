@@ -1,8 +1,10 @@
 package com.clinichelper.Controller;
 
+import com.clinichelper.Entity.Appointment;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
+import com.clinichelper.Tools.AppointmentStatus;
 import com.clinichelper.Tools.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ErrorController;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.PersistenceException;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class IndexController implements ErrorController {
@@ -34,9 +37,17 @@ public class IndexController implements ErrorController {
         if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
+        String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
+        List<Appointment> appointments = DQS.findAllRegisteredAppointmentsForToday(clinicId);
+
         model.addAttribute("name", name);
-        model.addAttribute("todoList", TKS.InitializeTodoList("CH-PLATINUM-JASC"));
-        model.addAttribute("todays_appointments", DQS.findAllRegisteredAppointmentsForToday("CH-PLATINUM-JASC"));
+        model.addAttribute("todoList", TKS.InitializeTodoList(clinicId));
+        model.addAttribute("todays_appointments", DQS.findAllRegisteredAppointmentsForToday(clinicId));
+        //model.addAttribute("pending", countConditions(appointments, AppointmentStatus.PENDING));
+        //model.addAttribute("inOffice", countConditions(appointments, AppointmentStatus.IN_OFFICE));
+        //model.addAttribute("completed", countConditions(appointments, AppointmentStatus.COMPLETED));
+        model.addAttribute("user",DQS.getSessionAttr("user"));
+
         return new ModelAndView("homepage/index");
     }
 
@@ -48,24 +59,39 @@ public class IndexController implements ErrorController {
 
 
     @PostMapping("/newTask")
-    public String registerNewPatient(/*@RequestParam("clinic") String clinicId,*/@RequestParam("title") String title, @RequestParam("type") String type, @RequestParam("description") String description){
+    public String registerNewPatient(@RequestParam("title") String title, @RequestParam("type") Task type, @RequestParam("description") String description, @RequestParam("clinic") String clinicId) {
+
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
 
         try {
-            String y = title;
-           DEAMS.createNewCustomTask("CH-PLATINUM-JASC", title, type.toUpperCase().equals("U") ? Task.URGENT : Task.REMINDER, description);
-            return "redirect:/";
+            DEAMS.createNewCustomTask(clinicId, title, type, description);
+            return "redirect:/patients";
         } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
             System.out.println("ERROR EN CREAR PACIENTE");
         } catch (Exception exp){
             System.out.println("ERROR EN CREAR PACIENTE");
         }
 
-        return "redirect:/";
+        return "redirect:/patients"; // TODO: add error handling method
     }
 
 
+    // Auxiliary Functions
     @Override
     public String getErrorPath() {
         return ERR_PATH;
+    }
+
+    private int countConditions(List<Appointment> appointments, AppointmentStatus status){
+        int num = 0;
+
+        for (Appointment a:
+                appointments) {
+            if (a.getAppointmentStatus().equals(status))
+                num++;
+        }
+
+        return num;
     }
 }

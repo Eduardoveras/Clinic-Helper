@@ -3,6 +3,7 @@ package com.clinichelper.Controller;
 import com.clinichelper.Entity.User;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
+import com.clinichelper.Service.ToolKitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,10 +28,14 @@ public class UserController {
     private DataEntryAndManagementService DEAMS;
     @Autowired
     private DataQueryService DQS;
+    @Autowired
+    private ToolKitService TKS;
 
     // TODO: this can only be used by SUPERADMIN
     @GetMapping("/admin/users")
     public ModelAndView fetchAllPatientsView(Model model){
+        model.addAttribute("todoList", TKS.InitializeTodoList("CH-PLATINUM-JASC"));
+
 
         //model.addAttribute("userList", DQS.findAllAllRegisteredUsersForClinic("CH-PLATINUM-JASC"));
         //model.addAttribute("amount", DQS.findAllAllRegisteredUsersForClinic("CH-PLATINUM-JASC").size());
@@ -41,14 +46,23 @@ public class UserController {
     }
 
     @RequestMapping("/login")
-    public ModelAndView fetchLoginView(Model model, HttpSession session){
-
-
+    public ModelAndView fetchLoginView(){
         return new ModelAndView("/users/login_register");
+    }
+
+    @RequestMapping("/logout")
+    public ModelAndView logOut(){
+        if (!DQS.isUserLoggedIn())
+            return new ModelAndView("redirect:/login");
+
+        DQS.logOut();
+        return new ModelAndView("redirect:/login");
     }
 
     @GetMapping("/user/{id}")
     public ModelAndView fetchUserProfile(Model model, @RequestParam("id") String userId){
+        if (!DQS.isUserLoggedIn())
+            return new ModelAndView("redirect:/login");
 
         model.addAttribute("user", DQS.findUserInformation(userId));
         return new ModelAndView("users/userProfile");
@@ -57,10 +71,14 @@ public class UserController {
     @PostMapping("/uploadProfilePhoto")
     public String uploadProfilePicture(@RequestParam() String email, @RequestParam("clinic") String clinicId, @RequestParam("photo") MultipartFile file){
 
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
+
         User user = DQS.findRegisteredUserAccount(email,clinicId);
 
         try {
             DEAMS.editUserPhoto(email, clinicId, processImageFile(file.getBytes()));
+            return "redirect:/user/" + user.getUserId();
         } catch (PersistenceException exp){
             //
         } catch (IllegalArgumentException exp) {
@@ -71,7 +89,7 @@ public class UserController {
             //
         }
 
-        return "redirect:/user/" + user.getUserId();
+        return "redirect:/user/" + user.getUserId(); // TODO: add error exception logic
     }
 
     @PostMapping("/userLogin")
@@ -80,19 +98,19 @@ public class UserController {
 
         if (DQS.validateUserAccountCredentials(email, password))
         {
-            System.out.println("\n\n\n\n\n\n\n\n\nFUCK THIS IM LOGGED\n\n\n");
             User u = DQS.findRegisteredUserAccount(email,password);
             DQS.setSessionAttr("user",u);
             return "redirect:/"; // TODO: filter which user is login in to redirect them to the correct url
         }
-        else {
-            System.out.println("\n\n\n\n\n\n\n\n\nFUCK THIS IM NOT LOGGED\n\n\n\n\n");
+        else
             return "redirect:/login"; // TODO: Implement error exception or message to login
-        }
     }
 
     @PostMapping("/editMyPassword")
     public String editUserPassword(@RequestParam("email") String email, @RequestParam("clinic") String clinicId, @RequestParam("password") String password, @RequestParam("newPassword") String newPassword){
+
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
 
         if (DQS.validateUserAccountCredentials(email.toLowerCase(), password)){
 
@@ -101,16 +119,11 @@ public class UserController {
             try {
                 DEAMS.editUserAccountCredentials(user.getEmail(), user.getClinic().getClinicId(), newPassword, user.getRole());
                 return "redirect:/user/" + user.getUserId();
-            } catch (PersistenceException exp){
-                //
-            } catch (IllegalArgumentException exp) {
-                //
-            } catch (NullPointerException exp) {
+            } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
                 //
             } catch (Exception exp){
                 //
             }
-
             return "redirect:/user/" + user.getUserId(); // TODO: Implement error exception or message to edit password
         }
         else

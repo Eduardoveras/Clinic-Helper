@@ -1,7 +1,7 @@
 <div class="col-md-3 menu_fixed left_col">
     <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
-            <a href="index.html" class="site_title"><i class="fa fa-plus-circle"></i> <span>Clinic Helper!</span></a>
+            <a href="/" class="site_title"><i class="fa fa-plus-circle"></i> <span>${user.getClinic().getClinicPrefix()}</span></a>
         </div>
 
         <div class="clearfix"></div>
@@ -13,7 +13,7 @@
             </div>
             <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <h2>${user.getFullName()}</h2>
             </div>
         </div>
         <!-- /menu profile quick info -->
@@ -24,7 +24,7 @@
         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
                 <br>
-                <h3>General</h3>
+                <h3>MENU</h3>
                 <ul class="nav side-menu">
 
                     <li><a href="/"><i  class="fa fa-plus-square-o"></i> Dashboard <span ></span></a></li>
@@ -55,7 +55,7 @@
             <a data-toggle="tooltip" data-placement="top" title="Lock">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
             </a>
-            <a data-toggle="tooltip" data-placement="top" title="Logout">
+            <a href="/logout" data-toggle="tooltip" data-placement="top" title="Logout">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
             </a>
         </div>

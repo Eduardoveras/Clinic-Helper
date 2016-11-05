@@ -1,6 +1,7 @@
 package com.clinichelper.Entity;
 
 import com.clinichelper.Tools.AccessForm;
+import com.clinichelper.Tools.AppointmentStatus;
 import com.clinichelper.Tools.AppointmentType;
 
 import javax.persistence.*;
@@ -21,8 +22,6 @@ public class Appointment implements Serializable{
     @Id
     private String appointmentId;
     @NotNull
-    private Date appointmentDate;
-    @NotNull
     private Timestamp appointmentTime;
     @ManyToOne
     @NotNull
@@ -31,6 +30,7 @@ public class Appointment implements Serializable{
     private String appointmentDescription;
     private AccessForm appointmentAccessFrom;
     private AppointmentType appointmentType;
+    private AppointmentStatus appointmentStatus;
     @ManyToOne
     private Clinic clinic;
 
@@ -39,25 +39,26 @@ public class Appointment implements Serializable{
 
     }
 
-    public Appointment(Clinic clinic, Date appointmentDate, Patient patient, String appointmentDescription){
+    public Appointment(Clinic clinic,Timestamp appointmentTime , Patient patient, String appointmentDescription){
         this.setAppointmentId(clinic.getClinicPrefix() + "-SOLICIT-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
-        this.setAppointmentDate(appointmentDate);
         this.setPatient(patient);
         this.setAppointmentDescription(appointmentDescription);
         this.setAppointmentAccessFrom(AccessForm.WEB);
         this.setClinic(clinic);
         this.setAppointmentType(AppointmentType.CONSULTATION);
+        this.setAppointmentStatus(AppointmentStatus.PENDING);
+        this.setAppointmentTime(appointmentTime);
     }
 
-    public Appointment(Clinic clinic, Date appointmentDate, Timestamp appointmentTime, Patient patient, String appointmentDescription, AppointmentType appointmentType){
+    public Appointment(Clinic clinic,  Timestamp appointmentTime, Patient patient, String appointmentDescription, AppointmentType appointmentType){
         this.setAppointmentId(clinic.getClinicPrefix() + "-A-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
-        this.setAppointmentDate(appointmentDate);
         this.setAppointmentTime(appointmentTime);
         this.setPatient(patient);
         this.setAppointmentDescription(appointmentDescription);
         this.setAppointmentAccessFrom(AccessForm.CLINIC);
         this.setClinic(clinic);
         this.setAppointmentType(appointmentType);
+        this.setAppointmentStatus(AppointmentStatus.PENDING);
     }
 
     //Getters and Setters
@@ -69,13 +70,6 @@ public class Appointment implements Serializable{
         this.appointmentId = appointmentId;
     }
 
-    public Date getAppointmentDate() {
-        return appointmentDate;
-    }
-
-    public void setAppointmentDate(Date appointmentDate) {
-        this.appointmentDate = appointmentDate;
-    }
 
     public Timestamp getAppointmentTime() {
         return appointmentTime;
@@ -129,5 +123,20 @@ public class Appointment implements Serializable{
 
     public void setAppointmentType(AppointmentType appointmentType) {
         this.appointmentType = appointmentType;
+    }
+
+    public String getSimplifiedTime()
+    {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
+        return sdf.format(appointmentTime);
+    }
+
+    public AppointmentStatus getAppointmentStatus() {
+        return appointmentStatus;
+    }
+
+    public void setAppointmentStatus(AppointmentStatus appointmentStatus) {
+        this.appointmentStatus = appointmentStatus;
     }
 }

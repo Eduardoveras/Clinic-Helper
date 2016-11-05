@@ -10,7 +10,7 @@
         <div class="animate form login_form">
             <section class="login_content">
                 <form METHOD="POST" enctype="multipart/form-data" action="/userLogin">
-                    <h1>Login Form</h1>
+                    <h1>Login To Begin Session</h1>
                     <div>
                         <input type="text" class="form-control" name="email" id="email" placeholder="Email" required="" />
                     </div>
@@ -19,7 +19,7 @@
                     </div>
                     <div>
                         <input type="hidden" name="clinic" value="CH-PLATINUM-JASC">
-                        <input type="submit" class="btn btn-default submit">Log in</input>
+                        <input type="submit" value="Log In" class="btn btn-default submit"></input>
                         <a class="reset_pass" href="#">Lost your password?</a>
                     </div>
 
@@ -35,7 +35,7 @@
 
                         <div>
                             <h1><i class="fa fa-plus-circle"></i> Clinic Helper!</h1>
-                            <p>©2016 All Rights Reserved. Clinic Helper! is a Bootstrap 3 template. Privacy and Terms</p>
+                            <p>©2016 All Rights Reserved. <br>Clinic Helper Privacy and Terms</p>
                         </div>
                     </div>
                 </form>
@@ -57,7 +57,7 @@
                     </div>
                     <div>
                         <input type="hidden" name="staff" value="JASC-STAFF-ADMIN" class="form-control" placeholder="Email" required="" />
-                        <input type="submit" class="btn btn-default submit" >Submit</input>
+                        <input type="submit" value="Register" class="btn btn-default submit" ></input>
                     </div>
 
                     <div class="clearfix"></div>

@@ -24,7 +24,6 @@
                 <thead>
                 <tr>
                     <th>Appointment Date:</th>
-                    <th>Appointment Time:</th>
                     <th>Patient:</th>
                     <th>Description:</th>
 
@@ -33,9 +32,7 @@
                 <tbody>
                 <#list appointmentList as appointment>
                 <tr>
-                    <td>${appointment.appointmentDate}</td>
-                    <td>${appointment.appointmentTime}</td>
-
+                    <td>${appointment.getAppointmentTime()}</td>
                     <td><a href="/patient/${appointment.patient.patientId}">${appointment.patient.patientFullName}</a></td>
                     <td>${appointment.appointmentDescription}</td>
 

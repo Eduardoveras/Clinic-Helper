@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.UUID;
 
@@ -42,6 +43,11 @@ public class Patient implements Serializable{
     private String patientAddress;
     @NotNull
     private String patientCity;
+
+
+
+   // @NotNull
+   // private ArrayList<String> patientAllergies;
     @NotNull
     private String patientCountry;
     @ManyToOne
@@ -77,8 +83,10 @@ public class Patient implements Serializable{
         this.setPatientAddress(patientAddress.toUpperCase());
         this.setPatientCity(patientCity.toUpperCase());
         this.setPatientCountry(patientCountry.toUpperCase());
+      //  this.setPatientAllergies(patientAllergies);
         this.setPatientRegisteredDate(new Date(Calendar.getInstance().getTime().getTime())); // current date
         this.setClinic(clinic);
+
     }
 
     // Getters and Setters
