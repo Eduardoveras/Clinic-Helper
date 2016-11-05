@@ -3,6 +3,7 @@ package com.clinichelper.Controller;
 import com.clinichelper.Entity.User;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
+import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Gender;
 import com.clinichelper.Tools.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +31,14 @@ public class TeamController {
     private DataEntryAndManagementService DEAMS;
     @Autowired
     private DataQueryService DQS;
+    @Autowired
+    private ToolKitService TKS;
 
     // Gets
     @RequestMapping("/team")
     public ModelAndView fetchStaffView(Model model, @RequestParam("clinic") String clinicId){
 
+        model.addAttribute("todoList", TKS.InitializeTodoList("CH-PLATINUM-JASC"));
         model.addAttribute("staffList", DQS.findAllRegisteredContactsForClinic(clinicId));
         model.addAttribute("userList", DQS.findAllAllRegisteredUsersForClinic(clinicId));
 
@@ -46,10 +50,9 @@ public class TeamController {
         if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
+        model.addAttribute("todoList", TKS.InitializeTodoList("CH-PLATINUM-JASC"));
         model.addAttribute("userList", DQS.findAllAllRegisteredUsersForClinic("CH-PLATINUM-JASC"));
         model.addAttribute("clinicId", DQS.findAllAllRegisteredUsersForClinic("CH-PLATINUM-JASC").get(0).getClinic().getClinicPrefix());
-        // model.addAttribute("userList", DQS.findAllAllRegisteredUsersForClinic(clinicId));
-        //model.addAttribute("amount", DQS.findAllAllRegisteredUsersForClinic(clinicId).size());
 
         return new ModelAndView("/users/allUsers");
     }

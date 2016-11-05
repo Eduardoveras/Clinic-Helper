@@ -6,6 +6,7 @@ package com.clinichelper.Controller;
 import com.clinichelper.Entity.Patient;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
+import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Gender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,8 @@ public class PatientController {
     private DataEntryAndManagementService DEAMS;
     @Autowired
     private DataQueryService DQS;
+    @Autowired
+    private ToolKitService TKS;
 
     // Gets
     @GetMapping("/patients")
@@ -36,6 +39,7 @@ public class PatientController {
         if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
+        model.addAttribute("todoList", TKS.InitializeTodoList("CH-PLATINUM-JASC"));
         model.addAttribute("patientList", DQS.findAllRegisteredPatientsForClinic("CH-PLATINUM-JASC"));
         model.addAttribute("amount", DQS.findAllRegisteredPatientsForClinic("CH-PLATINUM-JASC").size());
 
@@ -47,6 +51,7 @@ public class PatientController {
         if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
+        model.addAttribute("todoList", TKS.InitializeTodoList("CH-PLATINUM-JASC"));
         model.addAttribute("patient", DQS.findRegisteredPatient(patientId));
         model.addAttribute("appointments", DQS.findPatientsRegisteredAppointments(patientId));
         return new ModelAndView("patients/patientsProfile");

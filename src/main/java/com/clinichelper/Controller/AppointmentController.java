@@ -7,6 +7,7 @@ import com.clinichelper.Entity.Appointment;
 import com.clinichelper.Entity.Patient;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
+import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.AppointmentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,11 +30,14 @@ public class AppointmentController {
     private DataEntryAndManagementService DEAMS;
     @Autowired
     private DataQueryService DQS;
+    @Autowired
+    private ToolKitService TKS;
 
     // Gets
     @GetMapping("/appointments")
     public ModelAndView fetchAppointmentView(Model model) throws Exception{
 
+        model.addAttribute("todoList", TKS.InitializeTodoList("CH-PLATINUM-JASC"));
         model.addAttribute("appointmentList", DQS.findAllRegisteredAppointmentsForClinic("CH-PLATINUM-JASC"));
 
         return new ModelAndView("appointments/allAppointment");
