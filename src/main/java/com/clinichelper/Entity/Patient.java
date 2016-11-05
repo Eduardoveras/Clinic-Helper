@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.UUID;
 
