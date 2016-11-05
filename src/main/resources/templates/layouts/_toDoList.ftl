@@ -86,10 +86,8 @@
                                       data-parsley-trigger="keyup" data-parsley-minlength="4"
                                       data-parsley-maxlength="20"
                                       data-parsley-validation-threshold="10">
-
                                                         </textarea>
                         </div>
-
                         <div class="form-group">
                             <label for="sel1">Select type:</label>
                             <select class="form-control" id="type" name="type">
