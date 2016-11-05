@@ -43,13 +43,17 @@ public class ToolKitService {
         todoList = new ArrayList<>();
 
         // Adding Custom created tasks
-        FetchCustomTasks(clinicId);
+        todoList.addAll(choreRepository.findByClinicId(clinicId));
 
         // Adding Birthday reminder tasks
-        FetchBirthAndRegistrationDatesReminders(clinicId);
+        todoList.addAll(findAllPatientBirthdayForNextWeek(clinicId));
+
+        todoList.addAll(findAllStaffBirthdayForNextWeek(clinicId));
+
+        todoList.addAll(findAllPatientWhoCompletedAnotherYear(clinicId));
 
         // Adding all of today's meeting;
-        FetchMeetings(clinicId);
+        todoList.addAll(findAllMeetingsForToday(clinicId));
 
         // TODO: Add surgery mechanic
 
@@ -80,25 +84,6 @@ public class ToolKitService {
         inventory.put("medication", StockMedicationSelf(clinicId));
 
         return inventory;
-    }
-
-    // TodoList Functions
-    private void FetchCustomTasks(String clinicId){
-
-        todoList.addAll(choreRepository.findByClinicId(clinicId));
-    }
-
-    private void FetchBirthAndRegistrationDatesReminders(String clinicId){
-
-        todoList.addAll(findAllPatientBirthdayForNextWeek(clinicId));
-
-        todoList.addAll(findAllStaffBirthdayForNextWeek(clinicId));
-
-        todoList.addAll(findAllPatientWhoCompletedAnotherYear(clinicId));
-    }
-
-    private void FetchMeetings(String clinicId){
-        todoList.addAll(findAllMeetingsForToday(clinicId));
     }
 
     // Inventory Functions
