@@ -6,17 +6,21 @@ package com.clinichelper.Service;
 import com.clinichelper.Entity.*;
 import com.clinichelper.Repository.*;
 import com.clinichelper.Tools.Classes.CalendarEvent;
+import com.clinichelper.Tools.Enums.EventStatus;
 import com.clinichelper.Tools.Enums.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
 public class ToolKitService {
 
     // Attributes
+    private static final long MILLISECONDS_IN_A_DAY = 24 * 60 * 60 * 1000;
     private List<Chore> todoList;
 
     // Repositories
@@ -65,8 +69,12 @@ public class ToolKitService {
 
         // Adding all Appointments
 
-        // Adding all Meetings
 
+        // Adding all Meetings
+        for (Meeting m:
+             FetchMeetings(clinicId)) {
+            events.add(new CalendarEvent("MEETING: " + m.getMeetingTitle(), m.getMeetingTime(), m.getMeetingObjective(), differenceInDays(new Date(Calendar.getInstance().getTime().getTime()), new Date(m.getMeetingTime().getTime())) <= 0 ? EventStatus.EXPIRED : EventStatus.PENDING));
+        }
 
         return events;
     }
@@ -86,6 +94,10 @@ public class ToolKitService {
         return inventory;
     }
 
+    // Calendar Functions
+    private List<Meeting> FetchMeetings(String clinicId) { return meetingRepository.findByClinicId(clinicId); }
+
+
     // Inventory Functions
     private List<Equipment> StockEquipmentShelf(String clinicId) { return equipmentRepository.findByClinic(clinicId); }
 
@@ -98,22 +110,23 @@ public class ToolKitService {
     private List<Chore> findAllMeetingsForToday(String clinicId){
 
         List<Chore> chores = new ArrayList<>();
+        try{
+            for (Meeting m:
+                    meetingRepository.findByMeetingDate(new Timestamp(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(Calendar.getInstance().getTime().getTime() + " 00:00:00").getTime()), new Timestamp(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(Calendar.getInstance().getTime().getTime() + " 23:59:00").getTime()), clinicId)) {
 
-        java.util.Date utilDate = new java.util.Date();
+                String staff = "**";
 
-        for (Meeting m:
-             meetingRepository.findByMeetingDate(new Date(utilDate.getTime()), clinicId)) {
+                for (Contact s:
+                        m.getAttendees()) {
+                    staff += s.getFullName() + "** ";
+                }
 
-            String staff = "**";
-
-            for (Contact s:
-                 m.getAttendees()) {
-                staff += s.getFullName() + "** ";
+                chores.add(new Chore(clinicRepository.findByClinicId(clinicId), "Meeting Today: " + m.getMeetingTitle() + " At " + m.getMeetingTime().toString().substring(10),
+                        Task.MEETING,
+                        "Place: " + m.getMeetingPlace() + "\nAttendees: " + staff + "\nObjective: " + m.getMeetingObjective()));
             }
-
-            chores.add(new Chore(clinicRepository.findByClinicId(clinicId), "Meeting Today: " + m.getMeetingTitle() + " At " + m.getMeetingTime().toString().substring(10),
-                    Task.MEETING,
-                    "Place: " + m.getMeetingPlace() + "\nAttendees: " + staff + "\nObjective: " + m.getMeetingObjective()));
+        } catch (Exception exp) {
+            // TODO: add exception handling
         }
 
         return chores;
@@ -250,5 +263,9 @@ public class ToolKitService {
             default:
                 return "Incorrect Value!";
         }
+    }
+
+    private int differenceInDays(Date start, Date end){
+        return (int)((end.getTime() - start.getTime()) / MILLISECONDS_IN_A_DAY);
     }
 }

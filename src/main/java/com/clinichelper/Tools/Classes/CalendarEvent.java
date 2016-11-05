@@ -3,6 +3,8 @@
  */
 package com.clinichelper.Tools.Classes;
 
+import com.clinichelper.Tools.Enums.EventStatus;
+
 import java.sql.Timestamp;
 
 public class CalendarEvent {
@@ -10,14 +12,14 @@ public class CalendarEvent {
     private String title;
     private Timestamp dateAndTime;
     private String description;
-    private String status;
+    private EventStatus status;
 
     // Constructors
     public CalendarEvent(){
 
     }
 
-    public CalendarEvent(String title, Timestamp dateAndTime, String description, String status){
+    public CalendarEvent(String title, Timestamp dateAndTime, String description, EventStatus status){
         this.setTitle(title);
         this.setDateAndTime(dateAndTime);
         this.setDescription(description);
@@ -49,11 +51,11 @@ public class CalendarEvent {
         this.description = description;
     }
 
-    public String getStatus() {
+    public EventStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(EventStatus status) {
         this.status = status;
     }
 }
