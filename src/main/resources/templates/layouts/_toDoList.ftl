@@ -92,13 +92,6 @@
                                                         </textarea>
                         </div>
 
-                        <div class="col-md-30 col-sm-30 col-xs-26 form-group has-feedback">
-                            <input type="text" class="form-control has-feedback-left" id="clinicId"
-                                   placeholder="clinicId">
-                            <span class="fa fa-user form-control-feedback left"
-                                  aria-hidden="clinicId"></span>
-                        </div>
-
                         <div class="form-group">
                             <label for="sel1">Select type:</label>
                             <select class="form-control" id="type">
@@ -107,7 +100,7 @@
                             </select>
                         </div>
                     </form>
-                    <button type="sumbit" class="btn btn-success" data-dismiss="modal">sumbit</button>
+                    <button type="sumbit" class="btn btn-success" data-dismiss="modal">Submit</button>
                 </div>
             </div>
         </div>
