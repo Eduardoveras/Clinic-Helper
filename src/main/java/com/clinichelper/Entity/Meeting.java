@@ -24,8 +24,6 @@ public class Meeting implements Serializable{
     @NotNull
     private String meetingObjective;
     @NotNull
-    private Date meetingDate;//
-    @NotNull
     private Timestamp meetingTime;
     @NotNull
     private String meetingPlace;//
@@ -35,16 +33,15 @@ public class Meeting implements Serializable{
     @ManyToOne
     private Clinic clinic;
 
-    // Constructores
+    // Constructors
     public Meeting(){
 
     }
 
-    public Meeting(Clinic clinic, String meetingTitle, String meetingObjective, Date meetingDate, Timestamp meetingTime, String meetingPlace, Set<Contact> attendees){
+    public Meeting(Clinic clinic, String meetingTitle, String meetingObjective, Timestamp meetingTime, String meetingPlace, Set<Contact> attendees){
         this.setMeetingId(clinic.getClinicPrefix() + "-M-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setMeetingTitle(meetingTitle.toUpperCase());
         this.setMeetingObjective(meetingObjective.toUpperCase());
-        this.setMeetingDate(meetingDate);
         this.setMeetingTime(meetingTime);
         this.setMeetingPlace(meetingPlace);
         this.setAttendees(attendees);
@@ -76,22 +73,12 @@ public class Meeting implements Serializable{
         this.meetingObjective = meetingObjective;
     }
 
-    public Date getMeetingDate() {
-        return meetingDate;
-    }
-
-    public void setMeetingDate(Date meetingDate) {
-        this.meetingDate = meetingDate;
-    }
-
     public Timestamp getMeetingTime() {
         return meetingTime;
     }
 
     public String getStringMeetingTime(){
-        Date date = new Date(meetingTime.getTime());
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
-        return sdf.format(date).substring(11,16);
+        return meetingTime.toString();
     }
 
     public void setMeetingTime(Timestamp meetingTime) {
