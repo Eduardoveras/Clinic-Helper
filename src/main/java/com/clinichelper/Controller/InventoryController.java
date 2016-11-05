@@ -34,7 +34,7 @@ public class InventoryController {
     public ModelAndView FetchInventoryView(Model model/*, @RequestParam("clinic") String clinicId*/){
 
         Map<String, List> inventory = TKS.FetchClinicInventory("CH-PLATINUM-JASC");
-
+        model.addAttribute("todoList", TKS.InitializeTodoList("CH-PLATINUM-JASC"));
         model.addAttribute("equipmentList", inventory.get("equipments"));
         model.addAttribute("productList", inventory.get("products"));
         model.addAttribute("medication", inventory.get("medication"));

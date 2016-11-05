@@ -77,8 +77,8 @@ INSERT INTO staff (clinic_clinic_id, contact_id, first_name, last_name, email, b
 INSERT INTO appointments(clinic_clinic_id, appointment_id, appointment_date, appointment_time, patient_patient_id, appointment_description, appointment_access_from, appointment_type) VALUES (
 'CH-PLATINUM-JASC',
 'JASC123456',
-'2016-11-01',
-'2016-10-31 10:10:00',
+'2016-11-05',
+'2016-11-05 10:10:00',
 'JASC-P-BVN309WJHN32',
 'cita para bala bla bla bla',
 0,
