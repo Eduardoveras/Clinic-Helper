@@ -8,6 +8,7 @@ import com.clinichelper.Entity.Patient;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
+import com.clinichelper.Tools.AppointmentStatus;
 import com.clinichelper.Tools.AppointmentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ import javax.persistence.PersistenceException;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 @Controller
 public class AppointmentController {
@@ -36,62 +38,66 @@ public class AppointmentController {
     // Gets
     @GetMapping("/appointments")
     public ModelAndView fetchAppointmentView(Model model) throws Exception{
+        if (!DQS.isUserLoggedIn())
+            return new ModelAndView("redirect:/login");
 
-        model.addAttribute("todoList", TKS.InitializeTodoList("CH-PLATINUM-JASC"));
-        model.addAttribute("appointmentList", DQS.findAllRegisteredAppointmentsForClinic("CH-PLATINUM-JASC"));
+        String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
+
+        model.addAttribute("todoList", TKS.InitializeTodoList(clinicId));
+        model.addAttribute("appointmentList", DQS.findAllRegisteredAppointmentsForClinic(clinicId));
 
         return new ModelAndView("appointments/allAppointment");
     }
 
     // Posts
     @PostMapping("/newAppointment")
-    public String createNewApointment(/*@RequestParam("clinic") String clinicId,*/@RequestParam("appointmentDate") String appointmentDate, @RequestParam("appointmentTime") String  appointmentTime, @RequestParam("patient") String patientId, @RequestParam("description") String appointmentDescription, @RequestParam("type") String appointmentType){
+    public String createNewApointment(@RequestParam("appointmentTime") Timestamp appointmentTime, @RequestParam("patient") String patientId, @RequestParam("description") String appointmentDescription, @RequestParam("type") String appointmentType){
+
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
 
         try {
             SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy");
             SimpleDateFormat sdf2 = new SimpleDateFormat("hh:mm:ss");
+            String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
 
-            //Patient patient = DQS.findRegisteredPatientByIdCard(clinicId, patientId);
-            Patient patient = DQS.findRegisteredPatientByIdCard("CH-PLATINUM-JASC", patientId);
+            Patient patient = DQS.findRegisteredPatientByIdCard(clinicId, patientId);
 
-            Appointment appointment = DEAMS.createNewAppointment("CH-PLATINUM-JASC", new Date(sdf1.parse(appointmentDate).getTime()), new Timestamp(sdf2.parse(appointmentTime).getTime()), patient.getPatientId(), appointmentDescription, appointmentType.toUpperCase().equals("C") ? AppointmentType.CONSULTATION : AppointmentType.SURGERY);
+            DEAMS.createNewAppointment(clinicId, new Date(sdf1.parse(appointmentTime.toString()).getTime()), new Timestamp(sdf2.parse(appointmentTime.toString()).getTime()), patient.getPatientId(), appointmentDescription, appointmentType.toUpperCase().equals("C") ? AppointmentType.CONSULTATION : AppointmentType.SURGERY);
 
-            //return "redirect:/appointments/" + clinicId;
             return "redirect:/appointments";
-        } catch (PersistenceException exp){
-            //
-        } catch(IllegalArgumentException exp){
-            //
-        } catch (NullPointerException exp) {
+        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
             //
         } catch (Exception exp){
             //
         }
 
-        //return "redirect:/appointments/" + clinicId;
         return "redirect:/appointments"; // TODO: add error message handling
     }
 
     @PostMapping("/cancelAppointment")
-    public String cancelRegisteredAppointment(@RequestParam("clinic") String clinicId, @RequestParam("id") String appointmentId){
+    public String cancelRegisteredAppointment(@RequestParam("id") String appointmentId){
+
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
 
         try {
             DEAMS.deleteRegisteredAppointment(appointmentId);
-        } catch (PersistenceException exp){
-            //
-        } catch(IllegalArgumentException exp){
-            //
-        } catch (NullPointerException exp) {
+            return "redirect:/appointments";
+        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
             //
         } catch (Exception exp){
             //
         }
 
-        return "redirect:/appointments/" + clinicId;
+        return "redirect:/appointments"; // TODO: add error message handling
     }
 
     @PostMapping("/changeDateAndTime")
     public String editDateAndTimeOfRegisteredAppointment(@RequestParam("id") String appointmentId, @RequestParam("date") String newDate, @RequestParam("time") String newTime){
+
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
 
         Appointment appointment = DQS.findRegisteredAppointment(appointmentId);
 
@@ -104,17 +110,13 @@ public class AppointmentController {
             appointment.setAppointmentTime(new Timestamp(sdf1.parse(newTime).getTime()));
 
             DEAMS.editAppointment(appointment);
-        } catch (PersistenceException exp){
-            //
-        } catch(IllegalArgumentException exp){
-            //
-        } catch (NullPointerException exp) {
+            return "redirect:/appointments";
+        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
             //
         } catch (Exception exp){
             //
         }
 
-        return "redirect:/appointments/" + appointment.getClinic().getClinicId();
+        return "redirect:/appointments"; // TODO: add error message handling
     }
-
 }
