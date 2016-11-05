@@ -1,4 +1,4 @@
-<div class="col-md-3 col-sm-12 col-xs-12">
+<div class="col-md-4 col-sm-12 col-xs-12">
     <div>
         <div class="x_title">
             <h2>Today's appointments</h2>

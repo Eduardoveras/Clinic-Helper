@@ -1,5 +1,5 @@
 <!-- Start to do list -->
-<div class="col-md-5 col-sm-5 col-xs-12">
+<div class="col-md-4 col-sm-5 col-xs-12">
 
     <div class="x_panel">
 
