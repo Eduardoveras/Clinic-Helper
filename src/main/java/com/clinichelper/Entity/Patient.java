@@ -46,8 +46,8 @@ public class Patient implements Serializable{
 
 
 
-    @NotNull
-    private ArrayList<String> patientAllergies;
+   // @NotNull
+   // private ArrayList<String> patientAllergies;
     @NotNull
     private String patientCountry;
     @ManyToOne
@@ -68,7 +68,7 @@ public class Patient implements Serializable{
     }
 
     // Used to create and register new patients
-    public Patient(Clinic clinic, String patientFirstName, String patientLastName, String patientIdCard, String patientTelephoneNumber, String patientContactTelephoneNumber, String occupation, Gender patientGender, String patientEmail, Date patientBirthDate, String patientNationality, String patientAddress, String patientCity, String patientCountry, ArrayList<String> patientAllergies) {
+    public Patient(Clinic clinic, String patientFirstName, String patientLastName, String patientIdCard, String patientTelephoneNumber, String patientContactTelephoneNumber, String occupation, Gender patientGender, String patientEmail, Date patientBirthDate, String patientNationality, String patientAddress, String patientCity, String patientCountry) {
         this.setPatientId(clinic.getClinicPrefix() + "-P-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setPatientFirstName(patientFirstName.toLowerCase());
         this.setPatientLastName(patientLastName.toUpperCase());
@@ -83,7 +83,7 @@ public class Patient implements Serializable{
         this.setPatientAddress(patientAddress.toUpperCase());
         this.setPatientCity(patientCity.toUpperCase());
         this.setPatientCountry(patientCountry.toUpperCase());
-        this.setPatientAllergies(patientAllergies);
+      //  this.setPatientAllergies(patientAllergies);
         this.setPatientRegisteredDate(new Date(Calendar.getInstance().getTime().getTime())); // current date
         this.setClinic(clinic);
 
@@ -221,14 +221,7 @@ public class Patient implements Serializable{
         byte[] imgBytesAsBase64 = Base64.encodeBase64(toPrimitives(this.patientPhoto));
         return new String(imgBytesAsBase64);
     }
-    public ArrayList<String> getPatientAllergies() {
-        return patientAllergies;
-    }
 
-
-    public void setPatientAllergies(ArrayList<String> patientAllergies) {
-        this.patientAllergies = patientAllergies;
-    }
     public Clinic getClinic() {
         return clinic;
     }
