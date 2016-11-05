@@ -4,20 +4,18 @@ import com.clinichelper.Entity.Appointment;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
-import com.clinichelper.Tools.AppointmentStatus;
-import com.clinichelper.Tools.Task;
+import com.clinichelper.Tools.Enums.AppointmentStatus;
+import com.clinichelper.Tools.Enums.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.PersistenceException;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller

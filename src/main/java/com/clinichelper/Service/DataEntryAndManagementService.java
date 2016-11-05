@@ -5,10 +5,10 @@ package com.clinichelper.Service;
 
 import com.clinichelper.Entity.*;
 import com.clinichelper.Repository.*;
-import com.clinichelper.Tools.AppointmentType;
-import com.clinichelper.Tools.Gender;
-import com.clinichelper.Tools.Permission;
-import com.clinichelper.Tools.Task;
+import com.clinichelper.Tools.Enums.AppointmentType;
+import com.clinichelper.Tools.Enums.Gender;
+import com.clinichelper.Tools.Enums.Permission;
+import com.clinichelper.Tools.Enums.Task;
 import freemarker.template.utility.NullArgumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

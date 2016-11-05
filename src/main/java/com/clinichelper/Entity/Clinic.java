@@ -3,7 +3,7 @@
  */
 package com.clinichelper.Entity;
 
-import com.clinichelper.Tools.AccountType;
+import com.clinichelper.Tools.Enums.AccountType;
 import org.apache.tomcat.util.codec.binary.Base64;
 
 import javax.persistence.Column;

@@ -7,7 +7,7 @@ import com.clinichelper.Entity.Patient;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
-import com.clinichelper.Tools.Gender;
+import com.clinichelper.Tools.Enums.Gender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.PersistenceException;
-import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 

@@ -1,13 +1,12 @@
 package com.clinichelper.Entity;
 
-import com.clinichelper.Tools.Gender;
+import com.clinichelper.Tools.Enums.Gender;
 import org.apache.tomcat.util.codec.binary.Base64;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.UUID;
 

@@ -4,7 +4,7 @@
 package com.clinichelper.Repository;
 
 import com.clinichelper.Entity.Clinic;
-import com.clinichelper.Tools.AccountType;
+import com.clinichelper.Tools.Enums.AccountType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

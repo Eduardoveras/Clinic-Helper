@@ -5,7 +5,7 @@ package com.clinichelper.Service;
 
 import com.clinichelper.Entity.*;
 import com.clinichelper.Repository.*;
-import com.clinichelper.Tools.Task;
+import com.clinichelper.Tools.Enums.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
