@@ -8,8 +8,7 @@ import com.clinichelper.Entity.Patient;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
-import com.clinichelper.Tools.AppointmentStatus;
-import com.clinichelper.Tools.AppointmentType;
+import com.clinichelper.Tools.Enums.AppointmentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +21,6 @@ import javax.persistence.PersistenceException;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 @Controller
 public class AppointmentController {
