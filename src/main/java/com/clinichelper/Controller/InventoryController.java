@@ -30,7 +30,7 @@ public class InventoryController {
     private ToolKitService TKS;
 
     // Gets
-    @RequestMapping("/inventory")
+    @RequestMapping("/Inventory")
     public ModelAndView FetchInventoryView(Model model/*, @RequestParam("clinic") String clinicId*/){
         if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
@@ -43,7 +43,7 @@ public class InventoryController {
         model.addAttribute("productList", inventory.get("products"));
         model.addAttribute("medication", inventory.get("medication"));
 
-        return new ModelAndView("");
+        return new ModelAndView("inventory/viewInventory");
     }
 
 

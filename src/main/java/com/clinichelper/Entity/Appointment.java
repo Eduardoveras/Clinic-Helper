@@ -1,8 +1,8 @@
 package com.clinichelper.Entity;
 
-import com.clinichelper.Tools.AccessForm;
-import com.clinichelper.Tools.AppointmentStatus;
-import com.clinichelper.Tools.AppointmentType;
+import com.clinichelper.Tools.Enums.AccessForm;
+import com.clinichelper.Tools.Enums.AppointmentStatus;
+import com.clinichelper.Tools.Enums.AppointmentType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

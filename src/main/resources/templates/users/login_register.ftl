@@ -2,6 +2,7 @@
 
 
 <body class="login">
+<div class="loader"></div>
 <div>
     <a class="hiddenanchor" id="signup"></a>
     <a class="hiddenanchor" id="signin"></a>
@@ -10,7 +11,7 @@
         <div class="animate form login_form">
             <section class="login_content">
                 <form METHOD="POST" enctype="multipart/form-data" action="/userLogin">
-                    <h1>Login To Begin Session</h1>
+                    <h1>Login</h1>
                     <div>
                         <input type="text" class="form-control" name="email" id="email" placeholder="Email" required="" />
                     </div>

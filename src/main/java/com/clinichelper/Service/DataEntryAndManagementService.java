@@ -5,10 +5,10 @@ package com.clinichelper.Service;
 
 import com.clinichelper.Entity.*;
 import com.clinichelper.Repository.*;
-import com.clinichelper.Tools.AppointmentType;
-import com.clinichelper.Tools.Gender;
-import com.clinichelper.Tools.Permission;
-import com.clinichelper.Tools.Task;
+import com.clinichelper.Tools.Enums.AppointmentType;
+import com.clinichelper.Tools.Enums.Gender;
+import com.clinichelper.Tools.Enums.Permission;
+import com.clinichelper.Tools.Enums.Task;
 import freemarker.template.utility.NullArgumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -200,7 +200,7 @@ public class DataEntryAndManagementService {
 
 
 
-    public Meeting createNewMeeting(String clinicId, String title, String objective, Date date, Timestamp time, String place, Set<Contact> attendees) throws Exception {
+    public Meeting createNewMeeting(String clinicId, String title, String objective, Timestamp time, String place, Set<Contact> attendees) throws Exception {
 
         if (!doesClinicIdExist(clinicId))
             throw new IllegalArgumentException("\n\nThis is an invalid clinic id");
@@ -208,11 +208,11 @@ public class DataEntryAndManagementService {
         if (attendees.isEmpty())
             throw new NullArgumentException("\n\nYou can not schedule a meeting without any staff attending. Please choose who will attend");
 
-        if (differenceInDays(new Date(Calendar.getInstance().getTime().getTime()), date) <= 0)
+        if (differenceInDays(new Date(Calendar.getInstance().getTime().getTime()), new Date(time.getTime())) <= 0)
             throw new IllegalArgumentException("The meeting date must be a future date");
 
         try {
-            return meetingRepository.save(new Meeting(clinicRepository.findByClinicId(clinicId), title,objective, date, time, place, attendees));
+            return meetingRepository.save(new Meeting(clinicRepository.findByClinicId(clinicId), title,objective, time, place, attendees));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis insurance was not able to persist -> " + exp.getMessage());

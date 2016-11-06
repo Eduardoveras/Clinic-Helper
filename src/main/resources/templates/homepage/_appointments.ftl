@@ -4,7 +4,7 @@
         <div class="row">
         <#list todays_appointments as appointment>
             <div class="col-md-12 col-sm-12 col-xs-12 profile_details">
-                <div class="well profile_view">
+                <div class="well profile_view col-md-12">
                     <div class="col-sm-12">
                         <h4 class="brief"><i>${appointment.getAppointmentType()}
                             AT ${appointment.getSimplifiedTime()} </i></h4>

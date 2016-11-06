@@ -3,7 +3,7 @@
  */
 package com.clinichelper.Entity;
 
-import com.clinichelper.Tools.Task;
+import com.clinichelper.Tools.Enums.Task;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

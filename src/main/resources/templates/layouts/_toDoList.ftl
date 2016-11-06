@@ -1,4 +1,3 @@
-
 <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
 <#list todoList as todo>
     <li>
@@ -72,12 +71,10 @@
 
                 <div class="x_content">
                     <br/>
-                    <form action="/newTask" METHOD="POST"
-                          class="form-horizontal form-label-left input_mask">
+                    <form action="/newTask" METHOD="POST" class="form-horizontal form-label-left input_mask">
 
                         <div class="col-md-30 col-sm-30 col-xs-26 form-group has-feedback">
-                            <input type="text" class="form-control has-feedback-left" id="title"
-                                   placeholder="title">
+                            <input type="text" class="form-control has-feedback-left" id="title" name="title" placeholder="title">
                             <span class="fa fa-user form-control-feedback left"
                                   aria-hidden="title"></span>
                         </div>
@@ -89,26 +86,17 @@
                                       data-parsley-trigger="keyup" data-parsley-minlength="4"
                                       data-parsley-maxlength="20"
                                       data-parsley-validation-threshold="10">
-
                                                         </textarea>
                         </div>
-
-                        <div class="col-md-30 col-sm-30 col-xs-26 form-group has-feedback">
-                            <input type="text" class="form-control has-feedback-left" id="clinicId"
-                                   placeholder="clinicId">
-                            <span class="fa fa-user form-control-feedback left"
-                                  aria-hidden="clinicId"></span>
-                        </div>
-
                         <div class="form-group">
                             <label for="sel1">Select type:</label>
-                            <select class="form-control" id="type">
+                            <select class="form-control" id="type" name="type">
                                 <option>REMINDER</option>
                                 <option>URGENT</option>
                             </select>
                         </div>
+                        <input type="submit" value="CREATE" class="btn btn-success" />
                     </form>
-                    <button type="sumbit" class="btn btn-success" data-dismiss="modal">sumbit</button>
                 </div>
             </div>
         </div>

@@ -95,12 +95,11 @@ INSERT INTO appointments(clinic_clinic_id, appointment_id, appointment_time, pat
 INSERT INTO meetings (
 clinic_clinic_id,
 meeting_id,
-meeting_date,
 meeting_objective,
 meeting_place,
 meeting_time,
 meeting_title) VALUES
-('CH-PLATINUM-JASC', 'JASC-M-NY934WHRC3', '2016-10-31', 'Make plans for charity event', 'Meeting Room 102', '2016-10-28 08:00:00', 'JASC Cancer Charity');
+('CH-PLATINUM-JASC', 'JASC-M-NY934WHRC3', 'Make plans for charity event', 'Meeting Room 102', '2016-11-05 08:00:00', 'JASC Cancer Charity');
 
 INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_contact_id) VALUES ('JASC-M-NY934WHRC3', 'JASC-STAFF-PAULINA');
 INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_contact_id) VALUES ('JASC-M-NY934WHRC3', 'JASC-STAFF-ASTRID');
@@ -110,12 +109,11 @@ INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_contact_id) VALUE
 INSERT INTO meetings (
 clinic_clinic_id,
 meeting_id,
-meeting_date,
 meeting_objective,
 meeting_place,
 meeting_time,
 meeting_title) VALUES
-('CH-PLATINUM-JASC', 'JASC-M-NY934UINRC3', '2016-10-31', 'Prepare for seminar', 'Main Office', '2016-10-28 16:30:00', 'Seminar Prep');
+('CH-PLATINUM-JASC', 'JASC-M-NY934UINRC3', 'Prepare for seminar', 'Main Office', '2016-11-05 16:30:00', 'Seminar Prep');
 
 INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_contact_id) VALUES ('JASC-M-NY934UINRC3', 'JASC-STAFF-SICARD');
 INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_contact_id) VALUES ('JASC-M-NY934UINRC3', 'JASC-STAFF-ADELSO');
