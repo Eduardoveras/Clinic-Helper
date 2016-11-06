@@ -18,6 +18,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.Set;
 
 @Service
@@ -294,13 +295,13 @@ public class DataEntryAndManagementService {
 
 
 
-    public Record createNewRecord(String patientId, String recordDetails, Set<Surgery> surgeries, Set<Consultation> consultations) throws Exception {
+    public Record createNewRecord(String patientId, String recordDetails, ArrayList<Surgery> surgeries, ArrayList<Consultation> consultations, ArrayList<History> history) throws Exception {
 
         if (!doesPatientIdExist(patientId))
             throw new IllegalArgumentException("\n\nThis is an invalid patient id");
 
         try {
-            return null;// recordRepository.save(new Record(patientRepository.findByPatientId(patientId), recordDetails, surgeries, consultations));
+            return recordRepository.save(new Record(patientRepository.findByPatientId(patientId), new HashSet<>(surgeries), new HashSet<>(consultations), new HashSet<>(history)));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis record was not able to persist -> " + exp.getMessage());

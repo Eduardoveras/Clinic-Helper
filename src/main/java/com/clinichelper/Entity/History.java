@@ -3,7 +3,7 @@ package com.clinichelper.Entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.ArrayList;
 import java.util.UUID;
 
 /**
@@ -16,7 +16,6 @@ public class History implements Serializable {
     @Id
     private String historyId;
     @ManyToOne
-    @NotNull
     private Patient patient;
     @NotNull
     private String visitObjective;
@@ -24,9 +23,8 @@ public class History implements Serializable {
     private String observations;
     private String specialConditions;
     private String surgeryType;
-
-    private Set<byte[]> photos;
-    private Set<String> medicalData;
+    private ArrayList<byte[]> photos;
+    private ArrayList<String> medicalData;
 
 
 
@@ -34,7 +32,7 @@ public class History implements Serializable {
 
     }
 
-    public History(Patient patient, String visitObjective, String observations, String specialConditions, Set<byte[]> photos, String surgeryType, Set<String> medicalData) {
+    public History(Patient patient, String visitObjective, String observations, String specialConditions, ArrayList<byte[]> photos, String surgeryType, ArrayList<String> medicalData) {
         this.setHistoryId(patient.getPatientId() + "-H-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setPatient(patient);
         this.setVisitObjective(visitObjective);
@@ -85,14 +83,6 @@ public class History implements Serializable {
         this.specialConditions = specialConditions;
     }
 
-    public Set<byte[]> getPhotos() {
-        return photos;
-    }
-
-    public void setPhotos(Set<byte[]> photos) {
-        this.photos = photos;
-    }
-
     public String getSurgeryType() {
         return surgeryType;
     }
@@ -101,11 +91,19 @@ public class History implements Serializable {
         this.surgeryType = surgeryType;
     }
 
-    public Set<String> getMedicalData() {
+    public ArrayList<byte[]> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(ArrayList<byte[]> photos) {
+        this.photos = photos;
+    }
+
+    public ArrayList<String> getMedicalData() {
         return medicalData;
     }
 
-    public void setMedicalData(Set<String> medicalData) {
+    public void setMedicalData(ArrayList<String> medicalData) {
         this.medicalData = medicalData;
     }
 }

@@ -3,6 +3,7 @@ package com.clinichelper.Entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.UUID;
 
@@ -16,12 +17,12 @@ public class Record implements Serializable{
     @Id
     private String recordId;
     @OneToOne
-    @NotNull
     private Patient patient;
     @OneToMany
     private Set<Surgery> surgeries;
     @OneToMany
     private Set<Consultation> consultations;
+    @OneToMany
     private Set<History> history;
 
     // Constructors
@@ -29,7 +30,7 @@ public class Record implements Serializable{
 
     }
 
-    public Record(Patient patient, String recordDetails, Set<Surgery> surgeries, Set<Consultation> consultations,Set<History>history) {
+    public Record(Patient patient, Set<Surgery> surgeries, Set<Consultation> consultations, Set<History>history) {
         this.setRecordId(patient.getPatientId() + "-R-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setPatient(patient);
         this.setSurgeries(surgeries);
@@ -37,7 +38,6 @@ public class Record implements Serializable{
         this.setHistory(history);
     }
 
-    //Getters and Setters
     public String getRecordId() {
         return recordId;
     }
@@ -58,7 +58,9 @@ public class Record implements Serializable{
         return surgeries;
     }
 
-    public void setSurgeries(Set<Surgery> surgeries) { this.surgeries = surgeries; }
+    public void setSurgeries(Set<Surgery> surgeries) {
+        this.surgeries = surgeries;
+    }
 
     public Set<Consultation> getConsultations() {
         return consultations;
