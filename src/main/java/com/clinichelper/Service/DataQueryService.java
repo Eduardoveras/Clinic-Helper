@@ -51,6 +51,7 @@ public class DataQueryService {
     private HttpSession session;
 
 
+
     public Object getSessionAttr(String name)
     {
         return session.getAttribute(name);
@@ -232,6 +233,7 @@ public class DataQueryService {
 
         return (user != null);
     }
+
 
 
     // Auxiliary Functions

@@ -54,6 +54,8 @@ public class DataEntryAndManagementService {
     private SurgeryRepository surgeryRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private  HistoryRepository historyRepository;
 
     // Creation functions
     public Appointment createNewAppointment(String clinicId, Timestamp appointmentTime, String patientId, String appointmentDescription, AppointmentType appointmentType) throws Exception {
@@ -291,7 +293,25 @@ public class DataEntryAndManagementService {
         }
     }
 
+    public Record createNewHistory(Patient patient, String visitObjective, String observations, String specialConditions, ArrayList<byte[]> photos, String surgeryType, ArrayList<String> medicalData) {
 
+        if (!doesPatientIdExist(patient.getPatientId()))
+            throw new IllegalArgumentException("\n\nThis is an invalid patient id");
+
+        try {
+            return historyRepository.save(new History(patient, visitObjective,  observations, specialConditions, photos, surgeryType,  medicalData));
+
+        } catch (PersistenceException exp){
+            System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
+            throw new PersistenceException("\n\nThis record was not able to persist -> " + exp.getMessage());
+        } catch (NullPointerException exp) {
+            System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
+            throw new NullPointerException("\n\nAn object or process has risen a null value -> " + exp.getMessage());
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred when trying to create a record -> " + exp.getMessage());
+        }
+    }
 
 
     public Record createNewRecord(String patientId, String recordDetails, Set<Surgery> surgeries, Set<Consultation> consultations, ArrayList<History> history) throws Exception {
