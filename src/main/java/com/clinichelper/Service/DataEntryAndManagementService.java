@@ -294,13 +294,13 @@ public class DataEntryAndManagementService {
 
 
 
-    public Record createNewRecord(String patientId, String recordDetails, Set<Surgery> surgeries, Set<Consultation> consultations) throws Exception {
+    public Record createNewRecord(String patientId, String recordDetails, Set<Surgery> surgeries, Set<Consultation> consultations, Set<History> history) throws Exception {
 
         if (!doesPatientIdExist(patientId))
             throw new IllegalArgumentException("\n\nThis is an invalid patient id");
 
         try {
-            return recordRepository.save(new Record(patientRepository.findByPatientId(patientId), recordDetails, surgeries, consultations));
+            return recordRepository.save(new Record(patientRepository.findByPatientId(patientId), recordDetails, surgeries, consultations,history));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis record was not able to persist -> " + exp.getMessage());
