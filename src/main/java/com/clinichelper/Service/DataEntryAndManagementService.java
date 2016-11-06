@@ -300,7 +300,7 @@ public class DataEntryAndManagementService {
             throw new IllegalArgumentException("\n\nThis is an invalid patient id");
 
         try {
-            return recordRepository.save(new Record(patientRepository.findByPatientId(patientId), recordDetails, surgeries, consultations));
+            return null;// recordRepository.save(new Record(patientRepository.findByPatientId(patientId), recordDetails, surgeries, consultations));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis record was not able to persist -> " + exp.getMessage());
