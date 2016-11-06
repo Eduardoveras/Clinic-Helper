@@ -71,10 +71,10 @@
                                 </li>
                             </ul>
                             <#include "/patients/_patientForm/_step1.ftl">
-                            <#include "/patients/_patientForm/_step1.ftl">
-                            <#include "/patients/_patientForm/_step1.ftl">
-                            <#include "/patients/_patientForm/_step1.ftl">
-                            <#include "/patients/_patientForm/_step1.ftl">
+                            <#include "/patients/_patientForm/_step2.ftl">
+                            <#include "/patients/_patientForm/_step3.ftl">
+                            <#include "/patients/_patientForm/_step4.ftl">
+                            <#include "/patients/_patientForm/_step5.ftl">
                         </div>
                         <!-- End SmartWizard Content -->
                     </div>
