@@ -2,7 +2,7 @@
 
 
 <body class="login">
-<div class="loader"></div>
+<#--include  "/layouts/_loader.ftl"-->
 <div>
     <a class="hiddenanchor" id="signup"></a>
     <a class="hiddenanchor" id="signin"></a>
