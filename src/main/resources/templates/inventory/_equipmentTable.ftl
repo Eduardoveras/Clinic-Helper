@@ -1,3 +1,4 @@
+<button type="button" class="btn btn-primary">New Equipment</button>
 <table id="datatable-responsive" class="table table-hover table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
     <thead>
     <tr>
