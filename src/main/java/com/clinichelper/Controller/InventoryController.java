@@ -41,7 +41,7 @@ public class InventoryController {
         model.addAttribute("todoList", TKS.InitializeTodoList(clinicId));
         model.addAttribute("equipmentList", inventory.get("equipments"));
         model.addAttribute("productList", inventory.get("products"));
-        model.addAttribute("medication", inventory.get("medication"));
+        model.addAttribute("medicationList", inventory.get("medication"));
 
         return new ModelAndView("inventory/viewInventory");
     }
