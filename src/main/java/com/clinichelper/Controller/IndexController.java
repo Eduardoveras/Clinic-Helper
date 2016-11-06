@@ -130,6 +130,7 @@ public class IndexController implements ErrorController {
     public String changeMeetingTimeAndDate(@RequestParam("id") String meetingId, @RequestParam("time") Timestamp newTime){
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
+
         try{
             Meeting meeting = DQS.findRegisteredMeeting(meetingId);
             meeting.setMeetingTime(newTime);

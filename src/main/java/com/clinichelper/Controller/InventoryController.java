@@ -100,5 +100,19 @@ public class InventoryController {
         return "redirect:/inventory"; // TODO: implement error exception
     }
 
-    // TODO: ADD EDIT AND DELETE POSTS
+    @PostMapping("/deleteEquipment")
+    public String deleteEquipment(@RequestParam("id") String equipmentId){
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
+
+        try{
+            DEAMS.deleteRegisteredEquipment(equipmentId);
+        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
+            //
+        } catch (Exception exp){
+            //
+        }
+
+        return "redirect:/inventory"; // TODO: implement error exception
+    }
 }
