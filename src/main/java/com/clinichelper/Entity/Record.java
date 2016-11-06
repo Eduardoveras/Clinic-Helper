@@ -23,18 +23,20 @@ public class Record implements Serializable{
     private Set<Surgery> surgeries;
     @OneToMany
     private Set<Consultation> consultations;
+    private Set<History> history;
 
     // Constructors
     public Record(){
 
     }
 
-    public Record(Patient patient, String recordDetails, Set<Surgery> surgeries, Set<Consultation> consultations) {
+    public Record(Patient patient, String recordDetails, Set<Surgery> surgeries, Set<Consultation> consultations,Set<History>history) {
         this.setRecordId(patient.getPatientId() + "-R-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setPatient(patient);
         this.setRecordDetails(recordDetails);
         this.setSurgeries(surgeries);
         this.setConsultations(consultations);
+        this.setHistory(history);
     }
 
     //Getters and Setters
@@ -74,5 +76,13 @@ public class Record implements Serializable{
 
     public void setConsultations(Set<Consultation> consultations) {
         this.consultations = consultations;
+    }
+
+    public Set<History> getHistory() {
+        return history;
+    }
+
+    public void setHistory(Set<History> history) {
+        this.history = history;
     }
 }
