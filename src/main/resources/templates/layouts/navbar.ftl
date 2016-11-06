@@ -16,13 +16,13 @@
                         <li><a href="/user/${user.getUserId()}"> Profile</a></li>
                         <li><a href="javascript:;">Help</a></li>
                         <li><a href="/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-                    </ul>
+                    </ul>todoList
                 </li>
 
                 <li role="presentation" class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-bell-o"></i>
-                        <span class="badge bg-green">6</span>
+                        <span class="badge bg-green">${todoList?size}</span>
                     </a>
                     <#include "/layouts/_toDoList.ftl">
                 </li>
