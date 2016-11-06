@@ -87,8 +87,8 @@ public class AppointmentController {
         return "redirect:/" ; // TODO: add error message handling
     }
 
-    @PostMapping("/changeDateAndTime")
-    public String editDateAndTimeOfRegisteredAppointment(@RequestParam("id") String appointmentId, @RequestParam("date") String newDate, @RequestParam("time") String newTime){
+    @PostMapping("/reschedule")
+    public String editDateAndTimeOfRegisteredAppointment(@RequestParam("id") String appointmentId, @RequestParam("time") Timestamp newTime){
 
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
@@ -96,9 +96,7 @@ public class AppointmentController {
         Appointment appointment = DQS.findRegisteredAppointment(appointmentId);
 
         try {
-
-            SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
-            appointment.setAppointmentTime(new Timestamp(sdf1.parse(newDate).getTime()));
+            appointment.setAppointmentTime(newTime);
 
             DEAMS.editAppointment(appointment);
             return "redirect:/appointments";
