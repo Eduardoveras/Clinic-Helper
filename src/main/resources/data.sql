@@ -5,6 +5,7 @@ INSERT INTO staff (clinic_clinic_id, contact_id, first_name, last_name, email, b
 INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-YOLO', '1980-02-03', 'djidjellypas92@gmail.com', 'djijdelly', 0, 'SICLAIT', '1234', 0, 'CH-PLATINUM-JASC');
 INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-SWAG', '1980-02-03', 'eva', 'eva', 0, 'SORAYA', '1234', 0, 'CH-PLATINUM-JASC');
 INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-VAPE', '1980-02-03', 'eduardo', 'eduardo', 0, 'Veras', '1234', 0, 'CH-PLATINUM-JASC');
+INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-AWESOME', '1980-02-03', 'paulina', 'paulina', 0, 'LA MEJOR', '1234', 0, 'CH-PLATINUM-JASC');
 
 INSERT INTO patients (
 clinic_clinic_id,
@@ -120,3 +121,59 @@ INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_contact_id) VALUE
 
 INSERT INTO chore (clinic_clinic_id, chore_id, description, title, type) VALUES ('CH-PLATINUM-JASC', 'JASC-M-9URHFDN', 'By more Bras', 'Inventory refill', 4);
 INSERT INTO chore (clinic_clinic_id, chore_id, description, title, type) VALUES ('CH-PLATINUM-JASC', 'JASC-M-9UR23DN', 'Call Accountant', 'Finance', 6);
+
+INSERT INTO equipments (
+equipment_id,
+equipment_description,
+equipment_in_stock,
+equipment_name,
+equipment_use,
+clinic_clinic_id) VALUES
+('JASC-E-VYHU7iuyh', 'to cut stuff', 131, 'Scalpel', 'cut', 'CH-PLATINUM-JASC');
+
+INSERT INTO equipments (
+equipment_id,
+equipment_description,
+equipment_in_stock,
+equipment_name,
+equipment_use,
+clinic_clinic_id) VALUES
+('JASC-E-VYHU876yh', 'silicone breasts', 31, 'Silic', 'surgery', 'CH-PLATINUM-JASC');
+
+INSERT INTO equipments (
+equipment_id,
+equipment_description,
+equipment_in_stock,
+equipment_name,
+equipment_use,
+clinic_clinic_id) VALUES
+('JASC-E-VYHUUJH7iuyh', 'hearing', 13, 'Stetascope', 'hear', 'CH-PLATINUM-JASC');
+
+INSERT INTO items (
+product_id,
+product_description,
+product_in_stock,
+product_name,
+product_price,
+clinic_clinic_id) VALUES
+('JASC-P-HUJBUYHH778', 'Goodside Bras', 54, 'Bra', 432.42, 'CH-PLATINUM-JASC');
+
+INSERT INTO medications (
+medication_id,
+medication_description,
+medication_in_stock,
+medication_name,
+medication_price,
+supplier,
+clinic_clinic_id) VALUES
+('JASC-MED-UHGYHJNG343', 'for pain', 200, 'Ibuprofen', 43.20, 'MED Pact', 'CH-PLATINUM-JASC');
+
+INSERT INTO medications (
+medication_id,
+medication_description,
+medication_in_stock,
+medication_name,
+medication_price,
+supplier,
+clinic_clinic_id) VALUES
+('JASC-MED-UH43HJNG343', 'for pain', 100, 'IZuprina', 3.20, 'MED Pact', 'CH-PLATINUM-JASC');

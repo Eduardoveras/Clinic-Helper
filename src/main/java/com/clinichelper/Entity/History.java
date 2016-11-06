@@ -12,7 +12,7 @@ import java.util.UUID;
 @Entity
 @Table(name="history")
 public class History implements Serializable {
-
+    // Attributes
     @Id
     private String historyId;
     @ManyToOne
@@ -26,8 +26,7 @@ public class History implements Serializable {
     private ArrayList<byte[]> photos;
     private ArrayList<String> medicalData;
 
-
-
+    // Constructors
     public History(){
 
     }
@@ -43,6 +42,7 @@ public class History implements Serializable {
         this.setMedicalData(medicalData);
     }
 
+    // Getters and Setters
     public String getHistoryId() {
         return historyId;
     }
