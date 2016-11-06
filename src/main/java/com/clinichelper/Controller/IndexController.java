@@ -109,6 +109,21 @@ public class IndexController implements ErrorController {
         return "redirect:/"; // TODO: add error handling method
     }
 
+    @PostMapping("/cancelMeeting")
+    public String deleteMeeting(@RequestParam("id") String meetingId){
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
+
+        try {
+            DEAMS.deleteRegisteredMeeting(meetingId);
+        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
+            //
+        } catch (Exception exp){
+            //
+        }
+
+        return "redirect:/"; // TODO: add error handling method
+    }
 
     // Auxiliary Functions
     @Override
