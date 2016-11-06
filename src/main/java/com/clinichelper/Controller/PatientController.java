@@ -57,7 +57,7 @@ public class PatientController {
         model.addAttribute("todoList", TKS.InitializeTodoList(clinicId));
         model.addAttribute("amount", DQS.findAllRegisteredPatientsForClinic(clinicId).size());
 
-        return new ModelAndView("patients/patientForm");
+        return new ModelAndView("patients/_patientForm/patientWizard");
     }
 
 
