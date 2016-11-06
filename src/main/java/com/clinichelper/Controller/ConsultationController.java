@@ -77,13 +77,13 @@ public class ConsultationController {
     @PostMapping("/newhistory")
     public String createNewHistory(
 
-            @RequestParam("patient") String patient,
+            @RequestParam("patient") String patientId,
             @RequestParam("visitobjective") String visitObjective,
             @RequestParam("observations") String observations,
             @RequestParam("specialconditions") String specialConditions,
             @RequestParam("photos") ArrayList<byte[]> photos,
             @RequestParam("surgerytype") String surgeryType,
-            @RequestParam("medicaldata")  ArrayList<String> cmedicaData
+            @RequestParam("medicaldata")  ArrayList<String> medicaData
 
     ){
 
@@ -93,10 +93,8 @@ public class ConsultationController {
         try {
 
             String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
-
-
-
-            DEAMS.create
+            Patient patient = DQS.findRegisteredPatientByIdCard(clinicId, patientId);
+            DEAMS.createNewHistory(patient,visitObjective,observations,specialConditions,photos,surgeryType,medicaData);
 
             return "redirect:/"; // todavia no hay vista
         } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
