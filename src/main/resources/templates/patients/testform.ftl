@@ -79,7 +79,9 @@
 
 
 
-                <div class="stepContainer" style="height: 287px;"><div id="step-1" class="content" style="display: block;">
+                <div class="stepContainer" style="height: 287px;">
+                    <div id="step-1" class="content" style="display: block;">
+                    <h2>Basic INFO</h2>
                     <form class="form-horizontal form-label-left">
 
                         <div>
@@ -188,13 +190,13 @@
                     </form>
 
                     </div>
-
                 </div>
 
 
 
                 <div class="stepContainer" style="height: 287px;">
                     <div id="step-2" class="content" style="display: block;">
+                        <h2>Personal INFO</h2>
                         <form class="form-horizontal form-label-left">
 
                             <div class="form-group" >
@@ -282,11 +284,11 @@
 
                         </form>
                     </div>
-
                 </div>
 
                 <div class="stepContainer" style="height: 287px;">
                     <div id="step-3" class="content" style="display: block;">
+                        <h2>Patient Contact INFO</h2>
                     <form class="form-horizontal form-label-left">
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="telephoneNumber">Phone <span class="required">*</span>
@@ -325,6 +327,7 @@
                  </div>
                 <div class="stepContainer" style="height: 287px;">
                     <div id="step-4" class="content" style="display: block;">
+                        <h2>Patient Contact INFO</h2>
                         <form class="form-horizontal form-label-left">
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="contactfirstName">First Name <span class="required">*</span>
