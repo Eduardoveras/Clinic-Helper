@@ -2,6 +2,7 @@
 
 
 <body class="login">
+<div class="loader"></div>
 <div>
     <a class="hiddenanchor" id="signup"></a>
     <a class="hiddenanchor" id="signin"></a>
