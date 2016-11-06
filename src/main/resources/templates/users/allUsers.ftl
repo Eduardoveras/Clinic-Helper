@@ -1,6 +1,7 @@
 <#include "/layouts/header.ftl">
 
 <body class="nav-md">
+<#include  "/layouts/_loader.ftl">
 <div class="container body">
     <div class="main_container">
     <#include "/layouts/sidebar.ftl">
