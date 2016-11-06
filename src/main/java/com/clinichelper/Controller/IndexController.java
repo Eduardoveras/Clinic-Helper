@@ -2,6 +2,7 @@ package com.clinichelper.Controller;
 
 import com.clinichelper.Entity.Appointment;
 import com.clinichelper.Entity.Contact;
+import com.clinichelper.Entity.Meeting;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
@@ -116,6 +117,23 @@ public class IndexController implements ErrorController {
 
         try {
             DEAMS.deleteRegisteredMeeting(meetingId);
+        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
+            //
+        } catch (Exception exp){
+            //
+        }
+
+        return "redirect:/"; // TODO: add error handling method
+    }
+
+    @PostMapping("/rescheduleMeeting")
+    public String changeMeetingTimeAndDate(@RequestParam("id") String meetingId, @RequestParam("time") Timestamp newTime){
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
+        try{
+            Meeting meeting = DQS.findRegisteredMeeting(meetingId);
+            meeting.setMeetingTime(newTime);
+            DEAMS.editMeeting(meeting);
         } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
             //
         } catch (Exception exp){
