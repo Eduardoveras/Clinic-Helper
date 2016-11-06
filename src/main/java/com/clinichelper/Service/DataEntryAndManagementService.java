@@ -294,7 +294,7 @@ public class DataEntryAndManagementService {
 
 
 
-    public Record createNewRecord(String patientId, String recordDetails, Set<Surgery> surgeries, Set<Consultation> consultations, Set<History> history) throws Exception {
+    public Record createNewRecord(String patientId, String recordDetails, Set<Surgery> surgeries, Set<Consultation> consultations, ArrayList<History> history) throws Exception {
 
         if (!doesPatientIdExist(patientId))
             throw new IllegalArgumentException("\n\nThis is an invalid patient id");

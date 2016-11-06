@@ -31,7 +31,7 @@ public class History implements Serializable {
 
     private ArrayList<byte[]> photos;
     private String surgeryType;
-    private Set<String> medicalData;
+    private ArrayList<String> medicalData;
 
 
 
@@ -39,7 +39,7 @@ public class History implements Serializable {
 
     }
 
-    public History(String historyId,Patient patient, String visitObjective, String observations, String specialConditions, ArrayList<byte[]> photos, String surgeryType, Set<String> medicalData) {
+    public History(String historyId,Patient patient, String visitObjective, String observations, String specialConditions, ArrayList<byte[]> photos, String surgeryType, ArrayList<String> medicalData) {
         this.setHistoryId(patient.getPatientId() + "-R-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.patient = patient;
         this.visitObjective = visitObjective;
@@ -106,11 +106,11 @@ public class History implements Serializable {
         this.surgeryType = surgeryType;
     }
 
-    public Set<String> getMedicalData() {
+    public ArrayList<String> getMedicalData() {
         return medicalData;
     }
 
-    public void setMedicalData(Set<String> medicalData) {
+    public void setMedicalData(ArrayList<String> medicalData) {
         this.medicalData = medicalData;
     }
 }
