@@ -20,7 +20,7 @@
                 <div class="clearfix"></div>
                 <!--ADD CONTENT HERE-->
                 <div class="row">
-                <#include "/patients/_patientWizard.ftl">
+                <#include "/patients/_patientForm/patientWizard.ftl">
 
                 </div>
             </div>
