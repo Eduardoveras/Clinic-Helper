@@ -1,6 +1,7 @@
 <#include "/layouts/header.ftl">
 
 <body class="nav-md">
+<#include  "/layouts/_loader.ftl">
 <div class="container body">
     <div class="main_container">
     <#include "/layouts/sidebar.ftl">
@@ -19,9 +20,7 @@
                 <div class="clearfix"></div>
                 <!--ADD CONTENT HERE-->
                 <div class="row">
-
-
-
+                <#include "/patients/_patientForm/patientWizard.ftl">
 
                 </div>
             </div>

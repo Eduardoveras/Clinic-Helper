@@ -11,6 +11,7 @@
             <div class="">
                 <div class="row">
                 <#include "/inventory/_inventoryTabs.ftl">
+                <#include  "_modal.ftl">
                 </div>
             </div>
         </div>
