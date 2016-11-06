@@ -20,10 +20,7 @@
                 <div class="clearfix"></div>
                 <!--ADD CONTENT HERE-->
                 <div class="row">
-                <#--include "/patients/_patientsForm.ftl"-->
-                <#include "/patients/_patientsTable.ftl">
-
-
+                <#include "/patients/_patientWizard.ftl">
 
                 </div>
             </div>
