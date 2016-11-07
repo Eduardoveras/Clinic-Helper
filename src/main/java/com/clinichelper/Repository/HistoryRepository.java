@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by eva_c on 11/6/2016.
  */
-public interface HistoryRepository extends JpaRepository<History, String > {
+public interface HistoryRepository extends JpaRepository<History, String> {
 
     History findByHistoryId(String historyId);
 

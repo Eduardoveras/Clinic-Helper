@@ -14,15 +14,15 @@
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3>Appointment Registration</h3>
+                        <h3>Patient Registration</h3>
                     </div>
                 </div>
                 <div class="clearfix"></div>
                 <!--ADD CONTENT HERE-->
                 <div class="row">
-                <#include "/appointments/_appointmentForm.ftl">
-                <#include "/appointments/_appointmentsTable.ftl">
-                    <#include "_modal.ftl">
+                <#--include "/patients/_patientsForm.ftl"-->
+                <#include "_meetingsTable.ftl">
+
 
 
                 </div>
@@ -35,7 +35,8 @@
     </div>
 </div>
 <#include "/layouts/footer.ftl">
-<#include "_appointmentScripts.ftl">
+<#include "/patients/_patientsScripts.ftl">
+<!-- /Datatables -->
 <#include "/layouts/pageCloser.ftl">
 
 

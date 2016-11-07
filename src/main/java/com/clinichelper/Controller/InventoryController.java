@@ -40,8 +40,11 @@ public class InventoryController {
         Map<String, List> inventory = TKS.FetchClinicInventory(clinicId);
         model.addAttribute("todoList", TKS.InitializeTodoList(clinicId));
         model.addAttribute("equipmentList", inventory.get("equipments"));
+        model.addAttribute("eSize", inventory.get("equipments").size());
         model.addAttribute("productList", inventory.get("products"));
-        model.addAttribute("medication", inventory.get("medication"));
+        model.addAttribute("pSize", inventory.get("products").size());
+        model.addAttribute("medicationList", inventory.get("medication"));
+        model.addAttribute("mSize", inventory.get("medication").size());
 
         return new ModelAndView("inventory/viewInventory");
     }
@@ -100,5 +103,19 @@ public class InventoryController {
         return "redirect:/inventory"; // TODO: implement error exception
     }
 
-    // TODO: ADD EDIT AND DELETE POSTS
+    @PostMapping("/deleteEquipment")
+    public String deleteEquipment(@RequestParam("id") String equipmentId){
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
+
+        try{
+            DEAMS.deleteRegisteredEquipment(equipmentId);
+        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
+            //
+        } catch (Exception exp){
+            //
+        }
+
+        return "redirect:/inventory"; // TODO: implement error exception
+    }
 }

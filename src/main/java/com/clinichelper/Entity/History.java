@@ -1,13 +1,9 @@
 package com.clinichelper.Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -16,40 +12,37 @@ import java.util.UUID;
 @Entity
 @Table(name="history")
 public class History implements Serializable {
-
+    // Attributes
     @Id
     private String historyId;
-    @OneToOne
-    @NotNull
+    @ManyToOne
     private Patient patient;
     @NotNull
     private String visitObjective;
     @NotNull
     private String observations;
-
     private String specialConditions;
-
-    private ArrayList<byte[]> photos;
     private String surgeryType;
+    private ArrayList<byte[]> photos;
     private ArrayList<String> medicalData;
 
-
-
+    // Constructors
     public History(){
 
     }
 
     public History(Patient patient, String visitObjective, String observations, String specialConditions, ArrayList<byte[]> photos, String surgeryType, ArrayList<String> medicalData) {
-        this.setHistoryId(patient.getPatientId() + "-R-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
-        this.patient = patient;
-        this.visitObjective = visitObjective;
-        this.observations = observations;
-        this.specialConditions = specialConditions;
-        this.photos = photos;
-        this.surgeryType = surgeryType;
-        this.medicalData = medicalData;
+        this.setHistoryId(patient.getPatientId() + "-H-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+        this.setPatient(patient);
+        this.setVisitObjective(visitObjective);
+        this.setObservations(observations);
+        this.setSpecialConditions(specialConditions);
+        this.setPhotos(photos);
+        this.setSurgeryType(surgeryType);
+        this.setMedicalData(medicalData);
     }
 
+    // Getters and Setters
     public String getHistoryId() {
         return historyId;
     }
@@ -90,20 +83,20 @@ public class History implements Serializable {
         this.specialConditions = specialConditions;
     }
 
-    public ArrayList<byte[]> getPhotos() {
-        return photos;
-    }
-
-    public void setPhotos(ArrayList<byte[]> photos) {
-        this.photos = photos;
-    }
-
     public String getSurgeryType() {
         return surgeryType;
     }
 
     public void setSurgeryType(String surgeryType) {
         this.surgeryType = surgeryType;
+    }
+
+    public ArrayList<byte[]> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(ArrayList<byte[]> photos) {
+        this.photos = photos;
     }
 
     public ArrayList<String> getMedicalData() {

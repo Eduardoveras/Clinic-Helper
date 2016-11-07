@@ -16,7 +16,7 @@
                         <li><a href="/user/${user.getUserId()}"> Profile</a></li>
                         <li><a href="javascript:;">Help</a></li>
                         <li><a href="/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-                    </ul>todoList
+                    </ul>
                 </li>
 
                 <li role="presentation" class="dropdown">

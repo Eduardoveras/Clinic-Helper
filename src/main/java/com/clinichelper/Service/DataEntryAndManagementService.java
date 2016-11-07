@@ -18,6 +18,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.Set;
 
 @Service
@@ -314,13 +315,13 @@ public class DataEntryAndManagementService {
     }
 
 
-    public Record createNewRecord(String patientId, String recordDetails, Set<Surgery> surgeries, Set<Consultation> consultations, ArrayList<History> history) throws Exception {
+    public Record createNewRecord(String patientId, String recordDetails, ArrayList<Surgery> surgeries, ArrayList<Consultation> consultations, ArrayList<History> history) throws Exception {
 
         if (!doesPatientIdExist(patientId))
             throw new IllegalArgumentException("\n\nThis is an invalid patient id");
 
         try {
-            return recordRepository.save(new Record(patientRepository.findByPatientId(patientId), recordDetails, surgeries, consultations,history));
+            return recordRepository.save(new Record(patientRepository.findByPatientId(patientId), new HashSet<>(surgeries), new HashSet<>(consultations), new HashSet<>(history)));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis record was not able to persist -> " + exp.getMessage());
@@ -342,7 +343,7 @@ public class DataEntryAndManagementService {
             throw new IllegalArgumentException("\n\nThis is an invalid clinic id");
 
         try{
-            return contactRepository.save(new Contact(clinicRepository.findByClinicId(clinicId), staffFirstName, staffLastName, staffBirthDate, staffEmail));
+            return contactRepository.save(new Contact(clinicRepository.findByClinicId(clinicId), staffFirstName, staffLastName, staffBirthDate, staffEmail, false));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis patient was not able to persist -> " + exp.getMessage());
@@ -394,6 +395,8 @@ public class DataEntryAndManagementService {
             throw new IllegalArgumentException("\n\nThis email is already taken. Please choose another one!");
 
         try {
+            // Add new user automatically in contact list
+            contactRepository.save(new Contact(clinicRepository.findByClinicId(clinicId), firstName, lastName, birthDate, email, true));
             return userRepository.save(new User(clinicRepository.findByClinicId(clinicId), email, firstName, lastName, birthDate, gender, password, role));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
