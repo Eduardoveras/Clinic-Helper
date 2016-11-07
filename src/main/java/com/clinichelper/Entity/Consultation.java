@@ -17,8 +17,6 @@ public class Consultation implements Serializable{
     @Id
     private String consultationId;
     @NotNull
-    private Date consultationDate;//
-    @NotNull
     private Timestamp consultationTime;
     private String consultationDetail;
     @OneToOne
@@ -30,9 +28,8 @@ public class Consultation implements Serializable{
 
     }
 
-    public Consultation(Date consultationDate, Timestamp consultationTime, String consultationDetail, Appointment appointment){
+    public Consultation(Timestamp consultationTime, String consultationDetail, Appointment appointment){
         this.setConsultationId(appointment.getClinic().getClinicPrefix() + "-C-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
-        this.setConsultationDate(consultationDate);
         this.setConsultationTime(consultationTime);
         this.setConsultationDetail(consultationDetail);
         this.setAppointment(appointment);
@@ -46,14 +43,6 @@ public class Consultation implements Serializable{
 
     public void setConsultationId(String consultationId) {
         this.consultationId = consultationId;
-    }
-
-    public Date getConsultationDate() {
-        return consultationDate;
-    }
-
-    public void setConsultationDate(Date consultationDate) {
-        this.consultationDate = consultationDate;
     }
 
     public Timestamp getConsultationTime() {
