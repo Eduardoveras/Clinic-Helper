@@ -25,13 +25,12 @@
                    cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <th>Appointment Date:</th>
-                    <th>Patient:</th>
-                    <th>Type:</th>
-                    <th>Description:</th>
-                    <th>Action:</th>
-                    <!--<th>Status:</th>-->
-
+                    <th>Appointment Date</th>
+                    <th>Patient</th>
+                    <th>Type</th>
+                    <th>Action</th>
+                    <th>Description</th>
+                    <th>Status</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -41,7 +40,6 @@
                     <td><a href="/patient/${appointment.patient.patientId}">${appointment.patient.patientFullName}</a>
                     </td>
                     <td>${appointment.getAppointmentType()}</td>
-                    <td>${appointment.appointmentDescription}</td>
                     <td>
                         <div class="btn-group">
                             <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">Options <span class="caret"></span></button>
@@ -49,15 +47,13 @@
                                 <li><a href="#" data-toggle="modal" data-target="#appointmentModal">Re-Eschedule</a>
                                     <input type="hidden" form="reScheduleForm" name="id" value="${appointment.getAppointmentId()}">
                                 </li>
-                                <li><a href="#">Do Something...</a>
-                                </li>
-                                <li><a href="#">Do Something...</a>
+                                <li><a href="#">Cancel</a>
                                 </li>
                             </ul>
                         </div>
                     </td>
-                <#--<td>${appointment.getAppointmentStatus()}</td>-->
-
+                    <td>${appointment.appointmentDescription}</td>
+                    <td>${appointment.appointmentStatus}</td>
                 </tr>
                 <#else>
                 <tr>
