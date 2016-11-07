@@ -28,6 +28,8 @@ patient_id,
 '829xxxyyyy', 'RD', 'djidjellypas92@gmail.com', 'Djidjelly', 1, '1234rfg 323',
 'Siclait', 'Haitiano', '2015-10-23', '809xxxyyyy');
 
+INSERT INTO records (record_id, patient_patient_id) VALUES ('JASC-R-DJ', 'JASC-P-BVN309WJHN32');
+
 INSERT INTO patients (
 clinic_clinic_id,
 patient_id,
@@ -49,6 +51,8 @@ patient_id,
 '829xxxyyyy', 'USA', 'eduardo2@gmail.com', 'Eduardo', 1, '12343eg 323',
 'Veras', 'Dominicana', '2011-10-31', '809xxxyyyy');
 
+INSERT INTO records (record_id, patient_patient_id) VALUES ('JASC-R-WARDO', 'JASC-P-BVN3DF43WED32');
+
 INSERT INTO patients (
 clinic_clinic_id,
 patient_id,
@@ -69,6 +73,8 @@ patient_id,
 ('CH-PLATINUM-JASC', 'JASC-P-BVN309WDHN32', 'Crazy cat lady', 'Sience', '1982-04-11', 'Paris',
 '829xxxyyyy', 'FR', 'eva@gmail.com', 'Eva', 0, '12oih7g 323',
 'Soraya', 'Dominicana', '2015-10-28', '809xxxyyyy');
+
+INSERT INTO records (record_id, patient_patient_id) VALUES ('JASC-R-EVA', 'JASC-P-BVN309WDHN32');
 
 INSERT INTO contact (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date, has_account) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-PAULINA', 'Paulina', 'Reyes', 'p@gmail.com', '1985-03-23', TRUE );
 INSERT INTO contact (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date, has_account) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-SICARD', 'Julio', 'Sicard', 'js@gmail.com', '1980-11-03', FALSE);

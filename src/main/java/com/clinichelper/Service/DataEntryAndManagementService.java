@@ -5,10 +5,7 @@ package com.clinichelper.Service;
 
 import com.clinichelper.Entity.*;
 import com.clinichelper.Repository.*;
-import com.clinichelper.Tools.Enums.AppointmentType;
-import com.clinichelper.Tools.Enums.Gender;
-import com.clinichelper.Tools.Enums.Permission;
-import com.clinichelper.Tools.Enums.Task;
+import com.clinichelper.Tools.Enums.*;
 import freemarker.template.utility.NullArgumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -236,7 +233,8 @@ public class DataEntryAndManagementService {
                     patientBloodType, patientConditions));
 
             // The patient's medical record is created automatically
-            recordRepository.save(new Record(patient));
+            if (patient.getClinic().getAccountType() != AccountType.BASIC)
+                recordRepository.save(new Record(patient));
 
             // Adding insurance information if exist
             if (insuranceSerialCode != null)
@@ -327,19 +325,14 @@ public class DataEntryAndManagementService {
 
 
 
-    public Surgery createNewSurgery(String name, String description, String patientJascId, Date date, Timestamp time, String surgeryRoom, Set<Contact> contacts, Set<Equipment> equipments, String appointmentId) throws Exception {
+    public Surgery createNewSurgery(String name, String description, String patientId, Timestamp time) throws Exception {
 
-        if (!doesPatientIdExist(patientJascId))
-            throw new IllegalArgumentException("\n\nThis is an invalid patient jascId");
-
-        if (!doesAppointmentIdExist(appointmentId))
-            throw new IllegalArgumentException("\n\nThis appointment jasc id is not valid");
-
-        if (contacts.isEmpty())
-            throw new NullArgumentException("\n\nYou may not preform a surgery without staff. Please Choose at least one staff member.");
+        if (!doesPatientIdExist(patientId))
+            throw new IllegalArgumentException("\n\nThis is an invalid patient id");
 
         try {
-            return surgeryRepository.save(new Surgery(name, description, patientRepository.findByPatientId(patientJascId), date, time, surgeryRoom, contacts, equipments, appointmentRepository.findByAppointmentId(appointmentId)));
+            Appointment appointment = appointmentRepository.save(new Appointment( patientRepository.findByPatientId(patientId).getClinic(), time, patientRepository.findByPatientId(patientId), description, AppointmentType.SURGERY));
+            return surgeryRepository.save(new Surgery(name, description, patientRepository.findByPatientId(patientId), time, appointment));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis surgery was not able to persist -> " + exp.getMessage());

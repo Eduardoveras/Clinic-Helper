@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -25,8 +26,6 @@ public class Surgery implements Serializable{
     @NotNull
     private Patient patient;
     @NotNull
-    private Date surgeryDate;
-    @NotNull
     private Timestamp surgeryTime;
     @NotNull
     private String surgeryRoom;
@@ -44,16 +43,14 @@ public class Surgery implements Serializable{
 
     }
 
-    public Surgery(String surgeryName, String surgeryDescription, Patient patient, Date surgeryDate, Timestamp surgeryTime, String surgeryRoom, Set<Contact> contacts, Set<Equipment> equipments, Appointment appointment) {
+    public Surgery(String surgeryName, String surgeryDescription, Patient patient, Timestamp surgeryTime, Appointment appointment) {
         this.setSurgeryId(appointment.getClinic().getClinicPrefix() + "-S-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setSurgeryName(surgeryName);
         this.setSurgeryDescription(surgeryDescription);
         this.setPatient(patient);
-        this.setSurgeryDate(surgeryDate);
         this.setSurgeryTime(surgeryTime);
-        this.setSurgeryRoom(surgeryRoom);
-        this.setContacts(contacts);
-        this.setEquipments(equipments);
+        this.setContacts(new HashSet<>());
+        this.setEquipments(new HashSet<>());
         this.setAppointment(appointment);
     }
 
@@ -80,14 +77,6 @@ public class Surgery implements Serializable{
 
     public void setSurgeryDescription(String surgeryDescription) {
         this.surgeryDescription = surgeryDescription;
-    }
-
-    public Date getSurgeryDate() {
-        return surgeryDate;
-    }
-
-    public void setSurgeryDate(Date surgeryDate) {
-        this.surgeryDate = surgeryDate;
     }
 
     public Timestamp getSurgeryTime() {

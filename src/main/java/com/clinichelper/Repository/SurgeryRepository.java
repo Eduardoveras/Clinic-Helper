@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -23,16 +24,13 @@ public interface SurgeryRepository extends JpaRepository<Surgery, String> {
     @Query("select s from Surgery s where s.patient.patientId = :id")
     List<Surgery> findByPatientId(@Param("id") String patientId);
 
-    @Query("select s from Surgery s where s.surgeryDate = :surgeryDate and s.appointment.clinic.clinicId = :clinic" )
-    List<Surgery> findBySurgeryDate(@Param("surgeryDate") Date surgeryDate, @Param("clinic") String clinicId);
-
-    @Query("select s from Surgery s where s.appointment.clinic.clinicId = :clinic and s.surgeryDate between :beginning and :ending")
-    List<Surgery> findyDateRange(@Param("beginning") Date startDate, @Param("ending") Date endDate, @Param("clinic") String clinicId);
+    @Query("select s from Surgery s where s.appointment.clinic.clinicId = :clinic and s.surgeryTime between :beginning and :ending")
+    List<Surgery> findByDateRange(@Param("beginning") Timestamp startDate, @Param("ending") Timestamp endDate, @Param("clinic") String clinicId);
 
     @Query("select s from Surgery s where s.surgeryRoom = :surgeryRoom and s.appointment.clinic.clinicId = :clinic" )
     List<Surgery> findBySurgeryRoom(@Param("surgeryRoom") String surgeryRoom, @Param("clinic") String clinicId);
 
-    @Query("select s from Surgery s where s.surgeryDate = :surgeryDate and s.surgeryRoom = :surgeryRoom and s.appointment.clinic.clinicId = :clinic" )
-    List<Surgery> findBySurgeryDateAndSurgeryRoom(@Param("surgeryDate") Date surgeryDate, @Param("surgeryRoom") String surgeryRoom, @Param("clinic") String clinicId);
+    //@Query("select s from Surgery s where s.surgeryTime = :surgeryDate and s.surgeryRoom = :surgeryRoom and s.appointment.clinic.clinicId = :clinic" )
+    //List<Surgery> findBySurgeryDateAndSurgeryRoom(@Param("surgeryDate") Timestamp surgeryDate, @Param("surgeryRoom") String surgeryRoom, @Param("clinic") String clinicId);
 
 }
