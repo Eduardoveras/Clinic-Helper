@@ -24,6 +24,7 @@ public class Contact implements Serializable{
     @Column(unique = true)
     @NotNull
     private String email;
+    private boolean hasAccount;
     @ManyToOne
     private Clinic clinic;
 
@@ -32,12 +33,13 @@ public class Contact implements Serializable{
 
     }
 
-    public Contact(Clinic clinic, String firstName, String lastName, Date birthDate, String email) {
+    public Contact(Clinic clinic, String firstName, String lastName, Date birthDate, String email, boolean hasAccount) {
         this.setContactId(clinic.getClinicPrefix() + "-STAFF-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setFirstName(firstName.toLowerCase());
         this.setLastName(lastName.toUpperCase());
         this.setBirthDate(birthDate);
         this.setEmail(email.toLowerCase());
+        this.setHasAccount(hasAccount);
         this.setClinic(clinic);
     }
 
@@ -91,5 +93,13 @@ public class Contact implements Serializable{
 
     public void setClinic(Clinic clinic) {
         this.clinic = clinic;
+    }
+
+    public boolean isHasAccount() {
+        return hasAccount;
+    }
+
+    public void setHasAccount(boolean hasAccount) {
+        this.hasAccount = hasAccount;
     }
 }
