@@ -218,10 +218,9 @@ public class DataEntryAndManagementService {
                                     String patientContactCellphone, String patientContactTelephoneNumber,String occupation,
                                     Gender patientGender, String patientEmail, Date patientBirthDate, String patientNationality,
                                     String patientAddress, String patientCity, String patientCountry, ArrayList<String> patientAllergies,
-                                   String patientReligion, String PatientHeight, String PatientWeight, String patientBloodType,
-                                    ArrayList<String> patientConditions
-
-                                    ) throws Exception {
+                                    String patientReligion, String PatientHeight, String PatientWeight, String patientBloodType,
+                                    ArrayList<String> patientConditions, String insuranceSerialCode, String insuranceSupplier,
+                                    String insurancePlan) throws Exception {
 
         if (!doesClinicIdExist(clinicId))
             throw new IllegalArgumentException("\n\nThis is an invalid clinic id");
@@ -230,13 +229,19 @@ public class DataEntryAndManagementService {
             throw new IllegalArgumentException("The birth date must be a past date");
 
         try {
-            return patientRepository.save(new Patient(clinicRepository.findByClinicId(clinicId), patientFirstName, patientLastName, patientIdCard,
+            Patient patient = patientRepository.save(new Patient(clinicRepository.findByClinicId(clinicId), patientFirstName, patientLastName, patientIdCard,
                     patientTelephoneNumber, patientWorkphone,patientCellphone, patientContactName, patientContactLastName, patientContactAddress, patientContactCellphone,
                     patientContactTelephoneNumber, occupation, patientGender, patientEmail, patientBirthDate, patientNationality,
                     patientAddress, patientCity, patientCountry, patientAllergies, patientReligion, PatientHeight, PatientWeight,
                     patientBloodType, patientConditions
 
             ));
+
+            // Adding insurance information if exist
+            if (insuranceSerialCode != null)
+                insuranceRepository.save(new Insurance(patient, insuranceSerialCode, insuranceSupplier, insurancePlan));
+
+            return patient;
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis patient was not able to persist -> " + exp.getMessage());
