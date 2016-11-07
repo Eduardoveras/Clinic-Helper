@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -30,12 +31,12 @@ public class Record implements Serializable{
 
     }
 
-    public Record(Patient patient, Set<Surgery> surgeries, Set<Consultation> consultations, Set<History>history) {
+    public Record(Patient patient) {
         this.setRecordId(patient.getPatientId() + "-R-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setPatient(patient);
-        this.setSurgeries(surgeries);
-        this.setConsultations(consultations);
-        this.setHistory(history);
+        this.setSurgeries(new HashSet<>());
+        this.setConsultations(new HashSet<>());
+        this.setHistory(new HashSet<>());
     }
 
     public String getRecordId() {
