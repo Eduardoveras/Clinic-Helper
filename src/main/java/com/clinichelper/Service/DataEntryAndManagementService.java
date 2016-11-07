@@ -133,13 +133,13 @@ public class DataEntryAndManagementService {
 
 
 
-    public Insurance createNewInsurance(String ownerId, String insuranceSerialCode, String insurancePlan) throws Exception{
+    public Insurance createNewInsurance(String ownerId, String insuranceSerialCode, String supplier, String insurancePlan) throws Exception{
 
         if (!doesPatientIdExist(ownerId))
             throw new IllegalArgumentException("\n\nThis is an invalid patient jascId");
 
         try {
-            return insuranceRepository.save(new Insurance(patientRepository.findByPatientId(ownerId), insuranceSerialCode, insurancePlan));
+            return insuranceRepository.save(new Insurance(patientRepository.findByPatientId(ownerId), insuranceSerialCode, supplier, insurancePlan));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis insurance was not able to persist -> " + exp.getMessage());
