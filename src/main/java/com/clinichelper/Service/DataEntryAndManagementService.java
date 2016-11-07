@@ -375,6 +375,8 @@ public class DataEntryAndManagementService {
             throw new IllegalArgumentException("\n\nThis email is already taken. Please choose another one!");
 
         try {
+            // Add new user automatically in contact list
+            contactRepository.save(new Contact(clinicRepository.findByClinicId(clinicId), firstName, lastName, birthDate, email));
             return userRepository.save(new User(clinicRepository.findByClinicId(clinicId), email, firstName, lastName, birthDate, gender, password, role));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
