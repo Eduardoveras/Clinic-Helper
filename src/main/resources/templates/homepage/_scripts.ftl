@@ -1,3 +1,10 @@
+<!-- bootstrap-daterangepicker -->
+<script>
+    $(document).ready($(function () {
+        $('#datetimepicker2').datetimepicker();
+    }));
+</script>
+<!-- /bootstrap-daterangepicker -->
 <!-- jQuery Sparklines -->
 <script>
     $(document).ready(function() {

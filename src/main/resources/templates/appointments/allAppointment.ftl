@@ -22,6 +22,7 @@
                 <div class="row">
                 <#include "/appointments/_appointmentForm.ftl">
                 <#include "/appointments/_appointmentsTable.ftl">
+                    <#include "_modal.ftl">
 
 
                 </div>
@@ -34,13 +35,7 @@
     </div>
 </div>
 <#include "/layouts/footer.ftl">
-<!-- bootstrap-daterangepicker -->
-<script>
-    $(document).ready($(function () {
-        $('#datetimepicker1').datetimepicker();
-    }));
-</script>
-<!-- /bootstrap-daterangepicker -->
+<#include "_appointmentScripts.ftl">
 <#include "/layouts/pageCloser.ftl">
 
 

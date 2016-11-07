@@ -36,7 +36,10 @@
                                 <li><a href="#">Mark as HERE</a></li>
                                 <li><a href="#">Mark as READY</a></li>
                                 <li><a href="#">Mark as Dint show up</a></li>
-                                <li><a href="#">Re-schedule</a></li>
+                                <li>
+                                    <input type="hidden" form="reScheduleForm" name="id" value="${appointment.getAppointmentId()}">
+                                    <a href="#" data-toggle="modal" data-target="#appointmentModal">Re-Eschedule</a>
+                                </li>
                                 <li><a href="#">Send email reminder</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#">Collect Payment</a></li>

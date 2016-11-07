@@ -9,10 +9,11 @@
         <!-- page content -->
         <div class="right_col" role="main">
             <div class="">
-                 <#include "/homepage/_topBoxes.ftl">
+                 <#include "_topBoxes.ftl">
                 <div class="row">
-                <#include "/homepage/_appointments.ftl">
-                <#include "/homepage/_calendar.ftl">
+                <#include "_appointments.ftl">
+                <#include "_calendar.ftl">
+                    <#include "/appointments/_modal.ftl">
                 </div>
             </div>
         </div>
@@ -22,7 +23,7 @@
 </div>
 
 <#include "/layouts/footer.ftl">
-<#include "/homepage/_scripts.ftl">
+<#include "_scripts.ftl">
 <#include "/layouts/pageCloser.ftl">
 
 

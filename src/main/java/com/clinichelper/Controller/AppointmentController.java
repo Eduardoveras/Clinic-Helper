@@ -88,7 +88,7 @@ public class AppointmentController {
     }
 
     @PostMapping("/changeDateAndTime")
-    public String editDateAndTimeOfRegisteredAppointment(@RequestParam("id") String appointmentId, @RequestParam("date") String newDate, @RequestParam("time") String newTime){
+    public String editDateAndTimeOfRegisteredAppointment(@RequestParam("id") String appointmentId, @RequestParam("date") String newDate){
 
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
