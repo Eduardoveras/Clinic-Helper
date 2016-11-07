@@ -7,6 +7,7 @@ import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Enums.AppointmentStatus;
+import com.clinichelper.Tools.Enums.Permission;
 import com.clinichelper.Tools.Enums.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ErrorController;
@@ -35,8 +36,19 @@ public class IndexController implements ErrorController {
     private ToolKitService TKS;
     private static final String ERR_PATH = "/error";
 
-
+    // Gets
     @RequestMapping("/")
+    public ModelAndView filter(){
+        if (!DQS.isUserLoggedIn())
+            return new ModelAndView("redirect:/login");
+
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
+            return new ModelAndView("redirect:/assistant/home");
+        else
+            return new ModelAndView("redirect:/medic/home");
+    }
+
+    @RequestMapping("/assistant/home")
     public ModelAndView home(Model model, @RequestParam(value="name", required=false, defaultValue="home") String name) {
         if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
