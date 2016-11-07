@@ -10,7 +10,7 @@ import java.util.UUID;
  * Created by eva_c on 9/25/2016.
  */
 @Entity
-@Table(name="staff")
+@Table(name="contact")
 public class Contact implements Serializable{
     // Attributes
     @Id
