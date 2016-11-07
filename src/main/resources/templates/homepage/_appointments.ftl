@@ -45,7 +45,7 @@
                                 <li><a href="#">Collect Payment</a></li>
                             </ul>
 
-                            <button type="button" class="btn btn-primary btn-sm btn-round" >
+                            <button onclick="window.location.href='/patient/${appointment.patient.patientId}'" type="button" class="btn btn-primary btn-sm btn-round" >
                                 <i class="fa fa-user"> </i> View Profile
                             </button>
 
