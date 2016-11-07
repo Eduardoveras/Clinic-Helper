@@ -14,6 +14,7 @@
                             <div class="left col-xs-7">
                                 <h2>${contact.getFullName()}</h2>
                                 <p><strong>Email: </strong>${contact.getEmail()}</p>
+                                <p><strong>Has an Account: </strong><#if contact.hasAccount>YES<#else>NO</#if></p>
                             </div>
                             <div class="right col-xs-5 text-center">
                                 <img src="images/img.jpg" alt="" class="img-circle img-responsive">

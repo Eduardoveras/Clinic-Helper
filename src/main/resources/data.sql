@@ -1,6 +1,6 @@
 INSERT INTO clinic (clinic_id, account_type, clinic_name, clinic_prefix, registered_date) VALUES ('CH-PLATINUM-JASC', 3, 'JASC', 'JASC', '2016-10-30');
 
-INSERT INTO contact (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-ADMIN', 'administrator', 'ADMIN', 'djidjellypas92@gmail.com', '2016-11-4');
+INSERT INTO contact (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date, has_account) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-ADMIN', 'administrator', 'ADMIN', 'djidjellypas92@gmail.com', '2016-11-4', FALSE);
 
 INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-YOLO', '1980-02-03', 'djidjellypas92@gmail.com', 'djijdelly', 0, 'SICLAIT', '1234', 0, 'CH-PLATINUM-JASC');
 INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-SWAG', '1980-02-03', 'eva', 'eva', 0, 'SORAYA', '1234', 0, 'CH-PLATINUM-JASC');
@@ -70,10 +70,10 @@ patient_id,
 '829xxxyyyy', 'FR', 'eva@gmail.com', 'Eva', 0, '12oih7g 323',
 'Soraya', 'Dominicana', '2015-10-28', '809xxxyyyy');
 
-INSERT INTO contact (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-PAULINA', 'Paulina', 'Reyes', 'p@gmail.com', '1985-03-23');
-INSERT INTO contact (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-SICARD', 'Julio', 'Sicard', 'js@gmail.com', '1980-11-03');
-INSERT INTO contact (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-ADELSO', 'Adelso', 'Tejada', 'at@gmail.com', '1990-02-02');
-INSERT INTO contact (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-ASTRID', 'Astrid', 'Incarnacion', 'ai@gmail.com', '1990-10-31');
+INSERT INTO contact (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date, has_account) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-PAULINA', 'Paulina', 'Reyes', 'p@gmail.com', '1985-03-23', TRUE );
+INSERT INTO contact (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date, has_account) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-SICARD', 'Julio', 'Sicard', 'js@gmail.com', '1980-11-03', FALSE);
+INSERT INTO contact (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date, has_account) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-ADELSO', 'Adelso', 'Tejada', 'at@gmail.com', '1990-02-02', FALSE);
+INSERT INTO contact (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date, has_account) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-ASTRID', 'Astrid', 'Incarnacion', 'ai@gmail.com', '1990-10-31', FALSE);
 
 INSERT INTO appointments(clinic_clinic_id, appointment_id, appointment_time, patient_patient_id, appointment_description, appointment_access_from, appointment_type, appointment_status) VALUES (
 'CH-PLATINUM-JASC',
