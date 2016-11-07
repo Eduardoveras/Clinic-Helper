@@ -48,23 +48,9 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Type: <span class="required">*</span></label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <div class="radio" style="display: inline-block">
-                            <label><input type="radio" name="type" id="type" value="C" checked="checked" required>Consultation</label>
-                        </div>
-                        <div style="display: inline-block"></div>
-                        <div class="radio" style="display: inline-block">
-                            <label><input type="radio" name="type" id="type" value="S" required>Surgery</label>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="ln_solid"></div>
                 <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                        <button type="submit" class="btn btn-primary">Cancel</button>
                         <button type="submit" class="btn btn-success">Submit</button>
                     </div>
                 </div>

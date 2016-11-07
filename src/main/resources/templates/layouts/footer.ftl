@@ -52,6 +52,8 @@
 <!-- FullCalendar -->
 <script src="../js/moment/moment.min.js"></script>
 <script src="../js/fullcalendar.min.js"></script>
+<!-- jQuery Smart Wizard -->
+<script src="../vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
 
 
@@ -59,3 +61,8 @@
 
 <!-- Custom Theme Scripts -->
 <script src="../build/js/custom.min.js"></script>
+<script type="text/javascript">
+    $(window).load(function() {
+        $(".loader").fadeOut("slow");
+    })
+</script>

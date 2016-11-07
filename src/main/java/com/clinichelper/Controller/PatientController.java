@@ -48,6 +48,20 @@ public class PatientController {
         return new ModelAndView("patients/allPatients");
     }
 
+    @GetMapping("/new_patient")
+    public ModelAndView patientForm(Model model){
+        if (!DQS.isUserLoggedIn())
+            return new ModelAndView("redirect:/login");
+
+        String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
+        model.addAttribute("todoList", TKS.InitializeTodoList(clinicId));
+        model.addAttribute("amount", DQS.findAllRegisteredPatientsForClinic(clinicId).size());
+
+        return new ModelAndView("patients/patientForm");
+    }
+
+
+
     @GetMapping("/patient/{id}")
     public ModelAndView fetchPatientview(Model model,@PathVariable(value="id") String patientId){
         if (!DQS.isUserLoggedIn())
@@ -87,19 +101,20 @@ public class PatientController {
            @RequestParam("height") String patientHeight,
            @RequestParam("weight") String patientWeight,
            @RequestParam("bloodType") String patientBloodType,
-           @RequestParam("conditions")ArrayList<String> patientConditions
+           @RequestParam("conditions")ArrayList<String> patientConditions,
+           @RequestParam("insuranceCode") String insuranceCode,
+           @RequestParam("supplier") String supplier,
+           @RequestParam("plan") String insurancePlan
            ){
 
         try {
             SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy");
 
-            DEAMS.createNewPatient("CH-PLATINUM-JASC", firstName, lastName, idCard, telephoneNumber, patientWorkphone, patientCellphone, patientContactName, patientContactLastName,
+            DEAMS.createNewPatient(DQS.getCurrentLoggedUser().getClinic().getClinicId(), firstName, lastName, idCard, telephoneNumber, patientWorkphone, patientCellphone, patientContactName, patientContactLastName,
                     patientContactAddress, patientContactCellphone, contactTelephoneNumber, occupation, gender.toUpperCase().equals("F") ? Gender.F : Gender.M, mail,
                     new Date(sdf1.parse(dateOfBirth).getTime()), nationality, address, cities, countries, patientAllergies, patientReligion,
                     patientHeight, patientWeight, patientBloodType,
-                    patientConditions
-
-            );
+                    patientConditions, insuranceCode, supplier, insurancePlan);
             return "redirect:/patients";
         } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
             System.out.println("ERROR EN CREAR PACIENTE");

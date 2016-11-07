@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -49,6 +48,7 @@ public class DataQueryService {
     private UserRepository userRepository;
     @Autowired
     private HttpSession session;
+
 
 
     public Object getSessionAttr(String name)
@@ -106,9 +106,7 @@ public class DataQueryService {
 
     public List<Consultation> findAllRegisteredConsultationsForClinic(String clinicId){ return consultationRepository.findByClinicId(clinicId); }
 
-    public List<Consultation> findResgisteredConcultationByDate(String clinicId, Date searchDate){ return consultationRepository.findByConsultationDate(searchDate, clinicId); }
-
-    public  List<Consultation> findAllRegisteredConsultationsByTimePeriod(String clinicId, Date beginningOfTimePeriod, Date endOfTimePeriod){ return consultationRepository.findByConsultationDateRange(beginningOfTimePeriod, endOfTimePeriod, clinicId); }
+    //public  List<Consultation> findAllRegisteredConsultationsByTimePeriod(String clinicId, Date beginningOfTimePeriod, Date endOfTimePeriod){ return consultationRepository.findByConsultationDateRange(beginningOfTimePeriod, endOfTimePeriod, clinicId); }
 
 
     // Equipment Queries
@@ -210,13 +208,11 @@ public class DataQueryService {
 
     public List<Surgery> findRegisteredSurgeryByPatient(String patientId){ return surgeryRepository.findByPatientId(patientId);}
 
-    public List<Surgery> findRegisteredSurgeryByDate(String clinicId, Date searchDate){ return surgeryRepository.findBySurgeryDate(searchDate, clinicId); }
-
-    public List<Surgery> findRegisteredSurgeryByTimePeriod(String clinicId, Date startDate, Date endDate){ return surgeryRepository.findyDateRange(startDate, endDate, clinicId);}
+    //public List<Surgery> findRegisteredSurgeryByTimePeriod(String clinicId, Date startDate, Date endDate){ return surgeryRepository.findByDateRange(startDate, endDate, clinicId);}
 
     public List<Surgery> findRegisteredSurgeryByRoom(String clinicId, String searchRoom){ return surgeryRepository.findBySurgeryRoom(searchRoom, clinicId); }
 
-    public List<Surgery> findResgisteredSurgeryByDateAndRoom(String clinicId, String searchRoom, Date searchDate){ return surgeryRepository.findBySurgeryDateAndSurgeryRoom(searchDate, searchRoom, clinicId); }
+    //public List<Surgery> findResgisteredSurgeryByDateAndRoom(String clinicId, String searchRoom, Date searchDate){ return surgeryRepository.findBySurgeryDateAndSurgeryRoom(searchDate, searchRoom, clinicId); }
 
 
     // User Queries
@@ -232,6 +228,7 @@ public class DataQueryService {
 
         return (user != null);
     }
+
 
 
     // Auxiliary Functions

@@ -5,7 +5,6 @@
             <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
             <span>
                           <span>${todo.title}</span>
-                          <span class="time">3 mins ago</span>
                         </span>
             <span class="message">
             ${todo.description}

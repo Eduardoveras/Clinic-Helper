@@ -49,7 +49,7 @@ public class AppointmentController {
 
     // Posts
     @PostMapping("/newAppointment")
-    public String createNewApointment(@RequestParam("appointmentTime") String appointmentTime, @RequestParam("patient") String patientId, @RequestParam("description") String appointmentDescription, @RequestParam("type") String appointmentType){
+    public String createNewApointment(@RequestParam("appointmentTime") String appointmentTime, @RequestParam("patient") String patientId, @RequestParam("description") String appointmentDescription){
 
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
@@ -58,7 +58,7 @@ public class AppointmentController {
             SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
             String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
             Patient patient = DQS.findRegisteredPatientByIdCard(clinicId, patientId);
-            DEAMS.createNewAppointment(clinicId, new Timestamp(sdf1.parse(appointmentTime).getTime()), patient.getPatientId(), appointmentDescription, appointmentType.toUpperCase().equals("C") ? AppointmentType.CONSULTATION : AppointmentType.SURGERY);
+            DEAMS.createNewAppointment(clinicId, new Timestamp(sdf1.parse(appointmentTime).getTime()), patient.getPatientId(), appointmentDescription);
 
             return "redirect:/appointments";
         } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
@@ -88,7 +88,7 @@ public class AppointmentController {
     }
 
     @PostMapping("/changeDateAndTime")
-    public String editDateAndTimeOfRegisteredAppointment(@RequestParam("id") String appointmentId, @RequestParam("date") String newDate, @RequestParam("time") String newTime){
+    public String editDateAndTimeOfRegisteredAppointment(@RequestParam("id") String appointmentId, @RequestParam("date") String newDate){
 
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";

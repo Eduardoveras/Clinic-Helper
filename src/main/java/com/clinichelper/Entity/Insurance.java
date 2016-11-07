@@ -23,6 +23,8 @@ public class Insurance implements Serializable{
     @NotNull
     private String insuranceSerialCode;
     @NotNull
+    private String insuranceSupplier;
+    @NotNull
     private String insurancePlan;
 
     // Constructors
@@ -30,10 +32,11 @@ public class Insurance implements Serializable{
 
     }
 
-    public Insurance(Patient owner, String insuranceSerialCode, String insurancePlan){
+    public Insurance(Patient owner, String insuranceSerialCode, String insuranceSupplier, String insurancePlan){
         this.setInsuranceId( owner.getPatientId() + "-I-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setOwner(owner);
         this.setInsuranceSerialCode(insuranceSerialCode);
+        this.setInsuranceSupplier(insuranceSupplier);
         this.setInsurancePlan(insurancePlan);
     }
 
@@ -64,5 +67,13 @@ public class Insurance implements Serializable{
 
     public void setInsurancePlan(String insurancePlan) {
         this.insurancePlan = insurancePlan;
+    }
+
+    public String getInsuranceSupplier() {
+        return insuranceSupplier;
+    }
+
+    public void setInsuranceSupplier(String insuranceSupplier) {
+        this.insuranceSupplier = insuranceSupplier;
     }
 }

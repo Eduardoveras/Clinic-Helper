@@ -1,6 +1,7 @@
 <#include "/layouts/header.ftl">
 
 <body class="nav-md">
+<#include  "/layouts/_loader.ftl">
 <div class="container body">
     <div class="main_container">
     <#include "/layouts/sidebar.ftl">
@@ -10,6 +11,7 @@
             <div class="">
                 <div class="row">
                 <#include "/inventory/_inventoryTabs.ftl">
+                <#include  "_modal.ftl">
                 </div>
             </div>
         </div>

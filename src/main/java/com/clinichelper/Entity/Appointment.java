@@ -30,6 +30,7 @@ public class Appointment implements Serializable{
     private String appointmentDescription;
     private AccessForm appointmentAccessFrom;
     private AppointmentType appointmentType;
+    @NotNull
     private AppointmentStatus appointmentStatus;
     @ManyToOne
     private Clinic clinic;

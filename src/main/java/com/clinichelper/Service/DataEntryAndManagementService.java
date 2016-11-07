@@ -5,10 +5,7 @@ package com.clinichelper.Service;
 
 import com.clinichelper.Entity.*;
 import com.clinichelper.Repository.*;
-import com.clinichelper.Tools.Enums.AppointmentType;
-import com.clinichelper.Tools.Enums.Gender;
-import com.clinichelper.Tools.Enums.Permission;
-import com.clinichelper.Tools.Enums.Task;
+import com.clinichelper.Tools.Enums.*;
 import freemarker.template.utility.NullArgumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +15,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.Set;
 
 @Service
@@ -54,9 +52,11 @@ public class DataEntryAndManagementService {
     private SurgeryRepository surgeryRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private  HistoryRepository historyRepository;
 
     // Creation functions
-    public Appointment createNewAppointment(String clinicId, Timestamp appointmentTime, String patientId, String appointmentDescription, AppointmentType appointmentType) throws Exception {
+    public Appointment createNewAppointment(String clinicId, Timestamp appointmentTime, String patientId, String appointmentDescription) throws Exception {
 
         if(!doesClinicIdExist(clinicId))
             throw new IllegalArgumentException("\n\nThis is an invalid clinic id");
@@ -66,7 +66,10 @@ public class DataEntryAndManagementService {
             throw new IllegalArgumentException("\n\nThis is an invalid patient Id");
 
         try {
-            return appointmentRepository.save(new Appointment(clinicRepository.findByClinicId(clinicId), appointmentTime, patientRepository.findByPatientId(patientId), appointmentDescription, appointmentType));
+            Appointment appointment = appointmentRepository.save(new Appointment(clinicRepository.findByClinicId(clinicId), appointmentTime, patientRepository.findByPatientId(patientId), appointmentDescription, AppointmentType.CONSULTATION));
+            // Consultation is automatically created with every appointment
+            consultationRepository.save(new Consultation(appointmentTime, appointmentDescription, appointment));
+            return appointment;
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis appointment was not able to persist -> " + exp.getMessage());
@@ -104,28 +107,6 @@ public class DataEntryAndManagementService {
 
 
 
-    public Consultation createNewConsultation(Date date, Timestamp time, String detail, String appointmentId) throws Exception{
-
-        if (!doesAppointmentIdExist(appointmentId))
-            throw new IllegalArgumentException("\n\nThis appointment id is not valid");
-
-        try {
-            return consultationRepository.save(new Consultation(date, time, detail, appointmentRepository.findByAppointmentId(appointmentId)));
-        } catch (PersistenceException exp){
-            System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
-            throw new PersistenceException("\n\nThis consultation was not able to persist -> " + exp.getMessage());
-        } catch (NullPointerException exp) {
-            System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
-            throw new NullPointerException("\n\nAN object or process has risen a null value -> " + exp.getMessage());
-        } catch (Exception exp){
-            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
-            throw new Exception("\n\nAn error occurred when trying to create a consultation -> " + exp.getMessage());
-        }
-    }
-
-
-
-
     public Equipment createNewEquipment(String clinicId, String equipmentName, String equipmentUse, String equipmentDescription, Integer stock) throws Exception {
 
         if (!doesClinicIdExist(clinicId))
@@ -149,13 +130,13 @@ public class DataEntryAndManagementService {
 
 
 
-    public Insurance createNewInsurance(String ownerId, String insuranceSerialCode, String insurancePlan) throws Exception{
+    public Insurance createNewInsurance(String ownerId, String insuranceSerialCode, String supplier, String insurancePlan) throws Exception{
 
         if (!doesPatientIdExist(ownerId))
             throw new IllegalArgumentException("\n\nThis is an invalid patient jascId");
 
         try {
-            return insuranceRepository.save(new Insurance(patientRepository.findByPatientId(ownerId), insuranceSerialCode, insurancePlan));
+            return insuranceRepository.save(new Insurance(patientRepository.findByPatientId(ownerId), insuranceSerialCode, supplier, insurancePlan));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis insurance was not able to persist -> " + exp.getMessage());
@@ -234,10 +215,9 @@ public class DataEntryAndManagementService {
                                     String patientContactCellphone, String patientContactTelephoneNumber,String occupation,
                                     Gender patientGender, String patientEmail, Date patientBirthDate, String patientNationality,
                                     String patientAddress, String patientCity, String patientCountry, ArrayList<String> patientAllergies,
-                                   String patientReligion, String PatientHeight, String PatientWeight, String patientBloodType,
-                                    ArrayList<String> patientConditions
-
-                                    ) throws Exception {
+                                    String patientReligion, String PatientHeight, String PatientWeight, String patientBloodType,
+                                    ArrayList<String> patientConditions, String insuranceSerialCode, String insuranceSupplier,
+                                    String insurancePlan) throws Exception {
 
         if (!doesClinicIdExist(clinicId))
             throw new IllegalArgumentException("\n\nThis is an invalid clinic id");
@@ -246,13 +226,21 @@ public class DataEntryAndManagementService {
             throw new IllegalArgumentException("The birth date must be a past date");
 
         try {
-            return patientRepository.save(new Patient(clinicRepository.findByClinicId(clinicId), patientFirstName, patientLastName, patientIdCard,
+            Patient patient = patientRepository.save(new Patient(clinicRepository.findByClinicId(clinicId), patientFirstName, patientLastName, patientIdCard,
                     patientTelephoneNumber, patientWorkphone,patientCellphone, patientContactName, patientContactLastName, patientContactAddress, patientContactCellphone,
                     patientContactTelephoneNumber, occupation, patientGender, patientEmail, patientBirthDate, patientNationality,
                     patientAddress, patientCity, patientCountry, patientAllergies, patientReligion, PatientHeight, PatientWeight,
-                    patientBloodType, patientConditions
+                    patientBloodType, patientConditions));
 
-            ));
+            // The patient's medical record is created automatically
+            if (patient.getClinic().getAccountType() != AccountType.BASIC)
+                recordRepository.save(new Record(patient));
+
+            // Adding insurance information if exist
+            if (insuranceSerialCode != null)
+                insuranceRepository.save(new Insurance(patient, insuranceSerialCode, insuranceSupplier, insurancePlan));
+
+            return patient;
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis patient was not able to persist -> " + exp.getMessage());
@@ -291,16 +279,14 @@ public class DataEntryAndManagementService {
         }
     }
 
+    public History createNewHistory(Patient patient, String visitObjective, String observations, String specialConditions, ArrayList<byte[]> photos, String surgeryType, ArrayList<String> medicalData) throws Exception {
 
-
-
-    public Record createNewRecord(String patientId, String recordDetails, Set<Surgery> surgeries, Set<Consultation> consultations) throws Exception {
-
-        if (!doesPatientIdExist(patientId))
+        if (!doesPatientIdExist(patient.getPatientId()))
             throw new IllegalArgumentException("\n\nThis is an invalid patient id");
 
         try {
-            return recordRepository.save(new Record(patientRepository.findByPatientId(patientId), recordDetails, surgeries, consultations));
+            return historyRepository.save(new History(patient, visitObjective,  observations, specialConditions, photos, surgeryType,  medicalData));
+
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis record was not able to persist -> " + exp.getMessage());
@@ -322,7 +308,7 @@ public class DataEntryAndManagementService {
             throw new IllegalArgumentException("\n\nThis is an invalid clinic id");
 
         try{
-            return contactRepository.save(new Contact(clinicRepository.findByClinicId(clinicId), staffFirstName, staffLastName, staffBirthDate, staffEmail));
+            return contactRepository.save(new Contact(clinicRepository.findByClinicId(clinicId), staffFirstName, staffLastName, staffBirthDate, staffEmail, false));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis patient was not able to persist -> " + exp.getMessage());
@@ -339,19 +325,14 @@ public class DataEntryAndManagementService {
 
 
 
-    public Surgery createNewSurgery(String name, String description, String patientJascId, Date date, Timestamp time, String surgeryRoom, Set<Contact> contacts, Set<Equipment> equipments, String appointmentId) throws Exception {
+    public Surgery createNewSurgery(String name, String description, String patientId, Timestamp time) throws Exception {
 
-        if (!doesPatientIdExist(patientJascId))
-            throw new IllegalArgumentException("\n\nThis is an invalid patient jascId");
-
-        if (!doesAppointmentIdExist(appointmentId))
-            throw new IllegalArgumentException("\n\nThis appointment jasc id is not valid");
-
-        if (contacts.isEmpty())
-            throw new NullArgumentException("\n\nYou may not preform a surgery without staff. Please Choose at least one staff member.");
+        if (!doesPatientIdExist(patientId))
+            throw new IllegalArgumentException("\n\nThis is an invalid patient id");
 
         try {
-            return surgeryRepository.save(new Surgery(name, description, patientRepository.findByPatientId(patientJascId), date, time, surgeryRoom, contacts, equipments, appointmentRepository.findByAppointmentId(appointmentId)));
+            Appointment appointment = appointmentRepository.save(new Appointment( patientRepository.findByPatientId(patientId).getClinic(), time, patientRepository.findByPatientId(patientId), description, AppointmentType.SURGERY));
+            return surgeryRepository.save(new Surgery(name, description, patientRepository.findByPatientId(patientId), time, appointment));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis surgery was not able to persist -> " + exp.getMessage());
@@ -374,6 +355,8 @@ public class DataEntryAndManagementService {
             throw new IllegalArgumentException("\n\nThis email is already taken. Please choose another one!");
 
         try {
+            // Add new user automatically in contact list
+            contactRepository.save(new Contact(clinicRepository.findByClinicId(clinicId), firstName, lastName, birthDate, email, true));
             return userRepository.save(new User(clinicRepository.findByClinicId(clinicId), email, firstName, lastName, birthDate, gender, password, role));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());

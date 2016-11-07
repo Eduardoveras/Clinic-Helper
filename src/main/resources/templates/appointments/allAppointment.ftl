@@ -1,6 +1,7 @@
 <#include "/layouts/header.ftl">
 
 <body class="nav-md">
+<#include  "/layouts/_loader.ftl">
 <div class="container body">
     <div class="main_container">
     <#include "/layouts/sidebar.ftl">
@@ -21,6 +22,7 @@
                 <div class="row">
                 <#include "/appointments/_appointmentForm.ftl">
                 <#include "/appointments/_appointmentsTable.ftl">
+                    <#include "_modal.ftl">
 
 
                 </div>
@@ -33,13 +35,7 @@
     </div>
 </div>
 <#include "/layouts/footer.ftl">
-<!-- bootstrap-daterangepicker -->
-<script>
-    $(document).ready($(function () {
-        $('#datetimepicker1').datetimepicker();
-    }));
-</script>
-<!-- /bootstrap-daterangepicker -->
+<#include "_appointmentScripts.ftl">
 <#include "/layouts/pageCloser.ftl">
 
 

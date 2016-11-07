@@ -31,6 +31,12 @@
                     <li><a href="/patients" ><i class="fa fa-user-md"></i> Patients  <span ></span></a></li>
                     <li><a href="/appointments"><i  class="fa fa-desktop"></i> Appointments  <span ></span></a></li>
                     <li><a  href="/users"><i class="fa fa-users"></i> Users<span></span></a></li>
+                    <li><a><i class="fa fa-comments-o"></i> Team <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="/contacts">Members</a></li>
+                            <li><a href="/meetings">Meetings</a></li>
+                        </ul>
+                    </li>
                     <li><a href="/Inventory"><i  class="fa fa-calculator"></i> Inventory <span ></span></a></li>
                     <li><a  href="/Stats"><i class="fa fa-bar-chart-o"></i> Statistics<span></span></a></li>
 
@@ -48,12 +54,6 @@
         <div class="sidebar-footer hidden-small">
             <a data-toggle="tooltip" data-placement="top" title="Settings">
                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-            </a>
-            <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-            </a>
-            <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
             </a>
             <a href="/logout" data-toggle="tooltip" data-placement="top" title="Logout">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
