@@ -4,6 +4,7 @@ import com.clinichelper.Entity.User;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
+import com.clinichelper.Tools.Enums.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -72,7 +73,7 @@ public class UserController {
     @PostMapping("/uploadProfilePhoto")
     public String uploadProfilePicture(@RequestParam() String email, @RequestParam("clinic") String clinicId, @RequestParam("photo") MultipartFile file){
 
-        if (!DQS.isUserLoggedIn())
+        if (!DQS.isUserLoggedIn() && DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/login";
 
         User user = DQS.findRegisteredUserAccount(email,clinicId);
@@ -95,8 +96,7 @@ public class UserController {
 
     @PostMapping("/userLogin")
     public String loginUser(@RequestParam("email") String email, @RequestParam("password") String password){
-
-
+        
         if (DQS.validateUserAccountCredentials(email, password))
         {
             User u = DQS.findRegisteredUserAccount(email,password);

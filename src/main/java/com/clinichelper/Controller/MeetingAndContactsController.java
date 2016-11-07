@@ -25,13 +25,10 @@ public class MeetingAndContactsController {
     @Autowired
     private ToolKitService TKS;
 
-
-
     @RequestMapping("/contacts")
     public ModelAndView FetchContactsView(Model model){
         if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
-
 
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
         model.addAttribute("todoList", TKS.InitializeTodoList(clinicId));

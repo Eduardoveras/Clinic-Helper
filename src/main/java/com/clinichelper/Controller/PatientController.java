@@ -8,6 +8,7 @@ import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Enums.Gender;
+import com.clinichelper.Tools.Enums.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,7 +51,7 @@ public class PatientController {
 
     @GetMapping("/new_patient")
     public ModelAndView patientForm(Model model){
-        if (!DQS.isUserLoggedIn())
+        if (!DQS.isUserLoggedIn() && DQS.getCurrentLoggedUser().getRole() == Permission.ASSISTANT)
             return new ModelAndView("redirect:/login");
 
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
@@ -64,7 +65,7 @@ public class PatientController {
 
     @GetMapping("/patient/{id}")
     public ModelAndView fetchPatientview(Model model,@PathVariable(value="id") String patientId){
-        if (!DQS.isUserLoggedIn())
+        if (!DQS.isUserLoggedIn() && DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return new ModelAndView("redirect:/login");
 
         model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getClinic().getClinicId()));
@@ -104,8 +105,10 @@ public class PatientController {
            @RequestParam("conditions")ArrayList<String> patientConditions,
            @RequestParam("insuranceCode") String insuranceCode,
            @RequestParam("supplier") String supplier,
-           @RequestParam("plan") String insurancePlan
-           ){
+           @RequestParam("plan") String insurancePlan){
+
+        if (!DQS.isUserLoggedIn() && DQS.getCurrentLoggedUser().getRole() == Permission.ASSISTANT)
+            return "redirect:/login";
 
         try {
             SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy");
@@ -127,7 +130,7 @@ public class PatientController {
 
     @PostMapping("/editPatient")
     public String editPatient(@RequestParam("id") String patientId, @RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("idCard") String idCard, @RequestParam("mail") String mail, @RequestParam("telephoneNumber") String telephoneNumber, @RequestParam("contactTelephoneNumber") String contactTelephoneNumber, @RequestParam("address") String address, @RequestParam("occupation") String occupation, @RequestParam("dateOfBirth")Date dateOfBirth, @RequestParam("gender") String gender, @RequestParam("nationality") String nationality, @RequestParam("countries") String countries, @RequestParam("cities") String cities){
-        if (!DQS.isUserLoggedIn())
+        if (!DQS.isUserLoggedIn() && DQS.getCurrentLoggedUser().getRole() == Permission.ASSISTANT)
             return "redirect:/login";
 
         try {
@@ -159,8 +162,9 @@ public class PatientController {
 
     @PostMapping("/uploadPhoto")
     public String uploadPatientPhoto(@RequestParam("id") String patientId ,@RequestParam("photo")MultipartFile file){
-        if (!DQS.isUserLoggedIn())
+        if (!DQS.isUserLoggedIn() && DQS.getCurrentLoggedUser().getRole() == Permission.ASSISTANT)
             return "redirect:/login";
+
         Patient patient = DQS.findRegisteredPatient(patientId);
 
         try {

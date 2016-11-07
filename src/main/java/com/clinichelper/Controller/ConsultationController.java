@@ -7,6 +7,7 @@ import com.clinichelper.Entity.Patient;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Tools.Enums.AppointmentType;
+import com.clinichelper.Tools.Enums.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,9 +31,9 @@ public class ConsultationController {
     private DataQueryService DQS;
 
     // Gets
-    @GetMapping("/consultation")
+    @GetMapping("/consultations")
     public ModelAndView fetchConsultationView(Model model) throws Exception{
-        if (!DQS.isUserLoggedIn())
+        if (!DQS.isUserLoggedIn() && DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
             return new ModelAndView("redirect:/login");
 
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
@@ -42,7 +43,7 @@ public class ConsultationController {
         return new ModelAndView("t");
     }
 
-    @PostMapping("/newhistory")
+    @PostMapping("/newHistory")
     public String createNewHistory(
 
             @RequestParam("patient") String patientId,
@@ -51,11 +52,9 @@ public class ConsultationController {
             @RequestParam("specialconditions") String specialConditions,
             @RequestParam("photos") ArrayList<byte[]> photos,
             @RequestParam("surgerytype") String surgeryType,
-            @RequestParam("medicaldata")  ArrayList<String> medicaData
+            @RequestParam("medicaldata")  ArrayList<String> medicaData){
 
-    ){
-
-        if (!DQS.isUserLoggedIn())
+        if (!DQS.isUserLoggedIn() && DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
             return "redirect:/login";
 
         try {

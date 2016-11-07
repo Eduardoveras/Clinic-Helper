@@ -75,7 +75,7 @@ public class IndexController implements ErrorController {
     public ModelAndView medicHome(Model model){
         if (!DQS.isUserLoggedIn() && DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
             return new ModelAndView("redirect:/login");
-        
+
         return new ModelAndView("");
     }
 
