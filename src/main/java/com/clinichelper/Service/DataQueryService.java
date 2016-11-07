@@ -107,9 +107,7 @@ public class DataQueryService {
 
     public List<Consultation> findAllRegisteredConsultationsForClinic(String clinicId){ return consultationRepository.findByClinicId(clinicId); }
 
-    public List<Consultation> findResgisteredConcultationByDate(String clinicId, Date searchDate){ return consultationRepository.findByConsultationDate(searchDate, clinicId); }
-
-    public  List<Consultation> findAllRegisteredConsultationsByTimePeriod(String clinicId, Date beginningOfTimePeriod, Date endOfTimePeriod){ return consultationRepository.findByConsultationDateRange(beginningOfTimePeriod, endOfTimePeriod, clinicId); }
+    //public  List<Consultation> findAllRegisteredConsultationsByTimePeriod(String clinicId, Date beginningOfTimePeriod, Date endOfTimePeriod){ return consultationRepository.findByConsultationDateRange(beginningOfTimePeriod, endOfTimePeriod, clinicId); }
 
 
     // Equipment Queries
