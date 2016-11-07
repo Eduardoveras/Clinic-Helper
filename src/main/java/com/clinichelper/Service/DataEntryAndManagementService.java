@@ -293,7 +293,7 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public Record createNewHistory(Patient patient, String visitObjective, String observations, String specialConditions, ArrayList<byte[]> photos, String surgeryType, ArrayList<String> medicalData) {
+    public History createNewHistory(Patient patient, String visitObjective, String observations, String specialConditions, ArrayList<byte[]> photos, String surgeryType, ArrayList<String> medicalData) throws Exception {
 
         if (!doesPatientIdExist(patient.getPatientId()))
             throw new IllegalArgumentException("\n\nThis is an invalid patient id");
