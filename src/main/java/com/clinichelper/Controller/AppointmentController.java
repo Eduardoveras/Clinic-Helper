@@ -96,7 +96,9 @@ public class AppointmentController {
         Appointment appointment = DQS.findRegisteredAppointment(appointmentId);
 
         try {
-            appointment.setAppointmentTime(newTime);
+
+            SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
+            appointment.setAppointmentTime(new Timestamp(sdf1.parse(newDate).getTime()));
 
             DEAMS.editAppointment(appointment);
             return "redirect:/appointments";
