@@ -32,6 +32,7 @@ public class Patient implements Serializable{
     private String patientContactTelephoneNumber;//
     private String patientWorkphone;
     private String patientCellphone;
+    // Emergency Contact
     private String patientContactName;
     private String patientContactLastName;
     private String patientContactAddress;

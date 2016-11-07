@@ -2,7 +2,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Form Wizards <small>Sessions</small></h2>
+                        <h2>${user.clinic.clinicPrefix} Patient Registration Form</h2>
                         <ul class="nav navbar-right panel_toolbox">
                             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                             </li>
@@ -38,7 +38,7 @@
                                         <span class="step_no">2</span>
                                         <span class="step_descr">
                                               Step 2<br />
-                                              <small>Personal Information</small>
+                                              <small>Medical Information</small>
                                           </span>
                                     </a>
                                 </li>
@@ -47,7 +47,7 @@
                                         <span class="step_no">3</span>
                                         <span class="step_descr">
                                               Step 3<br />
-                                              <small>Personal Contact Information</small>
+                                              <small>Contact Information</small>
                                           </span>
                                     </a>
                                 </li>
@@ -56,7 +56,7 @@
                                         <span class="step_no">4</span>
                                         <span class="step_descr">
                                               Step 4<br />
-                                              <small>Family's Contact Information</small>
+                                              <small>Emergency Contact Information</small>
                                           </span>
                                     </a>
                                 </li>
