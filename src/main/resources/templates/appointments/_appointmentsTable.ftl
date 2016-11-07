@@ -28,9 +28,9 @@
                     <th>Appointment Date</th>
                     <th>Patient</th>
                     <th>Type</th>
-                    <th>Action</th>
                     <th>Description</th>
                     <th>Status</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -40,6 +40,8 @@
                     <td><a href="/patient/${appointment.patient.patientId}">${appointment.patient.patientFullName}</a>
                     </td>
                     <td>${appointment.getAppointmentType()}</td>
+                    <td>${appointment.appointmentDescription}</td>
+                    <td>${appointment.appointmentStatus}</td>
                     <td>
                         <div class="btn-group">
                             <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">Options <span class="caret"></span></button>
@@ -47,13 +49,11 @@
                                 <li><a href="#" data-toggle="modal" data-target="#appointmentModal">Re-schedule</a>
                                     <input type="hidden" form="reScheduleForm" id="id" name="id" value="${appointment.getAppointmentId()}">
                                 </li>
-                                <li><a href="#">Cancel</a>
+                                <li><a href="/cancelAppointment/${appointment.getAppointmentId()}">Cancel</a>
                                 </li>
                             </ul>
                         </div>
                     </td>
-                    <td>${appointment.appointmentDescription}</td>
-                    <td>${appointment.appointmentStatus}</td>
                 </tr>
                 <#else>
                 <tr>

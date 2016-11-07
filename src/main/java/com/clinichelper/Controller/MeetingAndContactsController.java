@@ -39,4 +39,16 @@ public class MeetingAndContactsController {
 
         return new ModelAndView("contacts/allContacts");
     }
+
+    @RequestMapping("/meetings")
+    public ModelAndView FetchMeetings(Model model){
+        if (!DQS.isUserLoggedIn())
+            return new ModelAndView("redirect:/login");
+
+        String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
+        model.addAttribute("todoList", TKS.InitializeTodoList(clinicId));
+        model.addAttribute("meetingsList", DQS.findAllRegisteredMeetingsForClinic(clinicId));
+
+        return new ModelAndView("meetings/allMeetings");
+    }
 }
