@@ -23,10 +23,10 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th>Appointment Date:</th>
-                    <th>Patient:</th>
-                    <th>Description:</th>
-
+                    <th>Appointment Date</th>
+                    <th>Patient</th>
+                    <th>Description</th>
+                    <th>Status</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -35,8 +35,7 @@
                     <td>${appointment.getAppointmentTime()}</td>
                     <td><a href="/patient/${appointment.patient.patientId}">${appointment.patient.patientFullName}</a></td>
                     <td>${appointment.appointmentDescription}</td>
-
-
+                    <td>${appointment.appointmentStatus}</td>
                 </tr>
                 <#else>
                 <tr>
