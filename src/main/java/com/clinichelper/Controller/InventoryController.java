@@ -40,8 +40,11 @@ public class InventoryController {
         Map<String, List> inventory = TKS.FetchClinicInventory(clinicId);
         model.addAttribute("todoList", TKS.InitializeTodoList(clinicId));
         model.addAttribute("equipmentList", inventory.get("equipments"));
+        model.addAttribute("eSize", inventory.get("equipments").size());
         model.addAttribute("productList", inventory.get("products"));
+        model.addAttribute("pSize", inventory.get("products").size());
         model.addAttribute("medicationList", inventory.get("medication"));
+        model.addAttribute("mSize", inventory.get("medication").size());
 
         return new ModelAndView("inventory/viewInventory");
     }
