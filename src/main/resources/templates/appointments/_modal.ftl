@@ -15,7 +15,7 @@
             <div class="modal-body">
                 <div class="x_title">
                     <ul class="nav navbar-left panel_toolbox">
-                        <li><h4>Re-Eschedule Appointment</h4>
+                        <li><h4>Re-schedule Appointment</h4>
                         </li>
                     </ul>
                     <ul class="nav navbar-right panel_toolbox">

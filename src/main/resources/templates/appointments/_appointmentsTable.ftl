@@ -44,8 +44,8 @@
                         <div class="btn-group">
                             <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">Options <span class="caret"></span></button>
                             <ul class="dropdown-menu">
-                                <li><a href="#" data-toggle="modal" data-target="#appointmentModal">Re-Eschedule</a>
-                                    <input type="hidden" form="reScheduleForm" name="id" value="${appointment.getAppointmentId()}">
+                                <li><a href="#" data-toggle="modal" data-target="#appointmentModal">Re-schedule</a>
+                                    <input type="hidden" form="reScheduleForm" id="id" name="id" value="${appointment.getAppointmentId()}">
                                 </li>
                                 <li><a href="#">Cancel</a>
                                 </li>
