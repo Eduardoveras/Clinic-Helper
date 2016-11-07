@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.PersistenceException;
-import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -49,14 +48,13 @@ public class IndexController implements ErrorController {
     }
 
     @RequestMapping("/assistant/home")
-    public ModelAndView home(Model model, @RequestParam(value="name", required=false, defaultValue="home") String name) {
-        if (!DQS.isUserLoggedIn())
+    public ModelAndView assistantHome(Model model, @RequestParam(value="name", required=false, defaultValue="home") String name) {
+        if (!DQS.isUserLoggedIn() && DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
             return new ModelAndView("redirect:/login");
 
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
         
         try {
-            List<Appointment> appointments = DQS.findAllRegisteredAppointmentsForToday(clinicId);
             model.addAttribute("todays_appointments", DQS.findAllRegisteredAppointmentsForToday(clinicId));
         } catch (Exception exp){
             model.addAttribute("todays_appointments", new ArrayList<Appointment>()); // An error occurred to make the list empty
@@ -73,11 +71,18 @@ public class IndexController implements ErrorController {
         return new ModelAndView("homepage/index");
     }
 
+    @RequestMapping("/medic/home")
+    public ModelAndView medicHome(Model model){
+        if (!DQS.isUserLoggedIn() && DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+            return new ModelAndView("redirect:/login");
+        
+        return new ModelAndView("");
+    }
+
     @RequestMapping(value = ERR_PATH)
     public String error() {
         return "layouts/error";
     }
-
 
     // Posts
     @PostMapping("/newTask")
