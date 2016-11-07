@@ -70,7 +70,7 @@ public class AppointmentController {
         return "redirect:/appointments"; // TODO: add error message handling
     }
 
-    @PostMapping("/cancelAppointment/{appointment_id}")
+    @PostMapping("/cancelAppointment")
     public String cancelRegisteredAppointment( @RequestParam("appointment_id") String appointmentId){
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
