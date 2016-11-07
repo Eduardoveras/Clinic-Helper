@@ -42,38 +42,6 @@ public class ConsultationController {
         return new ModelAndView("t");
     }
 
-    // Posts
-    @PostMapping("/newConsultation")
-    public String createNewconsultation(
-
-                                        @RequestParam("consultationDate") String consultationDate,
-                                        @RequestParam("consultationTime") String consultationTime,
-                                        @RequestParam("consultationdetail") String consultationDetail,
-                                        @RequestParam("consultationAppointment") String consultationAppointment
-
-                                        ){
-
-        if (!DQS.isUserLoggedIn())
-            return "redirect:/login";
-
-        try {
-            String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
-            SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
-
-
-            DEAMS.createNewConsultation(new SimpleDateFormat(new Timestamp(sdf1.parse(consultationDate + " 23:59:00").getTime()),new Timestamp(sdf1.parse(consultationTime).getTime()),consultationDetail,consultationAppointment);
-
-
-            return "redirect:/"; // todavia no hay vista
-        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
-            //
-        } catch (Exception exp){
-            //
-        }
-
-        return "redirect:/"; // TODO: add error message handling
-    }
-
     @PostMapping("/newhistory")
     public String createNewHistory(
 
