@@ -1,6 +1,8 @@
 package com.clinichelper.Controller;
 
 import com.clinichelper.Entity.Appointment;
+import com.clinichelper.Entity.Contact;
+import com.clinichelper.Entity.Meeting;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
@@ -17,7 +19,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.PersistenceException;
 import javax.servlet.http.HttpSession;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @Controller
@@ -83,13 +87,62 @@ public class IndexController implements ErrorController {
     }
 
     @PostMapping("/newMeeting")
-    public String registerNewMeeting(){
+    public String registerNewMeeting(@RequestParam("title") String title, @RequestParam("objective") String objective, @RequestParam("time")Timestamp time, @RequestParam("place")String place, @RequestParam("attendees") List<String> attendees){
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
+
+        List<Contact> team = new ArrayList<>();
+
+        try {
+            for (String s:
+                 attendees) {
+                team.add(DQS.findRegisteredStaffByEmail(DQS.getCurrentLoggedUser().getClinic().getClinicId(), s));
+            }
+
+            DEAMS.createNewMeeting(DQS.getCurrentLoggedUser().getClinic().getClinicId(), title, objective, time, place, new HashSet<>(team));
+            return "redirect:/";
+        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
+            //
+        } catch (Exception exp){
+            //
+        }
 
         return "redirect:/"; // TODO: add error handling method
     }
 
+    @PostMapping("/cancelMeeting")
+    public String deleteMeeting(@RequestParam("id") String meetingId){
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
+
+        try {
+            DEAMS.deleteRegisteredMeeting(meetingId);
+        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
+            //
+        } catch (Exception exp){
+            //
+        }
+
+        return "redirect:/"; // TODO: add error handling method
+    }
+
+    @PostMapping("/rescheduleMeeting")
+    public String changeMeetingTimeAndDate(@RequestParam("id") String meetingId, @RequestParam("time") Timestamp newTime){
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
+
+        try{
+            Meeting meeting = DQS.findRegisteredMeeting(meetingId);
+            meeting.setMeetingTime(newTime);
+            DEAMS.editMeeting(meeting);
+        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
+            //
+        } catch (Exception exp){
+            //
+        }
+
+        return "redirect:/"; // TODO: add error handling method
+    }
 
     // Auxiliary Functions
     @Override
