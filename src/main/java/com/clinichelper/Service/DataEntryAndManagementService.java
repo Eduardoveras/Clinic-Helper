@@ -59,7 +59,7 @@ public class DataEntryAndManagementService {
     private  HistoryRepository historyRepository;
 
     // Creation functions
-    public Appointment createNewAppointment(String clinicId, Timestamp appointmentTime, String patientId, String appointmentDescription, AppointmentType appointmentType) throws Exception {
+    public Appointment createNewAppointment(String clinicId, Timestamp appointmentTime, String patientId, String appointmentDescription) throws Exception {
 
         if(!doesClinicIdExist(clinicId))
             throw new IllegalArgumentException("\n\nThis is an invalid clinic id");
@@ -69,7 +69,7 @@ public class DataEntryAndManagementService {
             throw new IllegalArgumentException("\n\nThis is an invalid patient Id");
 
         try {
-            Appointment appointment = appointmentRepository.save(new Appointment(clinicRepository.findByClinicId(clinicId), appointmentTime, patientRepository.findByPatientId(patientId), appointmentDescription, appointmentType));
+            Appointment appointment = appointmentRepository.save(new Appointment(clinicRepository.findByClinicId(clinicId), appointmentTime, patientRepository.findByPatientId(patientId), appointmentDescription, AppointmentType.CONSULTATION));
             // Consultation is automatically created with every appointment
             consultationRepository.save(new Consultation(appointmentTime, appointmentDescription, appointment));
             return appointment;
