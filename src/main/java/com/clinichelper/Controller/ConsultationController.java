@@ -61,7 +61,7 @@ public class ConsultationController {
             SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
 
 
-            DEAMS.createNewConsultation(new SimpleDateFormat(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(consultationDate + " 23:59:00").getTime()),new Timestamp(sdf1.parse(consultationTime).getTime()),consultationDetail,consultationAppointment);
+            DEAMS.createNewConsultation(new SimpleDateFormat(new Timestamp(sdf1.parse(consultationDate + " 23:59:00").getTime()),new Timestamp(sdf1.parse(consultationTime).getTime()),consultationDetail,consultationAppointment);
 
 
             return "redirect:/"; // todavia no hay vista
