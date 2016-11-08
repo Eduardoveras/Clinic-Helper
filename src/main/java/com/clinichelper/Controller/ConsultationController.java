@@ -1,13 +1,12 @@
 package com.clinichelper.Controller;
 
-import com.clinichelper.Entity.Appointment;
 import com.clinichelper.Entity.Consultation;
 import com.clinichelper.Entity.History;
 import com.clinichelper.Entity.Patient;
+import com.clinichelper.Entity.Record;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
-import com.clinichelper.Tools.Enums.AppointmentType;
-import com.clinichelper.Tools.Enums.Permission;
+import org.apache.catalina.LifecycleState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,15 +15,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.PersistenceException;
-
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by eva_c on 11/6/2016.
  */
 public class ConsultationController {
+    // Services
     @Autowired
     private DataEntryAndManagementService DEAMS;
     @Autowired
@@ -46,9 +45,10 @@ public class ConsultationController {
         return new ModelAndView("t");
     }
 
-    @PostMapping("/newHistory")
-    public String createNewHistory(
-
+    // Posts
+    @PostMapping("/complete_consultation_process/{consultationId}")
+    public String completeConsultationProcess(
+            @RequestParam("consultationId") String consultationId, // This should be a hidden input
             @RequestParam("patient") String patientId,
             @RequestParam("visitobjective") String visitObjective,
             @RequestParam("observations") String observations,
@@ -64,9 +64,27 @@ public class ConsultationController {
           //  return "redirect:/";
 
         try {
-            String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
-            Patient patient = DQS.findRegisteredPatientByIdCard(clinicId, patientId);
-            DEAMS.createNewHistory(patient,visitObjective,observations,specialConditions,photos,surgeryType,medicaData);
+            Patient patient = DQS.findRegisteredPatientByIdCard(DQS.getCurrentLoggedUser().getClinic().getClinicId(), patientId);
+            // Creating the history
+            History history = DEAMS.createNewHistory(patient, visitObjective, observations, specialConditions, photos, surgeryType, medicaData, consultationId);
+
+            // Adding it to the Record
+            Record record = DQS.findPatientsRegisteredRecord(patient.getPatientId());
+
+            // Fetching the list of history
+            Set<History> medicalHistory = record.getHistory();
+            // Adding the new one
+            medicalHistory.add(history);
+            // Modifying the old list
+            record.setHistory(medicalHistory);
+
+            // Also saving the consultation
+            Set<Consultation> consultationsHistory = record.getConsultations();
+            consultationsHistory.add(DQS.findRegisteredConsultation(consultationId));
+            record.setConsultations(consultationsHistory);
+
+            // Edit patient medical record
+            DEAMS.editRecord(record);
 
             return "redirect:/"; // todavia no hay vista
         } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){

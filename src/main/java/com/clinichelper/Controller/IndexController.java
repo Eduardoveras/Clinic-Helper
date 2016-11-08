@@ -1,8 +1,6 @@
 package com.clinichelper.Controller;
 
 import com.clinichelper.Entity.Appointment;
-import com.clinichelper.Entity.Contact;
-import com.clinichelper.Entity.Meeting;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
@@ -19,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.PersistenceException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 @Controller
