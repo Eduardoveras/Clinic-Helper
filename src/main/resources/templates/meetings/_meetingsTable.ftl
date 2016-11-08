@@ -25,21 +25,34 @@
             <table id="datatable-responsive" class="table table-hover table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>
                 <tr>
+                    <th>${user.clinic.clinicPrefix} Id</th>
                     <th>Title</th>
                     <th>Objectives</th>
-
+                    <th>Time</th>
+                    <th>Place</th>
+                    <th>Attendees</th>
                 </tr>
                 </thead>
                 <tbody>
                 <#list meetingsList as meeting>
                 <tr>
+                    <td>${meeting.getMeetingId()}</td>
                     <td>${meeting.getMeetingTitle()}</td>
                     <td>${meeting.getMeetingObjective()}</td>
-
+                    <td>${meeting.getMeetingTime()}</td>
+                    <td>${meeting.getMeetingPlace()}</td>
+                    <td>
+                        <ul>
+                            <#list meeting.getAttendees() as member>
+                                <li style="display: inline-block;">
+                                    <span class="fa fa-user"></span> ${member.getFullName()} -- ${member.email}</li>
+                            </#list>
+                        </ul>
+                    </td>
                 </tr>
                 <#else>
                 <tr>
-                    <th scope="row">NO meetingS AVAIBLE</th>
+                    <th scope="row">NO MEETINGS AVAILABLE</th>
 
                 </tr>
                 </#list>
