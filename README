@@ -17,6 +17,27 @@ Language: Java
 Framework(s): Java EE 8 - JDK 1.8, Spring Boot, FreeMarker, JPA-ORM, Hibernate
 Database: PostgreSQL 9
 
+Version: v0.12.0
+** New Inventory feature with Equipment, Medication, and Product management
+** New Patient Registration form with 5 step registration process
+** Automatic Medical Record creation for all new patient
+        Basic Information
+        Medical Information
+        Contact Information
+        Emergency Contact Information
+        Insurance Information
+** New Appointment/Consultation logical link algorithm
+** New Medical History data storing entity
+
+Version: v0.11.0
+** Fix Heroku Build bug
+** Add user profile interface
+** Implement true clinic detections method
+** Implement url path restrictions
+** New clinic calendar initializer
+** Redesigned To Do Task system (Ubiquitous Accessibility)
+** Redesigned Appointments Management feature
+
 Version: v0.10.0
 ** Redesigned account and users mechanics
 ** Implemented new clinic account system
