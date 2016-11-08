@@ -14,6 +14,9 @@ public interface HistoryRepository extends JpaRepository<History, String> {
 
     History findByHistoryId(String historyId);
 
+    @Query("select h from History h where h.patient.patientId = :id and h.consultationReference = :reference")
+    History findByPatientIdAndConsultationReference(@Param("id") String patientId, @Param("reference") String consultationReference);
+
     @Query("select h from History h where h.patient.patientId = :id" )
     List<History> findByPatientId(@Param("id") String patientId);
 

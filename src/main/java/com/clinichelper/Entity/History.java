@@ -25,13 +25,15 @@ public class History implements Serializable {
     private String surgeryType;
     private ArrayList<byte[]> photos;
     private ArrayList<String> medicalData;
+    @Column(unique = true)
+    private String consultationReference;
 
     // Constructors
     public History(){
 
     }
 
-    public History(Patient patient, String visitObjective, String observations, String specialConditions, ArrayList<byte[]> photos, String surgeryType, ArrayList<String> medicalData) {
+    public History(Patient patient, String visitObjective, String observations, String specialConditions, ArrayList<byte[]> photos, String surgeryType, ArrayList<String> medicalData, String consultationReference) {
         this.setHistoryId(patient.getPatientId() + "-H-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setPatient(patient);
         this.setVisitObjective(visitObjective);
@@ -40,6 +42,7 @@ public class History implements Serializable {
         this.setPhotos(photos);
         this.setSurgeryType(surgeryType);
         this.setMedicalData(medicalData);
+        this.setConsultationReference(consultationReference);
     }
 
     // Getters and Setters
@@ -105,5 +108,13 @@ public class History implements Serializable {
 
     public void setMedicalData(ArrayList<String> medicalData) {
         this.medicalData = medicalData;
+    }
+
+    public String getConsultationReference() {
+        return consultationReference;
+    }
+
+    public void setConsultationReference(String consultationReference) {
+        this.consultationReference = consultationReference;
     }
 }

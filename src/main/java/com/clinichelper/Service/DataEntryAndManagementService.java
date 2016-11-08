@@ -279,14 +279,16 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public History createNewHistory(Patient patient, String visitObjective, String observations, String specialConditions, ArrayList<byte[]> photos, String surgeryType, ArrayList<String> medicalData) throws Exception {
+    public History createNewHistory(Patient patient, String visitObjective, String observations, String specialConditions, ArrayList<byte[]> photos, String surgeryType, ArrayList<String> medicalData, String consultationId) throws Exception {
 
         if (!doesPatientIdExist(patient.getPatientId()))
             throw new IllegalArgumentException("\n\nThis is an invalid patient id");
 
-        try {
-            return historyRepository.save(new History(patient, visitObjective,  observations, specialConditions, photos, surgeryType,  medicalData));
+        if (!doesConsultationIdExist(consultationId))
+            throw new IllegalArgumentException("This is not a valid consultation id");
 
+        try {
+            return historyRepository.save(new History(patient, visitObjective,  observations, specialConditions, photos, surgeryType,  medicalData, consultationId));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis record was not able to persist -> " + exp.getMessage());
@@ -697,6 +699,26 @@ public class DataEntryAndManagementService {
 
 
 
+    public void editRecord(Record record) throws Exception{
+        if (record == null)
+            throw new NullArgumentException("\n\nThis record has a NULL value");
+
+        try {
+            recordRepository.save(record);
+        } catch (PersistenceException exp){
+            System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
+            throw new PersistenceException("\n\nThis record was not able to persist -> " + exp.getMessage());
+        } catch (NullPointerException exp) {
+            System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
+            throw new NullPointerException("\n\nAn object or process has risen a null value -> " + exp.getMessage());
+        } catch (Exception exp){
+            System.out.println("\n\nGeneral Error! -> " + exp.getMessage());
+            throw new Exception("\n\nAn error occurred when trying to edit a record -> " + exp.getMessage());
+        }
+    }
+
+
+
     public void editUserAccountCredentials(String email, String clinicId, String password, Permission role) throws Exception{
 
         try {
@@ -766,6 +788,12 @@ public class DataEntryAndManagementService {
         Clinic clinic = clinicRepository.findByClinicId(clinicId);
 
         return (clinic != null);
+    }
+
+    private boolean doesConsultationIdExist(String consultationId){
+        Consultation consultation = consultationRepository.findByConsultationId(consultationId);
+
+        return (consultation != null);
     }
 
     private boolean doesCustomTaskIdExist(String taskId){
