@@ -109,64 +109,6 @@ public class IndexController implements ErrorController {
         return "redirect:/"; // TODO: add error handling method
     }
 
-    @PostMapping("/newMeeting")
-    public String registerNewMeeting(@RequestParam("title") String title, @RequestParam("objective") String objective, @RequestParam("time")Timestamp time, @RequestParam("place")String place, @RequestParam("attendees") List<String> attendees){
-        if (!DQS.isUserLoggedIn())
-            return "redirect:/login";
-
-        List<Contact> team = new ArrayList<>();
-
-        try {
-            for (String s:
-                 attendees) {
-                team.add(DQS.findRegisteredStaffByEmail(DQS.getCurrentLoggedUser().getClinic().getClinicId(), s));
-            }
-
-            DEAMS.createNewMeeting(DQS.getCurrentLoggedUser().getClinic().getClinicId(), title, objective, time, place, new HashSet<>(team));
-            return "redirect:/";
-        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
-            //
-        } catch (Exception exp){
-            //
-        }
-
-        return "redirect:/"; // TODO: add error handling method
-    }
-
-    @PostMapping("/cancelMeeting")
-    public String deleteMeeting(@RequestParam("id") String meetingId){
-        if (!DQS.isUserLoggedIn())
-            return "redirect:/login";
-
-        try {
-            DEAMS.deleteRegisteredMeeting(meetingId);
-        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
-            //
-        } catch (Exception exp){
-            //
-        }
-
-        return "redirect:/"; // TODO: add error handling method
-    }
-
-    @PostMapping("/rescheduleMeeting")
-    public String changeMeetingTimeAndDate(@RequestParam("id") String meetingId, @RequestParam("time") Timestamp newTime){
-        if (!DQS.isUserLoggedIn())
-            return "redirect:/login";
-
-        try{
-            Meeting meeting = DQS.findRegisteredMeeting(meetingId);
-            meeting.setMeetingTime(newTime);
-            DEAMS.editMeeting(meeting);
-        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
-            //
-        } catch (Exception exp){
-            //
-        }
-
-        return "redirect:/"; // TODO: add error handling method
-    }
-
     // Auxiliary Functions
     @Override
     public String getErrorPath() {
