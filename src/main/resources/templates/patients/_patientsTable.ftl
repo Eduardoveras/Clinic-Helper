@@ -35,7 +35,7 @@
                     <th>Register Date</th>
                     <th>occupation</th>
                     <th>Nationality</th>
-                    <th>Adress</th>
+                    <th>Address</th>
                     <th>city</th>
                     <th>country</th>
                 </tr>

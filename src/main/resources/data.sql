@@ -2,7 +2,7 @@ INSERT INTO clinic (clinic_id, account_type, clinic_name, clinic_prefix, registe
 
 INSERT INTO contact (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date, has_account) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-ADMIN', 'administrator', 'ADMIN', 'djidjellypas92@gmail.com', '2016-11-4', FALSE);
 
-INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-YOLO', '1980-02-03', 'djidjellypas92@gmail.com', 'djijdelly', 0, 'SICLAIT', '1234', 0, 'CH-PLATINUM-JASC');
+INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-YOLO', '1980-02-03', 'djidjellypas92@gmail.com', 'djijdelly', 0, 'SICLAIT', 's06OY8Xe3sxyW3qkydZpX7GryLlgy5xQbt6HrLBizIg=$jEpbVvthuKoAChil5GLNHv3+3HH1yUew56/bOqUNQcw=', 0, 'CH-PLATINUM-JASC');
 INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-SWAG', '1980-02-03', 'eva', 'eva', 0, 'SORAYA', '1234', 0, 'CH-PLATINUM-JASC');
 INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-VAPE', '1980-02-03', 'eduardo', 'eduardo', 0, 'Veras', '1234', 0, 'CH-PLATINUM-JASC');
 INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-AWESOME', '1980-02-03', 'paulina', 'paulina', 0, 'LA MEJOR', '1234', 0, 'CH-PLATINUM-JASC');

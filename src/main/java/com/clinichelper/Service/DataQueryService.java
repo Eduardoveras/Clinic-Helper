@@ -5,6 +5,7 @@ package com.clinichelper.Service;
 
 import com.clinichelper.Entity.*;
 import com.clinichelper.Repository.*;
+import com.clinichelper.Tools.Classes.PasswordCrypter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -222,11 +223,15 @@ public class DataQueryService {
 
     public List<User> findAllAllRegisteredUsersForClinic(String clinicId) { return userRepository.findByClinicId(clinicId); }
 
-    public boolean validateUserAccountCredentials(String username, String password) {
+    public boolean validateUserAccountCredentials(String username, String password, String clinicId) {
+        try {
+            User user = userRepository.findUserAccountWithUsernameAndClinicId(username.toLowerCase(), clinicId);
 
-        User user = userRepository.findUserAccountWithUsernameAndClinicIdAndPassword(username.toLowerCase(), password);
-
-        return (user != null);
+            return (user != null && PasswordCrypter.check(password, user.getPassword()));
+        } catch (Exception exp){
+            //
+        }
+        return false;
     }
 
 

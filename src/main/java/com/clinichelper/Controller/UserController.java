@@ -97,7 +97,7 @@ public class UserController {
     @PostMapping("/userLogin")
     public String loginUser(@RequestParam("email") String email, @RequestParam("password") String password){
         
-        if (DQS.validateUserAccountCredentials(email, password))
+        if (DQS.validateUserAccountCredentials(email, password, "CH-PLATINUM-JASC"))
         {
             User u = DQS.findRegisteredUserAccount(email,password);
             DQS.setSessionAttr("user",u);
@@ -113,7 +113,7 @@ public class UserController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.validateUserAccountCredentials(email.toLowerCase(), password)){
+        if (DQS.validateUserAccountCredentials(email.toLowerCase(), password, DQS.getCurrentLoggedUser().getClinic().getClinicId())){
 
             User user = DQS.findRegisteredUserAccount(email.toLowerCase(),clinicId);
 
