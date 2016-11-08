@@ -37,7 +37,7 @@ public class AppointmentController {
     // Gets
     @GetMapping("/appointments")
     public ModelAndView fetchAppointmentView(Model model) throws Exception{
-        if (!DQS.isUserLoggedIn() && DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
+        if (!DQS.isUserLoggedIn() || DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
             return new ModelAndView("redirect:/login");
 
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
@@ -52,7 +52,7 @@ public class AppointmentController {
     @PostMapping("/newAppointment")
     public String createNewApointment(@RequestParam("appointmentTime") String appointmentTime, @RequestParam("patient") String patientId, @RequestParam("description") String appointmentDescription){
 
-        if (!DQS.isUserLoggedIn() && DQS.getCurrentLoggedUser().getRole() == Permission.ASSISTANT)
+        if (!DQS.isUserLoggedIn() || DQS.getCurrentLoggedUser().getRole() == Permission.ASSISTANT)
             return "redirect:/login";
 
         try {
@@ -73,7 +73,7 @@ public class AppointmentController {
 
     @PostMapping("/cancelAppointment")
     public String cancelRegisteredAppointment( @RequestParam("appointment_id") String appointmentId){
-        if (!DQS.isUserLoggedIn() && DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
+        if (!DQS.isUserLoggedIn() || DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
             return "redirect:/login";
 
         try {
@@ -91,7 +91,7 @@ public class AppointmentController {
     @PostMapping("/changeDateAndTime")
     public String editDateAndTimeOfRegisteredAppointment(@RequestParam("id") String appointmentId, @RequestParam("date") String newDate){
 
-        if (!DQS.isUserLoggedIn() && DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
+        if (!DQS.isUserLoggedIn() || DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
             return "redirect:/login";
 
         Appointment appointment = DQS.findRegisteredAppointment(appointmentId);

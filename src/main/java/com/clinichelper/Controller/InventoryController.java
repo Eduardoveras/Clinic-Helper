@@ -33,7 +33,7 @@ public class InventoryController {
     // Gets
     @RequestMapping("/Inventory")
     public ModelAndView FetchInventoryView(Model model/*, @RequestParam("clinic") String clinicId*/){
-        if (!DQS.isUserLoggedIn() && DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
+        if (!DQS.isUserLoggedIn() || DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
             return new ModelAndView("redirect:/login");
 
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
@@ -55,7 +55,7 @@ public class InventoryController {
     @PostMapping("/newEquipment")
     public String registerNewEquipment(@RequestParam("name") String equipmentName, @RequestParam("use") String equipmentUse, @RequestParam("description") String equipmentDescription, @RequestParam("quantity") Integer stock){
 
-        if (!DQS.isUserLoggedIn() && DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
+        if (!DQS.isUserLoggedIn() || DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
             return "redirect:/login";
 
         try {
@@ -73,7 +73,7 @@ public class InventoryController {
     @PostMapping("/newProduct")
     public String registerNewProduct(@RequestParam("name") String productName, @RequestParam("description") String productDescription, @RequestParam("price") Float productPrice, @RequestParam("quantity") Integer stock){
 
-        if (!DQS.isUserLoggedIn() && DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
+        if (!DQS.isUserLoggedIn() || DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
             return "redirect:/login";
 
         try {
@@ -90,7 +90,7 @@ public class InventoryController {
     @PostMapping("/newMedication")
     public String registerNewMedication(@RequestParam("name")  String medicationName, @RequestParam("supplier") String supplier, @RequestParam("description") String medicationDescription, @RequestParam("price") Float medicationPrice, @RequestParam("quantity") Integer stock){
 
-        if (!DQS.isUserLoggedIn() && DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
+        if (!DQS.isUserLoggedIn() || DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
             return "redirect:/login";
 
         try {
@@ -106,7 +106,7 @@ public class InventoryController {
 
     @PostMapping("/deleteEquipment")
     public String deleteEquipment(@RequestParam("id") String equipmentId){
-        if (!DQS.isUserLoggedIn() && DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
+        if (!DQS.isUserLoggedIn() || DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
             return "redirect:/login";
 
         try{

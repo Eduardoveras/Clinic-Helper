@@ -73,7 +73,7 @@ public class UserController {
     @PostMapping("/uploadProfilePhoto")
     public String uploadProfilePicture(@RequestParam() String email, @RequestParam("clinic") String clinicId, @RequestParam("photo") MultipartFile file){
 
-        if (!DQS.isUserLoggedIn() && DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+        if (!DQS.isUserLoggedIn() || DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/login";
 
         User user = DQS.findRegisteredUserAccount(email,clinicId);

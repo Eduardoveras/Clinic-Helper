@@ -33,7 +33,7 @@ public class ConsultationController {
     // Gets
     @GetMapping("/consultations")
     public ModelAndView fetchConsultationView(Model model) throws Exception{
-        if (!DQS.isUserLoggedIn() && DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        if (!DQS.isUserLoggedIn() || DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
             return new ModelAndView("redirect:/login");
 
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
@@ -54,7 +54,7 @@ public class ConsultationController {
             @RequestParam("surgerytype") String surgeryType,
             @RequestParam("medicaldata")  ArrayList<String> medicaData){
 
-        if (!DQS.isUserLoggedIn() && DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        if (!DQS.isUserLoggedIn() || DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
             return "redirect:/login";
 
         try {

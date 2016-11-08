@@ -36,7 +36,7 @@ public class TeamController {
     // Gets
     @GetMapping("/users")
     public ModelAndView fetchAllPatientsView(Model model){
-        if (!DQS.isUserLoggedIn() && DQS.getCurrentLoggedUser().getRole() == Permission.ADMIN)
+        if (!DQS.isUserLoggedIn() || DQS.getCurrentLoggedUser().getRole() == Permission.ADMIN)
             return new ModelAndView("redirect:/login");
 
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
@@ -52,7 +52,7 @@ public class TeamController {
     @PostMapping("/newUser")
     public String newUser(@RequestParam("email") String email, @RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("dateOfBirth") String  birthDate, @RequestParam("gender") String gender, @RequestParam("password") String password, @RequestParam("role") String role){
 
-        if (!DQS.isUserLoggedIn() && DQS.getCurrentLoggedUser().getRole() == Permission.ADMIN)
+        if (!DQS.isUserLoggedIn() || DQS.getCurrentLoggedUser().getRole() == Permission.ADMIN)
             return "redirect:/login";
 
         try{
@@ -70,7 +70,7 @@ public class TeamController {
     @PostMapping("/deleteUser")
     public String deleteUser (@RequestParam("id") String userId){
 
-        if (!DQS.isUserLoggedIn() && DQS.getCurrentLoggedUser().getRole() == Permission.ADMIN)
+        if (!DQS.isUserLoggedIn() || DQS.getCurrentLoggedUser().getRole() == Permission.ADMIN)
             return "redirect:/login";
 
         try {
@@ -87,7 +87,7 @@ public class TeamController {
     @PostMapping("/makUserAdmin") //Only accessed by the admin of the clinic account
     public String makeUserDamin(@RequestParam("id") String userId){
 
-        if (!DQS.isUserLoggedIn() && DQS.getCurrentLoggedUser().getRole() == Permission.ADMIN)
+        if (!DQS.isUserLoggedIn() || DQS.getCurrentLoggedUser().getRole() == Permission.ADMIN)
             return "redirect:/login";
 
         User user = DQS.findUserInformation(userId);
