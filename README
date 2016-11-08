@@ -17,6 +17,14 @@ Language: Java
 Framework(s): Java EE 8 - JDK 1.8, Spring Boot, FreeMarker, JPA-ORM, Hibernate
 Database: PostgreSQL 9
 
+Version: v0.13.0
+** Improved Security System
+        New URL filter protocols
+        Permission Recognition algorithm
+** New Team Management Module
+        Team and Contacts interface
+        Meeting view and creation interface
+
 Version: v0.12.0
 ** New Inventory feature with Equipment, Medication, and Product management
 ** New Patient Registration form with 5 step registration process
