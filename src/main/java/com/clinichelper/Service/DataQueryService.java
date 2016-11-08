@@ -178,15 +178,16 @@ public class DataQueryService {
     // Record Queries
     public Record findRegisteredRecord(String recordId){ return recordRepository.findByRecordId(recordId); }
 
-    public List<Record> findRegisteredRecordsForClinic(String clinicId){ return recordRepository.findByClinicId(clinicId); }
-
-    public List<Record> findPatientsRegisteredRecord(String patientId){
+    public Record findPatientsRegisteredRecord(String patientId){
 
         if (!doesPatientIdExist(patientId))
             throw new IllegalArgumentException("\n\nThis is an invalid patient Id");
 
         return recordRepository.findByPatientId(patientId);
     }
+
+    public List<Record> findRegisteredRecordsForClinic(String clinicId){ return recordRepository.findByClinicId(clinicId); }
+
 
 
     // Staff Queries

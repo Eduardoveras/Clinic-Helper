@@ -17,5 +17,5 @@ public interface RecordRepository extends JpaRepository<Record, String > {
     List<Record> findByClinicId(@Param("clinic") String clinicId);
 
     @Query("select r from Record r where r.patient.patientId = :id" )
-    List<Record> findByPatientId(@Param("id") String patientId);
+    Record findByPatientId(@Param("id") String patientId);
 }
