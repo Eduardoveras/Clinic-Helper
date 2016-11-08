@@ -36,8 +36,11 @@ public class TeamController {
     // Gets
     @GetMapping("/users")
     public ModelAndView fetchAllPatientsView(Model model){
-        if (!DQS.isUserLoggedIn() || DQS.getCurrentLoggedUser().getRole() == Permission.ADMIN)
+        if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
+
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+            return new ModelAndView("redirect:/");
 
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
 
@@ -52,8 +55,11 @@ public class TeamController {
     @PostMapping("/newUser")
     public String newUser(@RequestParam("email") String email, @RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("dateOfBirth") String  birthDate, @RequestParam("gender") String gender, @RequestParam("password") String password, @RequestParam("role") String role){
 
-        if (!DQS.isUserLoggedIn() || DQS.getCurrentLoggedUser().getRole() == Permission.ADMIN)
+        if (!DQS.isUserLoggedIn())
             return "redirect:/login";
+
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+            return "redirect:/";
 
         try{
             DEAMS.createNewUserAccount(DQS.getCurrentLoggedUser().getClinic().getClinicId(), email, firstName, lastName, new Date(new SimpleDateFormat("MM/dd/yyyy").parse(birthDate).getTime()), gender.toUpperCase().equals("F") ? Gender.F : Gender.M, password, role.toUpperCase().equals("M") ? Permission.MEDIC : Permission.ASSISTANT);
@@ -70,8 +76,11 @@ public class TeamController {
     @PostMapping("/deleteUser")
     public String deleteUser (@RequestParam("id") String userId){
 
-        if (!DQS.isUserLoggedIn() || DQS.getCurrentLoggedUser().getRole() == Permission.ADMIN)
+        if (!DQS.isUserLoggedIn())
             return "redirect:/login";
+
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+            return "redirect:/";
 
         try {
             DEAMS.deleteRegisteredUserAccount(userId);
@@ -87,8 +96,11 @@ public class TeamController {
     @PostMapping("/makUserAdmin") //Only accessed by the admin of the clinic account
     public String makeUserDamin(@RequestParam("id") String userId){
 
-        if (!DQS.isUserLoggedIn() || DQS.getCurrentLoggedUser().getRole() == Permission.ADMIN)
+        if (!DQS.isUserLoggedIn())
             return "redirect:/login";
+
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+            return "redirect:/";
 
         User user = DQS.findUserInformation(userId);
 

@@ -64,6 +64,7 @@ public class UserController {
     public ModelAndView fetchUserProfile(Model model,@PathVariable(value="id") String userId){
         if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
+
         User u = DQS.findUserInformation(userId);
         model.addAttribute("todoList", TKS.InitializeTodoList(u.getClinic().getClinicId()));
         model.addAttribute("user", u);
@@ -73,8 +74,11 @@ public class UserController {
     @PostMapping("/uploadProfilePhoto")
     public String uploadProfilePicture(@RequestParam() String email, @RequestParam("clinic") String clinicId, @RequestParam("photo") MultipartFile file){
 
-        if (!DQS.isUserLoggedIn() || DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+        if (!DQS.isUserLoggedIn())
             return "redirect:/login";
+
+        if (DQS.getCurrentLoggedUser().getRole() == Permission.ADMIN)
+            return "redirect:/";
 
         User user = DQS.findRegisteredUserAccount(email,clinicId);
 

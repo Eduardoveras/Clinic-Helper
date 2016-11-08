@@ -33,8 +33,11 @@ public class ConsultationController {
     // Gets
     @GetMapping("/consultations")
     public ModelAndView fetchConsultationView(Model model) throws Exception{
-        if (!DQS.isUserLoggedIn() || DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
+
+        //if (DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
+           // return new ModelAndView("redirect:/");
 
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
 
@@ -54,11 +57,13 @@ public class ConsultationController {
             @RequestParam("surgerytype") String surgeryType,
             @RequestParam("medicaldata")  ArrayList<String> medicaData){
 
-        if (!DQS.isUserLoggedIn() || DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        try {
+        //if (DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
+          //  return "redirect:/";
 
+        try {
             String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
             Patient patient = DQS.findRegisteredPatientByIdCard(clinicId, patientId);
             DEAMS.createNewHistory(patient,visitObjective,observations,specialConditions,photos,surgeryType,medicaData);

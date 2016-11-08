@@ -49,8 +49,11 @@ public class IndexController implements ErrorController {
 
     @RequestMapping("/assistant/home")
     public ModelAndView assistantHome(Model model, @RequestParam(value="name", required=false, defaultValue="home") String name) {
-        if (!DQS.isUserLoggedIn() || DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
+        if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
+
+        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+            return new ModelAndView("redirect:/");
 
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
         
@@ -73,8 +76,11 @@ public class IndexController implements ErrorController {
 
     @RequestMapping("/medic/home")
     public ModelAndView medicHome(Model model){
-        if (!DQS.isUserLoggedIn() || DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
+
+        //if (DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
+            //return new ModelAndView("redirect:/");
 
         return new ModelAndView("");
     }

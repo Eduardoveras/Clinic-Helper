@@ -37,8 +37,11 @@ public class AppointmentController {
     // Gets
     @GetMapping("/appointments")
     public ModelAndView fetchAppointmentView(Model model) throws Exception{
-        if (!DQS.isUserLoggedIn() || DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
+        if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
+
+        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+            return new ModelAndView("redirect:/");
 
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
 
@@ -52,8 +55,11 @@ public class AppointmentController {
     @PostMapping("/newAppointment")
     public String createNewApointment(@RequestParam("appointmentTime") String appointmentTime, @RequestParam("patient") String patientId, @RequestParam("description") String appointmentDescription){
 
-        if (!DQS.isUserLoggedIn() || DQS.getCurrentLoggedUser().getRole() == Permission.ASSISTANT)
+        if (!DQS.isUserLoggedIn())
             return "redirect:/login";
+
+        //if (DQS.getCurrentLoggedUser().getRole() != Permission.ASSISTANT)
+           // return "redirect:/";
 
         try {
             SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
@@ -73,8 +79,11 @@ public class AppointmentController {
 
     @PostMapping("/cancelAppointment")
     public String cancelRegisteredAppointment( @RequestParam("appointment_id") String appointmentId){
-        if (!DQS.isUserLoggedIn() || DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
+        if (!DQS.isUserLoggedIn())
             return "redirect:/login";
+
+        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+            return "redirect:/";
 
         try {
             DEAMS.deleteRegisteredAppointment(appointmentId);
@@ -91,13 +100,15 @@ public class AppointmentController {
     @PostMapping("/changeDateAndTime")
     public String editDateAndTimeOfRegisteredAppointment(@RequestParam("id") String appointmentId, @RequestParam("date") String newDate){
 
-        if (!DQS.isUserLoggedIn() || DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
+        if (!DQS.isUserLoggedIn())
             return "redirect:/login";
+
+        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+            return "redirect:/";
 
         Appointment appointment = DQS.findRegisteredAppointment(appointmentId);
 
         try {
-
             SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
             appointment.setAppointmentTime(new Timestamp(sdf1.parse(newDate).getTime()));
 
