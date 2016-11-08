@@ -10,6 +10,7 @@ import org.apache.catalina.LifecycleState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -48,7 +49,7 @@ public class ConsultationController {
     // Posts
     @PostMapping("/complete_consultation_process/{consultationId}")
     public String completeConsultationProcess(
-            @RequestParam("consultationId") String consultationId, // This should be a hidden input
+            @PathVariable("consultationId") String consultationId, // This should be a hidden input
             @RequestParam("patient") String patientId,
             @RequestParam("visitobjective") String visitObjective,
             @RequestParam("observations") String observations,

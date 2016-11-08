@@ -48,8 +48,8 @@ public class IndexController implements ErrorController {
         if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
-            return new ModelAndView("redirect:/");
+        //if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+           // return new ModelAndView("redirect:/");
 
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
         
