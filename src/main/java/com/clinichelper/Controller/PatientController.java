@@ -46,7 +46,10 @@ public class PatientController {
         model.addAttribute("patientList", DQS.findAllRegisteredPatientsForClinic(clinicId));
         model.addAttribute("amount", DQS.findAllRegisteredPatientsForClinic(clinicId).size());
 
-        return new ModelAndView("patients/allPatients");
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
+            return new ModelAndView("patients/allPatients");
+        else
+            return new ModelAndView(""); // TODO: create a patient view fit for the doctor
     }
 
     @GetMapping("/new_patient")
