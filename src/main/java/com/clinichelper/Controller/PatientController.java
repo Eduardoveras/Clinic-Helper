@@ -67,17 +67,28 @@ public class PatientController {
 
 
     @GetMapping("/patient/{id}")
-    public ModelAndView fetchPatientview(Model model,@PathVariable(value="id") String patientId){
+    public ModelAndView fetchPatientview(Model model, @PathVariable(value="id") String patientId){
         if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
-        //if (DQS.getCurrentLoggedUser().getRole() == Permission.ADMIN)
+        //if (DQS.getCurrentLoggedUser().getRole() != Permission.ASSISTANT)
             //return new ModelAndView("redirect:/");
 
         model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getClinic().getClinicId()));
         model.addAttribute("patient", DQS.findRegisteredPatient(patientId));
         model.addAttribute("appointments", DQS.findPatientsRegisteredAppointments(patientId));
         return new ModelAndView("patients/patientsProfile");
+    }
+
+    @GetMapping("/patient/record/{i}")
+    public ModelAndView fetchPatientMedicalRecord(Model model, @PathVariable(value="id") String patientId){
+        if (!DQS.isUserLoggedIn())
+            return new ModelAndView("redirect:/login");
+
+        //if (DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
+        //return new ModelAndView("redirect:/");
+
+        return new ModelAndView("");
     }
 
     // Posts
