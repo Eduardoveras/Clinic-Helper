@@ -94,7 +94,7 @@ public class IndexController implements ErrorController {
             return "redirect:/login";
 
         try {
-            DEAMS.createNewCustomTask(DQS.getCurrentLoggedUser().getClinic().getClinicId(), title, type, description);
+            DEAMS.createNewCustomTask(DQS.getCurrentLoggedUser().getUserId(), title, type, description);
             return "redirect:/";
         } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
             System.out.println("ERROR EN CREAR TASK");

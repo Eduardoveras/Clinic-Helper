@@ -23,7 +23,7 @@ public class Chore implements Serializable{
     @Column(length = 500)
     private String description;
     @ManyToOne
-    private Clinic clinic;
+    private User user;
     @Transient
     private boolean completed;
 
@@ -32,13 +32,13 @@ public class Chore implements Serializable{
 
     }
 
-    public Chore(Clinic clinic, String title, Task type, String description){
-        this.setChoreId(clinic.getClinicPrefix() + "-TASK-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+    public Chore(User user, String title, Task type, String description){
+        this.setChoreId(user.getClinic().getClinicPrefix() + "-TASK-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setTitle(title);
         this.setType(type);
         this.setDescription(description);
         this.setCompleted(false);
-        this.setClinic(clinic);
+        this.setUser(user);
     }
 
     // Getters and Setters
@@ -89,8 +89,6 @@ public class Chore implements Serializable{
         }
     }
 
-
-
     public void setType(Task type) {
         this.type = type;
     }
@@ -119,11 +117,7 @@ public class Chore implements Serializable{
         this.title = title;
     }
 
-    public Clinic getClinic() {
-        return clinic;
-    }
+    public User getUser() { return user; }
 
-    public void setClinic(Clinic clinic) {
-        this.clinic = clinic;
-    }
+    public void setUser(User user) { this.user = user; }
 }

@@ -85,13 +85,13 @@ public class DataEntryAndManagementService {
 
 
 
-    public Chore createNewCustomTask(String clinicId, String title, Task type, String description) throws Exception{
+    public Chore createNewCustomTask(String userId, String title, Task type, String description) throws Exception{
 
-        if (!doesClinicIdExist(clinicId))
-            throw new IllegalArgumentException("\n\nThis is an invalid clinic id");
+        if (!doesUserIdExist(userId))
+            throw new IllegalArgumentException("\n\nThis is an invalid user id");
 
         try {
-            return choreRepository.save(new Chore(clinicRepository.findByClinicId(clinicId), title, type, description));
+            return choreRepository.save(new Chore(userRepository.findByUserId(userId), title, type, description));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis consultation was not able to persist -> " + exp.getMessage());
