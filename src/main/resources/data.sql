@@ -127,8 +127,8 @@ meeting_title) VALUES
 INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_contact_id) VALUES ('JASC-M-NY934UINRC3', 'JASC-STAFF-SICARD');
 INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_contact_id) VALUES ('JASC-M-NY934UINRC3', 'JASC-STAFF-ADELSO');
 
-INSERT INTO chore (clinic_clinic_id, chore_id, description, title, type) VALUES ('CH-PLATINUM-JASC', 'JASC-M-9URHFDN', 'By more Bras', 'Inventory refill', 4);
-INSERT INTO chore (clinic_clinic_id, chore_id, description, title, type) VALUES ('CH-PLATINUM-JASC', 'JASC-M-9UR23DN', 'Call Accountant', 'Finance', 6);
+INSERT INTO chore (user_user_id, chore_id, description, title, type) VALUES ('CH-JASC-AWESOME', 'JASC-M-9URHFDN', 'By more Bras', 'Inventory refill', 4);
+INSERT INTO chore (user_user_id, chore_id, description, title, type) VALUES ('CH-JASC-AWESOME', 'JASC-M-9UR23DN', 'Call Accountant', 'Finance', 6);
 
 INSERT INTO equipments (
 equipment_id,

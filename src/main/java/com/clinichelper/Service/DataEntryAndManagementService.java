@@ -13,10 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.PersistenceException;
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class DataEntryAndManagementService {
@@ -537,6 +534,13 @@ public class DataEntryAndManagementService {
             throw new IllegalArgumentException("\n\nDANGER: YOU CAN NOT ERASE ADMIN ACCOUNT!");
 
         try {
+            List<Chore> chores = choreRepository.findByUserId(userId);
+
+            for (Chore c:
+                 chores) {
+                choreRepository.delete(c); // Erasing any chore data created by the user
+            }
+
             userRepository.delete(userId);
         } catch (NullPointerException exp) {
             System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
