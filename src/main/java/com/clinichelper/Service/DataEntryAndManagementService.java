@@ -88,7 +88,8 @@ public class DataEntryAndManagementService {
             throw new IllegalArgumentException("\n\nThis is an invalid user id");
 
         try {
-            return choreRepository.save(new Chore(userRepository.findByUserId(userId), title, type, description));
+            Chore chore = choreRepository.save(new Chore(userRepository.findByUserId(userId), title, type, description));
+            return chore;
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis consultation was not able to persist -> " + exp.getMessage());

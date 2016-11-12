@@ -52,7 +52,7 @@ public class ToolKitService {
         todoList = new ArrayList<>();
 
         // Adding Custom created tasks
-        todoList.addAll(choreRepository.findByClinicId(userId));
+        todoList.addAll(choreRepository.findByUserId(userId));
 
         // Adding Birthday reminder tasks
         todoList.addAll(findAllPatientBirthdayForNextWeek(userId));

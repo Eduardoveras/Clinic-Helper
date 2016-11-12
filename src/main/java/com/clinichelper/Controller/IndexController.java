@@ -92,7 +92,7 @@ public class IndexController implements ErrorController {
 
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
-
+        Task t = type;
         try {
             DEAMS.createNewCustomTask(DQS.getCurrentLoggedUser().getUserId(), title, type, description);
             return "redirect:/";
