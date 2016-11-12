@@ -135,4 +135,44 @@ public class InventoryController {
         }
         return "redirect:/Inventory"; // TODO: implement error exception
     }
+
+    @PostMapping("/deleteMedication")
+    public String deleteMedication(@RequestParam("id") String medicationId){
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
+
+        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+            return "redirect:/";
+
+        try {
+            DEAMS.deleteRegisteredMedication(medicationId);
+            return "redirect:/Inventory";
+        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
+            //
+        } catch (Exception exp){
+            //
+        }
+        return "redirect:/Inventory"; // TODO: implement error exception
+    }
+
+    @PostMapping("/deleteProduct")
+    public String deleteProduct(@RequestParam("id") String productId){
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
+
+        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+            return "redirect:/";
+
+        try{
+            DEAMS.deleteRegisteredProduct(productId);
+            return "redirect:/Inventory";
+        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
+            //
+        } catch (Exception exp){
+            //
+        }
+        return "redirect:/Inventory"; // TODO: implement error exception
+    }
+
+    
 }
