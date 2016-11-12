@@ -37,16 +37,16 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Description </label>
+                <label for="description" class="control-label col-md-3 col-sm-3 col-xs-12">Description </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="description">
+                    <input id="description" class="form-control col-md-7 col-xs-12" type="text" name="description">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="price" class="control-label col-md-3 col-sm-3 col-xs-12">Price </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="price">
+                    <input id="price" class="form-control col-md-7 col-xs-12" type="text" name="price">
                 </div>
             </div>
 
@@ -72,7 +72,6 @@
             <div class="ln_solid"></div>
             <div class="form-group">
                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                    <button type="submit" class="btn btn-primary">Cancel</button>
                     <button type="submit" class="btn btn-success">Submit</button>
                 </div>
             </div>
