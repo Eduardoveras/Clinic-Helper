@@ -5,6 +5,7 @@
         <th>${user.clinic.clinicPrefix} ID</th>
         <th>NAME</th>
         <th>DESCRIPTION</th>
+        <th>SUPPLIER</th>
         <th>PRICE</th>
         <th>QUANTITY</th>
     </tr>
@@ -15,6 +16,7 @@
         <td>${product.productId}</td>
         <td>${product.productName}</td>
         <td>${product.productDescription}</td>
+        <td>${product.supplier}</td>
         <td>$${product.productPrice}</td>
         <td>${product.productInStock} unit<#if product.productInStock gt 1>s</#if></td>
     </tr>

@@ -252,7 +252,7 @@ public class DataEntryAndManagementService {
 
 
 
-    public Product createNewProduct(String clinicId, String productName, String productDescription, Float productPrice, Integer stock) throws Exception{
+    public Product createNewProduct(String clinicId, String productName, String supplier, String productDescription, Float productPrice, Integer stock) throws Exception{
         if (!doesClinicIdExist(clinicId))
             throw new IllegalArgumentException("\n\n\nThis clinic id is not valid");
 
@@ -263,7 +263,7 @@ public class DataEntryAndManagementService {
             throw new IllegalArgumentException("\n\nYou cannot register ZERO or less medication");
 
         try {
-            return productRepository.save(new Product(clinicRepository.findByClinicId(clinicId), productName, productDescription, productPrice, stock));
+            return productRepository.save(new Product(clinicRepository.findByClinicId(clinicId), productName, supplier, productDescription, productPrice, stock));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis product was not able to persist -> " + exp.getMessage());
@@ -380,6 +380,29 @@ public class DataEntryAndManagementService {
             throw new IllegalArgumentException("\n\nThis appointment jasc id is not valid");
 
         try {
+            // Fetching patients records
+            //Record record = recordRepository.findByPatientId(appointmentRepository.findByAppointmentId(appointmentId).getPatient().getPatientId());
+
+            // Applying cascade to any existing Consultation
+            Consultation consultation = consultationRepository.findByAppointmentId(appointmentId);
+            if (consultation != null) {
+                //Set<Consultation> consultations = record.getConsultations();
+                //consultations.remove(consultation);
+                //record.setConsultations(consultations);
+                consultationRepository.delete(consultation);
+            }
+
+            // Applying cascade to any existing Surgery
+            Surgery surgery = surgeryRepository.findByAppointmentId(appointmentId);
+            if (surgery != null) {
+                //Set<Surgery> surgeries = record.getSurgeries();
+                //surgeries.remove(surgery);
+                //record.setSurgeries(surgeries);
+                surgeryRepository.delete(surgery);
+            }
+
+            //recordRepository.save(record);
+
             appointmentRepository.delete(appointmentId);
         } catch (NullPointerException exp) {
             System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());

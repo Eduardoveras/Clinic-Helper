@@ -3,6 +3,9 @@
  */
 package com.clinichelper.Controller;
 
+import com.clinichelper.Entity.Equipment;
+import com.clinichelper.Entity.Medication;
+import com.clinichelper.Entity.Product;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
@@ -55,6 +58,7 @@ public class InventoryController {
 
 
     // Posts
+    // Creates
     @PostMapping("/newEquipment")
     public String registerNewEquipment(@RequestParam("name") String equipmentName, @RequestParam("use") String equipmentUse, @RequestParam("description") String equipmentDescription, @RequestParam("quantity") Integer stock){
 
@@ -76,7 +80,7 @@ public class InventoryController {
     }
 
     @PostMapping("/newProduct")
-    public String registerNewProduct(@RequestParam("name") String productName, @RequestParam("description") String productDescription, @RequestParam("price") Float productPrice, @RequestParam("quantity") Integer stock){
+    public String registerNewProduct(@RequestParam("name") String productName, @RequestParam("supplier") String supplier, @RequestParam("description") String productDescription, @RequestParam("price") Float productPrice, @RequestParam("quantity") Integer stock){
 
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
@@ -85,7 +89,7 @@ public class InventoryController {
             return "redirect:/";
 
         try {
-            DEAMS.createNewProduct(DQS.getCurrentLoggedUser().getClinic().getClinicId(), productName, productDescription, productPrice, stock);
+            DEAMS.createNewProduct(DQS.getCurrentLoggedUser().getClinic().getClinicId(), productName, supplier, productDescription, productPrice, stock);
             return "redirect:/Inventory";
         } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
             //
@@ -117,6 +121,7 @@ public class InventoryController {
         return "redirect:/Inventory"; // TODO: implement error exception
     }
 
+    // Deletes
     @PostMapping("/deleteEquipment")
     public String deleteEquipment(@RequestParam("id") String equipmentId){
         if (!DQS.isUserLoggedIn())
@@ -133,6 +138,189 @@ public class InventoryController {
         } catch (Exception exp){
             //
         }
+
+        return "redirect:/Inventory"; // TODO: implement error exception
+    }
+
+    @PostMapping("/deleteMedication")
+    public String deleteMedication(@RequestParam("id") String medicationId){
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
+
+        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+            return "redirect:/";
+
+        try {
+            DEAMS.deleteRegisteredMedication(medicationId);
+            return "redirect:/Inventory";
+        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
+            //
+        } catch (Exception exp){
+            //
+        }
+
+        return "redirect:/Inventory"; // TODO: implement error exception
+    }
+
+    @PostMapping("/deleteProduct")
+    public String deleteProduct(@RequestParam("id") String productId){
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
+
+        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+            return "redirect:/";
+
+        try{
+            DEAMS.deleteRegisteredProduct(productId);
+            return "redirect:/Inventory";
+        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
+            //
+        } catch (Exception exp){
+            //
+        }
+
+        return "redirect:/Inventory"; // TODO: implement error exception
+    }
+
+    // Restock
+    @PostMapping("/restockEquipment")
+    public String restockEquipment(@RequestParam("id") String equipmentId, @RequestParam("quantity") Integer stock){
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
+
+        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+            return "redirect:/";
+
+        try {
+            Equipment equipment = DQS.findRegisteredEquipment(equipmentId);
+            equipment.setEquipmentInStock(stock);
+            DEAMS.editEquipment(equipment);
+            return "redirect:/Inventory";
+        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
+            //
+        } catch (Exception exp){
+            //
+        }
+
+        return "redirect:/Inventory"; // TODO: implement error exception
+    }
+
+    @PostMapping("/restockMedication")
+    public String restockMedication(@RequestParam("id") String medicationId, @RequestParam("quantity") Integer stock){
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
+
+        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+            return "redirect:/";
+
+        try {
+            Medication medication = DQS.findRegisteredMedication(medicationId);
+            medication.setMedicationInStock(stock);
+            DEAMS.editMedication(medication);
+            return "redirect:/Inventory";
+        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
+            //
+        } catch (Exception exp){
+            //
+        }
+
+        return "redirect:/Inventory"; // TODO: implement error exception
+    }
+
+    @PostMapping("/restockProduct")
+    public String restockProduct(@RequestParam("id") String productId, @RequestParam("quantity") Integer stock){
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
+
+        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+            return "redirect:/";
+
+        try {
+            Product product = DQS.findRegisteredProduct(productId);
+            product.setProductInStock(stock);
+            DEAMS.editProduct(product);
+            return "redirect:/Inventory";
+        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
+            //
+        } catch (Exception exp){
+            //
+        }
+
+        return "redirect:/Inventory"; // TODO: implement error exception
+    }
+
+    // Edit
+    @PostMapping("/editEquipmentInformation")
+    public String editEquipmentInformation(@RequestParam("id") String equipmentId, @RequestParam("name") String name, @RequestParam("use") String use, @RequestParam("description") String description){
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
+
+        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+            return "redirect:/";
+
+        try {
+            Equipment equipment = DQS.findRegisteredEquipment(equipmentId);
+            equipment.setEquipmentName(name);
+            equipment.setEquipmentUse(use);
+            equipment.setEquipmentDescription(description);
+            DEAMS.editEquipment(equipment);
+            return "redirect:/Inventory";
+        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
+            //
+        } catch (Exception exp){
+            //
+        }
+
+        return "redirect:/Inventory"; // TODO: implement error exception
+    }
+
+    @PostMapping("/editMedicationInformation")
+    public String editMedicationInformation(@RequestParam("id") String medicationId, @RequestParam("name") String name, @RequestParam("supplier") String supplier, @RequestParam("description") String description, @RequestParam("price") Float price){
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
+
+        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+            return "redirect:/";
+
+        try {
+            Medication medication = DQS.findRegisteredMedication(medicationId);
+            medication.setMedicationName(name);
+            medication.setSupplier(supplier);
+            medication.setMedicationDescription(description);
+            medication.setMedicationPrice(price);
+            DEAMS.editMedication(medication);
+            return "redirect:/Inventory";
+        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
+            //
+        } catch (Exception exp){
+            //
+        }
+
+        return "redirect:/Inventory"; // TODO: implement error exception
+    }
+
+    @PostMapping("/editProductInformation")
+    public String editProductInformation(@RequestParam("id") String productId, @RequestParam("name") String name, @RequestParam("supplier") String supplier, @RequestParam("description") String description, @RequestParam("price") Float price){
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
+
+        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+            return "redirect:/";
+
+        try {
+            Product product = DQS.findRegisteredProduct(productId);
+            product.setProductName(name);
+            product.setProductDescription(description);
+            product.setSupplier(supplier);
+            product.setProductPrice(price);
+            DEAMS.editProduct(product);
+            return "redirect:/Inventory";
+        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
+            //
+        } catch (Exception exp){
+            //
+        }
+
         return "redirect:/Inventory"; // TODO: implement error exception
     }
 }

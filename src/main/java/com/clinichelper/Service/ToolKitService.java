@@ -173,7 +173,7 @@ public class ToolKitService {
                     chores.add(new Chore(userRepository.findByUserId(userId), "Happy Birthday " + p.getPatientFullName() + "!",
                             Task.PATIENT_BIRTHDAY,
                             "Celebrate " + p.getPatientFullName() + "'s special day! We have such awesome patients!", reminders));
-                else if ((birthDate.get(Calendar.DAY_OF_MONTH) - today.get(Calendar.DAY_OF_MONTH)) > 0 && (seventhDay.get(Calendar.DAY_OF_MONTH) - birthDate.get(Calendar.DAY_OF_MONTH)) <= 7)
+                else if ((birthDate.get(Calendar.DAY_OF_MONTH) - today.get(Calendar.DAY_OF_MONTH)) > 0 && (birthDate.get(Calendar.DAY_OF_MONTH) - seventhDay.get(Calendar.DAY_OF_MONTH)) <= 0)
                     chores.add(new Chore(userRepository.findByUserId(userId), "It's almost someone's special day!",
                             Task.PATIENT_BIRTHDAY,
                             "In " + (birthDate.get(Calendar.DAY_OF_MONTH) - today.get(Calendar.DAY_OF_MONTH)) + " day(s) it will be " + p.getPatientFullName() + "'s special day! Be Ready!", reminders));
@@ -245,10 +245,10 @@ public class ToolKitService {
                         chores.add(new Chore(userRepository.findByUserId(userId), "Happy Birthday " + s.getFullName() + "!",
                                 Task.STAFF_BIRTHDAY,
                                 "Celebrate " + s.getFullName() + "'s special day! We thank you for being part of the team!", reminders));
-                    else if ((birthDate.get(Calendar.DAY_OF_MONTH) - today.get(Calendar.DAY_OF_MONTH)) > 0 && (seventhDay.get(Calendar.DAY_OF_MONTH) - birthDate.get(Calendar.DAY_OF_MONTH)) <= 7)
+                    else if ((birthDate.get(Calendar.DAY_OF_MONTH) - today.get(Calendar.DAY_OF_MONTH)) > 0 && (birthDate.get(Calendar.DAY_OF_MONTH) - seventhDay.get(Calendar.DAY_OF_MONTH)) <= 0)
                         chores.add(new Chore(userRepository.findByUserId(userId), "It's almost someone's special day!",
                                 Task.STAFF_BIRTHDAY,
-                                "In" + (birthDate.get(Calendar.DAY_OF_MONTH) - today.get(Calendar.DAY_OF_MONTH)) + "day(s) it will be " + s.getFullName() + "'s special day! Don't forget to celebrate their contribution as a valued member of the JASC Team!", reminders));
+                                "In " + (birthDate.get(Calendar.DAY_OF_MONTH) - today.get(Calendar.DAY_OF_MONTH)) + " day(s) it will be " + s.getFullName() + "'s special day! Don't forget to celebrate their contribution as a valued member of the JASC Team!", reminders));
                 } else if ((birthDate.get(Calendar.MONTH) - today.get(Calendar.MONTH)) == 1 && Math.abs(today.get(Calendar.DAY_OF_MONTH) - birthDate.get(Calendar.DAY_OF_MONTH)) >= 23) // In there is a change of month during the week
                     chores.add(new Chore(userRepository.findByUserId(userId), "It's almost someone's special day!",
                             Task.STAFF_BIRTHDAY,

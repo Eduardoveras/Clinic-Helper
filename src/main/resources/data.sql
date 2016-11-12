@@ -161,8 +161,9 @@ product_description,
 product_in_stock,
 product_name,
 product_price,
+supplier,
 clinic_clinic_id) VALUES
-('JASC-P-HUJBUYHH778', 'Mayers Braseir', 54, 'Bra', 432.42, 'CH-PLATINUM-JASC');
+('JASC-P-HUJBUYHH778', 'Mayers Braseir', 54, 'Bra', 432.42, 'Procter and Gamble', 'CH-PLATINUM-JASC');
 
 INSERT INTO medications (
 medication_id,
