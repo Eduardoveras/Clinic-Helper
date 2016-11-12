@@ -60,7 +60,6 @@
 <script src="../vendors/validator/validator.js"></script>
 <!-- Select2 -->
 <script src="../vendors/select2/dist/js/select2.full.min.js"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
 
 

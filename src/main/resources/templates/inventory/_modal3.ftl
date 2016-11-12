@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="equipment" role="dialog">
+<div class="modal fade" id="product" role="dialog">
 
     <div class="modal-dialog modal-lg">
 
@@ -14,7 +14,7 @@
             <div class="modal-body">
                 <div class="x_title">
                     <ul class="nav navbar-left panel_toolbox">
-                        <li><h4>Add new equipment</h4>
+                        <li><h4>Add new product</h4>
                         </li>
                     </ul>
                     <ul class="nav navbar-right panel_toolbox">
@@ -28,7 +28,7 @@
 
                 <div class="x_content">
                     <br/>
-                    <#include "/inventory/modalForms/_equipmentForm.ftl">
+                <#include "/inventory/modalForms/_productForm.ftl">
                 </div>
             </div>
         </div>

@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#theModal">New Medication</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#medications">New Medication</button>
 <table id="datatable-responsive" class="table table-hover table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
     <thead>
     <tr>

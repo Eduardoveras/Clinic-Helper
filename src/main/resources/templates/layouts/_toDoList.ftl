@@ -87,6 +87,7 @@
                                       data-parsley-validation-threshold="10">
                                                         </textarea>
                         </div>
+
                         <div>
                             <div class="form-group" style="display: inline-block;">
                                 <label for="sel1">Select type:</label>

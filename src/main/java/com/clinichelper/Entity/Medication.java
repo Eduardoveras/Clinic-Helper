@@ -34,6 +34,7 @@ public class Medication implements Serializable{
         this.setMedicationDescription(medicationDescription);
         this.setMedicationPrice(medicationPrice);
         this.setMedicationInStock(medicationInStock);
+        this.setClinic(clinic);
     }
 
     // Getters and Setters

@@ -141,7 +141,7 @@ public class Patient implements Serializable{
         this.patientLastName = patientLastName;
     }
 
-    public String getPatientFullName() { return patientFirstName+ " " + patientLastName; }
+    public String getPatientFullName() { return patientFirstName.toUpperCase() + " " + patientLastName; }
 
     public String getPatientIdCard() {
         return patientIdCard;

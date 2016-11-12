@@ -55,6 +55,7 @@ public class AppointmentController {
     // Posts
     @PostMapping("/newAppointment")
     public String createNewApointment(@RequestParam("appointmentTime") String appointmentTime, @RequestParam("patient") String patientId, @RequestParam("description") String appointmentDescription){
+
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
@@ -85,7 +86,6 @@ public class AppointmentController {
         } catch (Exception exp){
             System.out.println("ERROR MESSAGE:");
             System.out.println(exp.getMessage());
-
             //
         }
 

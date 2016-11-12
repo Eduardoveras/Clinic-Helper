@@ -8,16 +8,14 @@
                 <input type="text" id="firstname" required="required" class="form-control col-md-7 col-xs-12">
             </div>
         </div>
+
         <div class="form-group" >
             <label class="control-label col-md-6 col-sm-6 col-xs-12" for="lastname">Last Name <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <input type="text" id="last-name" name="lastname" required="required" class="form-control col-md-7 col-xs-12">
             </div>
-
         </div>
-
-
 
         <div class="form-group"  >
             <label for="idCard" class="control-label col-md-6 col-sm-6 col-xs-12">Id/ Passport <span class="required">*</span></label>
@@ -34,8 +32,6 @@
             </div>
         </div>
 
-
-
         <div class="form-group" >
             <label  class="control-label col-md-3 col-sm-3 col-xs-12">Gender <span class="required">*</span></label>
             <div class="text-left" class="col-md-6 col-sm-6 col-xs-12" >
@@ -49,8 +45,6 @@
                 </div>
             </div>
         </div>
-
-
 
         <div class="form-group"  >
             <label for="occupation" class="control-label col-md-6 col-sm-6 col-xs-12">Occupation </label>
@@ -70,6 +64,7 @@
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <select id="country" name="country" required="required" class="form-control col-md-7 col-xs-12"></select>
+
             </div>
         </div>
 
@@ -96,8 +91,6 @@
                 <input type="text" id="nationality" name="nationality" required="required" class="form-control col-md-7 col-xs-12">
             </div>
         </div>
-
-
     </form>
 
 </div>

@@ -88,7 +88,7 @@ public class User implements Serializable{
         this.lastName = lastName;
     }
 
-    public String getFullName() { return firstName + " " + lastName; }
+    public String getFullName() { return firstName.toUpperCase() + " " + lastName; }
 
     public Date getBirthDate() {
         return birthDate;

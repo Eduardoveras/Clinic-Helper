@@ -19,7 +19,7 @@
                         <input type="password" class="form-control" name="password" id="password" placeholder="Password" required="" />
                     </div>
                     <div>
-                        <input type="hidden" name="clinic" value="CH-PLATINUM-JASC">
+                        <!--<input type="hidden" name="clinic" value="CH-PLATINUM-JASC">-->
                         <input id="send" type="submit" value="Log In" class="btn btn-default submit">
                         <a class="reset_pass" href="#">Lost your password?</a>
                     </div>

@@ -121,6 +121,7 @@ public class ToolKitService {
 
     // Auxiliary Function
     private List<Chore> findAllMeetingsForToday(String userId){
+
         List<Chore> chores = new ArrayList<>();
 
         try{
