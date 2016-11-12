@@ -66,14 +66,14 @@ public class InventoryController {
 
         try {
             DEAMS.createNewEquipment(DQS.getCurrentLoggedUser().getClinic().getClinicId(), equipmentName, equipmentUse, equipmentDescription, stock);
-            return "redirect:/inventory";
+            return "redirect:/Inventory";
         } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
             //
         } catch (Exception exp){
             //
         }
 
-        return "redirect:/inventory"; // TODO: implement error exception
+        return "redirect:/Inventory"; // TODO: implement error exception
     }
 
     @PostMapping("/newProduct")
@@ -87,13 +87,14 @@ public class InventoryController {
 
         try {
             DEAMS.createNewProduct(DQS.getCurrentLoggedUser().getClinic().getClinicId(), productName, productDescription, productPrice, stock);
+            return "redirect:/Inventory";
         } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
             //
         } catch (Exception exp){
             //
         }
 
-        return "redirect:/inventory"; // TODO: implement error exception
+        return "redirect:/Inventory"; // TODO: implement error exception
     }
 
     @PostMapping("/newMedication")
@@ -107,13 +108,14 @@ public class InventoryController {
 
         try {
             DEAMS.createNewMedication(DQS.getCurrentLoggedUser().getClinic().getClinicId(), medicationName, supplier, medicationDescription, medicationPrice, stock);
+            return "redirect:/Inventory";
         } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
             //
         } catch (Exception exp){
             //
         }
 
-        return "redirect:/inventory"; // TODO: implement error exception
+        return "redirect:/Inventory"; // TODO: implement error exception
     }
 
     @PostMapping("/deleteEquipment")
@@ -126,12 +128,13 @@ public class InventoryController {
 
         try{
             DEAMS.deleteRegisteredEquipment(equipmentId);
+            return "redirect:/Inventory";
         } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
             //
         } catch (Exception exp){
             //
         }
 
-        return "redirect:/inventory"; // TODO: implement error exception
+        return "redirect:/Inventory"; // TODO: implement error exception
     }
 }
