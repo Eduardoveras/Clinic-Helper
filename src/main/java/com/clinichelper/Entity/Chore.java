@@ -158,19 +158,40 @@ public class Chore implements Serializable{
                 today.add(Calendar.MONTH, 1); // Next Month
                 break;
             case MONDAY:
-                today.add(Calendar.MONDAY, 1);
+                do{
+                    today.add(Calendar.DATE, 1);
+                } while (today.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY);
+
                 break;
             case TUESDAY:
-                today.add(Calendar.TUESDAY, 1);
+                do{
+                    today.add(Calendar.DATE, 1);
+                } while (today.get(Calendar.DAY_OF_WEEK) != Calendar.TUESDAY);
+
                 break;
             case WEDNESDAY:
-                today.add(Calendar.WEDNESDAY, 1);
+                do{
+                    today.add(Calendar.DATE, 1);
+                } while (today.get(Calendar.DAY_OF_WEEK) != Calendar.WEDNESDAY);
+
                 break;
             case THURSDAY:
-                today.add(Calendar.THURSDAY, 1);
+                do{
+                    today.add(Calendar.DATE, 1);
+                } while (today.get(Calendar.DAY_OF_WEEK) != Calendar.THURSDAY);
+
                 break;
             case FRIDAY:
-                today.add(Calendar.FRIDAY, 1);
+                do{
+                    today.add(Calendar.DATE, 1);
+                } while (today.get(Calendar.DAY_OF_WEEK) != Calendar.FRIDAY);
+
+                break;
+            case SATURDAY:
+                do{
+                    today.add(Calendar.DATE, 1);
+                } while (today.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY);
+
                 break;
             case YEARLY: // every year
                 today.add(Calendar.YEAR, 1); // Next Year
