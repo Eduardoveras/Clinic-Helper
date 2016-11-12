@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="equipment" role="dialog">
+<div class="modal fade" id="medications" role="dialog">
 
     <div class="modal-dialog modal-lg">
 
@@ -28,7 +28,7 @@
 
                 <div class="x_content">
                     <br/>
-                <#include "/inventory/modalForms/_equipmentForm.ftl">
+                <#include "/inventory/modalForms/_medicationForm.ftl">
                 </div>
             </div>
         </div>
