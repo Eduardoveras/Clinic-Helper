@@ -51,7 +51,17 @@ public class ToolKitService {
         todoList = new ArrayList<>();
 
         // Adding Custom created tasks
-        todoList.addAll(choreRepository.findByUserId(userId));
+        List<Chore> chores = choreRepository.findByUserId(userId);
+
+        for (Chore c:
+             chores) {
+            if (c.getReminders().get(0) == Repeat.EVERY_DAY)
+                todoList.add(c);
+            else if (c.getNextReminder() == new Timestamp(Calendar.getInstance().getTime().getTime())) {
+                c.setNextReminder();
+                todoList.add(c);
+            }
+        }
 
         // Adding Birthday reminder tasks
         todoList.addAll(findAllPatientBirthdayForNextWeek(userId));
