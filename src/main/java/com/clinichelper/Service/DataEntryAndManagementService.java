@@ -252,7 +252,7 @@ public class DataEntryAndManagementService {
 
 
 
-    public Product createNewProduct(String clinicId, String productName, String productDescription, Float productPrice, Integer stock) throws Exception{
+    public Product createNewProduct(String clinicId, String productName, String supplier, String productDescription, Float productPrice, Integer stock) throws Exception{
         if (!doesClinicIdExist(clinicId))
             throw new IllegalArgumentException("\n\n\nThis clinic id is not valid");
 
@@ -263,7 +263,7 @@ public class DataEntryAndManagementService {
             throw new IllegalArgumentException("\n\nYou cannot register ZERO or less medication");
 
         try {
-            return productRepository.save(new Product(clinicRepository.findByClinicId(clinicId), productName, productDescription, productPrice, stock));
+            return productRepository.save(new Product(clinicRepository.findByClinicId(clinicId), productName, supplier, productDescription, productPrice, stock));
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis product was not able to persist -> " + exp.getMessage());
