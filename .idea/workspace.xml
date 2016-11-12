@@ -2,41 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e4b2c9b0-c577-4fc0-8335-af0a7b847451" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/templates/inventory/_modal2.ftl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/templates/inventory/_modal3.ftl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/templates/inventory/modalForms/_equipmentForm.ftl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/templates/inventory/modalForms/_medicationForm.ftl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/templates/inventory/modalForms/_productForm.ftl" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/AppointmentController.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/AppointmentController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/IndexController.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/IndexController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/InventoryController.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/InventoryController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/MeetingAndContactsController.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/MeetingAndContactsController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/PatientController.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/PatientController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/TeamController.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/TeamController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/UserController.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/UserController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/Chore.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/Chore.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/Medication.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/Medication.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/Patient.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/Patient.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/User.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Repository/ChoreRepository.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Repository/ChoreRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Service/DataEntryAndManagementService.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Service/DataEntryAndManagementService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Service/ToolKitService.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Service/ToolKitService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/data.sql" afterPath="$PROJECT_DIR$/src/main/resources/data.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/appointments/_appointmentForm.ftl" afterPath="$PROJECT_DIR$/src/main/resources/templates/appointments/_appointmentForm.ftl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/appointments/_appointmentScripts.ftl" afterPath="$PROJECT_DIR$/src/main/resources/templates/appointments/_appointmentScripts.ftl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/inventory/_equipmentTable.ftl" afterPath="$PROJECT_DIR$/src/main/resources/templates/inventory/_equipmentTable.ftl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/inventory/_medicationsTable.ftl" afterPath="$PROJECT_DIR$/src/main/resources/templates/inventory/_medicationsTable.ftl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/inventory/_modal.ftl" afterPath="$PROJECT_DIR$/src/main/resources/templates/inventory/_modal.ftl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/inventory/_productsTable.ftl" afterPath="$PROJECT_DIR$/src/main/resources/templates/inventory/_productsTable.ftl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/inventory/viewInventory.ftl" afterPath="$PROJECT_DIR$/src/main/resources/templates/inventory/viewInventory.ftl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/layouts/_toDoList.ftl" afterPath="$PROJECT_DIR$/src/main/resources/templates/layouts/_toDoList.ftl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/layouts/footer.ftl" afterPath="$PROJECT_DIR$/src/main/resources/templates/layouts/footer.ftl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/patients/_patientForm/_step1.ftl" afterPath="$PROJECT_DIR$/src/main/resources/templates/patients/_patientForm/_step1.ftl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/patients/_patientsScripts.ftl" afterPath="$PROJECT_DIR$/src/main/resources/templates/patients/_patientsScripts.ftl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/users/_usersForm.ftl" afterPath="$PROJECT_DIR$/src/main/resources/templates/users/_usersForm.ftl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/users/login_register.ftl" afterPath="$PROJECT_DIR$/src/main/resources/templates/users/login_register.ftl" />
     </list>
     <ignored path="Clinic-Helper.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -127,7 +93,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-927">
               <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-              <folding />
+              <folding>
+                <marker date="1478965784370" expanded="true" signature="1271:1342" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -380,7 +348,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="2957889633417" />
+        <entry key="$PROJECT_DIR$" value="2957894451716" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -1004,12 +972,12 @@
       <option name="presentableId" value="Default" />
       <updated>1478925173012</updated>
       <workItem from="1478925191375" duration="492000" />
-      <workItem from="1478928937641" duration="8901000" />
+      <workItem from="1478928937641" duration="9292000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9706000" />
+    <option name="totallyTimeSpent" value="10097000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="676" y="0" width="697" height="735" extended-state="0" />
@@ -1276,12 +1244,12 @@
         <state relative-caret-position="204">
           <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
           <folding>
-            <marker date="1478965057938" expanded="true" signature="54:782" ph="..." />
-            <marker date="1478965057938" expanded="true" signature="118:707" ph="..." />
-            <marker date="1478965057938" expanded="true" signature="151:700" ph="..." />
-            <marker date="1478965057938" expanded="true" signature="300:618" ph="..." />
-            <marker date="1478965057938" expanded="true" signature="327:603" ph="..." />
-            <marker date="1478965057938" expanded="true" signature="361:584" ph="..." />
+            <marker date="1478965784358" expanded="true" signature="54:782" ph="..." />
+            <marker date="1478965784358" expanded="true" signature="118:707" ph="..." />
+            <marker date="1478965784358" expanded="true" signature="151:700" ph="..." />
+            <marker date="1478965784358" expanded="true" signature="300:618" ph="..." />
+            <marker date="1478965784358" expanded="true" signature="327:603" ph="..." />
+            <marker date="1478965784358" expanded="true" signature="361:584" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1372,24 +1340,24 @@
           <caret line="688" column="0" selection-start-line="688" selection-start-column="0" selection-end-line="688" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1478965058506" expanded="true" signature="35314:36238" ph="{...}" />
-            <marker date="1478965058506" expanded="true" signature="36332:37232" ph="{...}" />
-            <marker date="1478965058506" expanded="true" signature="37293:38069" ph="{...}" />
-            <marker date="1478965058506" expanded="true" signature="38164:38302" ph="{...}" />
-            <marker date="1478965058506" expanded="true" signature="38358:38466" ph="{...}" />
-            <marker date="1478965058506" expanded="true" signature="38534:38678" ph="{...}" />
-            <marker date="1478965058506" expanded="true" signature="38736:38837" ph="{...}" />
-            <marker date="1478965058506" expanded="true" signature="38899:39025" ph="{...}" />
-            <marker date="1478965058506" expanded="true" signature="39087:39213" ph="{...}" />
-            <marker date="1478965058506" expanded="true" signature="39277:39409" ph="{...}" />
-            <marker date="1478965058506" expanded="true" signature="39467:39581" ph="{...}" />
-            <marker date="1478965058506" expanded="true" signature="39639:39753" ph="{...}" />
-            <marker date="1478965058506" expanded="true" signature="39807:39919" ph="{...}" />
-            <marker date="1478965058506" expanded="true" signature="39977:40091" ph="{...}" />
-            <marker date="1478965058506" expanded="true" signature="40166:40297" ph="{...}" />
-            <marker date="1478965058506" expanded="true" signature="40349:40445" ph="{...}" />
-            <marker date="1478965058506" expanded="true" signature="40509:40718" ph="{...}" />
-            <marker date="1478965058506" expanded="true" signature="40774:40862" ph="{...}" />
+            <marker date="1478965784248" expanded="true" signature="35314:36238" ph="{...}" />
+            <marker date="1478965784248" expanded="true" signature="36332:37232" ph="{...}" />
+            <marker date="1478965784248" expanded="true" signature="37293:38069" ph="{...}" />
+            <marker date="1478965784248" expanded="true" signature="38164:38302" ph="{...}" />
+            <marker date="1478965784248" expanded="true" signature="38358:38466" ph="{...}" />
+            <marker date="1478965784248" expanded="true" signature="38534:38678" ph="{...}" />
+            <marker date="1478965784248" expanded="true" signature="38736:38837" ph="{...}" />
+            <marker date="1478965784248" expanded="true" signature="38899:39025" ph="{...}" />
+            <marker date="1478965784248" expanded="true" signature="39087:39213" ph="{...}" />
+            <marker date="1478965784248" expanded="true" signature="39277:39409" ph="{...}" />
+            <marker date="1478965784248" expanded="true" signature="39467:39581" ph="{...}" />
+            <marker date="1478965784248" expanded="true" signature="39639:39753" ph="{...}" />
+            <marker date="1478965784248" expanded="true" signature="39807:39919" ph="{...}" />
+            <marker date="1478965784248" expanded="true" signature="39977:40091" ph="{...}" />
+            <marker date="1478965784248" expanded="true" signature="40166:40297" ph="{...}" />
+            <marker date="1478965784248" expanded="true" signature="40349:40445" ph="{...}" />
+            <marker date="1478965784248" expanded="true" signature="40509:40718" ph="{...}" />
+            <marker date="1478965784248" expanded="true" signature="40774:40862" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1511,7 +1479,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-927">
           <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1478965784370" expanded="true" signature="1271:1342" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
