@@ -47,6 +47,7 @@ public class AppointmentController {
 
         model.addAttribute("todoList", TKS.InitializeTodoList(clinicId));
         model.addAttribute("appointmentList", DQS.findAllRegisteredAppointmentsForClinic(clinicId));
+        model.addAttribute("userList", DQS.findAllRegisteredPatientsForClinic(clinicId));
 
         return new ModelAndView("appointments/allAppointment");
     }
@@ -54,23 +55,37 @@ public class AppointmentController {
     // Posts
     @PostMapping("/newAppointment")
     public String createNewApointment(@RequestParam("appointmentTime") String appointmentTime, @RequestParam("patient") String patientId, @RequestParam("description") String appointmentDescription){
-
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        //if (DQS.getCurrentLoggedUser().getRole() != Permission.ASSISTANT)
-           // return "redirect:/";
 
         try {
             SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
+            System.out.print("shit\n");
             String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
-            Patient patient = DQS.findRegisteredPatientByIdCard(clinicId, patientId);
-            DEAMS.createNewAppointment(clinicId, new Timestamp(sdf1.parse(appointmentTime).getTime()), patient.getPatientId(), appointmentDescription);
+            System.out.print("justtt\n");
+
+            Patient patient = DQS.findRegisteredPatient(patientId);
+            System.out.print("hitttt\n");
+
+            Timestamp test= new Timestamp(sdf1.parse(appointmentTime).getTime());
+            System.out.print("theeeeee\n");
+
+            System.out.println(clinicId);
+            System.out.println(patientId);
+            System.out.println(test);
+            System.out.println(patient);
+            System.out.println(appointmentDescription);
+
+            DEAMS.createNewAppointment(clinicId, test, patient.getPatientId(), appointmentDescription);
+            System.out.print("fannnn\n");
+
 
             return "redirect:/appointments";
-        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
-            //
         } catch (Exception exp){
+            System.out.println("ERROR MESSAGE:");
+            System.out.println(exp.getMessage());
+
             //
         }
 
