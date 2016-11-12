@@ -87,3 +87,15 @@
         TableManageButtons.init();
     });
 </script>
+
+
+<!-- Select2 -->
+<script>
+    $(document).ready(function() {
+        $(".select2_single").select2({
+            placeholder: "Select a patient",
+            allowClear: true
+        });
+    });
+</script>
+<!-- /Select2 -->

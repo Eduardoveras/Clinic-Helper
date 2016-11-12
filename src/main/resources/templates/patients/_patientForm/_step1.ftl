@@ -65,7 +65,21 @@
             </div>
         </div>
 
+        <div class="form-group" >
+            <label class="control-label col-md-6 col-sm-6 col-xs-12" for="country">Country <span class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <select id="country" name="country" required="required" class="form-control col-md-7 col-xs-12"></select>
+            </div>
+        </div>
 
+        <div class="form-group" >
+            <label class="control-label col-md-6 col-sm-6 col-xs-12" for="state">City <span class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <select id="state" name="state" required="required" class="form-control col-md-7 col-xs-12"></select>
+            </div>
+        </div>
 
         <div class="form-group"  >
             <label  class="control-label col-md-6 col-sm-6 col-xs-12" for="address">Address <span class="required">*</span>
@@ -75,24 +89,6 @@
             </div>
         </div>
 
-        <div class="form-group" >
-            <label class="control-label col-md-6 col-sm-6 col-xs-12" for="city">City <span class="required">*</span>
-            </label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="city" name="city" required="required" class="form-control col-md-7 col-xs-12">
-            </div>
-        </div>
-
-
-
-
-        <div class="form-group"  >
-            <label " class="control-label col-md-6 col-sm-6 col-xs-12" for="country">Country <span class="required">*</span>
-            </label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="country" name="country" required="required" class="form-control col-md-7 col-xs-12">
-            </div>
-        </div>
         <div class="form-group" >
             <label  class="control-label col-md-6 col-sm-6 col-xs-12" for="nationality">Nationality <span class="required">*</span>
             </label>
