@@ -249,5 +249,5 @@ public class InventoryController {
         return "redirect:/Inventory"; // TODO: implement error exception
     }
 
-    
+
 }
