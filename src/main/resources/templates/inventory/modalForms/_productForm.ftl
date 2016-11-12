@@ -26,7 +26,7 @@
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
+                    <input type="text" id="name" name="name" required="required" class="form-control col-md-7 col-xs-12">
                 </div>
             </div>
 
@@ -46,7 +46,7 @@
             </div>
 
             <div class="form-group">
-                <label for= "quantity"class="control-label col-md-3 col-sm-3 col-xs-12">Quantity <span class="required">*</span>
+                <label for="quantity" class="control-label col-md-3 col-sm-3 col-xs-12">Quantity <span class="required">*</span>
                 </label>
                 <div class="container">
                     <div class="row">
@@ -55,7 +55,7 @@
 				<span class="input-group-btn">
 					<button class="btn btn-default" type="button" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
 				</span>
-                                <input type="text" class="form-control text-center" value="1">
+                                <input type="text" name="quantity" class="form-control text-center" value="1">
                                 <span class="input-group-btn">
 					<button class="btn btn-default" type="button" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
 				</span>
