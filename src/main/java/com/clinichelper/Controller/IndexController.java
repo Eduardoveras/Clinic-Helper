@@ -78,6 +78,8 @@ public class IndexController implements ErrorController {
         //if (DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
             //return new ModelAndView("redirect:/");
 
+        model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
+
         return new ModelAndView("");
     }
 
@@ -92,7 +94,7 @@ public class IndexController implements ErrorController {
 
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
-        Task t = type;
+
         try {
             DEAMS.createNewCustomTask(DQS.getCurrentLoggedUser().getUserId(), title, type, description);
             return "redirect:/";

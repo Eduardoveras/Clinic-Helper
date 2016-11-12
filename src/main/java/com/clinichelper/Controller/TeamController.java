@@ -44,7 +44,7 @@ public class TeamController {
 
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
 
-        model.addAttribute("todoList", TKS.InitializeTodoList(clinicId));
+        model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
         model.addAttribute("userList", DQS.findAllAllRegisteredUsersForClinic(clinicId));
         model.addAttribute("clinicId", DQS.findAllAllRegisteredUsersForClinic(clinicId).get(0).getClinic().getClinicPrefix());
 

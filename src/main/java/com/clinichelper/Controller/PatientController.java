@@ -42,7 +42,7 @@ public class PatientController {
 
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
 
-        model.addAttribute("todoList", TKS.InitializeTodoList(clinicId));
+        model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
         model.addAttribute("patientList", DQS.findAllRegisteredPatientsForClinic(clinicId));
         model.addAttribute("amount", DQS.findAllRegisteredPatientsForClinic(clinicId).size());
 
@@ -61,7 +61,8 @@ public class PatientController {
             //return new ModelAndView("redirect:/");
 
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
-        model.addAttribute("todoList", TKS.InitializeTodoList(clinicId));
+
+        model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
         model.addAttribute("amount", DQS.findAllRegisteredPatientsForClinic(clinicId).size());
 
         return new ModelAndView("patients/patientForm");
@@ -77,7 +78,7 @@ public class PatientController {
         //if (DQS.getCurrentLoggedUser().getRole() != Permission.ASSISTANT)
             //return new ModelAndView("redirect:/");
 
-        model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getClinic().getClinicId()));
+        model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
         model.addAttribute("patient", DQS.findRegisteredPatient(patientId));
         model.addAttribute("appointments", DQS.findPatientsRegisteredAppointments(patientId));
         return new ModelAndView("patients/patientsProfile");
