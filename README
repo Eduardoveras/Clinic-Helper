@@ -8,9 +8,114 @@ Programmers:
 	Eva Soraya 
 	Eduardo Veras
 
+##HEROKU IMPORTANT CONFIG FOR LOCAL RUN
+export JDBC_DATABASE_URL=jdbc:postgresql://localhost:5432/ClinicHelperDB
+export JDBC_DATABASE_USERNAME=postgres
+export JDBC_DATABASE_PASSWORD=postgres
+
 Language: Java
-Framework(s): Java SE 8 - JDK 1.8, Spring Boot, FreeMarker, JPA-ORM, Hibernate
+Framework(s): Java EE 8 - JDK 1.8, Spring Boot, FreeMarker, JPA-ORM, Hibernate
 Database: PostgreSQL 9
+
+Version: v0.13.0
+** Improved Security System
+        New URL filter protocols
+        Permission Recognition algorithm
+** New Team Management Module
+        Team and Contacts interface
+        Meeting view and creation interface
+
+Version: v0.12.0
+** New Inventory feature with Equipment, Medication, and Product management
+** New Patient Registration form with 5 step registration process
+** Automatic Medical Record creation for all new patient
+        Basic Information
+        Medical Information
+        Contact Information
+        Emergency Contact Information
+        Insurance Information
+** New Appointment/Consultation logical link algorithm
+** New Medical History data storing entity
+
+Version: v0.11.0
+** Fix Heroku Build bug
+** Add user profile interface
+** Implement true clinic detections method
+** Implement url path restrictions
+** New clinic calendar initializer
+** Redesigned To Do Task system (Ubiquitous Accessibility)
+** Redesigned Appointments Management feature
+
+Version: v0.10.0
+** Redesigned account and users mechanics
+** Implemented new clinic account system
+** Establish base for reserved feature system of accounts
+    Basic
+    Silver
+    Gold
+    Platinum
+** Establish SuperAdmin permissions
+** Implementation of new dynamic interfaces
+** New organizational features
+    Calendar
+    Customizable Todo list
+        v0.10.1
+** Fix view Patients lists interface
+** Fix user views
+        v0.10.2
+** Fix Todo list modal
+** Fix today's appointment display
+        v0.10.3
+** Functional Todo list feature with
+    Birthday recognition for patients and staff
+    Meeting reminder
+    Registration date recognition
+    Custom task reminder
+        v0.10.4
+** Fix registration forms
+** Refine interfaces
+        v0.10.5
+** Fix user table bug
+        v0.10.6
+** Enabled Session system
+** Fix appointment creation form
+        v0.10.7
+** LogIn & Logout mechanics
+** Fix create task model bug
+
+Version: v0.9.0
+** Refactor Database to include custom created Tasks
+** Add TodoList functionality to ToolkitService
+** Fix bug with Meeting entity with @ManyToMany to allow staff to attend more then one meeting
+
+Version: v0.8.0
+** Functional Demo
+** Implements creation of patients and appointments with client-server union
+** New string date system
+** Bootstrap interface library
+
+Version: v0.7.0
+** Core Controller implementations
+        v0.7.1
+** Implement new naming convention to establish data standard (LowerCase v UpperCase)
+** Refactor new editUserAccountCredentials functions for easy user account modifications
+** Add missing makeAdmin POST function and modify editUser Post
+** Refactor TeamController
+        v0.7.2
+** Add new date validation system
+        v0.7.3
+** Implement new string time display format
+        v0.7.4
+** Implemented new login protocol with updated TeamController
+** Add login POST protocol with user validation technique
+** Refactor deleteStaff protocol to include user validation technique
+** Fix bug with edit password Post with new user validation technique
+** Fix logical errors with make admin with user account query
+
+Version: v0.6.0
+** Heroku support with functional domain
+	    v0.6.1
+** Implementing no heroku domain settings configurations with application-heroku.properties
 
 Version: v0.5.0
 ** Implementing new DataEntryAndManagement and DataQuery services
@@ -29,7 +134,7 @@ Version: v0.3.0
 
 Version: v0.2.0
 ** First visible interfaces managed by Spring Controllers
-	v0.2.1
+	    v0.2.1
 ** Fix configuration conflicts
 
 Version: v0.1.0

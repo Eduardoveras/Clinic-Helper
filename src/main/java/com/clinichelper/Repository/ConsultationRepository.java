@@ -6,17 +6,18 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
  * Created by eva_c on 10/8/2016.
  */
 public interface ConsultationRepository extends JpaRepository<Consultation, String> {
-    Consultation findByJascId (String jascId);
+    Consultation findByConsultationId(String consultationId);
 
-    @Query("select c from Consultation c where c.consultationDate = :consultationDate")
-    List<Consultation> findByConsultationDate(@Param("consultationDate") Date consultationDate);
+    @Query("select c from Consultation c where c.appointment.clinic.clinicId = :clinic")
+    List<Consultation> findByClinicId(@Param("clinic") String clinicId);
 
-    @Query("select c from Consultation c where c.consultationDate between :beginning and :ending")
-    List<Consultation> findByConsultationDateRange(@Param("beginning") Date startDate, @Param("ending") Date endDate);
+    @Query("select c from Consultation c where c.consultationTime between :beginning and :ending and c.appointment.clinic.clinicId = :clinic")
+    List<Consultation> findByConsultationDateRange(@Param("beginning") Timestamp startDate, @Param("ending") Timestamp endDate, @Param("clinic") String clinicId);
 }

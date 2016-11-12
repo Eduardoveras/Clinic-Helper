@@ -5,6 +5,8 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -14,8 +16,9 @@ import java.util.UUID;
 @Entity
 @Table(name="surgeries")
 public class Surgery implements Serializable{
+    // Attributes
     @Id
-    private String jascId;
+    private String surgeryId;
     @NotNull
     private String surgeryName;
     private String surgeryDescription;
@@ -23,43 +26,41 @@ public class Surgery implements Serializable{
     @NotNull
     private Patient patient;
     @NotNull
-    private Date surgeryDate;
-    @NotNull
     private Timestamp surgeryTime;
     @NotNull
     private String surgeryRoom;
     @ManyToMany
     @NotNull
-    private Set<Staff> staffs;
-    @OneToMany
+    private Set<Contact> contacts;
+    @ManyToMany
     private Set<Equipment> equipments;
     @OneToOne
     @NotNull
     private Appointment appointment;
 
+    // Constructors
     public Surgery(){
 
     }
 
-    public Surgery(String surgeryName, String surgeryDescription, Patient patient, Date surgeryDate, Timestamp surgeryTime, String surgeryRoom, Set<Staff> staffs, Set<Equipment> equipments, Appointment appointment) {
-        this.setJascId("JASC-S-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+    public Surgery(String surgeryName, String surgeryDescription, Patient patient, Timestamp surgeryTime, Appointment appointment) {
+        this.setSurgeryId(appointment.getClinic().getClinicPrefix() + "-S-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setSurgeryName(surgeryName);
         this.setSurgeryDescription(surgeryDescription);
         this.setPatient(patient);
-        this.setSurgeryDate(surgeryDate);
         this.setSurgeryTime(surgeryTime);
-        this.setSurgeryRoom(surgeryRoom);
-        this.setStaffs(staffs);
-        this.setEquipments(equipments);
+        this.setContacts(new HashSet<>());
+        this.setEquipments(new HashSet<>());
         this.setAppointment(appointment);
     }
 
-    public String getJascId() {
-        return jascId;
+    // Getters and Setters
+    public String getSurgeryId() {
+        return surgeryId;
     }
 
-    public void setJascId(String jascId) {
-        this.jascId = jascId;
+    public void setSurgeryId(String surgeryId) {
+        this.surgeryId = surgeryId;
     }
 
     public String getSurgeryName() {
@@ -78,16 +79,14 @@ public class Surgery implements Serializable{
         this.surgeryDescription = surgeryDescription;
     }
 
-    public Date getSurgeryDate() {
-        return surgeryDate;
-    }
-
-    public void setSurgeryDate(Date surgeryDate) {
-        this.surgeryDate = surgeryDate;
-    }
-
     public Timestamp getSurgeryTime() {
         return surgeryTime;
+    }
+
+    public String getStringSurgeryTime(){
+        Date date = new Date(surgeryTime.getTime());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+        return sdf.format(date).substring(11,16);
     }
 
     public void setSurgeryTime(Timestamp surgeryTime) {
@@ -102,12 +101,12 @@ public class Surgery implements Serializable{
         this.surgeryRoom = surgeryRoom;
     }
 
-    public Set<Staff> getStaffs() {
-        return staffs;
+    public Set<Contact> getContacts() {
+        return contacts;
     }
 
-    public void setStaffs(Set<Staff> staffs) {
-        this.staffs = staffs;
+    public void setContacts(Set<Contact> contacts) {
+        this.contacts = contacts;
     }
 
     public Appointment getAppointment() {

@@ -3,6 +3,8 @@ package com.clinichelper.Entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -12,36 +14,37 @@ import java.util.UUID;
 @Entity
 @Table(name="records")
 public class Record implements Serializable{
+    // Attributes
     @Id
-    private String jascId;
+    private String recordId;
     @OneToOne
-    @NotNull
     private Patient patient;
-    private String recordDetails; // TODO: Turn this into an historial
     @OneToMany
     private Set<Surgery> surgeries;
     @OneToMany
     private Set<Consultation> consultations;
+    @OneToMany
+    private Set<History> history;
 
-
+    // Constructors
     public Record(){
 
     }
 
-    public Record(Patient patient, String recordDetails, Set<Surgery> surgeries, Set<Consultation> consultations) {
-        this.setJascId("JASC-R-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+    public Record(Patient patient) {
+        this.setRecordId(patient.getPatientId() + "-R-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setPatient(patient);
-        this.setRecordDetails(recordDetails);
-        this.setSurgeries(surgeries);
-        this.setConsultations(consultations);
+        this.setSurgeries(new HashSet<>());
+        this.setConsultations(new HashSet<>());
+        this.setHistory(new HashSet<>());
     }
 
-    public String getJascId() {
-        return jascId;
+    public String getRecordId() {
+        return recordId;
     }
 
-    public void setJascId(String jascId) {
-        this.jascId = jascId;
+    public void setRecordId(String recordId) {
+        this.recordId = recordId;
     }
 
     public Patient getPatient() {
@@ -52,19 +55,13 @@ public class Record implements Serializable{
         this.patient = patient;
     }
 
-    public String getRecordDetails() {
-        return recordDetails;
-    }
-
-    public void setRecordDetails(String recordDetails) {
-        this.recordDetails = recordDetails;
-    }
-
     public Set<Surgery> getSurgeries() {
         return surgeries;
     }
 
-    public void setSurgeries(Set<Surgery> surgeries) { this.surgeries = surgeries; }
+    public void setSurgeries(Set<Surgery> surgeries) {
+        this.surgeries = surgeries;
+    }
 
     public Set<Consultation> getConsultations() {
         return consultations;
@@ -72,5 +69,13 @@ public class Record implements Serializable{
 
     public void setConsultations(Set<Consultation> consultations) {
         this.consultations = consultations;
+    }
+
+    public Set<History> getHistory() {
+        return history;
+    }
+
+    public void setHistory(Set<History> history) {
+        this.history = history;
     }
 }

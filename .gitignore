@@ -20,9 +20,8 @@ lib/
 out/
 settings.gradle
 nbproject/private/
-build/
+/build
 nbbuild/
-dist/
 nbdist/
 .nb-gradle/
 /.idea/
@@ -44,10 +43,14 @@ nbdist/
 
 
 .gradle
-/build/
 !gradle/wrapper/gradle-wrapper.jar
 bin/
 src/test/
-build
+
 out
 .DS_Store
+/.env
+
+test.ftl
+
+TestController.java

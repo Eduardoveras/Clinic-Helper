@@ -16,12 +16,14 @@ import java.util.UUID;
 public class Insurance implements Serializable{
     // Attributes
     @Id
-    private String jascId;
+    private String insuranceId;
     @ManyToOne
     @NotNull
     private Patient owner;
     @NotNull
     private String insuranceSerialCode;
+    @NotNull
+    private String insuranceSupplier;
     @NotNull
     private String insurancePlan;
 
@@ -30,19 +32,21 @@ public class Insurance implements Serializable{
 
     }
 
-    public Insurance(Patient owner, String insuranceSerialCode, String insurancePlan){
-        this.setJascId("JASC-I-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+    public Insurance(Patient owner, String insuranceSerialCode, String insuranceSupplier, String insurancePlan){
+        this.setInsuranceId( owner.getPatientId() + "-I-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setOwner(owner);
         this.setInsuranceSerialCode(insuranceSerialCode);
+        this.setInsuranceSupplier(insuranceSupplier);
         this.setInsurancePlan(insurancePlan);
     }
 
-    public String getJascId() {
-        return jascId;
+    // Getters and Setters
+    public String getInsuranceId() {
+        return insuranceId;
     }
 
-    public void setJascId(String jascId) {
-        this.jascId = jascId;
+    public void setInsuranceId(String insuranceId) {
+        this.insuranceId = insuranceId;
     }
 
     public Patient getOwner() { return owner; }
@@ -63,5 +67,13 @@ public class Insurance implements Serializable{
 
     public void setInsurancePlan(String insurancePlan) {
         this.insurancePlan = insurancePlan;
+    }
+
+    public String getInsuranceSupplier() {
+        return insuranceSupplier;
+    }
+
+    public void setInsuranceSupplier(String insuranceSupplier) {
+        this.insuranceSupplier = insuranceSupplier;
     }
 }

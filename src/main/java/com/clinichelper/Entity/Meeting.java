@@ -3,14 +3,12 @@
  */
 package com.clinichelper.Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Set;
 import java.util.UUID;
 
@@ -20,42 +18,43 @@ public class Meeting implements Serializable{
 
     // Attributes
     @Id
-    private String jascId;
+    private String meetingId;
     @NotNull
     private String meetingTitle; //
     @NotNull
     private String meetingObjective;
     @NotNull
-    private Date meetingDate;//
-    @NotNull
     private Timestamp meetingTime;
     @NotNull
     private String meetingPlace;//
-    @OneToMany
+    @ManyToMany
     @NotNull
-    private Set<Staff> attendees;
+    private Set<Contact> attendees;
+    @ManyToOne
+    private Clinic clinic;
 
-    // Constructores
+    // Constructors
     public Meeting(){
 
     }
 
-    public Meeting(String meetingTitle, String meetingObjective, Date meetingDate, Timestamp meetingTime, String meetingPlace, Set<Staff> attendees){
-        this.setJascId("JASC-M-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
-        this.setMeetingTitle(meetingTitle);
-        this.setMeetingObjective(meetingObjective);
-        this.setMeetingDate(meetingDate);
+    public Meeting(Clinic clinic, String meetingTitle, String meetingObjective, Timestamp meetingTime, String meetingPlace, Set<Contact> attendees){
+        this.setMeetingId(clinic.getClinicPrefix() + "-M-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+        this.setMeetingTitle(meetingTitle.toUpperCase());
+        this.setMeetingObjective(meetingObjective.toUpperCase());
         this.setMeetingTime(meetingTime);
         this.setMeetingPlace(meetingPlace);
         this.setAttendees(attendees);
+        this.setClinic(clinic);
     }
 
-    public String getJascId() {
-        return jascId;
+    // Getters and Setters
+    public String getMeetingId() {
+        return meetingId;
     }
 
-    public void setJascId(String jascId) {
-        this.jascId = jascId;
+    public void setMeetingId(String meetingId) {
+        this.meetingId = meetingId;
     }
 
     public String getMeetingTitle() {
@@ -74,16 +73,12 @@ public class Meeting implements Serializable{
         this.meetingObjective = meetingObjective;
     }
 
-    public Date getMeetingDate() {
-        return meetingDate;
-    }
-
-    public void setMeetingDate(Date meetingDate) {
-        this.meetingDate = meetingDate;
-    }
-
     public Timestamp getMeetingTime() {
         return meetingTime;
+    }
+
+    public String getStringMeetingTime(){
+        return meetingTime.toString();
     }
 
     public void setMeetingTime(Timestamp meetingTime) {
@@ -98,11 +93,19 @@ public class Meeting implements Serializable{
         this.meetingPlace = meetingPlace;
     }
 
-    public Set<Staff> getAttendees() {
+    public Set<Contact> getAttendees() {
         return attendees;
     }
 
-    public void setAttendees(Set<Staff> attendees) {
+    public void setAttendees(Set<Contact> attendees) {
         this.attendees = attendees;
+    }
+
+    public Clinic getClinic() {
+        return clinic;
+    }
+
+    public void setClinic(Clinic clinic) {
+        this.clinic = clinic;
     }
 }

@@ -8,19 +8,20 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 public interface AppointmentRepository extends JpaRepository<Appointment, String> {
 
-    Appointment findByJascId(String jascID);
+    Appointment findByAppointmentId(String appointmentId);
 
-    @Query("select a from Appointment a where a.appointmentDate = :appointmentDate")
-    List<Appointment> findByDate(@Param("appointmentDate") Date searchDate);
+    @Query("select a from Appointment a where a.clinic.clinicId = :clinic")
+    List<Appointment> findByClinicId(@Param("clinic") String clinicId);
 
-    @Query("select a from Appointment a where a.appointmentDate between :beginning and :ending")
-    List<Appointment> findByDateRange(@Param("beginning") Date startDate, @Param("ending") Date endDate);
+    @Query("select a from Appointment a where a.clinic.clinicId = :clinic and a.appointmentTime between :beginning and :ending")
+    List<Appointment> findByDateRange(@Param("beginning") Timestamp startDate, @Param("ending") Timestamp endDate, @Param("clinic") String clinicId);
 
-    @Query("select a from Appointment a where a.patient.jascId = :id")
-    List<Appointment> findByPatientJascId(@Param("id") String patientJascId);
+    @Query("select a from Appointment a where a.patient.patientId = :id")
+    List<Appointment> findByPatientId(@Param("id") String patientId);
 }

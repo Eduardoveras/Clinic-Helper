@@ -13,11 +13,9 @@ import java.util.UUID;
 @Entity
 @Table(name="consultation")
 public class Consultation implements Serializable{
+    // Attributes
     @Id
-    @GeneratedValue
-    private String jascId;
-    @NotNull
-    private Date consultationDate;//
+    private String consultationId;
     @NotNull
     private Timestamp consultationTime;
     private String consultationDetail;
@@ -25,32 +23,26 @@ public class Consultation implements Serializable{
     @NotNull
     private Appointment appointment;
 
+    // Constructors
     public Consultation(){
 
     }
-    public Consultation(Date consultationDate, Timestamp consultationTime, String consultationDetail, Appointment appointment){
-        this.setJascId("JASC-C-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
-        this.setConsultationDate(consultationDate);
+
+    public Consultation(Timestamp consultationTime, String consultationDetail, Appointment appointment){
+        this.setConsultationId(appointment.getClinic().getClinicPrefix() + "-C-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setConsultationTime(consultationTime);
         this.setConsultationDetail(consultationDetail);
         this.setAppointment(appointment);
 
     }
 
-    public String getJascId() {
-        return jascId;
+    //Getters and Setters
+    public String getConsultationId() {
+        return consultationId;
     }
 
-    public void setJascId(String jascId) {
-        this.jascId = jascId;
-    }
-
-    public Date getConsultationDate() {
-        return consultationDate;
-    }
-
-    public void setConsultationDate(Date consultationDate) {
-        this.consultationDate = consultationDate;
+    public void setConsultationId(String consultationId) {
+        this.consultationId = consultationId;
     }
 
     public Timestamp getConsultationTime() {

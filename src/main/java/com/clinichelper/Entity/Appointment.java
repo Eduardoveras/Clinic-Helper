@@ -1,10 +1,15 @@
 package com.clinichelper.Entity;
 
+import com.clinichelper.Tools.Enums.AccessForm;
+import com.clinichelper.Tools.Enums.AppointmentStatus;
+import com.clinichelper.Tools.Enums.AppointmentType;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.UUID;
 
 /**
@@ -13,10 +18,9 @@ import java.util.UUID;
 @Entity
 @Table(name="appointments")
 public class Appointment implements Serializable{
+    // Attributes
     @Id
-    private String jascId;
-    @NotNull
-    private Date appointmentDate;
+    private String appointmentId;
     @NotNull
     private Timestamp appointmentTime;
     @ManyToOne
@@ -24,47 +28,58 @@ public class Appointment implements Serializable{
     private Patient patient;
     @Column(length = 500)
     private String appointmentDescription;
-    private String appointmentAccessFrom;
+    private AccessForm appointmentAccessFrom;
+    private AppointmentType appointmentType;
+    @NotNull
+    private AppointmentStatus appointmentStatus;
+    @ManyToOne
+    private Clinic clinic;
 
+    // Constructors
     public Appointment(){
 
     }
 
-    public Appointment(Date appointmentDate, Patient patient, String appointmentDescription, String appointmentAccessFrom){
-        this.setJascId("Request-" + UUID.randomUUID().toString().split("-")[0]);
-        this.setAppointmentDate(appointmentDate);
+    public Appointment(Clinic clinic,Timestamp appointmentTime , Patient patient, String appointmentDescription){
+        this.setAppointmentId(clinic.getClinicPrefix() + "-SOLICIT-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setPatient(patient);
         this.setAppointmentDescription(appointmentDescription);
-        this.setAppointmentAccessFrom(appointmentAccessFrom);
+        this.setAppointmentAccessFrom(AccessForm.WEB);
+        this.setClinic(clinic);
+        this.setAppointmentType(AppointmentType.CONSULTATION);
+        this.setAppointmentStatus(AppointmentStatus.PENDING);
+        this.setAppointmentTime(appointmentTime);
     }
 
-    public Appointment(Date appointmentDate, Timestamp appointmentTime, Patient patient, String appointmentDescription, String appointmentAccessFrom){
-        this.setJascId("JASC-A-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
-        this.setAppointmentDate(appointmentDate);
+    public Appointment(Clinic clinic,  Timestamp appointmentTime, Patient patient, String appointmentDescription, AppointmentType appointmentType){
+        this.setAppointmentId(clinic.getClinicPrefix() + "-A-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setAppointmentTime(appointmentTime);
         this.setPatient(patient);
         this.setAppointmentDescription(appointmentDescription);
-        this.setAppointmentAccessFrom(appointmentAccessFrom);
+        this.setAppointmentAccessFrom(AccessForm.CLINIC);
+        this.setClinic(clinic);
+        this.setAppointmentType(appointmentType);
+        this.setAppointmentStatus(AppointmentStatus.PENDING);
     }
 
-    public String getJascId() {
-        return jascId;
+    //Getters and Setters
+    public String getAppointmentId() {
+        return appointmentId;
     }
 
-    public void setJascId(String jascId) {
-        this.jascId = jascId;
+    public void setAppointmentId(String appointmentId) {
+        this.appointmentId = appointmentId;
     }
 
-    public Date getAppointmentDate() {
-        return appointmentDate;
-    }
-
-    public void setAppointmentDate(Date appointmentDate) {
-        this.appointmentDate = appointmentDate;
-    }
 
     public Timestamp getAppointmentTime() {
         return appointmentTime;
+    }
+
+    public String getStringAppointmentTime(){
+        Date date = new Date(appointmentTime.getTime());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+        return sdf.format(date).substring(11,16);
     }
 
     public void setAppointmentTime(Timestamp appointmentTime) {
@@ -79,11 +94,11 @@ public class Appointment implements Serializable{
         this.patient = patient;
     }
 
-    public String getAppointmentAccessFrom() {
+    public AccessForm getAppointmentAccessFrom() {
         return appointmentAccessFrom;
     }
 
-    public void setAppointmentAccessFrom(String appointmentAccessFrom) {
+    public void setAppointmentAccessFrom(AccessForm appointmentAccessFrom) {
         this.appointmentAccessFrom = appointmentAccessFrom;
     }
 
@@ -93,5 +108,36 @@ public class Appointment implements Serializable{
 
     public void setAppointmentDescription(String appointmentDescription) {
         this.appointmentDescription = appointmentDescription;
+    }
+
+    public Clinic getClinic() {
+        return clinic;
+    }
+
+    public void setClinic(Clinic clinic) {
+        this.clinic = clinic;
+    }
+
+    public AppointmentType getAppointmentType() {
+        return appointmentType;
+    }
+
+    public void setAppointmentType(AppointmentType appointmentType) {
+        this.appointmentType = appointmentType;
+    }
+
+    public String getSimplifiedTime()
+    {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
+        return sdf.format(appointmentTime);
+    }
+
+    public AppointmentStatus getAppointmentStatus() {
+        return appointmentStatus;
+    }
+
+    public void setAppointmentStatus(AppointmentStatus appointmentStatus) {
+        this.appointmentStatus = appointmentStatus;
     }
 }
