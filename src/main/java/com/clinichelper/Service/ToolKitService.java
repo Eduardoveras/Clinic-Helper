@@ -32,8 +32,6 @@ public class ToolKitService {
     @Autowired
     private ChoreRepository choreRepository;
     @Autowired
-    private ClinicRepository clinicRepository;
-    @Autowired
     private MedicationRepository medicationRepository;
     @Autowired
     private MeetingRepository meetingRepository;
