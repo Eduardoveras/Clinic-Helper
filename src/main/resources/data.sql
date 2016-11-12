@@ -1,11 +1,9 @@
-INSERT INTO clinic (clinic_id, account_type, clinic_name, clinic_prefix, registered_date) VALUES ('CH-PLATINUM-JASC', 3, 'JASC', 'JASC', '2016-10-30');
+INSERT INTO clinic (clinic_id, account_type, clinic_name, clinic_prefix, registered_date) VALUES ('CH-PLATINUM-JASC', 3, 'JASC Clinic', 'JASC', '2016-10-30');
 
-INSERT INTO contact (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date, has_account) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-ADMIN', 'administrator', 'ADMIN', 'djidjellypas92@gmail.com', '2016-11-4', FALSE);
-
-INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-YOLO', '1980-02-03', 'djidjellypas92@gmail.com', 'djijdelly', 0, 'SICLAIT', '1234', 0, 'CH-PLATINUM-JASC');
-INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-SWAG', '1980-02-03', 'eva', 'eva', 0, 'SORAYA', '1234', 0, 'CH-PLATINUM-JASC');
-INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-VAPE', '1980-02-03', 'eduardo', 'eduardo', 0, 'Veras', '1234', 0, 'CH-PLATINUM-JASC');
-INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-AWESOME', '1980-02-03', 'paulina', 'paulina', 0, 'LA MEJOR', '1234', 0, 'CH-PLATINUM-JASC');
+INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-DJ8983JHDHIO', '1980-02-03', 'dj@gmail.com', 'djijdelly', 1, 'SICLAIT', '1234', 0, 'CH-PLATINUM-JASC');
+INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-ESI34JHH432U', '1980-02-03', 'eva@gmail.com', 'eva', 0, 'SORAYA', '1234', 0, 'CH-PLATINUM-JASC');
+INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-EV933JBF453D', '1980-02-03', 'eduardo@gmail.com', 'eduardo', 1, 'Veras', '1234', 0, 'CH-PLATINUM-JASC');
+INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-PAULINA32443', '1980-02-03', 'paulina@email.com', 'paulina', 0, 'LA MEJOR', '1234', 0, 'CH-PLATINUM-JASC');
 
 INSERT INTO patients (
 clinic_clinic_id,
@@ -24,9 +22,9 @@ patient_id,
   patient_nationality,
   patient_registered_date,
   patient_telephone_number) VALUES
-('CH-PLATINUM-JASC', 'JASC-P-BVN309WJHN32', 'Stripper', 'Villa Olga', '1992-10-31', 'Santiago',
-'829xxxyyyy', 'RD', 'djidjellypas92@gmail.com', 'Djidjelly', 1, '1234rfg 323',
-'Siclait', 'Haitiano', '2015-10-23', '809xxxyyyy');
+('CH-PLATINUM-JASC', 'JASC-P-BVN309WJHN32', 'Lawyer', 'Villa Olga', '1992-10-31', 'Santiago',
+'829xxxyyyy', 'RD', 'dj92@gmail.com', 'Djidjelly', 1, '1234rfg 323',
+'Siclait', 'Haitian', '2015-11-15', '809xxxyyyy');
 
 INSERT INTO records (record_id, patient_patient_id) VALUES ('JASC-R-DJ', 'JASC-P-BVN309WJHN32');
 
@@ -47,7 +45,7 @@ patient_id,
   patient_nationality,
   patient_registered_date,
   patient_telephone_number) VALUES
-('CH-PLATINUM-JASC', 'JASC-P-BVN3DF43WED32', 'Hobo', 'Queens', '1996-11-11', 'NYC',
+('CH-PLATINUM-JASC', 'JASC-P-BVN3DF43WED32', 'Police Officer', 'Queens', '1996-11-17', 'NYC',
 '829xxxyyyy', 'USA', 'eduardo2@gmail.com', 'Eduardo', 1, '12343eg 323',
 'Veras', 'Dominicana', '2011-10-31', '809xxxyyyy');
 
@@ -70,23 +68,23 @@ patient_id,
   patient_nationality,
   patient_registered_date,
   patient_telephone_number) VALUES
-('CH-PLATINUM-JASC', 'JASC-P-BVN309WDHN32', 'Crazy cat lady', 'Sience', '1982-11-12', 'Paris',
-'829xxxyyyy', 'FR', 'eva@gmail.com', 'Eva', 0, '12oih7g 323',
+('CH-PLATINUM-JASC', 'JASC-P-BVN309WDHN32', 'Vetenarian', 'Sience', '1982-11-19', 'Paris',
+'829xxxyyyy', 'FR', 'eva45@gmail.com', 'Eva', 0, '12oih7g 323',
 'Soraya', 'Dominicana', '2015-10-28', '809xxxyyyy');
 
 INSERT INTO records (record_id, patient_patient_id) VALUES ('JASC-R-EVA', 'JASC-P-BVN309WDHN32');
 
 INSERT INTO contact (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date, has_account) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-PAULINA', 'Paulina', 'Reyes', 'p@gmail.com', '1985-03-23', TRUE );
-INSERT INTO contact (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date, has_account) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-SICARD', 'Julio', 'Sicard', 'js@gmail.com', '1980-11-13', FALSE);
+INSERT INTO contact (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date, has_account) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-SICARD', 'Julio', 'Sicard', 'js@gmail.com', '1980-11-18', FALSE);
 INSERT INTO contact (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date, has_account) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-ADELSO', 'Adelso', 'Tejada', 'at@gmail.com', '1990-02-02', FALSE);
-INSERT INTO contact (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date, has_account) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-ASTRID', 'Astrid', 'Incarnacion', 'ai@gmail.com', '1990-11-14', FALSE);
+INSERT INTO contact (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date, has_account) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-ASTRID', 'Astrid', 'Incarnacion', 'ai@gmail.com', '1990-11-22', FALSE);
 
 INSERT INTO appointments(clinic_clinic_id, appointment_id, appointment_time, patient_patient_id, appointment_description, appointment_access_from, appointment_type, appointment_status) VALUES (
 'CH-PLATINUM-JASC',
 'JASC123456',
-'2016-11-07 10:10:00',
+'2016-11-14 10:10:00',
 'JASC-P-BVN309WJHN32',
-'cita para bala bla bla bla',
+'Rhinoplasti for facial reconstruction',
 0,
 0,
 0);
@@ -94,9 +92,9 @@ INSERT INTO appointments(clinic_clinic_id, appointment_id, appointment_time, pat
 INSERT INTO appointments(clinic_clinic_id, appointment_id, appointment_time, patient_patient_id, appointment_description, appointment_access_from, appointment_type, appointment_status) VALUES (
 'CH-PLATINUM-JASC',
 'JASC123452',
-'2016-11-07 11:10:00',
+'2016-11-14 11:10:00',
 'JASC-P-BVN3DF43WED32',
-'Appointment for brain removal',
+'Botox and face lift',
 0,
 0,
 0);
@@ -108,7 +106,7 @@ meeting_objective,
 meeting_place,
 meeting_time,
 meeting_title) VALUES
-('CH-PLATINUM-JASC', 'JASC-M-NY934WHRC3', 'Make plans for charity event', 'Meeting Room 102', '2016-11-12 08:00:00', 'JASC Cancer Charity');
+('CH-PLATINUM-JASC', 'JASC-M-NY934WHRC3', 'Make plans for Christmas charity event', 'Meeting Room 102', '2016-11-16 08:45:00', 'JASC Cancer Charity');
 
 INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_contact_id) VALUES ('JASC-M-NY934WHRC3', 'JASC-STAFF-PAULINA');
 INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_contact_id) VALUES ('JASC-M-NY934WHRC3', 'JASC-STAFF-ASTRID');
@@ -122,13 +120,13 @@ meeting_objective,
 meeting_place,
 meeting_time,
 meeting_title) VALUES
-('CH-PLATINUM-JASC', 'JASC-M-NY934UINRC3', 'Prepare for seminar', 'Main Office', '2016-11-11 16:30:00', 'Seminar Prep');
+('CH-PLATINUM-JASC', 'JASC-M-NY934UINRC3', 'Prepare for Annual Medical Association of Latino America seminar', 'Main Office', '2016-11-14 16:30:00', 'Seminar Prep');
 
 INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_contact_id) VALUES ('JASC-M-NY934UINRC3', 'JASC-STAFF-SICARD');
 INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_contact_id) VALUES ('JASC-M-NY934UINRC3', 'JASC-STAFF-ADELSO');
 
-INSERT INTO chore (user_user_id, chore_id, description, title, type, completed, next_reminder, reminders) VALUES ('CH-JASC-YOLO', 'JASC-M-9URHFDN', 'By more Bras', 'Inventory refill', 4, FALSE, '2012-01-12', E'\\xACED0005737200136A6176612E7574696C2E41727261794C6973747881D21D99C7619D03000149000473697A657870000000017704000000017E720023636F6D2E636C696E696368656C7065722E546F6F6C732E456E756D732E52657065617400000000000000001200007872000E6A6176612E6C616E672E456E756D0000000000000000120000787074000945564552595F44415978');
-INSERT INTO chore (user_user_id, chore_id, description, title, type, completed, next_reminder, reminders) VALUES ('CH-JASC-YOLO', 'JASC-M-9UR23DN', 'Call Accountant', 'Finance', 6, FALSE, '2016-11-18', E'\\xACED0005737200136A6176612E7574696C2E41727261794C6973747881D21D99C7619D03000149000473697A657870000000017704000000017E720023636F6D2E636C696E696368656C7065722E546F6F6C732E456E756D732E52657065617400000000000000001200007872000E6A6176612E6C616E672E456E756D0000000000000000120000787074000646524944415978');
+INSERT INTO chore (user_user_id, chore_id, description, title, type, completed, next_reminder, reminders) VALUES ('CH-JASC-DJ8983JHDHIO', 'JASC-M-9URHFDN', 'Restock Mayers Plus XL Braseir', 'Inventory refill', 4, FALSE, '2012-01-12', E'\\xACED0005737200136A6176612E7574696C2E41727261794C6973747881D21D99C7619D03000149000473697A657870000000017704000000017E720023636F6D2E636C696E696368656C7065722E546F6F6C732E456E756D732E52657065617400000000000000001200007872000E6A6176612E6C616E672E456E756D0000000000000000120000787074000945564552595F44415978');
+INSERT INTO chore (user_user_id, chore_id, description, title, type, completed, next_reminder, reminders) VALUES ('CH-JASC-DJ8983JHDHIO', 'JASC-M-9UR23DN', 'Call Accountant For Tax Return', 'Finance', 6, FALSE, '2016-11-18', E'\\xACED0005737200136A6176612E7574696C2E41727261794C6973747881D21D99C7619D03000149000473697A657870000000017704000000017E720023636F6D2E636C696E696368656C7065722E546F6F6C732E456E756D732E52657065617400000000000000001200007872000E6A6176612E6C616E672E456E756D0000000000000000120000787074000646524944415978');
 
 INSERT INTO equipments (
 equipment_id,
@@ -137,7 +135,7 @@ equipment_in_stock,
 equipment_name,
 equipment_use,
 clinic_clinic_id) VALUES
-('JASC-E-VYHU7iuyh', 'to cut stuff', 131, 'Scalpel', 'cut', 'CH-PLATINUM-JASC');
+('JASC-E-VYHU7iuyh', 'For surgically precise incisions', 131, 'Scalpel', 'Sharp Tool', 'CH-PLATINUM-JASC');
 
 INSERT INTO equipments (
 equipment_id,
@@ -146,7 +144,7 @@ equipment_in_stock,
 equipment_name,
 equipment_use,
 clinic_clinic_id) VALUES
-('JASC-E-VYHU876yh', 'silicone breasts', 31, 'Silic', 'surgery', 'CH-PLATINUM-JASC');
+('JASC-E-VYHU876yh', 'silicone breasts implants for mamary reconstruction', 31, 'Silic Implants', 'Implants', 'CH-PLATINUM-JASC');
 
 INSERT INTO equipments (
 equipment_id,
@@ -155,7 +153,7 @@ equipment_in_stock,
 equipment_name,
 equipment_use,
 clinic_clinic_id) VALUES
-('JASC-E-VYHUUJH7iuyh', 'hearing', 13, 'Stetascope', 'hear', 'CH-PLATINUM-JASC');
+('JASC-E-VYHUUJH7iuyh', 'eneral medical tool', 13, 'Stetascope', 'Hearing', 'CH-PLATINUM-JASC');
 
 INSERT INTO items (
 product_id,
@@ -164,7 +162,7 @@ product_in_stock,
 product_name,
 product_price,
 clinic_clinic_id) VALUES
-('JASC-P-HUJBUYHH778', 'Goodside Bras', 54, 'Bra', 432.42, 'CH-PLATINUM-JASC');
+('JASC-P-HUJBUYHH778', 'Mayers Braseir', 54, 'Bra', 432.42, 'CH-PLATINUM-JASC');
 
 INSERT INTO medications (
 medication_id,
@@ -174,7 +172,7 @@ medication_name,
 medication_price,
 supplier,
 clinic_clinic_id) VALUES
-('JASC-MED-UHGYHJNG343', 'for pain', 200, 'Ibuprofen', 43.20, 'MED Pact', 'CH-PLATINUM-JASC');
+('JASC-MED-UHGYHJNG343', 'Low pain medication', 200, 'Ibuprofen', 43.20, 'MED Pact', 'CH-PLATINUM-JASC');
 
 INSERT INTO medications (
 medication_id,
@@ -184,4 +182,4 @@ medication_name,
 medication_price,
 supplier,
 clinic_clinic_id) VALUES
-('JASC-MED-UH43HJNG343', 'for pain', 100, 'IZuprina', 3.20, 'MED Pact', 'CH-PLATINUM-JASC');
+('JASC-MED-UH43HJNG343', 'Surgical Anaesthetic', 100, 'I-Zuprina', 3.20, 'MED Pact', 'CH-PLATINUM-JASC');
