@@ -45,7 +45,7 @@ public class AppointmentController {
 
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
 
-        model.addAttribute("todoList", TKS.InitializeTodoList(clinicId));
+        model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
         model.addAttribute("appointmentList", DQS.findAllRegisteredAppointmentsForClinic(clinicId));
         model.addAttribute("userList", DQS.findAllRegisteredPatientsForClinic(clinicId));
 

@@ -40,7 +40,7 @@ public class MeetingAndContactsController {
             return new ModelAndView("redirect:/login");
 
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
-        model.addAttribute("todoList", TKS.InitializeTodoList(clinicId));
+        model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
         model.addAttribute("contactList", DQS.findAllRegisteredContactsForClinic(clinicId));
 
         return new ModelAndView("contacts/allContacts");
@@ -52,7 +52,7 @@ public class MeetingAndContactsController {
             return new ModelAndView("redirect:/login");
 
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
-        model.addAttribute("todoList", TKS.InitializeTodoList(clinicId));
+        model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
         model.addAttribute("meetingsList", DQS.findAllRegisteredMeetingsForClinic(clinicId));
 
         return new ModelAndView("meetings/allMeetings");

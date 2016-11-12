@@ -42,7 +42,7 @@ public class InventoryController {
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
 
         Map<String, List> inventory = TKS.FetchClinicInventory(clinicId);
-        model.addAttribute("todoList", TKS.InitializeTodoList(clinicId));
+        model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
         model.addAttribute("equipmentList", inventory.get("equipments"));
         model.addAttribute("eSize", inventory.get("equipments").size());
         model.addAttribute("productList", inventory.get("products"));

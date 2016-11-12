@@ -35,7 +35,7 @@ public class UserController {
     // TODO: this can only be used by SUPERADMIN
     @GetMapping("/admin/users")
     public ModelAndView fetchAllPatientsView(Model model){
-        model.addAttribute("todoList", TKS.InitializeTodoList("CH-PLATINUM-JASC"));
+        //model.addAttribute("todoList", TKS.InitializeTodoList("CH-PLATINUM-JASC"));
 
 
         //model.addAttribute("userList", DQS.findAllAllRegisteredUsersForClinic("CH-PLATINUM-JASC"));
@@ -66,7 +66,7 @@ public class UserController {
             return new ModelAndView("redirect:/login");
 
         User u = DQS.findUserInformation(userId);
-        model.addAttribute("todoList", TKS.InitializeTodoList(u.getClinic().getClinicId()));
+        model.addAttribute("todoList", TKS.InitializeTodoList(u.getUserId()));
         model.addAttribute("user", u);
         return new ModelAndView("users/userProfile");
     }

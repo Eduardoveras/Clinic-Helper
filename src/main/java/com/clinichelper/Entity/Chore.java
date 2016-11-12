@@ -3,11 +3,16 @@
  */
 package com.clinichelper.Entity;
 
+import com.clinichelper.Tools.Enums.Repeat;
 import com.clinichelper.Tools.Enums.Task;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.UUID;
 
 @Entity
@@ -23,22 +28,25 @@ public class Chore implements Serializable{
     @Column(length = 500)
     private String description;
     @ManyToOne
-    private Clinic clinic;
-    @Transient
+    private User user;
     private boolean completed;
+    private Timestamp nextReminder;
+    private ArrayList<Repeat> reminders;
 
     // Constructors
     public Chore(){
 
     }
 
-    public Chore(Clinic clinic, String title, Task type, String description){
-        this.setChoreId(clinic.getClinicPrefix() + "-TASK-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
+    public Chore(User user, String title, Task type, String description, ArrayList<Repeat> reminders){
+        this.setChoreId(user.getClinic().getClinicPrefix() + "-TASK-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setTitle(title);
         this.setType(type);
         this.setDescription(description);
         this.setCompleted(false);
-        this.setClinic(clinic);
+        this.setUser(user);
+        this.setReminders(reminders);
+        this.setNextReminder();
     }
 
     // Getters and Setters
@@ -89,8 +97,6 @@ public class Chore implements Serializable{
         }
     }
 
-
-
     public void setType(Task type) {
         this.type = type;
     }
@@ -119,11 +125,81 @@ public class Chore implements Serializable{
         this.title = title;
     }
 
-    public Clinic getClinic() {
-        return clinic;
+    public User getUser() { return user; }
+
+    public void setUser(User user) { this.user = user; }
+
+    public Timestamp getNextReminder() {
+        return nextReminder;
     }
 
-    public void setClinic(Clinic clinic) {
-        this.clinic = clinic;
+    public void setNextReminder() {
+        this.nextReminder = setFirstNextReminder(this.reminders.get(0));
+    }
+
+    public ArrayList<Repeat> getReminders() {
+        return reminders;
+    }
+
+    public void setReminders(ArrayList<Repeat> reminders) {
+        this.reminders = reminders;
+    }
+
+    // Auxiliary Functions
+    private Timestamp setFirstNextReminder(Repeat repeat){
+        Calendar today = Calendar.getInstance();
+        today.setTime(Calendar.getInstance().getTime());
+
+        switch (repeat){
+            case EVERY_DAY:
+                today.add(Calendar.DATE, 1); // Tomorrow
+                break;
+            case MONTHLY:
+                today.add(Calendar.MONTH, 1); // Next Month
+                break;
+            case MONDAY:
+                do{
+                    today.add(Calendar.DATE, 1);
+                } while (today.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY);
+
+                break;
+            case TUESDAY:
+                do{
+                    today.add(Calendar.DATE, 1);
+                } while (today.get(Calendar.DAY_OF_WEEK) != Calendar.TUESDAY);
+
+                break;
+            case WEDNESDAY:
+                do{
+                    today.add(Calendar.DATE, 1);
+                } while (today.get(Calendar.DAY_OF_WEEK) != Calendar.WEDNESDAY);
+
+                break;
+            case THURSDAY:
+                do{
+                    today.add(Calendar.DATE, 1);
+                } while (today.get(Calendar.DAY_OF_WEEK) != Calendar.THURSDAY);
+
+                break;
+            case FRIDAY:
+                do{
+                    today.add(Calendar.DATE, 1);
+                } while (today.get(Calendar.DAY_OF_WEEK) != Calendar.FRIDAY);
+
+                break;
+            case SATURDAY:
+                do{
+                    today.add(Calendar.DATE, 1);
+                } while (today.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY);
+
+                break;
+            case YEARLY: // every year
+                today.add(Calendar.YEAR, 1); // Next Year
+                break;
+            default:
+                return new Timestamp(Calendar.getInstance().getTime().getTime());
+        }
+
+        return new Timestamp(today.getTime().getTime());
     }
 }

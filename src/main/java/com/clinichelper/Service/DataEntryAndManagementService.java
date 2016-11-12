@@ -13,10 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.PersistenceException;
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class DataEntryAndManagementService {
@@ -85,13 +82,14 @@ public class DataEntryAndManagementService {
 
 
 
-    public Chore createNewCustomTask(String clinicId, String title, Task type, String description) throws Exception{
+    public Chore createNewCustomTask(String userId, String title, Task type, String description, ArrayList<Repeat> reminders) throws Exception{
 
-        if (!doesClinicIdExist(clinicId))
-            throw new IllegalArgumentException("\n\nThis is an invalid clinic id");
+        if (!doesUserIdExist(userId))
+            throw new IllegalArgumentException("\n\nThis is an invalid user id");
 
         try {
-            return choreRepository.save(new Chore(clinicRepository.findByClinicId(clinicId), title, type, description));
+            Chore chore = choreRepository.save(new Chore(userRepository.findByUserId(userId), title, type, description, reminders));
+            return chore;
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
             throw new PersistenceException("\n\nThis consultation was not able to persist -> " + exp.getMessage());
@@ -537,6 +535,13 @@ public class DataEntryAndManagementService {
             throw new IllegalArgumentException("\n\nDANGER: YOU CAN NOT ERASE ADMIN ACCOUNT!");
 
         try {
+            List<Chore> chores = choreRepository.findByUserId(userId);
+
+            for (Chore c:
+                 chores) {
+                choreRepository.delete(c); // Erasing any chore data created by the user
+            }
+
             userRepository.delete(userId);
         } catch (NullPointerException exp) {
             System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
