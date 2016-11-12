@@ -15,6 +15,9 @@ import java.util.List;
 public interface ConsultationRepository extends JpaRepository<Consultation, String> {
     Consultation findByConsultationId(String consultationId);
 
+    @Query("select c from Consultation c where c.appointment.appointmentId = :id")
+    Consultation findByAppointmentId(@Param("id") String appointmentId);
+
     @Query("select c from Consultation c where c.appointment.clinic.clinicId = :clinic")
     List<Consultation> findByClinicId(@Param("clinic") String clinicId);
 

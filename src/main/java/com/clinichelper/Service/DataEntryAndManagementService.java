@@ -380,6 +380,29 @@ public class DataEntryAndManagementService {
             throw new IllegalArgumentException("\n\nThis appointment jasc id is not valid");
 
         try {
+            // Fetching patients records
+            //Record record = recordRepository.findByPatientId(appointmentRepository.findByAppointmentId(appointmentId).getPatient().getPatientId());
+
+            // Applying cascade to any existing Consultation
+            Consultation consultation = consultationRepository.findByAppointmentId(appointmentId);
+            if (consultation != null) {
+                //Set<Consultation> consultations = record.getConsultations();
+                //consultations.remove(consultation);
+                //record.setConsultations(consultations);
+                consultationRepository.delete(consultation);
+            }
+
+            // Applying cascade to any existing Surgery
+            Surgery surgery = surgeryRepository.findByAppointmentId(appointmentId);
+            if (surgery != null) {
+                //Set<Surgery> surgeries = record.getSurgeries();
+                //surgeries.remove(surgery);
+                //record.setSurgeries(surgeries);
+                surgeryRepository.delete(surgery);
+            }
+
+            //recordRepository.save(record);
+
             appointmentRepository.delete(appointmentId);
         } catch (NullPointerException exp) {
             System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
