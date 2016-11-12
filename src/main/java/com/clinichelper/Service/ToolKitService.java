@@ -8,6 +8,7 @@ import com.clinichelper.Repository.*;
 import com.clinichelper.Tools.Classes.CalendarEvent;
 import com.clinichelper.Tools.Enums.AppointmentStatus;
 import com.clinichelper.Tools.Enums.EventStatus;
+import com.clinichelper.Tools.Enums.Repeat;
 import com.clinichelper.Tools.Enums.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -123,9 +124,12 @@ public class ToolKitService {
                     staff += s.getFullName() + "** ";
                 }
 
+                ArrayList<Repeat> reminders = new ArrayList<>();
+                reminders.add(Repeat.NEVER);
+
                 chores.add(new Chore(userRepository.findByUserId(userId), "Meeting Today: " + m.getMeetingTitle() + " At " + m.getMeetingTime().toString().substring(10),
                         Task.MEETING,
-                        "Place: " + m.getMeetingPlace() + "\nAttendees: " + staff + "\nObjective: " + m.getMeetingObjective()));
+                        "Place: " + m.getMeetingPlace() + "\nAttendees: " + staff + "\nObjective: " + m.getMeetingObjective(), reminders));
             }
         } catch (Exception exp) {
             // TODO: add exception handling
@@ -150,19 +154,22 @@ public class ToolKitService {
 
             birthDate.setTime(p.getPatientBirthDate());
 
+            ArrayList<Repeat> reminders = new ArrayList<>();
+            reminders.add(Repeat.NEVER);
+
             if ((birthDate.get(Calendar.MONTH) - today.get(Calendar.MONTH)) == 0) {
                 if ((today.get(Calendar.DAY_OF_MONTH) - birthDate.get(Calendar.DAY_OF_MONTH)) == 0)
                     chores.add(new Chore(userRepository.findByUserId(userId), "Happy Birthday " + p.getPatientFullName() + "!",
                             Task.PATIENT_BIRTHDAY,
-                            "Celebrate " + p.getPatientFullName() + "'s special day! We have such awesome patients!"));
+                            "Celebrate " + p.getPatientFullName() + "'s special day! We have such awesome patients!", reminders));
                 else if ((birthDate.get(Calendar.DAY_OF_MONTH) - today.get(Calendar.DAY_OF_MONTH)) > 0 && (seventhDay.get(Calendar.DAY_OF_MONTH) - birthDate.get(Calendar.DAY_OF_MONTH)) <= 7)
                     chores.add(new Chore(userRepository.findByUserId(userId), "It's almost someone's special day!",
                             Task.PATIENT_BIRTHDAY,
-                            "In " + (birthDate.get(Calendar.DAY_OF_MONTH) - today.get(Calendar.DAY_OF_MONTH)) + " day(s) it will be " + p.getPatientFullName() + "'s special day! Be Ready!"));
+                            "In " + (birthDate.get(Calendar.DAY_OF_MONTH) - today.get(Calendar.DAY_OF_MONTH)) + " day(s) it will be " + p.getPatientFullName() + "'s special day! Be Ready!", reminders));
             } else if ((birthDate.get(Calendar.MONTH) - today.get(Calendar.MONTH)) == 1 && Math.abs(today.get(Calendar.DAY_OF_MONTH) - birthDate.get(Calendar.DAY_OF_MONTH)) >= 23) // In there is a change of month during the week
                 chores.add(new Chore(userRepository.findByUserId(userId), "It's almost someone's special day!",
                         Task.PATIENT_BIRTHDAY,
-                        "It will soon be " + p.getPatientFullName() + "'s special day! Be Ready for " + birthDate.get(Calendar.DAY_OF_MONTH) + " of " + getMonthName(birthDate.get(Calendar.MONTH)) + "!"));
+                        "It will soon be " + p.getPatientFullName() + "'s special day! Be Ready for " + birthDate.get(Calendar.DAY_OF_MONTH) + " of " + getMonthName(birthDate.get(Calendar.MONTH)) + "!", reminders));
         }
 
         return chores;
@@ -183,15 +190,18 @@ public class ToolKitService {
 
             registered.setTime(p.getPatientRegisteredDate());
 
+            ArrayList<Repeat> reminders = new ArrayList<>();
+            reminders.add(Repeat.NEVER);
+
             if ((today.get(Calendar.MONTH) - registered.get(Calendar.MONTH)) == 0 && (today.get(Calendar.DAY_OF_MONTH) - registered.get(Calendar.DAY_OF_MONTH)) == 0)
                 if ((today.get(Calendar.YEAR) - registered.get(Calendar.YEAR)) == 1)
                     chores.add(new Chore(userRepository.findByUserId(userId), p.getPatientFullName() + " Met Us One Year Ago!",
                             Task.REGISTRATIONDATE,
-                            "Has it been ONE year already? " + p.getPatientFullName() + " has completed their first year with us! Congratulations faithful patient!"));
+                            "Has it been ONE year already? " + p.getPatientFullName() + " has completed their first year with us! Congratulations faithful patient!", reminders));
                 else if ((today.get(Calendar.YEAR) - registered.get(Calendar.YEAR)) > 1)
                     chores.add(new Chore(userRepository.findByUserId(userId), "We Are Happy To Be Celebrating Another Year With " + p.getPatientFullName(),
                             Task.REGISTRATIONDATE,
-                            (today.get(Calendar.YEAR) - registered.get(Calendar.YEAR)) + " years together! How time flies?! " + p.getPatientFullName() + " has completed their first year with us! Congratulations faithful patient!"));
+                            (today.get(Calendar.YEAR) - registered.get(Calendar.YEAR)) + " years together! How time flies?! " + p.getPatientFullName() + " has completed their first year with us! Congratulations faithful patient!", reminders));
         }
 
         return chores;
@@ -214,20 +224,24 @@ public class ToolKitService {
              contactRepository.findByClinicId(userRepository.findByUserId(userId).getClinic().getClinicId())) {
 
             birthDate.setTime(s.getBirthDate());
+
+            ArrayList<Repeat> reminders = new ArrayList<>();
+            reminders.add(Repeat.NEVER);
+
             if (!s.getContactId().equals("JASC-STAFF-ADMIN")) {
                 if ((today.get(Calendar.MONTH) - birthDate.get(Calendar.MONTH)) == 0) {
                     if ((today.get(Calendar.DAY_OF_MONTH) - birthDate.get(Calendar.DAY_OF_MONTH)) == 0)
                         chores.add(new Chore(userRepository.findByUserId(userId), "Happy Birthday " + s.getFullName() + "!",
                                 Task.STAFF_BIRTHDAY,
-                                "Celebrate " + s.getFullName() + "'s special day! We thank you for being part of the team!"));
+                                "Celebrate " + s.getFullName() + "'s special day! We thank you for being part of the team!", reminders));
                     else if ((birthDate.get(Calendar.DAY_OF_MONTH) - today.get(Calendar.DAY_OF_MONTH)) > 0 && (seventhDay.get(Calendar.DAY_OF_MONTH) - birthDate.get(Calendar.DAY_OF_MONTH)) <= 7)
                         chores.add(new Chore(userRepository.findByUserId(userId), "It's almost someone's special day!",
                                 Task.STAFF_BIRTHDAY,
-                                "In" + (birthDate.get(Calendar.DAY_OF_MONTH) - today.get(Calendar.DAY_OF_MONTH)) + "day(s) it will be " + s.getFullName() + "'s special day! Don't forget to celebrate their contribution as a valued member of the JASC Team!"));
+                                "In" + (birthDate.get(Calendar.DAY_OF_MONTH) - today.get(Calendar.DAY_OF_MONTH)) + "day(s) it will be " + s.getFullName() + "'s special day! Don't forget to celebrate their contribution as a valued member of the JASC Team!", reminders));
                 } else if ((birthDate.get(Calendar.MONTH) - today.get(Calendar.MONTH)) == 1 && Math.abs(today.get(Calendar.DAY_OF_MONTH) - birthDate.get(Calendar.DAY_OF_MONTH)) >= 23) // In there is a change of month during the week
                     chores.add(new Chore(userRepository.findByUserId(userId), "It's almost someone's special day!",
                             Task.STAFF_BIRTHDAY,
-                            "It will soon be " + s.getFullName() + "'s special day! Be Ready for " + birthDate.get(Calendar.DAY_OF_MONTH) + " of " + getMonthName(birthDate.get(Calendar.MONTH)) + "!"));
+                            "It will soon be " + s.getFullName() + "'s special day! Be Ready for " + birthDate.get(Calendar.DAY_OF_MONTH) + " of " + getMonthName(birthDate.get(Calendar.MONTH)) + "!", reminders));
             }
         }
 

@@ -87,12 +87,28 @@
                                       data-parsley-validation-threshold="10">
                                                         </textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="sel1">Select type:</label>
-                            <select class="form-control" id="type" name="type">
-                                <option>REMINDER</option>
-                                <option>URGENT</option>
-                            </select>
+                        <div>
+                            <div class="form-group" style="display: inline-block;">
+                                <label for="sel1">Select type:</label>
+                                <select class="form-control" id="type" name="type">
+                                    <option>REMINDER</option>
+                                    <option>URGENT</option>
+                                </select>
+                            </div>
+                            <div class="form-group"style="display: inline-block;">
+                                <label for="sel1">Repeat:</label>
+                                <select class="form-control" id="repeat" name="repeat">
+                                    <option>EVERY_DAY</option>
+                                    <option>MONDAY</option>
+                                    <option>TUESDAY</option>
+                                    <option>WEDNESDAY</option>
+                                    <option>THURSDAY</option>
+                                    <option>FRIDAY</option>
+                                    <option>SATURDAY</option>
+                                    <option>MONTHLY</option>
+                                    <option>YEARLY</option>
+                                </select>
+                            </div>
                         </div>
                         <input type="submit" value="CREATE" class="btn btn-success" />
                     </form>

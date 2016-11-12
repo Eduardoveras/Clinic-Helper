@@ -6,6 +6,7 @@ import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Enums.AppointmentStatus;
 import com.clinichelper.Tools.Enums.Permission;
+import com.clinichelper.Tools.Enums.Repeat;
 import com.clinichelper.Tools.Enums.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ErrorController;
@@ -90,13 +91,15 @@ public class IndexController implements ErrorController {
 
     // Posts
     @PostMapping("/newTask")
-    public String registerNewTask(@RequestParam("title") String title, @RequestParam("type") Task type, @RequestParam("description") String description) {
+    public String registerNewTask(@RequestParam("title") String title, @RequestParam("type") Task type, @RequestParam("repeat")Repeat repeat, @RequestParam("description") String description) {
 
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
         try {
-            DEAMS.createNewCustomTask(DQS.getCurrentLoggedUser().getUserId(), title, type, description);
+            ArrayList<Repeat> reminders = new ArrayList<>();
+            reminders.add(repeat);
+            DEAMS.createNewCustomTask(DQS.getCurrentLoggedUser().getUserId(), title, type, description, reminders);
             return "redirect:/";
         } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
             System.out.println("ERROR EN CREAR TASK");

@@ -11,7 +11,7 @@ public enum Repeat {
     THURSDAY,
     FRIDAY,
     SATURDAY,
-    WEEKLY,
     MONTHLY,
-    YEARLY
+    YEARLY,
+    NEVER
 }

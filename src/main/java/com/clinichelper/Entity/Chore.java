@@ -3,11 +3,16 @@
  */
 package com.clinichelper.Entity;
 
+import com.clinichelper.Tools.Enums.Repeat;
 import com.clinichelper.Tools.Enums.Task;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.UUID;
 
 @Entity
@@ -24,21 +29,24 @@ public class Chore implements Serializable{
     private String description;
     @ManyToOne
     private User user;
-    @Transient
     private boolean completed;
+    private Timestamp nextReminder;
+    private ArrayList<Repeat> reminders;
 
     // Constructors
     public Chore(){
 
     }
 
-    public Chore(User user, String title, Task type, String description){
+    public Chore(User user, String title, Task type, String description, ArrayList<Repeat> reminders){
         this.setChoreId(user.getClinic().getClinicPrefix() + "-TASK-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setTitle(title);
         this.setType(type);
         this.setDescription(description);
         this.setCompleted(false);
         this.setUser(user);
+        this.setReminders(reminders);
+        this.setNextReminder();
     }
 
     // Getters and Setters
@@ -120,4 +128,57 @@ public class Chore implements Serializable{
     public User getUser() { return user; }
 
     public void setUser(User user) { this.user = user; }
+
+    public Timestamp getNextReminder() {
+        return nextReminder;
+    }
+
+    public void setNextReminder() {
+        this.nextReminder = setFirstNextReminder(this.reminders.get(0));
+    }
+
+    public ArrayList<Repeat> getReminders() {
+        return reminders;
+    }
+
+    public void setReminders(ArrayList<Repeat> reminders) {
+        this.reminders = reminders;
+    }
+
+    // Auxiliary Functions
+    private Timestamp setFirstNextReminder(Repeat repeat){
+        Calendar today = Calendar.getInstance();
+        today.setTime(Calendar.getInstance().getTime());
+
+        switch (repeat){
+            case EVERY_DAY:
+                today.add(Calendar.DATE, 1); // Tomorrow
+                break;
+            case MONTHLY:
+                today.add(Calendar.MONTH, 1); // Next Month
+                break;
+            case MONDAY:
+                today.add(Calendar.MONDAY, 1);
+                break;
+            case TUESDAY:
+                today.add(Calendar.TUESDAY, 1);
+                break;
+            case WEDNESDAY:
+                today.add(Calendar.WEDNESDAY, 1);
+                break;
+            case THURSDAY:
+                today.add(Calendar.THURSDAY, 1);
+                break;
+            case FRIDAY:
+                today.add(Calendar.FRIDAY, 1);
+                break;
+            case YEARLY: // every year
+                today.add(Calendar.YEAR, 1); // Next Year
+                break;
+            default:
+                return new Timestamp(Calendar.getInstance().getTime().getTime());
+        }
+
+        return new Timestamp(today.getTime().getTime());
+    }
 }

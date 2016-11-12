@@ -17,7 +17,7 @@ public interface ChoreRepository extends JpaRepository<Chore, String>{
     @Query("select c from Chore c where c.user.clinic.clinicId = :clinic")
     List<Chore> findByClinicId(@Param("clinic") String clinicId);
 
-    @Query("select c from Chore c where c.user.userId = :user")
+    @Query("select c from Chore c where c.user.userId = :user and c.completed = FALSE")
     List<Chore> findByUserId(@Param("user") String userId);
 /*
     @Query("select c from Chore c where c.type = :choreType and c.clinic.clinicId = :clinic")

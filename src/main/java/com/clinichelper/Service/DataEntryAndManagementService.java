@@ -82,13 +82,13 @@ public class DataEntryAndManagementService {
 
 
 
-    public Chore createNewCustomTask(String userId, String title, Task type, String description) throws Exception{
+    public Chore createNewCustomTask(String userId, String title, Task type, String description, ArrayList<Repeat> reminders) throws Exception{
 
         if (!doesUserIdExist(userId))
             throw new IllegalArgumentException("\n\nThis is an invalid user id");
 
         try {
-            Chore chore = choreRepository.save(new Chore(userRepository.findByUserId(userId), title, type, description));
+            Chore chore = choreRepository.save(new Chore(userRepository.findByUserId(userId), title, type, description, reminders));
             return chore;
         } catch (PersistenceException exp){
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
