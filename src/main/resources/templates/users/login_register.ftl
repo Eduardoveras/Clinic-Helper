@@ -8,19 +8,19 @@
     <a class="hiddenanchor" id="signin"></a>
 
     <div class="login_wrapper">
-        <div class="animate form login_form">
+        <div class="form-group animate form login_form item">
             <section class="login_content">
                 <form METHOD="POST" enctype="multipart/form-data" action="/userLogin">
                     <h1>Login</h1>
                     <div>
-                        <input type="text" class="form-control" name="email" id="email" placeholder="Email" required="" />
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Email" required="" />
                     </div>
                     <div>
                         <input type="password" class="form-control" name="password" id="password" placeholder="Password" required="" />
                     </div>
                     <div>
                         <input type="hidden" name="clinic" value="CH-PLATINUM-JASC">
-                        <input type="submit" value="Log In" class="btn btn-default submit"></input>
+                        <input id="send" type="submit" value="Log In" class="btn btn-default submit">
                         <a class="reset_pass" href="#">Lost your password?</a>
                     </div>
 
@@ -81,5 +81,6 @@
         </div>
     </div>
 </div>
+<#include "/layouts/footer.ftl">
 </body>
 </html>
