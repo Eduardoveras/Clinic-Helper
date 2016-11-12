@@ -47,7 +47,7 @@ patient_id,
   patient_nationality,
   patient_registered_date,
   patient_telephone_number) VALUES
-('CH-PLATINUM-JASC', 'JASC-P-BVN3DF43WED32', 'Hobo', 'Queens', '1996-11-01', 'NYC',
+('CH-PLATINUM-JASC', 'JASC-P-BVN3DF43WED32', 'Hobo', 'Queens', '1996-11-11', 'NYC',
 '829xxxyyyy', 'USA', 'eduardo2@gmail.com', 'Eduardo', 1, '12343eg 323',
 'Veras', 'Dominicana', '2011-10-31', '809xxxyyyy');
 
@@ -70,16 +70,16 @@ patient_id,
   patient_nationality,
   patient_registered_date,
   patient_telephone_number) VALUES
-('CH-PLATINUM-JASC', 'JASC-P-BVN309WDHN32', 'Crazy cat lady', 'Sience', '1982-04-11', 'Paris',
+('CH-PLATINUM-JASC', 'JASC-P-BVN309WDHN32', 'Crazy cat lady', 'Sience', '1982-11-12', 'Paris',
 '829xxxyyyy', 'FR', 'eva@gmail.com', 'Eva', 0, '12oih7g 323',
 'Soraya', 'Dominicana', '2015-10-28', '809xxxyyyy');
 
 INSERT INTO records (record_id, patient_patient_id) VALUES ('JASC-R-EVA', 'JASC-P-BVN309WDHN32');
 
 INSERT INTO contact (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date, has_account) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-PAULINA', 'Paulina', 'Reyes', 'p@gmail.com', '1985-03-23', TRUE );
-INSERT INTO contact (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date, has_account) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-SICARD', 'Julio', 'Sicard', 'js@gmail.com', '1980-11-03', FALSE);
+INSERT INTO contact (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date, has_account) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-SICARD', 'Julio', 'Sicard', 'js@gmail.com', '1980-11-13', FALSE);
 INSERT INTO contact (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date, has_account) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-ADELSO', 'Adelso', 'Tejada', 'at@gmail.com', '1990-02-02', FALSE);
-INSERT INTO contact (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date, has_account) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-ASTRID', 'Astrid', 'Incarnacion', 'ai@gmail.com', '1990-10-31', FALSE);
+INSERT INTO contact (clinic_clinic_id, contact_id, first_name, last_name, email, birth_date, has_account) VALUES ('CH-PLATINUM-JASC', 'JASC-STAFF-ASTRID', 'Astrid', 'Incarnacion', 'ai@gmail.com', '1990-11-14', FALSE);
 
 INSERT INTO appointments(clinic_clinic_id, appointment_id, appointment_time, patient_patient_id, appointment_description, appointment_access_from, appointment_type, appointment_status) VALUES (
 'CH-PLATINUM-JASC',
@@ -108,7 +108,7 @@ meeting_objective,
 meeting_place,
 meeting_time,
 meeting_title) VALUES
-('CH-PLATINUM-JASC', 'JASC-M-NY934WHRC3', 'Make plans for charity event', 'Meeting Room 102', '2016-11-05 08:00:00', 'JASC Cancer Charity');
+('CH-PLATINUM-JASC', 'JASC-M-NY934WHRC3', 'Make plans for charity event', 'Meeting Room 102', '2016-11-12 08:00:00', 'JASC Cancer Charity');
 
 INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_contact_id) VALUES ('JASC-M-NY934WHRC3', 'JASC-STAFF-PAULINA');
 INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_contact_id) VALUES ('JASC-M-NY934WHRC3', 'JASC-STAFF-ASTRID');
@@ -122,13 +122,13 @@ meeting_objective,
 meeting_place,
 meeting_time,
 meeting_title) VALUES
-('CH-PLATINUM-JASC', 'JASC-M-NY934UINRC3', 'Prepare for seminar', 'Main Office', '2016-11-05 16:30:00', 'Seminar Prep');
+('CH-PLATINUM-JASC', 'JASC-M-NY934UINRC3', 'Prepare for seminar', 'Main Office', '2016-11-11 16:30:00', 'Seminar Prep');
 
 INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_contact_id) VALUES ('JASC-M-NY934UINRC3', 'JASC-STAFF-SICARD');
 INSERT INTO  meetings_attendees (meeting_meeting_id, attendees_contact_id) VALUES ('JASC-M-NY934UINRC3', 'JASC-STAFF-ADELSO');
 
-INSERT INTO chore (user_user_id, chore_id, description, title, type) VALUES ('CH-JASC-AWESOME', 'JASC-M-9URHFDN', 'By more Bras', 'Inventory refill', 4);
-INSERT INTO chore (user_user_id, chore_id, description, title, type) VALUES ('CH-JASC-AWESOME', 'JASC-M-9UR23DN', 'Call Accountant', 'Finance', 6);
+INSERT INTO chore (user_user_id, chore_id, description, title, type) VALUES ('CH-JASC-YOLO', 'JASC-M-9URHFDN', 'By more Bras', 'Inventory refill', 4);
+INSERT INTO chore (user_user_id, chore_id, description, title, type) VALUES ('CH-JASC-YOLO', 'JASC-M-9UR23DN', 'Call Accountant', 'Finance', 6);
 
 INSERT INTO equipments (
 equipment_id,

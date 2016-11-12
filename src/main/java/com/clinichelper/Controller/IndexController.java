@@ -60,7 +60,7 @@ public class IndexController implements ErrorController {
         }
 
         model.addAttribute("name", name);
-        model.addAttribute("todoList", TKS.InitializeTodoList(clinicId));
+        model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
         //model.addAttribute("pending", countConditions(appointments, AppointmentStatus.PENDING));
         //model.addAttribute("inOffice", countConditions(appointments, AppointmentStatus.IN_OFFICE));
         //model.addAttribute("completed", countConditions(appointments, AppointmentStatus.COMPLETED));

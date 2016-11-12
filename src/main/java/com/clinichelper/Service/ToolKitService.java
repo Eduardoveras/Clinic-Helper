@@ -143,9 +143,7 @@ public class ToolKitService {
 
         List<Chore> chores = new ArrayList<>();
 
-        java.util.Date utilDate = new java.util.Date();
-
-        today.setTime(new Date(utilDate.getTime()));
+        today.setTime(new Date(Calendar.getInstance().getTime().getTime()));
         seventhDay.setTime(today.getTime());
         seventhDay.add(Calendar.DATE, 7);
 
