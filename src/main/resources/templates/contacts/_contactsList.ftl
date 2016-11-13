@@ -52,7 +52,7 @@
 
                                         <li><a href="#">Delete</a></li>
                                         <li class="divider"></li>
-                                        <li><a href="#">Collect Payment</a></li>
+                                        <li><a href="#">Edit</a></li>
                                     </ul>
                                     <button type="button" class="btn btn-primary btn-sm btn-round" >
                                         <i class="fa fa-user"> </i> View Profile

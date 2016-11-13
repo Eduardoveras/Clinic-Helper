@@ -10,6 +10,7 @@ import com.clinichelper.Tools.Enums.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -113,7 +114,7 @@ public class MeetingAndContactsController {
     }
 
     @PostMapping("/delete_contact")
-    public String deleteContact(@RequestParam("id") String contactId){
+    public String deleteContact(@RequestParam("contactId") String contactId){
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
