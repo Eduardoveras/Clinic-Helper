@@ -51,7 +51,7 @@ public class TeamController {
             model.addAttribute("isAdmin", false);
         else
             model.addAttribute("isAdmin", true);
-        
+
         return new ModelAndView("/users/allUsers");
     }
 
