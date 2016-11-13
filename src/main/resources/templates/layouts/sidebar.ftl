@@ -12,7 +12,7 @@
                 <img src="/images/img.jpg" alt="..." class="img-circle profile_img">
             </div>
             <div class="profile_info">
-                <span>Welcome,</span>
+                <span><@spring.message "welcome" />,</span>
                 <h2>${user.getFullName()}</h2>
             </div>
         </div>
@@ -24,21 +24,21 @@
         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
                 <br>
-                <h3>MENU</h3>
+                <h3><@spring.message "menu" /></h3>
                 <ul class="nav side-menu">
 
-                    <li><a href="/"><i  class="fa fa-plus-square-o"></i> Dashboard <span ></span></a></li>
-                    <li><a href="/patients" ><i class="fa fa-user-md"></i> Patients  <span ></span></a></li>
-                    <li><a href="/appointments"><i  class="fa fa-desktop"></i> Appointments  <span ></span></a></li>
-                    <li><a  href="/users"><i class="fa fa-users"></i> Users<span></span></a></li>
-                    <li><a><i class="fa fa-comments-o"></i> Team <span class="fa fa-chevron-down"></span></a>
+                    <li><a href="/"><i  class="fa fa-plus-square-o"></i> <@spring.message "dashboard" /> <span ></span></a></li>
+                    <li><a href="/patients" ><i class="fa fa-user-md"></i> <@spring.message "patients" />  <span ></span></a></li>
+                    <li><a href="/appointments"><i  class="fa fa-desktop"></i> <@spring.message "appointments" />  <span ></span></a></li>
+                    <li><a  href="/users"><i class="fa fa-users"></i> <@spring.message "users" /><span></span></a></li>
+                    <li><a><i class="fa fa-comments-o"></i> <@spring.message "team" /> <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="/contacts">Members</a></li>
-                            <li><a href="/meetings">Meetings</a></li>
+                            <li><a href="/contacts"><@spring.message "contacts" /></a></li>
+                            <li><a href="/meetings"><@spring.message "meetings" /></a></li>
                         </ul>
                     </li>
-                    <li><a href="/Inventory"><i  class="fa fa-calculator"></i> Inventory <span ></span></a></li>
-                    <li><a  href="/Stats"><i class="fa fa-bar-chart-o"></i> Statistics<span></span></a></li>
+                    <li><a href="/Inventory"><i  class="fa fa-calculator"></i> <@spring.message "inventory" /> <span ></span></a></li>
+                    <li><a  href="/Stats"><i class="fa fa-bar-chart-o"></i> <@spring.message "statistics" /><span></span></a></li>
 
 
                 </ul>
@@ -52,10 +52,10 @@
 
         <!-- /menu footer buttons -->
         <div class="sidebar-footer hidden-small">
-            <a data-toggle="tooltip" data-placement="top" title="Settings">
+            <a data-toggle="tooltip" data-placement="top" title="<@spring.message "settings" />">
                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
             </a>
-            <a href="/logout" data-toggle="tooltip" data-placement="top" title="Logout">
+            <a href="/logout" data-toggle="tooltip" data-placement="top" title="<@spring.message "logout" />">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
             </a>
         </div>
