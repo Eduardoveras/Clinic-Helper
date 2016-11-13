@@ -122,7 +122,7 @@ public class MeetingAndContactsController {
             return "redirect:/";
 
         if (DQS.findRegisteredContact(contactId).isHasAccount())
-            return "redirect:/contacts"; // TODO: add Not allowed action delete user account first
+            return "redirect:/users"; // TODO: add Not allowed action delete user account first
 
         try {
             DEAMS.deleteRegisteredStaff(contactId);
