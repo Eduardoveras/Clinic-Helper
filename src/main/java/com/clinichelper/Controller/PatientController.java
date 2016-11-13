@@ -142,10 +142,9 @@ public class PatientController {
                     patientHeight, patientWeight, patientBloodType,
                     patientConditions, insuranceCode, supplier, insurancePlan);
             return "redirect:/patients";
-        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
-            System.out.println("ERROR EN CREAR PACIENTE");
         } catch (Exception exp){
             System.out.println("ERROR EN CREAR PACIENTE");
+            exp.printStackTrace();
         }
 
         return "redirect:/patients"; // TODO: implement exception handeling
@@ -155,9 +154,6 @@ public class PatientController {
     public String editPatient(@RequestParam("id") String patientId, @RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("idCard") String idCard, @RequestParam("mail") String mail, @RequestParam("telephoneNumber") String telephoneNumber, @RequestParam("contactTelephoneNumber") String contactTelephoneNumber, @RequestParam("address") String address, @RequestParam("occupation") String occupation, @RequestParam("dateOfBirth")Date dateOfBirth, @RequestParam("gender") String gender, @RequestParam("nationality") String nationality, @RequestParam("countries") String countries, @RequestParam("cities") String cities){
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
-
-        //if (DQS.getCurrentLoggedUser().getRole() != Permission.ASSISTANT)
-         //   return "redirect:/";
 
         try {
             Patient patient = DQS.findRegisteredPatient(patientId);
@@ -177,10 +173,8 @@ public class PatientController {
             patient.setPatientCity(cities.toUpperCase());
             DEAMS.editPatient(patient);
             return "redirect:/patient" + patient.getPatientId();
-        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/patient/" + patientId; // TODO: Implement Error exceptions for edit patient
@@ -201,10 +195,8 @@ public class PatientController {
 
             DEAMS.editPatient(patient);
             return "redirect:/patient/" + patient.getPatientId();
-        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/patient/" + patientId;// TODO: Implement Error exceptions for upload patient photo

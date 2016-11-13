@@ -80,10 +80,8 @@ public class MeetingAndContactsController {
         try {
             DEAMS.createNewStaffMember(DQS.getCurrentLoggedUser().getClinic().getClinicId(), firstName, lastName, new Date(new SimpleDateFormat("MM/dd/yyyy").parse(birthDate).getTime()), email);
             return "redirect:/contacts";
-        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/contacts"; // TODO: add error handling method
@@ -104,10 +102,8 @@ public class MeetingAndContactsController {
 
             DEAMS.createNewMeeting(DQS.getCurrentLoggedUser().getClinic().getClinicId(), title, objective, time, place, new HashSet<>(team));
             return "redirect:/meetings";
-        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/meetings"; // TODO: add error handling method
@@ -127,10 +123,8 @@ public class MeetingAndContactsController {
         try {
             DEAMS.deleteRegisteredStaff(contactId);
             return "redirect:/contacts";
-        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/contacts"; // TODO: add error handling method
@@ -144,10 +138,8 @@ public class MeetingAndContactsController {
         try {
             DEAMS.deleteRegisteredMeeting(meetingId);
             return "redirect:/meetings";
-        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/meetings"; // TODO: add error handling method
@@ -163,10 +155,8 @@ public class MeetingAndContactsController {
             meeting.setMeetingTime(newTime);
             DEAMS.editMeeting(meeting);
             return "redirect:/meetings";
-        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/meetings"; // TODO: add error handling method

@@ -85,14 +85,8 @@ public class UserController {
         try {
             DEAMS.editUserPhoto(email, clinicId, processImageFile(file.getBytes()));
             return "redirect:/user/" + user.getUserId();
-        } catch (PersistenceException exp){
-            //
-        } catch (IllegalArgumentException exp) {
-            //
-        } catch (NullPointerException exp) {
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/user/" + user.getUserId(); // TODO: add error exception logic
@@ -124,10 +118,8 @@ public class UserController {
             try {
                 DEAMS.editUserAccountCredentials(user.getEmail(), user.getClinic().getClinicId(), newPassword, user.getRole());
                 return "redirect:/user/" + user.getUserId();
-            } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
-                //
             } catch (Exception exp){
-                //
+                exp.printStackTrace();
             }
             return "redirect:/user/" + user.getUserId(); // TODO: Implement error exception or message to edit password
         }

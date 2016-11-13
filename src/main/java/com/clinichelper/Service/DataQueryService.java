@@ -82,6 +82,7 @@ public class DataQueryService {
         try {
             return findAllRegisteredAppointmentsByGivenDate(new Date(Calendar.getInstance().getTime().getTime()), clinicId);
         } catch (Exception exp){
+            exp.printStackTrace();
             throw new  Exception("Error during search for appointments for today");
         }
      }
@@ -90,6 +91,7 @@ public class DataQueryService {
         try{
             return appointmentRepository.findByDateRange(new Timestamp(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(searchDate.toString() + " 00:00:00").getTime()), new Timestamp(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(searchDate.toString() + " 23:59:00").getTime()), clinicId);
         } catch (Exception exp){
+            exp.printStackTrace();
             throw new  Exception("Error during search for appointments of a specific date");
         }
     }

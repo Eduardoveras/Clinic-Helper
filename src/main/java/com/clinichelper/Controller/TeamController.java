@@ -64,10 +64,8 @@ public class TeamController {
         try{
             DEAMS.createNewUserAccount(DQS.getCurrentLoggedUser().getClinic().getClinicId(), email, firstName, lastName, new Date(new SimpleDateFormat("MM/dd/yyyy").parse(birthDate).getTime()), gender.toUpperCase().equals("F") ? Gender.F : Gender.M, password, role.toUpperCase().equals("M") ? Permission.MEDIC : Permission.ASSISTANT);
             return "redirect:/users";
-        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/users"; // TODO: add error exception handler
@@ -84,10 +82,8 @@ public class TeamController {
 
         try {
             DEAMS.deleteRegisteredUserAccount(userId);
-        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect/team";
@@ -107,10 +103,8 @@ public class TeamController {
         try {
             DEAMS.editUserAccountCredentials(user.getEmail(), user.getClinic().getClinicId(), user.getPassword(), Permission.ADMIN);
             return "redirect:/team";
-        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/team"; // TODO: Implement error exception or message to edit password

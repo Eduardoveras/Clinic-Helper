@@ -71,10 +71,8 @@ public class InventoryController {
         try {
             DEAMS.createNewEquipment(DQS.getCurrentLoggedUser().getClinic().getClinicId(), equipmentName, equipmentUse, equipmentDescription, stock);
             return "redirect:/Inventory";
-        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
         return "redirect:/Inventory"; // TODO: implement error exception
     }
@@ -91,10 +89,8 @@ public class InventoryController {
         try {
             DEAMS.createNewProduct(DQS.getCurrentLoggedUser().getClinic().getClinicId(), productName, supplier, productDescription, productPrice, stock);
             return "redirect:/Inventory";
-        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/Inventory"; // TODO: implement error exception
@@ -112,10 +108,8 @@ public class InventoryController {
         try {
             DEAMS.createNewMedication(DQS.getCurrentLoggedUser().getClinic().getClinicId(), medicationName, supplier, medicationDescription, medicationPrice, stock);
             return "redirect:/Inventory";
-        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/Inventory"; // TODO: implement error exception
@@ -133,10 +127,8 @@ public class InventoryController {
         try{
             DEAMS.deleteRegisteredEquipment(equipmentId);
             return "redirect:/Inventory";
-        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/Inventory"; // TODO: implement error exception
@@ -153,10 +145,8 @@ public class InventoryController {
         try {
             DEAMS.deleteRegisteredMedication(medicationId);
             return "redirect:/Inventory";
-        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/Inventory"; // TODO: implement error exception
@@ -173,10 +163,8 @@ public class InventoryController {
         try{
             DEAMS.deleteRegisteredProduct(productId);
             return "redirect:/Inventory";
-        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/Inventory"; // TODO: implement error exception
@@ -196,10 +184,8 @@ public class InventoryController {
             equipment.setEquipmentInStock(stock);
             DEAMS.editEquipment(equipment);
             return "redirect:/Inventory";
-        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/Inventory"; // TODO: implement error exception
@@ -218,10 +204,8 @@ public class InventoryController {
             medication.setMedicationInStock(stock);
             DEAMS.editMedication(medication);
             return "redirect:/Inventory";
-        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/Inventory"; // TODO: implement error exception
@@ -240,10 +224,8 @@ public class InventoryController {
             product.setProductInStock(stock);
             DEAMS.editProduct(product);
             return "redirect:/Inventory";
-        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/Inventory"; // TODO: implement error exception
@@ -265,10 +247,8 @@ public class InventoryController {
             equipment.setEquipmentDescription(description);
             DEAMS.editEquipment(equipment);
             return "redirect:/Inventory";
-        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/Inventory"; // TODO: implement error exception
@@ -290,10 +270,8 @@ public class InventoryController {
             medication.setMedicationPrice(price);
             DEAMS.editMedication(medication);
             return "redirect:/Inventory";
-        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/Inventory"; // TODO: implement error exception
@@ -315,10 +293,8 @@ public class InventoryController {
             product.setProductPrice(price);
             DEAMS.editProduct(product);
             return "redirect:/Inventory";
-        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/Inventory"; // TODO: implement error exception

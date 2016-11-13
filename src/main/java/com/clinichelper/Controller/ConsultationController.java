@@ -36,9 +36,6 @@ public class ConsultationController {
         if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
-        //if (DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
-           // return new ModelAndView("redirect:/");
-
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
 
         model.addAttribute("consultationList", DQS.findAllRegisteredConsultationsForClinic(clinicId));
@@ -88,10 +85,8 @@ public class ConsultationController {
             DEAMS.editRecord(record);
 
             return "redirect:/"; // todavia no hay vista
-        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/"; // TODO: add error message handling

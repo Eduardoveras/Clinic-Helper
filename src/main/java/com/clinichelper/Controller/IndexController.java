@@ -57,6 +57,7 @@ public class IndexController implements ErrorController {
         try {
             model.addAttribute("todays_appointments", DQS.findAllRegisteredAppointmentsForToday(clinicId));
         } catch (Exception exp){
+            exp.printStackTrace();
             model.addAttribute("todays_appointments", new ArrayList<Appointment>()); // An error occurred to make the list empty
         }
 
@@ -101,10 +102,9 @@ public class IndexController implements ErrorController {
             reminders.add(repeat);
             DEAMS.createNewCustomTask(DQS.getCurrentLoggedUser().getUserId(), title, type, description, reminders);
             return "redirect:/";
-        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
-            System.out.println("ERROR EN CREAR TASK");
         } catch (Exception exp){
             System.out.println("ERROR EN CREAR TASK");
+            exp.printStackTrace();
         }
 
         return "redirect:/"; // TODO: add error handling method
