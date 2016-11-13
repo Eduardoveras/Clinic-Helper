@@ -1,5 +1,6 @@
 package com.clinichelper.Controller;
 
+import com.clinichelper.Entity.Clinic;
 import com.clinichelper.Entity.Contact;
 import com.clinichelper.Entity.Meeting;
 import com.clinichelper.Service.DataEntryAndManagementService;
