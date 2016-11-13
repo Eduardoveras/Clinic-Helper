@@ -46,7 +46,12 @@
                                 </button>
                                 <ul role="menu" class="dropdown-menu">
 
-                                    <li><a href="#">Delete</a></li>
+                                    <li><a>
+                                        <form action="/cancelAppointment" METHOD="POST" enctype="multipart/form-data">
+                                            <input type="hidden" value="${contact.getContactId()}" id="appointment_id" name="appointment_id">
+                                            <input type="submit" value="Cancel" class="btn btn-link">
+                                        </form>
+                                    </a></li>
                                     <li class="divider"></li>
                                     <li><a href="#">Collect Payment</a></li>
                                 </ul>
