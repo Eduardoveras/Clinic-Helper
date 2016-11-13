@@ -6,9 +6,11 @@ import com.clinichelper.Entity.Meeting;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
+import com.clinichelper.Tools.Enums.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,6 +48,11 @@ public class MeetingAndContactsController {
         model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
         model.addAttribute("contactList", DQS.findAllRegisteredContactsForClinic(clinicId));
 
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+            model.addAttribute("isAdmin", false);
+        else
+            model.addAttribute("isAdmin", true);
+        
         return new ModelAndView("contacts/allContacts");
     }
 
@@ -66,6 +73,9 @@ public class MeetingAndContactsController {
     public String registerNewContact(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("dateOfBirth") String  birthDate, @RequestParam("email") String email){
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
+
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+            return "redirect:/";
 
         try {
             DEAMS.createNewStaffMember(DQS.getCurrentLoggedUser().getClinic().getClinicId(), firstName, lastName, new Date(new SimpleDateFormat("MM/dd/yyyy").parse(birthDate).getTime()), email);
@@ -103,7 +113,28 @@ public class MeetingAndContactsController {
         return "redirect:/meetings"; // TODO: add error handling method
     }
 
-    
+    @PostMapping("/delete_contact")
+    public String deleteContact(@RequestParam("contactId") String contactId){
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
+
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+            return "redirect:/";
+
+        if (DQS.findRegisteredContact(contactId).isHasAccount())
+            return "redirect:/contacts"; // TODO: add Not allowed action delete user account first
+
+        try {
+            DEAMS.deleteRegisteredStaff(contactId);
+            return "redirect:/contacts";
+        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
+            //
+        } catch (Exception exp){
+            //
+        }
+
+        return "redirect:/contacts"; // TODO: add error handling method
+    }
 
     @PostMapping("/cancelMeeting")
     public String deleteMeeting(@RequestParam("id") String meetingId){
