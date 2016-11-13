@@ -46,6 +46,11 @@ public class AppointmentController {
         model.addAttribute("appointmentList", DQS.findAllRegisteredAppointmentsForClinic(clinicId));
         model.addAttribute("userList", DQS.findAllRegisteredPatientsForClinic(clinicId));
 
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+            model.addAttribute("isAdmin", false);
+        else
+            model.addAttribute("isAdmin", true);
+
         return new ModelAndView("appointments/allAppointment");
     }
 
@@ -56,6 +61,8 @@ public class AppointmentController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
+        //if (DQS.getCurrentLoggedUser().getRole() != Permission.ASSISTANT)
+          //  return "redirect:/";
 
         try {
             SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
@@ -94,6 +101,9 @@ public class AppointmentController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
+        //if (DQS.getCurrentLoggedUser().getRole() != Permission.ASSISTANT)
+        //  return "redirect:/";
+
         try {
             DEAMS.deleteRegisteredAppointment(appointmentId);
             return "redirect:/";
@@ -110,8 +120,8 @@ public class AppointmentController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
-            return "redirect:/";
+        //if (DQS.getCurrentLoggedUser().getRole() != Permission.ASSISTANT)
+        //  return "redirect:/";
 
         Appointment appointment = DQS.findRegisteredAppointment(appointmentId);
 
