@@ -47,7 +47,11 @@
                                 <li><a href="#" data-toggle="modal" data-target="#appointmentModal">Re-schedule</a>
                                     <input type="hidden" form="reScheduleForm" id="id" name="id" value="${appointment.getAppointmentId()}">
                                 </li>
-                                <li><a href="/cancelAppointment/${appointment.getAppointmentId()}">Cancel</a>
+                                <li>
+                                    <form action="/cancelAppointment" METHOD="POST" enctype="multipart/form-data">
+                                        <input type="hidden" value="${appointment.getAppointmentId()}" id="appointment_id" name="appointment_id">
+                                        <input type="submit" value="Cancel" class="btn btn-link">
+                                    </form>
                                 </li>
                             </ul>
                         </div>

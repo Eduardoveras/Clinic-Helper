@@ -86,7 +86,7 @@ public class AppointmentController {
         } catch (Exception exp){
             System.out.println("ERROR MESSAGE:");
             System.out.println(exp.getMessage());
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/appointments"; // TODO: add error message handling
@@ -97,16 +97,11 @@ public class AppointmentController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
-            return "redirect:/";
-
         try {
             DEAMS.deleteRegisteredAppointment(appointmentId);
             return "redirect:/";
-        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/" ; // TODO: add error message handling
@@ -129,10 +124,8 @@ public class AppointmentController {
 
             DEAMS.editAppointment(appointment);
             return "redirect:/appointments";
-        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/appointments"; // TODO: add error message handling
