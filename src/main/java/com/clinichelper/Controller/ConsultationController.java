@@ -6,6 +6,7 @@ import com.clinichelper.Entity.Patient;
 import com.clinichelper.Entity.Record;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
+import com.clinichelper.Tools.Enums.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,6 +41,12 @@ public class ConsultationController {
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
 
         model.addAttribute("consultationList", DQS.findAllRegisteredConsultationsForClinic(clinicId));
+        //model.addAttribute("isAdmin", false);
+
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+            model.addAttribute("isAdmin", false);
+        else
+            model.addAttribute("isAdmin", true);
 
         return new ModelAndView("t");
     }
