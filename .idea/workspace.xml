@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e4b2c9b0-c577-4fc0-8335-af0a7b847451" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/templates/consultations/_consultationList.ftl" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/ConsultationController.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/ConsultationController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/consultations/_consultation.ftl" afterPath="$PROJECT_DIR$/src/main/resources/templates/consultations/_consultation.ftl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/consultations/allConsultations.ftl" afterPath="$PROJECT_DIR$/src/main/resources/templates/consultations/allConsultations.ftl" />
     </list>
     <ignored path="Clinic-Helper.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -64,18 +62,20 @@
       <file leaf-file-name="ConsultationController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/ConsultationController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="38" column="27" selection-start-line="38" selection-start-column="27" selection-end-line="38" selection-end-column="27" />
-              <folding />
+            <state relative-caret-position="408">
+              <caret line="39" column="27" selection-start-line="39" selection-start-column="27" selection-end-line="39" selection-end-column="27" />
+              <folding>
+                <marker date="1479069349295" expanded="true" signature="1557:1559" ph="//..." />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="allConsultations.ftl" pinned="false" current-in-tab="true">
+      <file leaf-file-name="allConsultations.ftl" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/templates/consultations/allConsultations.ftl">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+            <state relative-caret-position="255">
+              <caret line="15" column="44" selection-start-line="15" selection-start-column="44" selection-end-line="15" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -86,6 +86,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="238">
               <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_consultationList.ftl" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/consultations/_consultationList.ftl">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="85" column="6" selection-start-line="85" selection-start-column="6" selection-end-line="85" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -482,6 +492,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/ConsultationController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/consultations/allConsultations.ftl" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/consultations/_consultation.ftl" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/consultations/_consultationList.ftl" />
       </list>
     </option>
   </component>
@@ -1241,6 +1252,9 @@
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="e4b2c9b0-c577-4fc0-8335-af0a7b847451" name="Default" comment="" />
@@ -1256,7 +1270,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22779000" />
+    <option name="totallyTimeSpent" value="23246000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1370" height="744" extended-state="0" />
@@ -1348,7 +1362,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/meetings/_meetingsTable.ftl" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/patients/allPatients.ftl" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/inventory/_inventoryTabs.ftl" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/appointments/_modal.ftl" />
@@ -1672,8 +1685,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/clinichelper/Controller/ConsultationController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="38" column="27" selection-start-line="38" selection-start-column="27" selection-end-line="38" selection-end-column="27" />
+        <state relative-caret-position="408">
+          <caret line="39" column="27" selection-start-line="39" selection-start-column="27" selection-end-line="39" selection-end-column="27" />
+          <folding>
+            <marker date="1479069349295" expanded="true" signature="1557:1559" ph="//..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/consultations/allConsultations.ftl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="44" selection-start-line="15" selection-start-column="44" selection-end-line="15" selection-end-column="44" />
           <folding />
         </state>
       </provider>
@@ -1686,10 +1709,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/consultations/allConsultations.ftl">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/consultations/_consultationList.ftl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        <state relative-caret-position="330">
+          <caret line="85" column="6" selection-start-line="85" selection-start-column="6" selection-end-line="85" selection-end-column="6" />
           <folding />
         </state>
       </provider>
