@@ -18,10 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.persistence.PersistenceException;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 public class AppointmentController {
@@ -119,8 +118,11 @@ public class AppointmentController {
         Appointment appointment = DQS.findRegisteredAppointment(appointmentId);
 
         try {
-            SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
-            appointment.setAppointmentTime(new Timestamp(sdf1.parse(newDate).getTime()));
+            SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy hh:mm a");
+            Date newDate2=sdf1.parse(newDate);
+            Timestamp timestamp = new java.sql.Timestamp(newDate2.getTime());
+            System.out.println("THE SUPER TIME IS"+timestamp);
+            appointment.setAppointmentTime(timestamp);
 
             DEAMS.editAppointment(appointment);
             return "redirect:/appointments";
