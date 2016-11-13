@@ -24,6 +24,7 @@
 
 
 
+
                 </div>
             </div>
         </div>
@@ -34,13 +35,6 @@
     </div>
 </div>
 <#include "/layouts/footer.ftl">
-<!-- bootstrap-daterangepicker -->
-<script>
-    $(document).ready($(function () {
-        $('#datetimepicker1').datetimepicker();
-    }));
-</script>
-<!-- /bootstrap-daterangepicker -->
 <#include "/layouts/pageCloser.ftl">
 
 

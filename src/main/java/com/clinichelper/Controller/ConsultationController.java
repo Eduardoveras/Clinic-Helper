@@ -8,6 +8,7 @@ import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import org.apache.catalina.LifecycleState;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +24,7 @@ import java.util.Set;
 /**
  * Created by eva_c on 11/6/2016.
  */
+@Controller
 public class ConsultationController {
     // Services
     @Autowired
@@ -33,6 +35,7 @@ public class ConsultationController {
     // Gets
     @GetMapping("/consultations")
     public ModelAndView fetchConsultationView(Model model) throws Exception{
+
         if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
@@ -43,7 +46,7 @@ public class ConsultationController {
 
         model.addAttribute("consultationList", DQS.findAllRegisteredConsultationsForClinic(clinicId));
 
-        return new ModelAndView("t");
+        return new ModelAndView("consultations/allConsultations");
     }
 
     // Posts
