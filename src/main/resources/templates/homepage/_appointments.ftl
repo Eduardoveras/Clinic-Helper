@@ -1,7 +1,7 @@
 <div class="col-md-7">
     <h2>Today's appointments</h2>
     <div class="x_content">
-        <div class="row">
+        <div class="row" style="overflow: auto; max-height: 400px;">
         <#list todays_appointments as appointment>
             <div class="col-md-12 col-sm-12 col-xs-12 profile_details">
                 <div class="well profile_view col-md-12">
