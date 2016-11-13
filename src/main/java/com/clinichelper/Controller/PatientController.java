@@ -117,7 +117,7 @@ public class PatientController {
             model.addAttribute("isAdmin", false);
         else
             model.addAttribute("isAdmin", true);
-        
+
         return new ModelAndView("");
     }
 
