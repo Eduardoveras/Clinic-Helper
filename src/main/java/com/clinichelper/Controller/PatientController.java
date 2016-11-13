@@ -41,7 +41,7 @@ public class PatientController {
             return new ModelAndView("redirect:/login");
 
         //if (DQS.getCurrentLoggedUser().getRole() == Permission.ADMIN)
-           // return new ModelAndView("redirect:/users");
+           // return new ModelAndView("redirect:/");
 
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
 

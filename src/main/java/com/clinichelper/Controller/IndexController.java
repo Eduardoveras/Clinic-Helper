@@ -38,6 +38,9 @@ public class IndexController implements ErrorController {
         if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
+        //if (DQS.getCurrentLoggedUser().getRole() == Permission.ADMIN)
+        // return new ModelAndView("redirect:/users");
+
         if (DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
             return new ModelAndView("redirect:/assistant/home");
         else
@@ -49,7 +52,7 @@ public class IndexController implements ErrorController {
         if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
-        //if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        //if (DQS.getCurrentLoggedUser().getRole() != Permission.ASSISTANT)
            // return new ModelAndView("redirect:/");
 
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
@@ -67,6 +70,12 @@ public class IndexController implements ErrorController {
         //model.addAttribute("completed", countConditions(appointments, AppointmentStatus.COMPLETED));
         model.addAttribute("user",DQS.getSessionAttr("user"));
         model.addAttribute("events",TKS.InitializeClinicCalendar(clinicId));
+        //model.addAttribute("isAdmin", false);
+
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+            model.addAttribute("isAdmin", false);
+        else
+            model.addAttribute("isAdmin", true);
 
         return new ModelAndView("homepage/index");
     }
@@ -80,6 +89,12 @@ public class IndexController implements ErrorController {
             //return new ModelAndView("redirect:/");
 
         model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
+        //model.addAttribute("isAdmin", false);
+
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+            model.addAttribute("isAdmin", false);
+        else
+            model.addAttribute("isAdmin", true);
 
         return new ModelAndView("");
     }
@@ -95,6 +110,9 @@ public class IndexController implements ErrorController {
 
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
+
+        //if (DQS.getCurrentLoggedUser().getRole() == Permission.ADMIN)
+        // return new ModelAndView("redirect:/");
 
         try {
             ArrayList<Repeat> reminders = new ArrayList<>();
