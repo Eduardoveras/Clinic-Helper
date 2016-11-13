@@ -1,6 +1,5 @@
 package com.clinichelper.Controller;
 
-import com.clinichelper.Entity.Clinic;
 import com.clinichelper.Entity.Contact;
 import com.clinichelper.Entity.Meeting;
 import com.clinichelper.Service.DataEntryAndManagementService;
@@ -10,7 +9,6 @@ import com.clinichelper.Tools.Enums.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

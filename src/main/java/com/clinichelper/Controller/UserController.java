@@ -16,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.PersistenceException;
-import javax.servlet.http.HttpSession;
 
 /**
  * Created by Eduardo veras on 28-Oct-16.

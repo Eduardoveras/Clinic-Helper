@@ -60,7 +60,6 @@ public class InventoryController {
         return new ModelAndView("inventory/viewInventory");
     }
 
-
     // Posts
     // Creates
     @PostMapping("/newEquipment")

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -48,6 +47,11 @@ public class TeamController {
         model.addAttribute("userList", DQS.findAllAllRegisteredUsersForClinic(clinicId));
         model.addAttribute("clinicId", DQS.findAllAllRegisteredUsersForClinic(clinicId).get(0).getClinic().getClinicPrefix());
 
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+            model.addAttribute("isAdmin", false);
+        else
+            model.addAttribute("isAdmin", true);
+        
         return new ModelAndView("/users/allUsers");
     }
 
