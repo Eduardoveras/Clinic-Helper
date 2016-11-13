@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.PersistenceException;
+import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -60,6 +62,23 @@ public class MeetingAndContactsController {
     }
 
     // Posts
+    @PostMapping("/new_contact")
+    public String registerNewContact(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("dateOfBirth") String  birthDate, @RequestParam("email") String email){
+        if (!DQS.isUserLoggedIn())
+            return "redirect:/login";
+
+        try {
+            DEAMS.createNewStaffMember(DQS.getCurrentLoggedUser().getClinic().getClinicId(), firstName, lastName, new Date(new SimpleDateFormat("MM/dd/yyyy").parse(birthDate).getTime()), email);
+            return "redirect:/contacts";
+        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
+            //
+        } catch (Exception exp){
+            //
+        }
+
+        return "redirect:/contacts"; // TODO: add error handling method
+    }
+
     @PostMapping("/new_meeting")
     public String registerNewMeeting(@RequestParam("title") String title, @RequestParam("objective") String objective, @RequestParam("time")Timestamp time, @RequestParam("place")String place, @RequestParam("attendees") List<String> attendees){
         if (!DQS.isUserLoggedIn())
@@ -74,15 +93,17 @@ public class MeetingAndContactsController {
             }
 
             DEAMS.createNewMeeting(DQS.getCurrentLoggedUser().getClinic().getClinicId(), title, objective, time, place, new HashSet<>(team));
-            return "redirect:/";
+            return "redirect:/meetings";
         } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
             //
         } catch (Exception exp){
             //
         }
 
-        return "redirect:/"; // TODO: add error handling method
+        return "redirect:/meetings"; // TODO: add error handling method
     }
+
+    
 
     @PostMapping("/cancelMeeting")
     public String deleteMeeting(@RequestParam("id") String meetingId){
@@ -91,13 +112,14 @@ public class MeetingAndContactsController {
 
         try {
             DEAMS.deleteRegisteredMeeting(meetingId);
+            return "redirect:/meetings";
         } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
             //
         } catch (Exception exp){
             //
         }
 
-        return "redirect:/"; // TODO: add error handling method
+        return "redirect:/meetings"; // TODO: add error handling method
     }
 
     @PostMapping("/rescheduleMeeting")
@@ -109,13 +131,14 @@ public class MeetingAndContactsController {
             Meeting meeting = DQS.findRegisteredMeeting(meetingId);
             meeting.setMeetingTime(newTime);
             DEAMS.editMeeting(meeting);
+            return "redirect:/meetings";
         } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
             //
         } catch (Exception exp){
             //
         }
 
-        return "redirect:/"; // TODO: add error handling method
+        return "redirect:/meetings"; // TODO: add error handling method
     }
 
 }

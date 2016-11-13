@@ -15,7 +15,7 @@
             <div class="modal-body">
                 <div class="x_title">
                     <ul class="nav navbar-left panel_toolbox">
-                        <li><h4>Add new contactz</h4>
+                        <li><h4>Add New ${user.clinic.clinicPrefix} Team Member</h4>
                         </li>
                     </ul>
                     <ul class="nav navbar-right panel_toolbox">
@@ -30,7 +30,7 @@
 
                 <div class="x_content">
                     <br/>
-                    <form action="/newUser" METHOD="POST" enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                    <form action="/new_contact" METHOD="POST" enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
                         <div class="form-group item">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="firstName">First Name <span class="required">*</span>
@@ -49,21 +49,10 @@
                         </div>
 
                         <div class="form-group item">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <div class="radio">
-                                    <label><input type="radio" name="gender" id="gender1" value="M" required checked>Male</label>
-                                </div>
-                                <div class="radio">
-                                    <label><input type="radio" name="gender" id="gender2" value="F" required>Female</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group item">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth <span class="required">*</span>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth<span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input id="dateOfBirth" name="dateOfBirth" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                                <input id="dateOfBirth" name="dateOfBirth" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text" placeholder="(MM/DD/YYYY)">
                             </div>
                         </div>
 
