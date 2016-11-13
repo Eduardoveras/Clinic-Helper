@@ -2,7 +2,11 @@
     <div class="x_panel">
         <div class="x_title">
             <h2>
-                <a href="#" data-toggle="modal" data-target="#contactModal" class="btn btn-success">Add New Member</a>
+                <#if isAdmin>
+                    <a href="#" data-toggle="modal" data-target="#contactModal" class="btn btn-success">Add New ${user.clinic.clinicPrefix} Member</a>
+                <#else>
+                    Our ${user.clinic.clinicPrefix} Team!
+                </#if>
             </h2>
             <ul class="nav navbar-right panel_toolbox">
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
