@@ -49,10 +49,6 @@
                                 <i class="fa fa-user"> </i> View Profile
                             </button>
 
-
-
-
-
                         </div>
                     </div>
                 </div>

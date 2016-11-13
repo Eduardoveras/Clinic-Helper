@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<div class="col-md-9">
     <div class="x_panel">
         <div class="x_title">
             <h2>
@@ -31,7 +31,7 @@
 
                 <#list contactList as contact>
 
-                    <div class="col-md-4 col-sm-4 col-xs-12 profile_details">
+                    <div class="col-md-6 col-sm-6 col-xs-12 profile_details">
                         <div class="well profile_view">
                             <div class="col-sm-12">
                                 <h4 class="brief"><i>${user.clinic.clinicPrefix} Contact</i></h4>
@@ -45,11 +45,20 @@
                                 </div>
                             </div>
                             <div class="col-xs-12 bottom text-center">
-                                <div class="col-xs-12 col-sm-6 emphasis">
-                                    <button type="button" class="btn btn-success btn-xs"><i class="fa fa-user">
-                                    </i> <i class="fa fa-comments-o">Message</i></button>
-                                    <button type="button" class="btn btn-primary btn-xs">
+                                <div class="col-xs-12 col-sm-12 emphasis">
+                                    <button data-toggle="dropdown" class="btn btn-default dropdown-toggle btn-sm btn-round" type="button" aria-expanded="false">Options <span class="caret"></span>
+                                    </button>
+                                    <ul role="menu" class="dropdown-menu">
+
+                                        <li><a href="#">Delete</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Collect Payment</a></li>
+                                    </ul>
+                                    <button type="button" class="btn btn-primary btn-sm btn-round" >
                                         <i class="fa fa-user"> </i> View Profile
+                                    </button>
+                                    <button type="button" class="btn btn-primary btn-sm btn-round" >
+                                        <i class="fa fa-user"> </i> Send Message
                                     </button>
                                 </div>
                             </div>
