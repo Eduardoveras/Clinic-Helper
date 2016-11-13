@@ -65,6 +65,11 @@ public class MeetingAndContactsController {
         model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
         model.addAttribute("meetingsList", DQS.findAllRegisteredMeetingsForClinic(clinicId));
 
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+            model.addAttribute("isAdmin", false);
+        else
+            model.addAttribute("isAdmin", true);
+
         return new ModelAndView("meetings/allMeetings");
     }
 
@@ -75,7 +80,7 @@ public class MeetingAndContactsController {
             return "redirect:/login";
 
         if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
-            return "redirect:/";
+            return "redirect:/contacts";
 
         try {
             DEAMS.createNewStaffMember(DQS.getCurrentLoggedUser().getClinic().getClinicId(), firstName, lastName, new Date(new SimpleDateFormat("MM/dd/yyyy").parse(birthDate).getTime()), email);
@@ -93,6 +98,9 @@ public class MeetingAndContactsController {
     public String registerNewMeeting(@RequestParam("title") String title, @RequestParam("objective") String objective, @RequestParam("time")Timestamp time, @RequestParam("place")String place, @RequestParam("attendees") List<String> attendees){
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
+
+        if (DQS.getCurrentLoggedUser().getRole() == Permission.ADMIN)
+           return "redirect:/meetings";
 
         List<Contact> team = new ArrayList<>();
 
@@ -119,7 +127,7 @@ public class MeetingAndContactsController {
             return "redirect:/login";
 
         if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
-            return "redirect:/";
+            return "redirect:/contacts";
 
         if (DQS.findRegisteredContact(contactId).isHasAccount())
             return "redirect:/users"; // TODO: add Not allowed action delete user account first
@@ -141,6 +149,9 @@ public class MeetingAndContactsController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
+        //if (DQS.getCurrentLoggedUser().getRole() == Permission.ADMIN)
+          //  return "redirect:/meetings";
+
         try {
             DEAMS.deleteRegisteredMeeting(meetingId);
             return "redirect:/meetings";
@@ -157,6 +168,9 @@ public class MeetingAndContactsController {
     public String changeMeetingTimeAndDate(@RequestParam("id") String meetingId, @RequestParam("time") Timestamp newTime){
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
+
+        //if (DQS.getCurrentLoggedUser().getRole() == Permission.ADMIN)
+          //  return "redirect:/meetings";
 
         try{
             Meeting meeting = DQS.findRegisteredMeeting(meetingId);
