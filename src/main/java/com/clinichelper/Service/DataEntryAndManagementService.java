@@ -559,7 +559,20 @@ public class DataEntryAndManagementService {
             throw new IllegalArgumentException("\n\nDANGER: YOU CAN NOT ERASE ADMIN ACCOUNT!");
 
         try {
-            contactRepository.delete(staffId);
+            Contact target = contactRepository.findByContactId(staffId);
+
+            // Applying cascade to meetings
+            for (Meeting m:
+                 meetingRepository.findByClinicId(target.getClinic().getClinicId())) {
+
+                Set<Contact> attendees = m.getAttendees();
+
+                attendees.remove(target);
+            }
+
+            // TODO: Apply Cascade to Surgeries
+
+            contactRepository.delete(target);
         } catch (NullPointerException exp) {
             System.out.println("\n\nNull Pointer Error! -> " + exp.getMessage());
             throw new NullPointerException("\n\nAn object or process has risen a null value -> " + exp.getMessage());
