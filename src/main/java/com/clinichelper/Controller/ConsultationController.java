@@ -6,12 +6,8 @@ import com.clinichelper.Entity.Patient;
 import com.clinichelper.Entity.Record;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
-<<<<<<< HEAD
 import com.clinichelper.Service.ToolKitService;
-import org.apache.catalina.LifecycleState;
-=======
 import com.clinichelper.Tools.Enums.Permission;
->>>>>>> development
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.persistence.PersistenceException;
 import java.util.ArrayList;
 import java.util.Set;
 
