@@ -40,11 +40,27 @@ public class PatientController {
         if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
+        //if (DQS.getCurrentLoggedUser().getRole() == Permission.ADMIN)
+           // return new ModelAndView("redirect:/");
+
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
 
         model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
         model.addAttribute("patientList", DQS.findAllRegisteredPatientsForClinic(clinicId));
         model.addAttribute("amount", DQS.findAllRegisteredPatientsForClinic(clinicId).size());
+
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ASSISTANT)
+            model.addAttribute("canUse", false);
+        else
+            model.addAttribute("canUse", true);
+
+        //model.addAttribute("isAdmin", false);
+
+
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+            model.addAttribute("isAdmin", false);
+        else
+            model.addAttribute("isAdmin", true);
 
         if (DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
             return new ModelAndView("patients/allPatients");
@@ -64,23 +80,34 @@ public class PatientController {
 
         model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
         model.addAttribute("amount", DQS.findAllRegisteredPatientsForClinic(clinicId).size());
+        //model.addAttribute("isAdmin", false);
+
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+            model.addAttribute("isAdmin", false);
+        else
+            model.addAttribute("isAdmin", true);
 
         return new ModelAndView("patients/patientForm");
     }
-
-
 
     @GetMapping("/patient/{id}")
     public ModelAndView fetchPatientview(Model model, @PathVariable(value="id") String patientId){
         if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
-        //if (DQS.getCurrentLoggedUser().getRole() != Permission.ASSISTANT)
+        //if (DQS.getCurrentLoggedUser().getRole() == Permission.ADMIN)
             //return new ModelAndView("redirect:/");
 
         model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
         model.addAttribute("patient", DQS.findRegisteredPatient(patientId));
         model.addAttribute("appointments", DQS.findPatientsRegisteredAppointments(patientId));
+        //model.addAttribute("isAdmin", false);
+
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+            model.addAttribute("isAdmin", false);
+        else
+            model.addAttribute("isAdmin", true);
+
         return new ModelAndView("patients/patientsProfile");
     }
 
@@ -91,6 +118,12 @@ public class PatientController {
 
         //if (DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
         //return new ModelAndView("redirect:/");
+        //model.addAttribute("isAdmin", false);
+
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+            model.addAttribute("isAdmin", false);
+        else
+            model.addAttribute("isAdmin", true);
 
         return new ModelAndView("");
     }

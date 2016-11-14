@@ -10,7 +10,6 @@ import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Enums.Permission;
-import freemarker.template.utility.NullArgumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,9 +52,13 @@ public class InventoryController {
         model.addAttribute("medicationList", inventory.get("medication"));
         model.addAttribute("mSize", inventory.get("medication").size());
 
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+            model.addAttribute("isAdmin", false);
+        else
+            model.addAttribute("isAdmin", true);
+
         return new ModelAndView("inventory/viewInventory");
     }
-
 
     // Posts
     // Creates
@@ -65,7 +68,7 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/";
 
         try {
@@ -83,7 +86,7 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/";
 
         try {
@@ -102,7 +105,7 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/";
 
         try {
@@ -121,7 +124,7 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/";
 
         try{
@@ -139,7 +142,7 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/";
 
         try {
@@ -157,7 +160,7 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/";
 
         try{
@@ -176,7 +179,7 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/";
 
         try {
@@ -196,7 +199,7 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/";
 
         try {
@@ -216,7 +219,7 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/";
 
         try {
@@ -237,7 +240,7 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/";
 
         try {
@@ -259,7 +262,7 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/";
 
         try {
@@ -282,7 +285,7 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/";
 
         try {
