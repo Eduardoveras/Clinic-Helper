@@ -14,34 +14,37 @@ import java.util.logging.Logger;
 @Service
 public class EncriptationService {
 
-
-    private static MessageDigest md;
-
-    public static String getEncriptedPassword(String pass){
-        try {
-            md = MessageDigest.getInstance("MD5");
-            byte[] passBytes = pass.getBytes();
-            md.reset();
-            byte[] digested = md.digest(passBytes);
-            StringBuffer sb = new StringBuffer();
-            for (byte aDigested : digested) {
-                sb.append(Integer.toHexString(0xff & aDigested));
-            }
-            return sb.toString();
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(EncriptationService.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-
-    }
-
-
-    public boolean isPasswordCorrect(String formPassword,String databasePassword)
+    public String encryptPassword(String passwordToHash)
     {
-        return Objects.equals(databasePassword, getEncriptedPassword(formPassword));
+        String generatedPassword = null;
+
+        try {
+            // Create MessageDigest instance for MD5
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            //Add password bytes to digest
+            md.update(passwordToHash.getBytes());
+            //Get the hash's bytes
+            byte[] bytes = md.digest();
+            //This bytes[] has bytes in decimal format;
+            //Convert it to hexadecimal format
+            StringBuilder sb = new StringBuilder();
+            for(int i=0; i< bytes.length ;i++)
+            {
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            //Get complete hashed password in hex format
+            generatedPassword = sb.toString();
+        }
+        catch(Exception e)
+        {
+            System.out.println("ERROR ON Encriptation Service");
+            e.printStackTrace();
+        }
+        return generatedPassword;
     }
 
-
-
-
+    public boolean comparePasswords(String original,String currentPassword)
+    {
+        return (Objects.equals(currentPassword, encryptPassword(original)));
+    }
 }

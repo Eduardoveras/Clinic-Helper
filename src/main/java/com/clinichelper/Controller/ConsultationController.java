@@ -6,8 +6,12 @@ import com.clinichelper.Entity.Patient;
 import com.clinichelper.Entity.Record;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
+<<<<<<< HEAD
 import com.clinichelper.Service.ToolKitService;
 import org.apache.catalina.LifecycleState;
+=======
+import com.clinichelper.Tools.Enums.Permission;
+>>>>>>> development
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.PersistenceException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -46,6 +49,12 @@ public class ConsultationController {
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
 
         model.addAttribute("consultationList", DQS.findAllRegisteredConsultationsForClinic(clinicId));
+        //model.addAttribute("isAdmin", false);
+
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+            model.addAttribute("isAdmin", false);
+        else
+            model.addAttribute("isAdmin", true);
 
         return new ModelAndView("consultations/allConsultations");
     }
@@ -92,10 +101,8 @@ public class ConsultationController {
             DEAMS.editRecord(record);
 
             return "redirect:/"; // todavia no hay vista
-        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/"; // TODO: add error message handling

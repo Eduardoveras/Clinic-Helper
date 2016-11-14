@@ -16,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.PersistenceException;
-import javax.servlet.http.HttpSession;
 
 /**
  * Created by Eduardo veras on 28-Oct-16.
@@ -32,6 +31,7 @@ public class UserController {
     @Autowired
     private ToolKitService TKS;
 
+    // Gets
     // TODO: this can only be used by SUPERADMIN
     @GetMapping("/admin/users")
     public ModelAndView fetchAllPatientsView(Model model){
@@ -68,31 +68,28 @@ public class UserController {
         User u = DQS.findUserInformation(userId);
         model.addAttribute("todoList", TKS.InitializeTodoList(u.getUserId()));
         model.addAttribute("user", u);
+
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+            model.addAttribute("isAdmin", false);
+        else
+            model.addAttribute("isAdmin", true);
+
         return new ModelAndView("users/userProfile");
     }
 
+    // Post
     @PostMapping("/uploadProfilePhoto")
     public String uploadProfilePicture(@RequestParam() String email, @RequestParam("clinic") String clinicId, @RequestParam("photo") MultipartFile file){
-
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
-
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.ADMIN)
-            return "redirect:/";
 
         User user = DQS.findRegisteredUserAccount(email,clinicId);
 
         try {
             DEAMS.editUserPhoto(email, clinicId, processImageFile(file.getBytes()));
             return "redirect:/user/" + user.getUserId();
-        } catch (PersistenceException exp){
-            //
-        } catch (IllegalArgumentException exp) {
-            //
-        } catch (NullPointerException exp) {
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/user/" + user.getUserId(); // TODO: add error exception logic
@@ -124,10 +121,8 @@ public class UserController {
             try {
                 DEAMS.editUserAccountCredentials(user.getEmail(), user.getClinic().getClinicId(), newPassword, user.getRole());
                 return "redirect:/user/" + user.getUserId();
-            } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
-                //
             } catch (Exception exp){
-                //
+                exp.printStackTrace();
             }
             return "redirect:/user/" + user.getUserId(); // TODO: Implement error exception or message to edit password
         }

@@ -8,7 +8,6 @@ import com.clinichelper.Entity.Patient;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
-import com.clinichelper.Tools.Enums.AppointmentType;
 import com.clinichelper.Tools.Enums.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,10 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.persistence.PersistenceException;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 public class AppointmentController {
@@ -49,6 +47,11 @@ public class AppointmentController {
         model.addAttribute("appointmentList", DQS.findAllRegisteredAppointmentsForClinic(clinicId));
         model.addAttribute("userList", DQS.findAllRegisteredPatientsForClinic(clinicId));
 
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+            model.addAttribute("isAdmin", false);
+        else
+            model.addAttribute("isAdmin", true);
+
         return new ModelAndView("appointments/allAppointment");
     }
 
@@ -59,6 +62,8 @@ public class AppointmentController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
+        //if (DQS.getCurrentLoggedUser().getRole() != Permission.ASSISTANT)
+          //  return "redirect:/";
 
         try {
             SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
@@ -86,7 +91,7 @@ public class AppointmentController {
         } catch (Exception exp){
             System.out.println("ERROR MESSAGE:");
             System.out.println(exp.getMessage());
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/appointments"; // TODO: add error message handling
@@ -97,16 +102,14 @@ public class AppointmentController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
-            return "redirect:/";
+        //if (DQS.getCurrentLoggedUser().getRole() != Permission.ASSISTANT)
+        //  return "redirect:/";
 
         try {
             DEAMS.deleteRegisteredAppointment(appointmentId);
             return "redirect:/";
-        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/" ; // TODO: add error message handling
@@ -118,21 +121,22 @@ public class AppointmentController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
-            return "redirect:/";
+        //if (DQS.getCurrentLoggedUser().getRole() != Permission.ASSISTANT)
+        //  return "redirect:/";
 
         Appointment appointment = DQS.findRegisteredAppointment(appointmentId);
 
         try {
-            SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
-            appointment.setAppointmentTime(new Timestamp(sdf1.parse(newDate).getTime()));
+            SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy hh:mm a");
+            Date newDate2=sdf1.parse(newDate);
+            Timestamp timestamp = new java.sql.Timestamp(newDate2.getTime());
+            System.out.println("THE SUPER TIME IS"+timestamp);
+            appointment.setAppointmentTime(timestamp);
 
             DEAMS.editAppointment(appointment);
             return "redirect:/appointments";
-        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/appointments"; // TODO: add error message handling

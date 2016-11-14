@@ -17,6 +17,21 @@ Language: Java
 Framework(s): Java EE 8 - JDK 1.8, Spring Boot, FreeMarker, JPA-ORM, Hibernate
 Database: PostgreSQL 9
 
+Version: v0.14.0
+** New password encryption algorithm
+** Internationalism partially implemented with beginner words
+** Improved user permission detection and restriction
+** New Cascade Delete Feature
+** Improved To do Task Repition System
+    Daily
+    Weekly (Day Specific)
+    Monthly
+    Yearly
+** Improves contact management system
+    Registration
+    Elimination
+** Fully functional Inventory Registration System
+
 Version: v0.13.0
 ** Improved Security System
         New URL filter protocols
