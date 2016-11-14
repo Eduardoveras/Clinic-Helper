@@ -80,12 +80,12 @@ public class DataQueryService {
         return appointmentRepository.findByPatientId(patientId);
     }
 
-    public List<Appointment> findAllRegisteredAppointmentsForToday(String clinicId) throws Exception{
+    public List<Appointment> findAllRegisteredAppointmentsForToday(String clinicId) {
         try {
             return findAllRegisteredAppointmentsByGivenDate(new Date(Calendar.getInstance().getTime().getTime()), clinicId);
         } catch (Exception exp){
             exp.printStackTrace();
-            throw new  Exception("Error during search for appointments for today");
+            return null;
         }
      }
 

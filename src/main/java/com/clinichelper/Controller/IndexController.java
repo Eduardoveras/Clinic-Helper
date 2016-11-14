@@ -52,9 +52,6 @@ public class IndexController implements ErrorController {
         if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
-        //if (DQS.getCurrentLoggedUser().getRole() != Permission.ASSISTANT)
-           // return new ModelAndView("redirect:/");
-
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
         
         try {
@@ -64,14 +61,17 @@ public class IndexController implements ErrorController {
             model.addAttribute("todays_appointments", new ArrayList<Appointment>()); // An error occurred to make the list empty
         }
 
+        model.addAttribute("patient_amount",DQS.findAllRegisteredPatientsForClinic(clinicId).size());
+        model.addAttribute("users_amount",DQS.findAllAllRegisteredUsersForClinic(clinicId).size());
+        model.addAttribute("surg_amount",DQS.findAllRegisteredSurgeries(clinicId).size());
+        model.addAttribute("app_today_amount",DQS.findAllRegisteredAppointmentsForToday(clinicId).size());
+
+
         model.addAttribute("name", name);
         model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
-        //model.addAttribute("pending", countConditions(appointments, AppointmentStatus.PENDING));
-        //model.addAttribute("inOffice", countConditions(appointments, AppointmentStatus.IN_OFFICE));
-        //model.addAttribute("completed", countConditions(appointments, AppointmentStatus.COMPLETED));
+
         model.addAttribute("user",DQS.getSessionAttr("user"));
         model.addAttribute("events",TKS.InitializeClinicCalendar(clinicId));
-        //model.addAttribute("isAdmin", false);
 
         if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             model.addAttribute("isAdmin", false);
