@@ -30,7 +30,7 @@
                     <li><a href="/"><i  class="fa fa-plus-square-o"></i> Dashboard <span ></span></a></li>
                     <li><a href="/patients" ><i class="fa fa-user-md"></i> Patients  <span ></span></a></li>
                     <li><a href="/appointments"><i  class="fa fa-desktop"></i> Appointments  <span ></span></a></li>
-                    <li><a  href="/users"><i class="fa fa-users"></i> Users<span></span></a></li>
+                    <#if isAdmin><li><a  href="/users"><i class="fa fa-users"></i> Users<span></span></a></li></#if>
                     <li><a><i class="fa fa-comments-o"></i> Team <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="/contacts">Members</a></li>

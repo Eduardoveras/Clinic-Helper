@@ -48,7 +48,14 @@ public class PatientController {
         model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
         model.addAttribute("patientList", DQS.findAllRegisteredPatientsForClinic(clinicId));
         model.addAttribute("amount", DQS.findAllRegisteredPatientsForClinic(clinicId).size());
+
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ASSISTANT)
+            model.addAttribute("canUse", false);
+        else
+            model.addAttribute("canUse", true);
+
         //model.addAttribute("isAdmin", false);
+
 
         if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             model.addAttribute("isAdmin", false);
