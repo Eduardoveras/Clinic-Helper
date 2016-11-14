@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#medications">New Medication</button>
+<#if isAdmin><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#medications">New Medication</button><#else><strong>Sign in as an ADMIN to register new medication</strong></#if>
 <table id="datatable-responsive" class="table table-hover table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
     <thead>
     <tr>

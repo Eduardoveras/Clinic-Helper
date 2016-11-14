@@ -8,7 +8,6 @@ import com.clinichelper.Entity.Patient;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
-import com.clinichelper.Tools.Enums.AppointmentType;
 import com.clinichelper.Tools.Enums.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -48,6 +47,11 @@ public class AppointmentController {
         model.addAttribute("appointmentList", DQS.findAllRegisteredAppointmentsForClinic(clinicId));
         model.addAttribute("userList", DQS.findAllRegisteredPatientsForClinic(clinicId));
 
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+            model.addAttribute("isAdmin", false);
+        else
+            model.addAttribute("isAdmin", true);
+
         return new ModelAndView("appointments/allAppointment");
     }
 
@@ -58,6 +62,8 @@ public class AppointmentController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
+        //if (DQS.getCurrentLoggedUser().getRole() != Permission.ASSISTANT)
+          //  return "redirect:/";
 
         try {
             SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
@@ -96,6 +102,9 @@ public class AppointmentController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
+        //if (DQS.getCurrentLoggedUser().getRole() != Permission.ASSISTANT)
+        //  return "redirect:/";
+
         try {
             DEAMS.deleteRegisteredAppointment(appointmentId);
             return "redirect:/";
@@ -112,8 +121,8 @@ public class AppointmentController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
-            return "redirect:/";
+        //if (DQS.getCurrentLoggedUser().getRole() != Permission.ASSISTANT)
+        //  return "redirect:/";
 
         Appointment appointment = DQS.findRegisteredAppointment(appointmentId);
 
