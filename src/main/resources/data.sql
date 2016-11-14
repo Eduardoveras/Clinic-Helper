@@ -1,9 +1,9 @@
 INSERT INTO clinic (clinic_id, account_type, clinic_name, clinic_prefix, registered_date) VALUES ('CH-PLATINUM-JASC', 3, 'JASC Clinic', 'JASC', '2016-10-30');
 
-INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-DJ8983JHDHIO', '1980-02-03', 'dj@gmail.com', 'djijdelly', 1, 'SICLAIT', '1234', 0, 'CH-PLATINUM-JASC');
-INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-ESI34JHH432U', '1980-02-03', 'eva@gmail.com', 'eva', 0, 'SORAYA', '1234', 0, 'CH-PLATINUM-JASC');
-INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-EV933JBF453D', '1980-02-03', 'eduardo@gmail.com', 'eduardo', 1, 'Veras', '1234', 0, 'CH-PLATINUM-JASC');
-INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-PAULINA32443', '1980-02-03', 'paulina@email.com', 'paulina', 0, 'LA MEJOR', '1234', 0, 'CH-PLATINUM-JASC');
+INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-DJ8983JHDHIO', '1980-02-03', 'dj@gmail.com', 'djijdelly', 1, 'SICLAIT', '81dc9bdb52d04dc20036dbd8313ed055', 0, 'CH-PLATINUM-JASC');
+INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-ESI34JHH432U', '1980-02-03', 'eva@gmail.com', 'eva', 0, 'SORAYA', '81dc9bdb52d04dc20036dbd8313ed055', 0, 'CH-PLATINUM-JASC');
+INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-EV933JBF453D', '1980-02-03', 'eduardo@gmail.com', 'eduardo', 1, 'Veras', '81dc9bdb52d04dc20036dbd8313ed055', 0, 'CH-PLATINUM-JASC');
+INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-PAULINA32443', '1980-02-03', 'paulina@email.com', 'paulina', 0, 'LA MEJOR', '81dc9bdb52d04dc20036dbd8313ed055', 0, 'CH-PLATINUM-JASC');
 
 INSERT INTO patients (
 clinic_clinic_id,

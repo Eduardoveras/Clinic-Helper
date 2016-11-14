@@ -51,6 +51,8 @@ public class DataEntryAndManagementService {
     private UserRepository userRepository;
     @Autowired
     private  HistoryRepository historyRepository;
+    @Autowired
+    private EncriptationService EncriptService;
 
     // Creation functions
     public Appointment createNewAppointment(String clinicId, Timestamp appointmentTime, String patientId, String appointmentDescription) throws Exception {
@@ -387,7 +389,7 @@ public class DataEntryAndManagementService {
         try {
             // Add new user automatically in contact list
             contactRepository.save(new Contact(clinicRepository.findByClinicId(clinicId), firstName, lastName, birthDate, email, true));
-            return userRepository.save(new User(clinicRepository.findByClinicId(clinicId), email, firstName, lastName, birthDate, gender, password, role));
+            return userRepository.save(new User(clinicRepository.findByClinicId(clinicId), email, firstName, lastName, birthDate, gender, EncriptService.encryptPassword(password), role));
         } catch (PersistenceException exp){
             exp.printStackTrace();
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
@@ -830,7 +832,7 @@ public class DataEntryAndManagementService {
 
         try {
             User user = userRepository.findUserAccountWithUsernameAndPassword(email, clinicId);
-            user.setPassword(password);
+            user.setPassword(EncriptService.encryptPassword(password));
             user.setRole(role);
             userRepository.save(user);
         } catch (PersistenceException exp){
