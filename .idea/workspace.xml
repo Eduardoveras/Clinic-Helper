@@ -2,7 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e4b2c9b0-c577-4fc0-8335-af0a7b847451" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Tools/Enums/SurgeryType.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/templates/consultations/consultationForm/_step1.ftl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/templates/consultations/consultationForm/_step2.ftl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/templates/consultations/consultationForm/surgeryForms/_breastEvaluation.ftl" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/templates/consultations/_consultation.ftl" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/History.java" afterPath="$PROJECT_DIR$/src/main/java/com/clinichelper/Entity/History.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/consultations/allConsultations.ftl" afterPath="$PROJECT_DIR$/src/main/resources/templates/consultations/allConsultations.ftl" />
     </list>
     <ignored path="Clinic-Helper.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -68,16 +75,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
               <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_consultation.ftl" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/consultations/_consultation.ftl">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -1265,12 +1262,12 @@
       <workItem from="1478928937641" duration="9292000" />
       <workItem from="1478979244682" duration="1349000" />
       <workItem from="1478982353305" duration="11333000" />
-      <workItem from="1479165837244" duration="815000" />
+      <workItem from="1479165837244" duration="903000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23594000" />
+    <option name="totallyTimeSpent" value="23682000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
