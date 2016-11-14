@@ -10,7 +10,6 @@ import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Enums.Permission;
-import freemarker.template.utility.NullArgumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,9 +52,13 @@ public class InventoryController {
         model.addAttribute("medicationList", inventory.get("medication"));
         model.addAttribute("mSize", inventory.get("medication").size());
 
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+            model.addAttribute("isAdmin", false);
+        else
+            model.addAttribute("isAdmin", true);
+
         return new ModelAndView("inventory/viewInventory");
     }
-
 
     // Posts
     // Creates
@@ -65,16 +68,14 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/";
 
         try {
             DEAMS.createNewEquipment(DQS.getCurrentLoggedUser().getClinic().getClinicId(), equipmentName, equipmentUse, equipmentDescription, stock);
             return "redirect:/Inventory";
-        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
         return "redirect:/Inventory"; // TODO: implement error exception
     }
@@ -85,16 +86,14 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/";
 
         try {
             DEAMS.createNewProduct(DQS.getCurrentLoggedUser().getClinic().getClinicId(), productName, supplier, productDescription, productPrice, stock);
             return "redirect:/Inventory";
-        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/Inventory"; // TODO: implement error exception
@@ -106,16 +105,14 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/";
 
         try {
             DEAMS.createNewMedication(DQS.getCurrentLoggedUser().getClinic().getClinicId(), medicationName, supplier, medicationDescription, medicationPrice, stock);
             return "redirect:/Inventory";
-        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/Inventory"; // TODO: implement error exception
@@ -127,16 +124,14 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/";
 
         try{
             DEAMS.deleteRegisteredEquipment(equipmentId);
             return "redirect:/Inventory";
-        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/Inventory"; // TODO: implement error exception
@@ -147,16 +142,14 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/";
 
         try {
             DEAMS.deleteRegisteredMedication(medicationId);
             return "redirect:/Inventory";
-        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/Inventory"; // TODO: implement error exception
@@ -167,16 +160,14 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/";
 
         try{
             DEAMS.deleteRegisteredProduct(productId);
             return "redirect:/Inventory";
-        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/Inventory"; // TODO: implement error exception
@@ -188,7 +179,7 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/";
 
         try {
@@ -196,10 +187,8 @@ public class InventoryController {
             equipment.setEquipmentInStock(stock);
             DEAMS.editEquipment(equipment);
             return "redirect:/Inventory";
-        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/Inventory"; // TODO: implement error exception
@@ -210,7 +199,7 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/";
 
         try {
@@ -218,10 +207,8 @@ public class InventoryController {
             medication.setMedicationInStock(stock);
             DEAMS.editMedication(medication);
             return "redirect:/Inventory";
-        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/Inventory"; // TODO: implement error exception
@@ -232,7 +219,7 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/";
 
         try {
@@ -240,10 +227,8 @@ public class InventoryController {
             product.setProductInStock(stock);
             DEAMS.editProduct(product);
             return "redirect:/Inventory";
-        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/Inventory"; // TODO: implement error exception
@@ -255,7 +240,7 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/";
 
         try {
@@ -265,10 +250,8 @@ public class InventoryController {
             equipment.setEquipmentDescription(description);
             DEAMS.editEquipment(equipment);
             return "redirect:/Inventory";
-        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/Inventory"; // TODO: implement error exception
@@ -279,7 +262,7 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/";
 
         try {
@@ -290,10 +273,8 @@ public class InventoryController {
             medication.setMedicationPrice(price);
             DEAMS.editMedication(medication);
             return "redirect:/Inventory";
-        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/Inventory"; // TODO: implement error exception
@@ -304,7 +285,7 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/";
 
         try {
@@ -315,10 +296,8 @@ public class InventoryController {
             product.setProductPrice(price);
             DEAMS.editProduct(product);
             return "redirect:/Inventory";
-        } catch (PersistenceException | NullPointerException | IllegalArgumentException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/Inventory"; // TODO: implement error exception

@@ -12,6 +12,7 @@
                 <div class="row">
 
                     <#include "_contactsList.ftl">
+                    <#include "_contactsModal.ftl">
 
                 </div>
             </div>

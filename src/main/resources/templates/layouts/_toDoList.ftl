@@ -1,4 +1,5 @@
-<ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+<ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu" style="width: 400px">
+<div style="overflow: auto; max-height: 400px;">
 <#list todoList as todo>
     <li>
         <a>
@@ -21,6 +22,7 @@
         </div>
     </li>
 </#list>
+</div>
     <li>
         <div class="text-center">
             <a>

@@ -2,7 +2,7 @@
     <div class="x_panel">
         <div class="x_title">
             <h2>
-                <a href="/new_patient" role="button" class="btn btn-primary">New Patient</a>
+                <!--<if canUse>--><a href="/new_patient" role="button" class="btn btn-primary">New Patient</a><!--<else><strong>Only ASSISTANT accounts can register new patients</strong></if>-->
             </h2>
             <ul class="nav navbar-right panel_toolbox">
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -26,18 +26,18 @@
                 <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Cedula/pasaporte</th>
-                    <th>Phone</th>
-                    <th>Contact Phone</th>
-                    <th>email</th>
+                    <th>Identification #/Passport</th>
+                    <th>Main Phone</th>
+                    <th>Secondary Phone</th>
+                    <th>Email</th>
                     <th>Birthday</th>
-                    <th>gender</th>
+                    <th>Gender</th>
                     <th>Register Date</th>
-                    <th>occupation</th>
+                    <th>Occupation</th>
                     <th>Nationality</th>
-                    <th>Adress</th>
-                    <th>city</th>
-                    <th>country</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>Country</th>
                 </tr>
                 </thead>
                 <tbody>

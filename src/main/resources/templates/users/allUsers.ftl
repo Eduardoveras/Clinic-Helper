@@ -14,7 +14,7 @@
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3>User Registration</h3>
+                        <h3>${user.clinic.clinicPrefix} Users</h3>
                     </div>
                 </div>
                 <div class="clearfix"></div>

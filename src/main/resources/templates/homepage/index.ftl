@@ -11,8 +11,8 @@
             <div class="">
                  <#include "_topBoxes.ftl">
                 <div class="row">
-                <#include "_appointments.ftl">
-                <#include "_calendar.ftl">
+                    <#include "_appointments.ftl">
+                    <#include "_calendar.ftl">
                     <#include "/appointments/_modal.ftl">
                 </div>
             </div>
