@@ -1,5 +1,7 @@
 package com.clinichelper.Entity;
 
+import com.clinichelper.Tools.Enums.SurgeryType;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -22,7 +24,7 @@ public class History implements Serializable {
     @NotNull
     private String observations;
     private String specialConditions;
-    private String surgeryType;
+    private SurgeryType surgeryType;
     private ArrayList<byte[]> photos;
     private ArrayList<String> medicalData;
     @Column(unique = true)
@@ -33,7 +35,7 @@ public class History implements Serializable {
 
     }
 
-    public History(Patient patient, String visitObjective, String observations, String specialConditions, ArrayList<byte[]> photos, String surgeryType, ArrayList<String> medicalData, String consultationReference) {
+    public History(Patient patient, String visitObjective, String observations, String specialConditions, ArrayList<byte[]> photos, SurgeryType surgeryType, ArrayList<String> medicalData, String consultationReference) {
         this.setHistoryId(patient.getPatientId() + "-H-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setPatient(patient);
         this.setVisitObjective(visitObjective);
@@ -86,11 +88,11 @@ public class History implements Serializable {
         this.specialConditions = specialConditions;
     }
 
-    public String getSurgeryType() {
+    public SurgeryType getSurgeryType() {
         return surgeryType;
     }
 
-    public void setSurgeryType(String surgeryType) {
+    public void setSurgeryType(SurgeryType surgeryType) {
         this.surgeryType = surgeryType;
     }
 
