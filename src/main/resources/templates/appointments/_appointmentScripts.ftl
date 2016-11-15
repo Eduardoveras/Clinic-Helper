@@ -93,7 +93,7 @@
 <script>
     $(document).ready(function() {
         $(".select2_single").select2({
-            placeholder: "Select a patient",
+            placeholder: "<@spring.message "selectPat" />",
             allowClear: true
         });
     });

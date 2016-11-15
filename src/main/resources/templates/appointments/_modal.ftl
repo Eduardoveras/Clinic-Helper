@@ -15,7 +15,7 @@
             <div class="modal-body">
                 <div class="x_title">
                     <ul class="nav navbar-left panel_toolbox">
-                        <li><h4>Re-schedule Appointment</h4>
+                        <li><h4><@spring.message "reApp" /></h4>
                         </li>
                     </ul>
                     <ul class="nav navbar-right panel_toolbox">
@@ -34,7 +34,7 @@
                           data-parsley-validate class="form-horizontal form-label-left">
                         <div class="form-group">
                             <label class="text-left" class="control-label col-md-6 col-sm-6 col-xs-12"
-                                   class="date-picker" for="appointmentTime"> New Appointment Time: <span
+                                   class="date-picker" for="appointmentTime"> <@spring.message "newTime" />: <span
                                     class="required">*</span>
                             </label>
                             <div class='input-group date' id='datetimepicker2'>
@@ -49,8 +49,7 @@
                         <div class="ln_solid"></div>
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                <button type="submit" class="btn btn-primary">Cancel</button>
-                                <button type="submit" class="btn btn-success">Change Time</button>
+                                <button type="submit" class="btn btn-success"><@spring.message "changeTime" /></button>
                             </div>
                         </div>
 
