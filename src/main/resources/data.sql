@@ -5,6 +5,9 @@ INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, pa
 INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-EV933JBF453D', '1980-02-03', 'eduardo@gmail.com', 'eduardo', 1, 'Veras', '81dc9bdb52d04dc20036dbd8313ed055', 0, 'CH-PLATINUM-JASC');
 INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-PAULINA32443', '1980-02-03', 'paulina@email.com', 'paulina', 0, 'LA MEJOR', '81dc9bdb52d04dc20036dbd8313ed055', 0, 'CH-PLATINUM-JASC');
 
+INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-DOCTOR', '1980-02-03', 'med@gmail.com', 'Dr', 1, 'Doctor', '81dc9bdb52d04dc20036dbd8313ed055', 1, 'CH-PLATINUM-JASC');
+INSERT INTO users (user_id, birth_date, email, first_name, gender, last_name, password, role, clinic_clinic_id) VALUES ('CH-JASC-ASSISTANT', '1980-02-03', 'ass@gmail.com', 'Assis', 0, 'Assistant', '81dc9bdb52d04dc20036dbd8313ed055', 2, 'CH-PLATINUM-JASC');
+
 INSERT INTO patients (
 clinic_clinic_id,
 patient_id,
