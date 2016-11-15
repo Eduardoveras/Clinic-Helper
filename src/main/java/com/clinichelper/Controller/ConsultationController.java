@@ -8,6 +8,7 @@ import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Enums.Permission;
+import com.clinichelper.Tools.Enums.SurgeryType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -63,7 +64,7 @@ public class ConsultationController {
             @RequestParam("observations") String observations,
             @RequestParam("specialconditions") String specialConditions,
             @RequestParam("photos") ArrayList<byte[]> photos,
-            @RequestParam("surgerytype") String surgeryType,
+            @RequestParam("surgerytype") SurgeryType surgeryType,
             @RequestParam("medicaldata")  ArrayList<String> medicaData){
 
         if (!DQS.isUserLoggedIn())
