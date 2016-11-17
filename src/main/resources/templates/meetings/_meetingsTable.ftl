@@ -2,7 +2,7 @@
     <div class="x_panel">
         <div class="x_title">
             <h2>
-                <!--<if !isAdmin>--><a href="/new_meeting" role="button" class="btn btn-primary">New meeting</a><!--<else><strong>Only non-ADMIN accounts can organize meetings</strong></if>-->
+                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#meeting">New Equipment</button>
             </h2>
             <ul class="nav navbar-right panel_toolbox">
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>

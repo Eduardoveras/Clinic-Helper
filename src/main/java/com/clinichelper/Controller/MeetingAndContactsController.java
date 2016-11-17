@@ -62,6 +62,7 @@ public class MeetingAndContactsController {
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
         model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
         model.addAttribute("meetingsList", DQS.findAllRegisteredMeetingsForClinic(clinicId));
+        model.addAttribute("contactList", DQS.findAllRegisteredContactsForClinic(clinicId));
 
         if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             model.addAttribute("isAdmin", false);

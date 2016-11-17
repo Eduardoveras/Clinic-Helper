@@ -6,8 +6,11 @@ import com.clinichelper.Entity.Patient;
 import com.clinichelper.Entity.Record;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
+import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Enums.Permission;
+import com.clinichelper.Tools.Enums.SurgeryType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,18 +24,23 @@ import java.util.Set;
 /**
  * Created by eva_c on 11/6/2016.
  */
+@Controller
 public class ConsultationController {
     // Services
     @Autowired
     private DataEntryAndManagementService DEAMS;
     @Autowired
     private DataQueryService DQS;
+    @Autowired
+    private ToolKitService TKS;
 
     // Gets
     @GetMapping("/consultations")
     public ModelAndView fetchConsultationView(Model model) throws Exception{
         if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
+
+        model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
 
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
 
@@ -44,7 +52,7 @@ public class ConsultationController {
         else
             model.addAttribute("isAdmin", true);
 
-        return new ModelAndView("t");
+        return new ModelAndView("consultations/allConsultations");
     }
 
     // Posts
@@ -56,7 +64,7 @@ public class ConsultationController {
             @RequestParam("observations") String observations,
             @RequestParam("specialconditions") String specialConditions,
             @RequestParam("photos") ArrayList<byte[]> photos,
-            @RequestParam("surgerytype") String surgeryType,
+            @RequestParam("surgerytype") SurgeryType surgeryType,
             @RequestParam("medicaldata")  ArrayList<String> medicaData){
 
         if (!DQS.isUserLoggedIn())
