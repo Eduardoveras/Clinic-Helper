@@ -2,7 +2,7 @@
     <div class="x_panel">
         <div class="x_title">
             <h2>
-               <#if isAdmin><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#meeting">New Equipment</button><#else><strong>Sign in as an ADMIN to register new meetingt</strong></#if>
+                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#meeting">New Equipment</button>
             </h2>
             <ul class="nav navbar-right panel_toolbox">
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
