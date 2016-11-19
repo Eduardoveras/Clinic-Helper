@@ -1,13 +1,13 @@
-<#if isAdmin><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#medications">New Medication</button><#else><strong>Sign in as an ADMIN to register new medication</strong></#if>
+<#if isAdmin><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#medications"><@spring.message "newMed" /></button><#else><strong><@spring.message "restrict2" /></strong></#if>
 <table id="datatable-responsive" class="table table-hover table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
     <thead>
     <tr>
-        <th>${user.clinic.clinicPrefix} ID</th>
-        <th>NAME</th>
-        <th>SUPPLIER</th>
-        <th>DESCRIPTION</th>
-        <th>PRICE</th>
-        <th>QUANTITY</th>
+        <th><span style="text-transform: uppercase;"><@spring.message "idFrag1" /> ${user.clinic.clinicPrefix} <@spring.message "idFrag2" /></span></th>
+        <th><span style="text-transform: uppercase;"><@spring.message "name" /></span></th>
+        <th><span style="text-transform: uppercase;"><@spring.message "supplier" /></span></th>
+        <th><span style="text-transform: uppercase;"><@spring.message "description" /></span></th>
+        <th><span style="text-transform: uppercase;"><@spring.message "price" /></span></th>
+        <th><span style="text-transform: uppercase;"><@spring.message "quantity" /></span></th>
     </tr>
     </thead>
     <tbody>
@@ -18,11 +18,11 @@
         <td>${medication.supplier}</td>
         <td>${medication.medicationDescription}</td>
         <td>$${medication.medicationPrice}</td>
-        <td>${medication.medicationInStock} unit<#if medication.medicationInStock gt 1>s</#if></td>
+        <td>${medication.medicationInStock} <@spring.message "unit" /><#if medication.medicationInStock gt 1><@spring.message "plural" /></#if></td>
     </tr>
     <#else>
     <tr>
-        <th scope="row">No Medication Registered</th>
+        <th scope="row"><@spring.message "emptyMedication" /></th>
 
     </tr>
     </#list>

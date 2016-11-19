@@ -1,23 +1,7 @@
 <div class="col-md-8 col-sm-6 col-xs-12">
     <div class="x_panel">
         <div class="x_title">
-            <h2>Registered Appointments</h2>
-            <ul class="nav navbar-right panel_toolbox">
-                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i
-                            class="fa fa-wrench"></i></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Settings 1</a>
-                        </li>
-                        <li><a href="#">Settings 2</a>
-                        </li>
-                    </ul>
-                </li>
-                <li><a class="close-link"><i class="fa fa-close"></i></a>
-                </li>
-            </ul>
+            <h2><@spring.message "registeredApp" /></h2>
             <div class="clearfix"></div>
         </div>
         <div class="x_content">
@@ -25,12 +9,12 @@
                    cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <th>Appointment Date</th>
-                    <th>Patient</th>
-                    <th>Type</th>
-                    <th>Action</th>
-                    <th>Description</th>
-                    <th>Status</th>
+                    <th><span style="text-transform: uppercase;"><@spring.message "appDate" /></span></th>
+                    <th><span style="text-transform: uppercase;"><@spring.message "patient" /></span></th>
+                    <th><span style="text-transform: uppercase;"><@spring.message "type" /></span></th>
+                    <th><span style="text-transform: uppercase;"><@spring.message "action" /></span></th>
+                    <th><span style="text-transform: uppercase;"><@spring.message "description" /></span></th>
+                    <th><span style="text-transform: uppercase;"><@spring.message "status" /></span></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -42,15 +26,15 @@
                     <td>${appointment.getAppointmentType()}</td>
                     <td>
                         <div class="btn-group">
-                            <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">Options <span class="caret"></span></button>
+                            <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button"><@spring.message "options" /> <span class="caret"></span></button>
                             <ul class="dropdown-menu">
-                                <li><a href="#" data-toggle="modal" data-target="#appointmentModal">Re-schedule</a>
+                                <li><a href="#" data-toggle="modal" data-target="#appointmentModal"><@spring.message "reschedule" /></a>
                                     <input type="hidden" form="reScheduleForm" id="id" name="id" value="${appointment.getAppointmentId()}">
                                 </li>
                                 <li>
                                     <form action="/cancelAppointment" METHOD="POST" enctype="multipart/form-data">
                                         <input type="hidden" value="${appointment.getAppointmentId()}" id="appointment_id" name="appointment_id">
-                                        <input type="submit" value="Cancel" class="btn btn-link">
+                                        <input type="submit" value="<@spring.message "cancel" />" class="btn btn-link">
                                     </form>
                                 </li>
                             </ul>
@@ -61,7 +45,7 @@
                 </tr>
                 <#else>
                 <tr>
-                    <th scope="row">NO APPOINTMENTS AVAIBLE</th>
+                    <th scope="row"><@spring.message "emptyApp" /></th>
 
                 </tr>
                 </#list>
