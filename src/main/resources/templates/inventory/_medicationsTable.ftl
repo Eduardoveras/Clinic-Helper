@@ -11,7 +11,7 @@
     </tr>
     </thead>
     <tbody>
-    <#list medicationList as medication>
+    <#list medicationList?sort_by("medicationName") as medication>
     <tr>
         <td>${medication.medicationId}</td>
         <td>${medication.medicationName}</td>
@@ -22,13 +22,13 @@
         <td>
             <form method="post" action="/deleteMedication">
                 <input type="hidden" name="id" value="${medication.medicationId}">
-                <input type="submit" class="btn btn-small btn-danger" onclick="return confirm('<@spring.message "confirmMessage" />');" value="DELETE">
+                <input type="submit" class="btn btn-small btn-danger" onclick="return confirm('<@spring.message "confirmMessage" />');" value="<@spring.message "delete" />">
             </form>
         </td>
         <td>
             <form method="post" action="/restockMedication">
                 <input type="hidden" name="id" value="${medication.medicationId}">
-                <input type="submit" class="btn btn-small btn-danger" onclick="return confirm('<@spring.message "confirmMessage" />');" value="RESTOCK">
+                <input type="submit" class="btn btn-small btn-danger"  value="<@spring.message "restock" />">
             </form>
         </td>
 

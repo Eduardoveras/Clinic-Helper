@@ -12,7 +12,7 @@
     </tr>
     </thead>
     <tbody>
-    <#list productList as product>
+    <#list productList?sort_by("productName") as product>
     <tr>
         <td>${product.productId}</td>
         <td>${product.productName}</td>
@@ -23,13 +23,13 @@
         <td>
             <form method="post" action="/deleteProduct">
                 <input type="hidden" name="id" value="${product.productId}">
-                <input type="submit" class="btn btn-small btn-danger" onclick="return confirm('<@spring.message "confirmMessage" />');" value="DELETE">
+                <input type="submit" class="btn btn-small btn-danger" onclick="return confirm('<@spring.message "confirmMessage" />');" value="<@spring.message "delete" />">
             </form>
         </td>
         <td>
             <form method="post" action="/restockProduct">
                 <input type="hidden" name="id" value="${product.productId}">
-                <input type="submit" class="btn btn-small btn-danger" onclick="return confirm('<@spring.message "confirmMessage" />');" value="RESTOCK">
+                <input type="submit" class="btn btn-small btn-danger" value="<@spring.message "restock" />">
             </form>
         </td>
     </tr>

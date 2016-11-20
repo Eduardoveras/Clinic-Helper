@@ -10,7 +10,7 @@
     </tr>
     </thead>
     <tbody>
-    <#list equipmentList as equipment>
+    <#list equipmentList?sort_by("equipmentName") as equipment>
     <tr>
         <td>${equipment.equipmentId}</td>
         <td>${equipment.equipmentName}</td>
@@ -20,14 +20,14 @@
         <td>
             <form method="post" action="/deleteEquipment">
                 <input type="hidden" name="id" value="${equipment.equipmentId}">
-                <input type="submit" class="btn btn-small btn-danger" onclick="return confirm('<@spring.message "confirmMessage" />');" value="DELETE">
+                <input type="submit" class="btn btn-small btn-danger" onclick="return confirm('<@spring.message "confirmMessage" />');" value="<@spring.message "delete" />">
             </form>
         </td>
         <td>
             <form method="post" action="/restockEquipment">
                 <input type="hidden" name="id" value="${equipment.equipmentId}">
                 <input type="number" name="quantity" id="quantity"   required="required" class="form-control col-md-0 col-xs-0">
-                <input type="submit" class="btn btn-small btn-danger" onclick="return confirm('<@spring.message "confirmMessage" />');" value="RESTOCK">
+                <input type="submit" class="btn btn-small btn-danger" value="<@spring.message "restock" />">
             </form>
         </td>
 
