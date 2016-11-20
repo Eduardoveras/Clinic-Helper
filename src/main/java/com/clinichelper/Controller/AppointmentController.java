@@ -67,21 +67,9 @@ public class AppointmentController {
 
         try {
             SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
-            System.out.print("shit\n");
             String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
-            System.out.print("justtt\n");
-
             Patient patient = DQS.findRegisteredPatient(patientId);
-            System.out.print("hitttt\n");
-
             Timestamp test= new Timestamp(sdf1.parse(appointmentTime).getTime());
-            System.out.print("theeeeee\n");
-
-            System.out.println(clinicId);
-            System.out.println(patientId);
-            System.out.println(test);
-            System.out.println(patient);
-            System.out.println(appointmentDescription);
 
             DEAMS.createNewAppointment(clinicId, test, patient.getPatientId(), appointmentDescription);
             System.out.print("fannnn\n");

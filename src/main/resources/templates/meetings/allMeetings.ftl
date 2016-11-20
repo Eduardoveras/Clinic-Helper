@@ -36,8 +36,7 @@
     </div>
 </div>
 <#include "/layouts/footer.ftl">
-<#include "/patients/_patientsScripts.ftl">
-<!-- /Datatables -->
+<#include "_meetingsScripts.ftl">
 <#include "/layouts/pageCloser.ftl">
 
 

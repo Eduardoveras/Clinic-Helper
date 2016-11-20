@@ -2,6 +2,7 @@ package com.clinichelper.Controller;
 
 import com.clinichelper.Entity.Contact;
 import com.clinichelper.Entity.Meeting;
+import com.clinichelper.Entity.Patient;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
@@ -92,7 +93,7 @@ public class MeetingAndContactsController {
     }
 
     @PostMapping("/new_meeting")
-    public String registerNewMeeting(@RequestParam("title") String title, @RequestParam("objective") String objective, @RequestParam("time")Timestamp time, @RequestParam("place")String place, @RequestParam("attendees") List<String> attendees){
+    public String registerNewMeeting(@RequestParam("title") String title, @RequestParam("objective") String objective, @RequestParam("time")String time, @RequestParam("place")String place, @RequestParam("attendees") List<String> attendees){
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
@@ -104,7 +105,11 @@ public class MeetingAndContactsController {
                 team.add(DQS.findRegisteredStaffByEmail(DQS.getCurrentLoggedUser().getClinic().getClinicId(), s));
             }
 
-            DEAMS.createNewMeeting(DQS.getCurrentLoggedUser().getClinic().getClinicId(), title, objective, time, place, new HashSet<>(team));
+            SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
+            Timestamp realTime= new Timestamp(sdf1.parse(time).getTime());
+
+
+            DEAMS.createNewMeeting(DQS.getCurrentLoggedUser().getClinic().getClinicId(), title, objective, realTime, place, new HashSet<>(team));
             return "redirect:/meetings";
         } catch (Exception exp){
             exp.printStackTrace();

@@ -45,9 +45,6 @@
             </div>
 
             <div class="form-group item">
-                <label class="text-left" class="control-label col-md-6 col-sm-6 col-xs-12" class="date-picker"
-                       for="meetingTime"> Meeting Time: <span class="required">*</span>
-                </label>
                 <div class='input-group date' id='datetimepicker1'>
                     <input type='text' class="form-control" id="time" name="time"
                            required="required" class="form-control col-md-7 col-xs-12"/>
@@ -56,6 +53,8 @@
                     </span>
                 </div>
             </div>
+
+
 
             <div class="control-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Attendees </label>
