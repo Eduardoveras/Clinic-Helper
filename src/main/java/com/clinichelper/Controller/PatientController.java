@@ -149,7 +149,7 @@ public class PatientController {
            @RequestParam("gender") String gender,
            @RequestParam("nationality") String nationality,
            @RequestParam("country") String countries,
-           @RequestParam("city") String cities,
+           @RequestParam("state") String cities,
            @RequestParam("allergies")ArrayList<String> patientAllergies,
            @RequestParam("religion") String patientReligion,
            @RequestParam("height") String patientHeight,

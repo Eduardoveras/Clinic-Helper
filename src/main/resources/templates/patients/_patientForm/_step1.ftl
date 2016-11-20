@@ -72,7 +72,7 @@
             <label class="control-label col-md-6 col-sm-6 col-xs-12" for="state"><@spring.message "city" /> <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <select id="city" name="city" required="required" class="form-control col-md-7 col-xs-12"></select>
+                <select id="state" name="state" required="required" class="form-control col-md-7 col-xs-12"></select>
             </div>
         </div>
 
