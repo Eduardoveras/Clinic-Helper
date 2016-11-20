@@ -52,7 +52,7 @@ public class DataEntryAndManagementService {
     @Autowired
     private  HistoryRepository historyRepository;
     @Autowired
-    private EncriptationService EncriptService;
+    private EncryptionService EncriptService;
 
     // Creation functions
     public Appointment createNewAppointment(String clinicId, Timestamp appointmentTime, String patientId, String appointmentDescription) throws Exception {
@@ -60,9 +60,11 @@ public class DataEntryAndManagementService {
         if(!doesClinicIdExist(clinicId))
             throw new IllegalArgumentException("\n\nThis is an invalid clinic id");
 
-
         if (!doesPatientIdExist(patientId))
             throw new IllegalArgumentException("\n\nThis is an invalid patient Id");
+
+        if (!isGivenDateInTheFuture(appointmentTime))
+            throw new IllegalArgumentException("The date of an appointment must be a future date");
 
         try {
             Appointment appointment = appointmentRepository.save(new Appointment(clinicRepository.findByClinicId(clinicId), appointmentTime, patientRepository.findByPatientId(patientId), appointmentDescription, AppointmentType.CONSULTATION));
@@ -203,11 +205,11 @@ public class DataEntryAndManagementService {
         if (attendees.isEmpty())
             throw new NullArgumentException("\n\nYou can not schedule a meeting without any staff attending. Please choose who will attend");
 
-        if (differenceInDays(new Date(Calendar.getInstance().getTime().getTime()), new Date(time.getTime())) <= 0)
+        if (!isGivenDateInTheFuture(time))
             throw new IllegalArgumentException("The meeting date must be a future date");
 
         try {
-            return meetingRepository.save(new Meeting(clinicRepository.findByClinicId(clinicId), title,objective, time, place, attendees));
+            return meetingRepository.save(new Meeting(clinicRepository.findByClinicId(clinicId), title, objective, time, place, attendees));
         } catch (PersistenceException exp){
             exp.printStackTrace();
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
@@ -238,7 +240,7 @@ public class DataEntryAndManagementService {
         if (!doesClinicIdExist(clinicId))
             throw new IllegalArgumentException("\n\nThis is an invalid clinic id");
 
-        if (differenceInDays(patientBirthDate ,new Date(Calendar.getInstance().getTime().getTime())) <= 0)
+        if (differenceInDays(patientBirthDate, new Date(Calendar.getInstance().getTime().getTime())) <= 0)
             throw new IllegalArgumentException("The birth date must be a past date");
 
         try {
@@ -981,5 +983,24 @@ public class DataEntryAndManagementService {
 
     private int differenceInDays(Date start, Date end){
         return (int)((end.getTime() - start.getTime()) / MILLISECONDS_IN_A_DAY);
+    }
+
+    private boolean isGivenDateInTheFuture(Timestamp date){
+        Calendar today = Calendar.getInstance();
+        today.setTime(new Date(Calendar.getInstance().getTime().getTime()));
+
+        Calendar givenDate = Calendar.getInstance();
+        givenDate.setTime(new Date(date.getTime()));
+
+        if ((givenDate.get(Calendar.YEAR) - today.get(Calendar.YEAR)) < 0)
+            return false;
+
+        if ((givenDate.get(Calendar.MONTH) - today.get(Calendar.MONTH)) < 0)
+            return false;
+
+        if ((givenDate.get(Calendar.DAY_OF_MONTH) - today.get(Calendar.DAY_OF_MONTH)) < 0)
+            return false;
+
+        return true;
     }
 }

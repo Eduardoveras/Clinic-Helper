@@ -105,11 +105,7 @@ public class MeetingAndContactsController {
                 team.add(DQS.findRegisteredStaffByEmail(DQS.getCurrentLoggedUser().getClinic().getClinicId(), s));
             }
 
-            SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
-            Timestamp realTime= new Timestamp(sdf1.parse(time).getTime());
-
-
-            DEAMS.createNewMeeting(DQS.getCurrentLoggedUser().getClinic().getClinicId(), title, objective, realTime, place, new HashSet<>(team));
+            DEAMS.createNewMeeting(DQS.getCurrentLoggedUser().getClinic().getClinicId(), title, objective, new Timestamp(new SimpleDateFormat("MM/dd/yyyy hh:mm a").parse(time).getTime()), place, new HashSet<>(team));
             return "redirect:/meetings";
         } catch (Exception exp){
             exp.printStackTrace();

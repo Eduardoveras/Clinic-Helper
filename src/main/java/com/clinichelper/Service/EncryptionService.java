@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  * Created by Eduardo veras on 11-Nov-16.
  */
 @Service
-public class EncriptationService {
+public class EncryptionService {
 
     public String encryptPassword(String passwordToHash)
     {

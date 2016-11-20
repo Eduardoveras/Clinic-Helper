@@ -49,7 +49,7 @@ public class DataQueryService {
     @Autowired
     private HttpSession session;
     @Autowired
-    private EncriptationService EncriptService;
+    private EncryptionService EncriptService;
 
 
 
