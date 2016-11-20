@@ -14,7 +14,7 @@
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3>Patient Report: ${patient.patientId}</h3>
+                        <h3><@spring.message "report" />: ${patient.patientId}</h3>
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -22,22 +22,7 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>${user.clinic.clinicPrefix} Patient Profile</h2>
-                                <ul class="nav navbar-right panel_toolbox">
-                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a href="#">Settings 1</a>
-                                            </li>
-                                            <li><a href="#">Settings 2</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                    </li>
-                                </ul>
+                                <h2><@spring.message "pProfileFrag1" /> ${user.clinic.clinicPrefix} <@spring.message "pProfileFrag2" /></h2>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
@@ -64,7 +49,7 @@
                                         </li>
                                     </ul>
 
-                                    <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
+                                    <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i><@spring.message "editProfile" /></a>
                                     <br>
 
                                     <!-- start skills
@@ -99,22 +84,22 @@
 
                                 </div>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <h1>Basic Information</h1><br>
-                                    <h4>${patient.clinic.clinicPrefix} ID:</h4><h3>${patient.patientId}</h3><br>
-                                    <h4>First Name:</h4><h3>${patient.patientFirstName}</h3><br>
-                                    <h4>Last Name:</h4><h3>${patient.patientLastName}</h3><br>
-                                    <h4>ID Card:</h4><h3>${patient.patientIdCard}</h3><br>
-                                    <h4>Phone:</h4><h3>${patient.patientTelephoneNumber}</h3><br>
-                                    <h4>Contact:</h4><h3>${patient.patientContactTelephoneNumber}</h3><br>
-                                    <h4>Email:</h4><h3>${patient.patientEmail}</h3><br>
-                                    <h4>Birth day:</h4><h3>${patient.patientBirthDate}</h3><br>
-                                    <h4>Gender:</h4><h3>${patient.patientGender}</h3><br>
-                                    <h4>Date Registered</h4><h3>${patient.patientRegisteredDate}</h3><br>
-                                    <h4>Occupation:</h4><h3>${patient.occupation}</h3><br>
-                                    <h4>Nationality:</h4><h3>${patient.patientNationality}</h3><br>
-                                    <h4>Address:</h4><h3>${patient.patientAddress}</h3><br>
-                                    <h4>City:</h4><h3>${patient.patientCity}</h3><br>
-                                    <h4>Country:</h4><h3>${patient.patientCountry}</h3><br>
+                                    <h1><@spring.message "basic" /></h1><br>
+                                    <h4><@spring.message "idFrag1" />${user.clinic.clinicPrefix} <@spring.message "idFrag2" />:</h4><h3>${patient.patientId}</h3><br>
+                                    <h4><@spring.message "first" />:</h4><h3>${patient.patientFirstName}</h3><br>
+                                    <h4><@spring.message "last" />:</h4><h3>${patient.patientLastName}</h3><br>
+                                    <h4><@spring.message "id" />:</h4><h3>${patient.patientIdCard}</h3><br>
+                                    <h4><@spring.message "mainPhone" />:</h4><h3>${patient.patientTelephoneNumber}</h3><br>
+                                    <h4><@spring.message "sPhone" />t:</h4><h3>${patient.patientContactTelephoneNumber}</h3><br>
+                                    <h4><@spring.message "email" />:</h4><h3>${patient.patientEmail}</h3><br>
+                                    <h4><@spring.message "bday" />:</h4><h3>${patient.patientBirthDate}</h3><br>
+                                    <h4><@spring.message "sex" />:</h4><h3>${patient.patientGender}</h3><br>
+                                    <h4><@spring.message "rDay" />:</h4><h3>${patient.patientRegisteredDate}</h3><br>
+                                    <h4><@spring.message "job" />:</h4><h3>${patient.occupation}</h3><br>
+                                    <h4><@spring.message "nationality" />:</h4><h3>${patient.patientNationality}</h3><br>
+                                    <h4><@spring.message "address" />:</h4><h3>${patient.patientAddress}</h3><br>
+                                    <h4><@spring.message "city" />:</h4><h3>${patient.patientCity}</h3><br>
+                                    <h4><@spring.message "country" />:</h4><h3>${patient.patientCountry}</h3><br>
                                     
                                 </div>
                             </div>

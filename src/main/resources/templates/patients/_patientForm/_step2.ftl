@@ -2,7 +2,7 @@
     <form class="form-horizontal form-label-left">
 
         <div class="form-group" >
-            <label  class="control-label col-md-6 col-sm-6 col-xs-12" for="nationality"> Height <span class="required">*</span>
+            <label  class="control-label col-md-6 col-sm-6 col-xs-12" for="nationality"> <@spring.message "height" /> <span class="required">*</span>
             </label>
 
             <div class="input-group number-spinner">
@@ -20,7 +20,7 @@
         </div>
 
         <div class="form-group" >
-            <label  class="control-label col-md-6 col-sm-6 col-xs-12" for="nationality"> Weight <span class="required">*</span>
+            <label  class="control-label col-md-6 col-sm-6 col-xs-12" for="nationality"> <@spring.message "weight" /> <span class="required">*</span>
             </label>
 
             <div class="input-group number-spinner">
@@ -38,7 +38,7 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">Blood Type <span class="required">*</span></label>
+            <label class="control-label col-md-3 col-sm-3 col-xs-12"><@spring.message "bType" /> <span class="required">*</span></label>
             <div class="col-md-9 col-sm-9 col-xs-12">
                 <select id="bloodType" class="form-control">
                     <option>A+</option>
@@ -52,7 +52,7 @@
         </div>
 
         <div class="control-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">Allergies</label>
+            <label class="control-label col-md-3 col-sm-3 col-xs-12"><@spring.message "allergies" /></label>
             <div id="tags_1_tagsinput" class="tagsinput" style="width: auto; min-height: 100px; height: 100px;">
                                 <span class="tag"><span>social&nbsp;&nbsp;</span><a href="#" title="Removing tag">x</a>
                                 </span>
@@ -68,7 +68,7 @@
 
 
         <div class="control-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">Conditions</label>
+            <label class="control-label col-md-3 col-sm-3 col-xs-12"><@spring.message "conditions" /></label>
             <div id="tags_1_tagsinput" class="tagsinput" style="width: auto; min-height: 100px; height: 100px;">
                                 <span class="tag"><span>social&nbsp;&nbsp;</span><a href="#" title="Removing tag">x</a>
                                 </span>

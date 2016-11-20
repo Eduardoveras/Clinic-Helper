@@ -16,7 +16,7 @@
     <li>
         <div class="text-center">
             <a>
-                <strong>You did everything!</strong>
+                <strong><@spring.message "didIt" /></strong>
                 <i class="fa fa-angle-right"></i>
             </a>
         </div>
@@ -26,14 +26,14 @@
     <li>
         <div class="text-center">
             <a>
-                <strong>See All Alerts</strong>
+                <strong><@spring.message "alerts" /></strong>
                 <i class="fa fa-angle-right"></i>
             </a>
         </div>
     </li>
     <li>
         <div class="text-center">
-            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Create
+            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal"><@spring.message "create" />
             </button>
         </div>
     </li>
