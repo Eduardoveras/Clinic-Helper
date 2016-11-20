@@ -2,9 +2,11 @@ package com.clinichelper.Service;
 
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
+import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,9 @@ public class AmazonService {
     private static String keyName        = System.getenv("AWS_BUCKET_KEY");
 
     public void UploadImageToAWS(String uploadFileName,File file) {
+        AWSCredentials credentials = new ProfileCredentialsProvider().getCredentials();
+
+
         file.renameTo(new File(uploadFileName));
         AmazonS3 s3client = new AmazonS3Client(new ProfileCredentialsProvider());
         try {

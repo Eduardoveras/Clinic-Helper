@@ -1,6 +1,7 @@
 package com.clinichelper.Controller;
 
 import com.clinichelper.Entity.Appointment;
+import com.clinichelper.Service.AmazonService;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.PersistenceException;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +32,8 @@ public class IndexController implements ErrorController {
     private DataQueryService DQS;
     @Autowired
     private ToolKitService TKS;
+    @Autowired
+    private AmazonService AS;
     private static final String ERR_PATH = "/error";
 
     // Gets
@@ -38,6 +42,7 @@ public class IndexController implements ErrorController {
         if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
+        AS.UploadImageToAWS("YOLO",new File("swag"));
 
         System.out.println("THE FUCKING ROLE IS"+DQS.getCurrentLoggedUser().getRole());
         model.addAttribute("userRole",DQS.getCurrentLoggedUser().getRole());
