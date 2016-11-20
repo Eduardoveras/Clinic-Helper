@@ -3,27 +3,11 @@
         <div class="x_title">
             <h2>
                 <#if isAdmin>
-                    <a href="#" data-toggle="modal" data-target="#contactModal" class="btn btn-success">Add New ${user.clinic.clinicPrefix} Member</a>
+                    <a href="#" data-toggle="modal" data-target="#contactModal" class="btn btn-success"><@spring.message "addNew" /> ${user.clinic.clinicPrefix} <@spring.message "teamMember" /></a>
                 <#else>
-                    Our ${user.clinic.clinicPrefix} Team!
+                    <@spring.message "teamFrag1" /> ${user.clinic.clinicPrefix} <@spring.message "teamFrag2" />
                 </#if>
             </h2>
-            <ul class="nav navbar-right panel_toolbox">
-                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i
-                            class="fa fa-wrench"></i></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Settings 1</a>
-                        </li>
-                        <li><a href="#">Settings 2</a>
-                        </li>
-                    </ul>
-                </li>
-                <li><a class="close-link"><i class="fa fa-close"></i></a>
-                </li>
-            </ul>
             <div class="clearfix"></div>
         </div>
         <div class="x_content">
@@ -34,11 +18,11 @@
                     <div class="col-md-6 col-sm-6 col-xs-12 profile_details">
                         <div class="well profile_view">
                             <div class="col-sm-12">
-                                <h4 class="brief"><i>${user.clinic.clinicPrefix} Contact</i></h4>
+                                <h4 class="brief"><i><@spring.message "cFrag1" /> ${user.clinic.clinicPrefix} <@spring.message "cFrag2" /></i></h4>
                                 <div class="left col-xs-7">
                                     <h2>${contact.getFullName()}</h2>
-                                    <p><strong>Email: </strong>${contact.getEmail()}</p>
-                                    <p><strong>Has an Account: </strong><#if contact.hasAccount>YES<#else>NO</#if></p>
+                                    <p><strong><@spring.message "email" />: </strong>${contact.getEmail()}</p>
+                                    <p><strong><@spring.message "hasAccount" />: </strong><#if contact.hasAccount><@spring.message "yes" /><#else><@spring.message "no" /></#if></p>
                                 </div>
                                 <div class="right col-xs-5 text-center">
                                     <img src="images/img.jpg" alt="" class="img-circle img-responsive">
@@ -47,31 +31,31 @@
                             <div class="col-xs-12 bottom text-center">
                                 <#if isAdmin>
                                 <div class="col-xs-12 col-sm-12 emphasis">
-                                    <button data-toggle="dropdown" class="btn btn-default dropdown-toggle btn-sm btn-round" type="button" aria-expanded="false">Options <span class="caret"></span>
+                                    <button data-toggle="dropdown" class="btn btn-default dropdown-toggle btn-sm btn-round" type="button" aria-expanded="false"><@spring.message "options" /> <span class="caret"></span>
                                     </button>
                                     <ul role="menu" class="dropdown-menu">
                                         <li>
                                             <form action="/delete_contact" METHOD="POST" enctype="multipart/form-data">
                                                 <input type="hidden" value="${contact.getContactId()}" id="contactId" name="contactId">
-                                                <input type="submit" value="Delete" class="btn btn-link">
+                                                <input type="submit" value="<@spring.message "deleteContact" />" class="btn btn-link">
                                             </form>
                                         </li>
                                         <li class="divider"></li>
-                                        <li><a href="#">Edit</a></li>
+                                        <li><a href="#"><@spring.message "editProfile" /></a></li>
                                     </ul>
                                 </div>
                                 </#if>
                                 <button type="button" class="btn btn-primary btn-sm btn-round" >
-                                    <i class="fa fa-user"> </i> View Profile
+                                    <i class="fa fa-user"> </i> <@spring.message "viewProfile" />
                                 </button>
                                 <button type="button" class="btn btn-primary btn-sm btn-round" >
-                                    <i class="fa fa-user"> </i> Send Message
+                                    <i class="fa fa-user"> </i> <@spring.message "sendMessage" />
                                 </button>
                             </div>
                         </div>
                     </div>
                 <#else>
-                    <p><h4>You have don't have more appointments to show</h4></p>
+                    <p><h4><@spring.message "emptyContact" /></h4></p>
                 </#list>
             </div>
         </div>

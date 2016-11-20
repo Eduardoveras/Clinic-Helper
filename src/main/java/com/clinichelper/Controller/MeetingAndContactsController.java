@@ -82,7 +82,7 @@ public class MeetingAndContactsController {
             return "redirect:/contacts";
 
         try {
-            DEAMS.createNewStaffMember(DQS.getCurrentLoggedUser().getClinic().getClinicId(), firstName, lastName, new Date(new SimpleDateFormat("MM/dd/yyyy").parse(birthDate).getTime()), email);
+            DEAMS.createNewStaffMember(DQS.getCurrentLoggedUser().getClinic().getClinicId(), firstName, lastName, new Date(new SimpleDateFormat("MM/dd/yyyy").parse(birthDate).getTime()), email.toLowerCase());
             return "redirect:/contacts";
         } catch (Exception exp){
             exp.printStackTrace();

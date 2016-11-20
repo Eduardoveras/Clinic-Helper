@@ -14,7 +14,7 @@
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3>${user.clinic.clinicPrefix} Appointments</h3>
+                        <h3><@spring.message "appFrag1" /> ${user.clinic.clinicPrefix} <@spring.message "appFrag2" /></h3>
                     </div>
                 </div>
                 <div class="clearfix"></div>

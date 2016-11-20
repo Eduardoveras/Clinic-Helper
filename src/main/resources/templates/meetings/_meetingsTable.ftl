@@ -2,35 +2,20 @@
     <div class="x_panel">
         <div class="x_title">
             <h2>
-                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#meeting">New Equipment</button>
+                <!--<if !isAdmin>--><a href="/new_meeting" role="button" class="btn btn-primary"><@spring.message "newMeeting" /></a><!--<else><strong>Only non-ADMIN accounts can organize meetings</strong></if>-->
             </h2>
-            <ul class="nav navbar-right panel_toolbox">
-                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Settings 1</a>
-                        </li>
-                        <li><a href="#">Settings 2</a>
-                        </li>
-                    </ul>
-                </li>
-                <li><a class="close-link"><i class="fa fa-close"></i></a>
-                </li>
-            </ul>
             <div class="clearfix"></div>
         </div>
         <div class="x_content">
             <table id="datatable-responsive" class="table table-hover table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <th>${user.clinic.clinicPrefix} Id</th>
-                    <th>Title</th>
-                    <th>Objectives</th>
-                    <th>Time</th>
-                    <th>Place</th>
-                    <th>Attendees</th>
+                    <th><@spring.message "idFrag1" />${user.clinic.clinicPrefix} <@spring.message "idFrag2" /></th>
+                    <th><span style="text-transform: uppercase;"><@spring.message "title" /></span></th>
+                    <th><span style="text-transform: uppercase;"><@spring.message "objectives" /></span></th>
+                    <th><span style="text-transform: uppercase;"><@spring.message "time" /></span></th>
+                    <th><span style="text-transform: uppercase;"><@spring.message "place" /></span</th>
+                    <th><span style="text-transform: uppercase;"><@spring.message "attendees" /></span></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -52,7 +37,7 @@
                 </tr>
                 <#else>
                 <tr>
-                    <th scope="row">NO MEETINGS AVAILABLE</th>
+                    <th scope="row"><@spring.message "emptyMeeting" /></th>
 
                 </tr>
                 </#list>
