@@ -1,5 +1,5 @@
 <div id="step-1">
-    <form class="form-horizontal form-label-left">
+    <form action="/newPatient" method="post" class="form-horizontal form-label-left">
 
         <div class="form-group"  >
             <label class="control-label col-md-6 col-sm-6 col-xs-12" for="firstname">First Name <span class="required">*</span>
@@ -13,7 +13,7 @@
             <label class="control-label col-md-6 col-sm-6 col-xs-12" for="lastname">Last Name <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="last-name" name="lastname" required="required" class="form-control col-md-7 col-xs-12">
+                <input type="text" id="lastname" name="lastname" required="required" class="form-control col-md-7 col-xs-12">
             </div>
         </div>
 
@@ -28,7 +28,7 @@
             <label class="control-label col-md-6 col-sm-6 col-xs-12">Date Of Birth <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="birthdate" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                <input id="dateofbirth" name="dateofbirth" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
             </div>
         </div>
 
@@ -72,7 +72,7 @@
             <label class="control-label col-md-6 col-sm-6 col-xs-12" for="state">City <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <select id="state" name="state" required="required" class="form-control col-md-7 col-xs-12"></select>
+                <select id="city" name="city" required="required" class="form-control col-md-7 col-xs-12"></select>
             </div>
         </div>
 
@@ -91,6 +91,6 @@
                 <input type="text" id="nationality" name="nationality" required="required" class="form-control col-md-7 col-xs-12">
             </div>
         </div>
-    </form>
+
 
 </div>

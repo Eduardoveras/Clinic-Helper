@@ -1,11 +1,10 @@
 <div id="step-5">
-    <form class="form-horizontal form-label-left">
 
         <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="insuranceCode">Insurance Serial Code
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="insurancecode">Insurance Serial Code
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="insuranceCode" required="required" class="form-control col-md-7 col-xs-12">
+                <input type="text" id="insurancecode" name="insurancecode"  required="required" class="form-control col-md-7 col-xs-12">
             </div>
         </div>
         <div class="form-group">
