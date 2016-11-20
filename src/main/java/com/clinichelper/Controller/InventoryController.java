@@ -174,9 +174,7 @@ public class InventoryController {
 
         try {
             Equipment equipment = DQS.findRegisteredEquipment(equipmentId);
-
             equipment.setEquipmentInStock(equipment.getEquipmentInStock() + stock);
-
             DEAMS.editEquipment(equipment);
             return "redirect:/Inventory";
         } catch (Exception exp){
@@ -191,10 +189,9 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-
         try {
             Medication medication = DQS.findRegisteredMedication(medicationId);
-            medication.setMedicationInStock(stock);
+            medication.setMedicationInStock(medication.getMedicationInStock() + stock);
             DEAMS.editMedication(medication);
             return "redirect:/Inventory";
         } catch (Exception exp){
@@ -212,7 +209,7 @@ public class InventoryController {
 
         try {
             Product product = DQS.findRegisteredProduct(productId);
-            product.setProductInStock(stock);
+            product.setProductInStock(product.getProductInStock() + stock);
             DEAMS.editProduct(product);
             return "redirect:/Inventory";
         } catch (Exception exp){
