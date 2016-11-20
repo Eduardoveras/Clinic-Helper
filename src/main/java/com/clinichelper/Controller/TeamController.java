@@ -66,7 +66,7 @@ public class TeamController {
             return "redirect:/";
 
         try{
-            DEAMS.createNewUserAccount(DQS.getCurrentLoggedUser().getClinic().getClinicId(), email, firstName, lastName, new Date(new SimpleDateFormat("MM/dd/yyyy").parse(birthDate).getTime()), gender.toUpperCase().equals("F") ? Gender.F : Gender.M, password, role.toUpperCase().equals("M") ? Permission.MEDIC : Permission.ASSISTANT);
+            DEAMS.createNewUserAccount(DQS.getCurrentLoggedUser().getClinic().getClinicId(), email.toLowerCase(), firstName, lastName, new Date(new SimpleDateFormat("MM/dd/yyyy").parse(birthDate).getTime()), gender.toUpperCase().equals("F") ? Gender.F : Gender.M, password, role.toUpperCase().equals("M") ? Permission.MEDIC : Permission.ASSISTANT);
             return "redirect:/users";
         } catch (Exception exp){
             exp.printStackTrace();
