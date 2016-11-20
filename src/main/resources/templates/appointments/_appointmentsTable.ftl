@@ -18,7 +18,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <#list appointmentList as appointment>
+                <#list appointmentList?sort_by("appointmentTime")?reverse as appointment>
                 <tr>
                     <td>${appointment.getAppointmentTime()}</td>
                     <td><a href="/patient/${appointment.patient.patientId}">${appointment.patient.patientFullName}</a>

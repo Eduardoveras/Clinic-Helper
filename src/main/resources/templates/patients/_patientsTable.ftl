@@ -26,7 +26,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <#list patientList as patient>
+                <#list patientList?sort_by("patientLastName") as patient>
                 <tr>
                     <td><a href="/patient/${patient.patientId}">${patient.patientFullName}</a></td>
                     <td>${patient.patientIdCard}</td>

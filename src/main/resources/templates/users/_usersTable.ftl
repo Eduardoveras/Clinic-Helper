@@ -16,7 +16,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <#list userList as user>
+                <#list userList?sort_by("email") as user>
                 <tr>
                     <td>${user.userId}</td>
                     <td>${user.fullName}</td>
