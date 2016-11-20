@@ -33,6 +33,21 @@
                                             <img class="img-responsive avatar-view" src="/images/user.png" alt="Avatar" title="Change the avatar">
                                         </div>
                                     </div>
+
+                                    <div>
+                                        <form action="/uploadPhoto" METHOD="POST" enctype="multipart/form-data">
+                                            <div class="mdl-card__supporting-text">
+                                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                    <input class="mdl-textfield__input" type="file" id="photo" name="photo">
+                                                </div>
+                                            </div>
+                                            <div class="mdl-card__actions mdl-card--border">
+                                                <input type="hidden" name="id" value="${patient.patientId}">
+                                                <input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit" value="Edit Profile Picture">
+                                            </div>
+                                        </form>
+                                    </div>
+
                                     <h3>${patient.patientFullName}</h3>
 
                                     <ul class="list-unstyled user_data">

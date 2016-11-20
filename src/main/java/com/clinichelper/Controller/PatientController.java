@@ -4,6 +4,7 @@
 package com.clinichelper.Controller;
 
 import com.clinichelper.Entity.Patient;
+import com.clinichelper.Service.AmazonService;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
@@ -20,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.PersistenceException;
+import java.io.File;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,6 +35,8 @@ public class PatientController {
     private DataQueryService DQS;
     @Autowired
     private ToolKitService TKS;
+    @Autowired
+    private AmazonService AS;
 
     // Gets
     @GetMapping("/patients")
@@ -207,9 +211,9 @@ public class PatientController {
         Patient patient = DQS.findRegisteredPatient(patientId);
 
         try {
-            patient.setPatientPhoto(processImageFile(file.getBytes()));
-
-            DEAMS.editPatient(patient);
+            //patient.setPatientPhoto(processImageFile(file.getBytes()));
+            AS.UploadImageToAWS(patient.getPatientId(), convertToFile(file));
+            //DEAMS.editPatient(patient);
             return "redirect:/patient/" + patient.getPatientId();
         } catch (Exception exp){
             exp.printStackTrace();
@@ -228,5 +232,24 @@ public class PatientController {
             bytes[i++] = b; // Autoboxing
 
         return bytes;
+    }
+
+    private File convertToFile(MultipartFile file){
+        try{
+            File converted = new File(file.getOriginalFilename());
+
+            //converted.createNewFile();
+            //FileOutputStream fos = new FileOutputStream(converted);
+            //fos.write(file.getBytes());
+            //fos.close();
+
+            file.transferTo(converted);
+
+            return converted;
+        } catch (Exception exp){
+            //
+        }
+
+        return null;
     }
 }
