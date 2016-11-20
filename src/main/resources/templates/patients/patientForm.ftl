@@ -14,7 +14,7 @@
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3>Patient Registration</h3>
+                        <h3><@spring.message "patientReg" /></h3>
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -32,8 +32,7 @@
     </div>
 </div>
 <#include "/layouts/footer.ftl">
-<#include "/patients/_patientsScripts.ftl">
-<!-- /Datatables -->
+<#include "_patientsScripts.ftl">
 <#include "/layouts/pageCloser.ftl">
 
 
