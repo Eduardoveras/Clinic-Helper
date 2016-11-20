@@ -20,7 +20,7 @@ public class AmazonService {
     private static String bucketName     = System.getenv("AWS_BUCKET_NAME");
     private static String keyName        = System.getenv("AWS_BUCKET_KEY");
 
-    public void UploadImageToAWS(String uploadFileName,File file) {
+    public void UploadImageToAWS(String uploadFileName, File file) {
         file.renameTo(new File(uploadFileName));
         AmazonS3 s3client = new AmazonS3Client(new ProfileCredentialsProvider());
         try {
