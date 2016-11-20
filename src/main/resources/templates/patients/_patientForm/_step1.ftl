@@ -33,7 +33,7 @@
         </div>
 
         <div class="form-group" >
-            <label  class="control-label col-md-3 col-sm-3 col-xs-12"><@spring.message "sex" /> <span class="required">*</span></label>
+            <label  class="control-label col-md-3 col-sm-3 col-xs-12"><@spring.message "Gender" /> <span class="required">*</span></label>
             <div class="text-left" class="col-md-6 col-sm-6 col-xs-12" >
                 <div id="gender" class="btn-group" data-toggle="buttons">
                     <label  class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">

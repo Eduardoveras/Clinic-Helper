@@ -60,6 +60,8 @@
                             <#include "/patients/_patientForm/_step3.ftl">
                             <#include "/patients/_patientForm/_step4.ftl">
                             <#include "/patients/_patientForm/_step5.ftl">
+                            <button type="submit" class="btn btn-success">Submit</button>
+                            </form>
                         </div>
                         <!-- End SmartWizard Content -->
                     </div>
