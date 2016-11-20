@@ -1,5 +1,5 @@
 <div id="step-1">
-    <form class="form-horizontal form-label-left">
+    <form action="/newPatient" method="post" class="form-horizontal form-label-left">
 
         <div class="form-group"  >
             <label class="control-label col-md-6 col-sm-6 col-xs-12" for="firstname"><@spring.message "first" /> <span class="required">*</span>
@@ -13,7 +13,7 @@
             <label class="control-label col-md-6 col-sm-6 col-xs-12" for="lastname"><@spring.message "last" /> <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="last-name" name="lastName" required="required" class="form-control col-md-7 col-xs-12">
+                <input type="text" id="lastname" name="lastname" required="required" class="form-control col-md-7 col-xs-12">
             </div>
         </div>
 
@@ -28,12 +28,12 @@
             <label class="control-label col-md-6 col-sm-6 col-xs-12"><@spring.message "bday" /> <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="dateOfBirth" name="dateOfBirth" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                <input id="dateofbirth" name="dateofbirth" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
             </div>
         </div>
 
         <div class="form-group" >
-            <label  class="control-label col-md-3 col-sm-3 col-xs-12"><@spring.message "sex" /> <span class="required">*</span></label>
+            <label  class="control-label col-md-3 col-sm-3 col-xs-12"><@spring.message "Gender" /> <span class="required">*</span></label>
             <div class="text-left" class="col-md-6 col-sm-6 col-xs-12" >
                 <div id="gender" class="btn-group" data-toggle="buttons">
                     <label  class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
@@ -91,6 +91,6 @@
                 <input type="text" id="nationality" name="nationality" required="required" class="form-control col-md-7 col-xs-12">
             </div>
         </div>
-    </form>
+
 
 </div>
