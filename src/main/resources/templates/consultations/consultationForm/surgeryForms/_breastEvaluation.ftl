@@ -123,3 +123,18 @@
         <br>
         </p>
     </div>
+
+    <div class="form-group" >
+        <label  class="control-label col-md-3 col-sm-3 col-xs-12"><@spring.message "Are you self-conscious about your breast?" /> <span class="required">*</span></label>
+        <div class="text-left" class="col-md-6 col-sm-6 col-xs-12" >
+            <div id="concsious" class="btn-group" data-toggle="buttons">
+                <label  class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                    <input type="radio" name="concsious" value="yes"> &nbsp; <@spring.message "YES" /> &nbsp;
+                </label>
+                <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                    <input type="radio" name="concsious" value="no"> <@spring.message "NO" />
+                </label>
+            </div>
+        </div>
+    </div>
+

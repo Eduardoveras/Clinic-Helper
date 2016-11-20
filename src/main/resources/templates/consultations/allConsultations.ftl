@@ -20,7 +20,7 @@
                 <div class="clearfix"></div>
                 <!--ADD CONTENT HERE-->
                 <div class="row">
-                <#include "/templates/consultations/consultationForm/_consultation.ftl">
+                <#include "consultations/consultationForm/_consultationForm.ftl">
 
 
 

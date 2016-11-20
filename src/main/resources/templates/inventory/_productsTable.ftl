@@ -26,6 +26,12 @@
                 <input type="submit" class="btn btn-small btn-danger" onclick="return confirm('<@spring.message "confirmMessage" />');" value="DELETE">
             </form>
         </td>
+        <td>
+            <form method="post" action="/restockProduct">
+                <input type="hidden" name="id" value="${product.productId}">
+                <input type="submit" class="btn btn-small btn-danger" onclick="return confirm('<@spring.message "confirmMessage" />');" value="RESTOCK">
+            </form>
+        </td>
     </tr>
     <#else>
     <tr>

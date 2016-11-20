@@ -17,6 +17,20 @@
         <td>${equipment.equipmentUse}</td>
         <td>${equipment.equipmentDescription}</td>
         <td>${equipment.equipmentInStock} <@spring.message "unit" /><#if equipment.equipmentInStock gt 1><@spring.message "plural" /></#if></td>
+        <td>
+            <form method="post" action="/deleteEquipment">
+                <input type="hidden" name="id" value="${equipment.equipmentId}">
+                <input type="submit" class="btn btn-small btn-danger" onclick="return confirm('<@spring.message "confirmMessage" />');" value="DELETE">
+            </form>
+        </td>
+        <td>
+            <form method="post" action="/restockEquipment">
+                <input type="hidden" name="id" value="${equipment.equipmentId}">
+                <input type="number" name="quantity" id="quantity"   required="required" class="form-control col-md-0 col-xs-0">
+                <input type="submit" class="btn btn-small btn-danger" onclick="return confirm('<@spring.message "confirmMessage" />');" value="RESTOCK">
+            </form>
+        </td>
+
     </tr>
     <#else>
     <tr>

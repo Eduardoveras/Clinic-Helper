@@ -19,6 +19,19 @@
         <td>${medication.medicationDescription}</td>
         <td>$${medication.medicationPrice}</td>
         <td>${medication.medicationInStock} <@spring.message "unit" /><#if medication.medicationInStock gt 1><@spring.message "plural" /></#if></td>
+        <td>
+            <form method="post" action="/deleteMedication">
+                <input type="hidden" name="id" value="${medication.medicationId}">
+                <input type="submit" class="btn btn-small btn-danger" onclick="return confirm('<@spring.message "confirmMessage" />');" value="DELETE">
+            </form>
+        </td>
+        <td>
+            <form method="post" action="/restockMedication">
+                <input type="hidden" name="id" value="${medication.medicationId}">
+                <input type="submit" class="btn btn-small btn-danger" onclick="return confirm('<@spring.message "confirmMessage" />');" value="RESTOCK">
+            </form>
+        </td>
+
     </tr>
     <#else>
     <tr>
