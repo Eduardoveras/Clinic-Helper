@@ -34,23 +34,15 @@ public class IndexController implements ErrorController {
 
     // Gets
     @RequestMapping("/")
-    public ModelAndView filter(){
-        if (!DQS.isUserLoggedIn())
-            return new ModelAndView("redirect:/login");
-
-        //if (DQS.getCurrentLoggedUser().getRole() == Permission.ADMIN)
-        // return new ModelAndView("redirect:/users");
-
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
-            return new ModelAndView("redirect:/assistant/home");
-        else
-            return new ModelAndView("redirect:/medic/home");
-    }
-
-    @RequestMapping("/assistant/home")
     public ModelAndView assistantHome(Model model, @RequestParam(value="name", required=false, defaultValue="home") String name) {
         if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
+
+
+        System.out.println("THE FUCKING ROLE IS"+DQS.getCurrentLoggedUser().getRole());
+        model.addAttribute("userRole",DQS.getCurrentLoggedUser().getRole());
+
+
 
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
         
@@ -81,24 +73,6 @@ public class IndexController implements ErrorController {
         return new ModelAndView("homepage/index");
     }
 
-    @RequestMapping("/medic/home")
-    public ModelAndView medicHome(Model model){
-        if (!DQS.isUserLoggedIn())
-            return new ModelAndView("redirect:/login");
-
-        //if (DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
-            //return new ModelAndView("redirect:/");
-
-        model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
-        //model.addAttribute("isAdmin", false);
-
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
-            model.addAttribute("isAdmin", false);
-        else
-            model.addAttribute("isAdmin", true);
-
-        return new ModelAndView("");
-    }
 
     @RequestMapping(value = ERR_PATH)
     public String error() {

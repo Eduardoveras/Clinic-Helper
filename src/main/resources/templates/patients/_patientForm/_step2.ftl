@@ -1,48 +1,6 @@
 <div id="step-2">
 
         <div class="form-group">
-            <label class="control-label col-md-6 col-sm-6 col-xs-12" for="nationality"> <@spring.message "height" />
-                <span class="required">*</span>
-            </label>
-
-            <div class="input-group number-spinner">
-                                    <span class="input-group-btn data-dwn">
-                                        <button class="btn btn-default btn-info" data-dir="dwn">
-                                            <span class="glyphicon glyphicon-minus">
-                                            </span>
-                                        </button>
-                                    </span>
-                <input type="text" id="height" name="height" class="form-control text-center"  min="0" max="7.0">
-                <span class="input-group-btn data-up">
-					                    <button class="btn btn-default btn-info" data-dir="up"><span
-                                                class="glyphicon glyphicon-plus"></span></button>
-				                    </span>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-6 col-sm-6 col-xs-12" for="weight"> <@spring.message "weight" />
-                <span class="required">*</span>
-            </label>
-
-            <div class="input-group number-spinner">
-
-                                    <span class="input-group-btn data-dwn">
-                                        <button class="btn btn-default btn-info" data-dir="dwn">
-                                            <span class="glyphicon glyphicon-minus">
-                                            </span>
-                                        </button>
-                                    </span>
-                <input type="text" id="weight" name="weight" class="form-control text-center"  min="0" max="500">
-
-                <span class="input-group-btn data-up">
-					<button class="btn btn-default btn-info" data-dir="up"><span
-                            class="glyphicon glyphicon-plus"></span></button>
-				</span>
-            </div>
-        </div>
-
-        <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="bloodType"><@spring.message "bType" /> <span class="required">*</span></label>
             <div class="col-md-9 col-sm-9 col-xs-12">
                 <select id="bloodtype" name="bloodtype" class="form-control">
