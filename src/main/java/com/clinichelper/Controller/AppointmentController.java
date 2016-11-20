@@ -66,15 +66,7 @@ public class AppointmentController {
           //  return "redirect:/";
 
         try {
-            SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
-            String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
-            Patient patient = DQS.findRegisteredPatient(patientId);
-            Timestamp test= new Timestamp(sdf1.parse(appointmentTime).getTime());
-
-            DEAMS.createNewAppointment(clinicId, test, patient.getPatientId(), appointmentDescription);
-            System.out.print("fannnn\n");
-
-
+            DEAMS.createNewAppointment(DQS.getCurrentLoggedUser().getClinic().getClinicId(),  new Timestamp(new SimpleDateFormat("MM/dd/yyyy hh:mm a").parse(appointmentTime).getTime()), DQS.findRegisteredPatient(patientId).getPatientId(), appointmentDescription);
             return "redirect:/appointments";
         } catch (Exception exp){
             System.out.println("ERROR MESSAGE:");
@@ -104,7 +96,7 @@ public class AppointmentController {
     }
 
     @PostMapping("/changeDateAndTime")
-    public String editDateAndTimeOfRegisteredAppointment(@RequestParam("id") String appointmentId, @RequestParam("date") String newDate){
+    public String editDateAndTimeOfRegisteredAppointment(@RequestParam("id") String appointmentId, @RequestParam("appointmentTime") String newDate){
 
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
@@ -112,14 +104,10 @@ public class AppointmentController {
         //if (DQS.getCurrentLoggedUser().getRole() != Permission.ASSISTANT)
         //  return "redirect:/";
 
-        Appointment appointment = DQS.findRegisteredAppointment(appointmentId);
-
         try {
-            SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy hh:mm a");
-            Date newDate2=sdf1.parse(newDate);
-            Timestamp timestamp = new java.sql.Timestamp(newDate2.getTime());
-            System.out.println("THE SUPER TIME IS"+timestamp);
-            appointment.setAppointmentTime(timestamp);
+            Appointment appointment = DQS.findRegisteredAppointment(appointmentId);
+
+            appointment.setAppointmentTime(new Timestamp(new SimpleDateFormat("MM/dd/yyyy hh:mm a").parse(newDate).getTime()));
 
             DEAMS.editAppointment(appointment);
             return "redirect:/appointments";

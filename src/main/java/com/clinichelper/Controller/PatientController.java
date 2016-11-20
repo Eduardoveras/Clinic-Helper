@@ -111,23 +111,6 @@ public class PatientController {
         return new ModelAndView("patients/patientsProfile");
     }
 
-    @GetMapping("/patient/record/{i}")
-    public ModelAndView fetchPatientMedicalRecord(Model model, @PathVariable(value="id") String patientId){
-        if (!DQS.isUserLoggedIn())
-            return new ModelAndView("redirect:/login");
-
-        //if (DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
-        //return new ModelAndView("redirect:/");
-        //model.addAttribute("isAdmin", false);
-
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
-            model.addAttribute("isAdmin", false);
-        else
-            model.addAttribute("isAdmin", true);
-
-        return new ModelAndView("");
-    }
-
     // Posts
     @PostMapping("/newPatient")
     public String registerNewPatient(
@@ -136,7 +119,7 @@ public class PatientController {
            @RequestParam("idCard") String idCard,
            @RequestParam("email") String mail,
            @RequestParam("telephoneNumber") String telephoneNumber,
-           @RequestParam("workphone") String patientWorkphone,
+           @RequestParam("workPhone") String patientWorkphone,
            @RequestParam("cellphone") String patientCellphone,
            @RequestParam("contactName") String patientContactName,
            @RequestParam("contactLastName") String patientContactLastName,
@@ -149,7 +132,7 @@ public class PatientController {
            @RequestParam("gender") String gender,
            @RequestParam("nationality") String nationality,
            @RequestParam("country") String countries,
-           @RequestParam("city") String cities,
+           @RequestParam("state") String cities,
            @RequestParam("allergies")ArrayList<String> patientAllergies,
            @RequestParam("religion") String patientReligion,
            @RequestParam("height") String patientHeight,

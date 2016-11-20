@@ -5,7 +5,7 @@
             <label class="control-label col-md-6 col-sm-6 col-xs-12" for="firstname"><@spring.message "first" /> <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="firstname" required="required" class="form-control col-md-7 col-xs-12">
+                <input type="text" id="firstName" required="required" class="form-control col-md-7 col-xs-12">
             </div>
         </div>
 
@@ -13,7 +13,7 @@
             <label class="control-label col-md-6 col-sm-6 col-xs-12" for="lastname"><@spring.message "last" /> <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="last-name" name="lastname" required="required" class="form-control col-md-7 col-xs-12">
+                <input type="text" id="last-name" name="lastName" required="required" class="form-control col-md-7 col-xs-12">
             </div>
         </div>
 
@@ -28,7 +28,7 @@
             <label class="control-label col-md-6 col-sm-6 col-xs-12"><@spring.message "bday" /> <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="birthdate" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                <input id="dateOfBirth" name="dateOfBirth" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
             </div>
         </div>
 
