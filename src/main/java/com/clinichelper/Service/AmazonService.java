@@ -17,15 +17,15 @@ import java.io.IOException;
 @Service
 public class AmazonService {
 
-    private static String bucketName     = "*** Provide bucket name ***";
-    private static String keyName        = "*** Provide key ***";
-    private static String uploadFileName = "*** Provide file name ***";
+    private static String bucketName     = System.getenv("AWS_BUCKET_NAME");
+    private static String keyName        = System.getenv("AWS_BUCKET_KEY");
 
-    public void UploadImageToAWS() {
+    public void UploadImageToAWS(String uploadFileName,File file) {
+        file.renameTo(new File(uploadFileName));
         AmazonS3 s3client = new AmazonS3Client(new ProfileCredentialsProvider());
         try {
             System.out.println("Uploading a new object to S3 from a file\n");
-            File file = new File(uploadFileName);
+
             s3client.putObject(new PutObjectRequest(
                     bucketName, keyName, file));
 
