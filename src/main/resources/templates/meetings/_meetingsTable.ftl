@@ -19,7 +19,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <#list meetingsList as meeting>
+                <#list meetingsList?sort_by("meetingTime")?reverse as meeting>
                 <tr>
                     <td>${meeting.getMeetingId()}</td>
                     <td>${meeting.getMeetingTitle()}</td>

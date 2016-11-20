@@ -13,7 +13,7 @@
         <div class="x_content">
             <div class="row" style="overflow: auto; max-height: 500px;">
 
-                <#list contactList as contact>
+                <#list contactList?sort_by("lastName") as contact>
 
                     <div class="col-md-6 col-sm-6 col-xs-12 profile_details">
                         <div class="well profile_view">
