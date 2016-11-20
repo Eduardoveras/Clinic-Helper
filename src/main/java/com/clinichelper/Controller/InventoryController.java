@@ -124,9 +124,6 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
-            return "redirect:/";
-
         try{
             DEAMS.deleteRegisteredEquipment(equipmentId);
             return "redirect:/Inventory";
@@ -142,8 +139,6 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
-            return "redirect:/";
 
         try {
             DEAMS.deleteRegisteredMedication(medicationId);
@@ -160,8 +155,6 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
-            return "redirect:/";
 
         try{
             DEAMS.deleteRegisteredProduct(productId);
@@ -179,8 +172,6 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
-            return "redirect:/";
 
         try {
             Equipment equipment = DQS.findRegisteredEquipment(equipmentId);
@@ -199,8 +190,6 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
-            return "redirect:/";
 
         try {
             Medication medication = DQS.findRegisteredMedication(medicationId);
@@ -219,8 +208,6 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
-            return "redirect:/";
 
         try {
             Product product = DQS.findRegisteredProduct(productId);
@@ -234,14 +221,11 @@ public class InventoryController {
         return "redirect:/Inventory"; // TODO: implement error exception
     }
 
-    // Edit
     @PostMapping("/editEquipmentInformation")
     public String editEquipmentInformation(@RequestParam("id") String equipmentId, @RequestParam("name") String name, @RequestParam("use") String use, @RequestParam("description") String description){
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
-            return "redirect:/";
 
         try {
             Equipment equipment = DQS.findRegisteredEquipment(equipmentId);
@@ -262,8 +246,6 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
-            return "redirect:/";
 
         try {
             Medication medication = DQS.findRegisteredMedication(medicationId);
@@ -284,9 +266,6 @@ public class InventoryController {
     public String editProductInformation(@RequestParam("id") String productId, @RequestParam("name") String name, @RequestParam("supplier") String supplier, @RequestParam("description") String description, @RequestParam("price") Float price){
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
-
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
-            return "redirect:/";
 
         try {
             Product product = DQS.findRegisteredProduct(productId);
