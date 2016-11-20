@@ -34,7 +34,7 @@
                                 <li>
                                     <form action="/cancelAppointment" METHOD="POST" enctype="multipart/form-data">
                                         <input type="hidden" value="${appointment.getAppointmentId()}" id="appointment_id" name="appointment_id">
-                                        <input type="submit" value="<@spring.message "cancel" />" class="btn btn-link">
+                                        <input type="submit" value="<@spring.message "cancel" />" class="btn btn-link" onclick="return confirm('<@spring.message "confirmMessage" />');">
                                     </form>
                                 </li>
                             </ul>
@@ -46,7 +46,6 @@
                 <#else>
                 <tr>
                     <th scope="row"><@spring.message "emptyApp" /></th>
-
                 </tr>
                 </#list>
                 </tbody>

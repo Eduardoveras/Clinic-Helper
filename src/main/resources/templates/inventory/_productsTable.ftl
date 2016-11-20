@@ -8,6 +8,7 @@
         <th><span style="text-transform: uppercase;"><@spring.message "supplier" /></span></th>
         <th><span style="text-transform: uppercase;"><@spring.message "price" /></span></th>
         <th><span style="text-transform: uppercase;"><@spring.message "quantity" /></span></th>
+        <th><span style="text-transform: uppercase;">Delete</span></th>
     </tr>
     </thead>
     <tbody>
@@ -19,10 +20,16 @@
         <td>${product.supplier}</td>
         <td>$${product.productPrice}</td>
         <td>${product.productInStock} <@spring.message "unit" /><#if product.productInStock gt 1><@spring.message "plural" /></#if></td>
+        <td>
+            <form method="post" action="/deleteProduct">
+                <input type="hidden" name="id" value="${product.productId}">
+                <input type="submit" class="btn btn-small btn-danger" onclick="return confirm('<@spring.message "confirmMessage" />');" value="DELETE">
+            </form>
+        </td>
     </tr>
     <#else>
     <tr>
-        <th scope="row"><@spring.message "emptyProduct" />/th>
+        <th scope="row"><@spring.message "emptyProduct" /></th>
     </tr>
     </#list>
     </tbody>

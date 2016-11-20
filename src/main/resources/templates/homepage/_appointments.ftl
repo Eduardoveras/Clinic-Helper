@@ -1,7 +1,7 @@
 <div class="col-md-7">
     <h2><@spring.message "todayApp" /></h2>
     <div class="x_content">
-        <div class="row" style="overflow: auto; max-height: 400px;">
+        <div class="row" style="overflow: auto;  min-height: 400px; max-height: 400px;">
         <#list todays_appointments as appointment>
             <div class="col-md-12 col-sm-12 col-xs-12 profile_details">
                 <div class="well profile_view col-md-12">
@@ -25,7 +25,7 @@
                         <div class="col-xs-12 col-sm-6 emphasis">
                             <form action="/cancelAppointment" METHOD="POST" enctype="multipart/form-data" data-parsley-validate>
                                 <input type="hidden" id="appointment_id" name="appointment_id" value="${appointment.getAppointmentId()}">
-                                <input type="submit" class="btn btn-danger btn-sm btn-round" value="<@spring.message "cancel" />">
+                                <input type="submit" class="btn btn-danger btn-sm btn-round" onclick="return confirm('Are you sure you want to delete this item?');" value="<@spring.message "cancel" />">
                             </form>
                         </div>
                         <div class="col-xs-12 col-sm-6 emphasis">
