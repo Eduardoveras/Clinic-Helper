@@ -2,7 +2,7 @@
     <div class="x_panel">
         <div class="x_title">
             <h2>
-                <!--<if !isAdmin>--><a href="/new_meeting" role="button" class="btn btn-primary"><@spring.message "newMeeting" /></a><!--<else><strong>Only non-ADMIN accounts can organize meetings</strong></if>-->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#meeting"><@spring.message "newMeeting" /></button>
             </h2>
             <div class="clearfix"></div>
         </div>
