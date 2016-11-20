@@ -19,20 +19,17 @@ import java.io.IOException;
 @Service
 public class AmazonService {
 
-    private static String bucketName     = System.getenv("AWS_BUCKET_NAME");
-    private static String keyName        = System.getenv("AWS_BUCKET_KEY");
+    private static String bucketName     = "clinic-manager-staging";
 
     public void UploadImageToAWS(String uploadFileName,File file) {
         AWSCredentials credentials = new ProfileCredentialsProvider().getCredentials();
 
-
-        file.renameTo(new File(uploadFileName));
-        AmazonS3 s3client = new AmazonS3Client(new ProfileCredentialsProvider());
+        AmazonS3 s3client = new AmazonS3Client(credentials);
         try {
             System.out.println("Uploading a new object to S3 from a file\n");
 
-            s3client.putObject(new PutObjectRequest(
-                    bucketName, keyName, file));
+            s3client.putObject(new PutObjectRequest(bucketName, uploadFileName,
+                    file.getAbsolutePath()));
 
         } catch (AmazonServiceException ase) {
             System.out.println("Caught an AmazonServiceException, which " +

@@ -42,9 +42,8 @@ public class IndexController implements ErrorController {
         if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
-        AS.UploadImageToAWS("YOLO",new File("swag"));
+        //AS.UploadImageToAWS("YOLO",new File("swag"));
 
-        System.out.println("THE FUCKING ROLE IS"+DQS.getCurrentLoggedUser().getRole());
         model.addAttribute("userRole",DQS.getCurrentLoggedUser().getRole());
 
 

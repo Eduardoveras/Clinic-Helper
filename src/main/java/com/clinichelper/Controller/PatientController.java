@@ -205,15 +205,11 @@ public class PatientController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        //if (DQS.getCurrentLoggedUser().getRole() != Permission.ASSISTANT)
-          //  return "redirect:/";
-
         Patient patient = DQS.findRegisteredPatient(patientId);
 
         try {
-            //patient.setPatientPhoto(processImageFile(file.getBytes()));
-            AS.UploadImageToAWS(patient.getPatientId(), convertToFile(file));
-            //DEAMS.editPatient(patient);
+            File newFile= convertToFile(file);
+            AS.UploadImageToAWS(patient.getPatientId(), newFile);
             return "redirect:/patient/" + patient.getPatientId();
         } catch (Exception exp){
             exp.printStackTrace();
