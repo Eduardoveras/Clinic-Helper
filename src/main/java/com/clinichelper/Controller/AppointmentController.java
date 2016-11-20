@@ -8,6 +8,7 @@ import com.clinichelper.Entity.Patient;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
+import com.clinichelper.Tools.Enums.AppointmentStatus;
 import com.clinichelper.Tools.Enums.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -86,7 +87,11 @@ public class AppointmentController {
         //  return "redirect:/";
 
         try {
-            DEAMS.deleteRegisteredAppointment(appointmentId);
+            if (DQS.findRegisteredAppointment(appointmentId).getAppointmentStatus() == AppointmentStatus.PENDING)
+                DEAMS.deleteRegisteredAppointment(appointmentId);
+            else
+                return "redirect:/" ; // TODO: add error message handling
+
             return "redirect:/";
         } catch (Exception exp){
             exp.printStackTrace();
