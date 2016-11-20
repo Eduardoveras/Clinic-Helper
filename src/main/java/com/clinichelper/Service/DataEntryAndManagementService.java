@@ -244,7 +244,7 @@ public class DataEntryAndManagementService {
         try {
             Patient patient = patientRepository.save(new Patient(clinicRepository.findByClinicId(clinicId), patientFirstName, patientLastName, patientIdCard,
                     patientTelephoneNumber, patientWorkphone,patientCellphone, patientContactName, patientContactLastName, patientContactAddress, patientContactCellphone,
-                    patientContactTelephoneNumber, occupation, patientGender, patientEmail, patientBirthDate, patientNationality,
+                    patientContactTelephoneNumber, occupation, patientGender, patientEmail.toLowerCase(), patientBirthDate, patientNationality,
                     patientAddress, patientCity, patientCountry, patientAllergies, patientReligion, PatientHeight, PatientWeight,
                     patientBloodType, patientConditions));
 
@@ -300,7 +300,7 @@ public class DataEntryAndManagementService {
         }
     }
 
-    public History createNewHistory(Patient patient, String visitObjective, String observations, String specialConditions, ArrayList<byte[]> photos, String surgeryType, ArrayList<String> medicalData, String consultationId) throws Exception {
+    public History createNewHistory(Patient patient, String visitObjective, String observations, String specialConditions, ArrayList<byte[]> photos, SurgeryType surgeryType, ArrayList<String> medicalData, String consultationId) throws Exception {
 
         if (!doesPatientIdExist(patient.getPatientId()))
             throw new IllegalArgumentException("\n\nThis is an invalid patient id");
@@ -334,7 +334,7 @@ public class DataEntryAndManagementService {
             throw new IllegalArgumentException("\n\nThis is an invalid clinic id");
 
         try{
-            return contactRepository.save(new Contact(clinicRepository.findByClinicId(clinicId), staffFirstName, staffLastName, staffBirthDate, staffEmail, false));
+            return contactRepository.save(new Contact(clinicRepository.findByClinicId(clinicId), staffFirstName, staffLastName, staffBirthDate, staffEmail.toLowerCase(), false));
         } catch (PersistenceException exp){
             exp.printStackTrace();
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
@@ -383,13 +383,13 @@ public class DataEntryAndManagementService {
 
     public User createNewUserAccount(String clinicId, String email, String firstName, String lastName, Date birthDate, Gender gender, String password, Permission role) throws Exception {
 
-        if (isUsernameAlreadyTaken(email, clinicId))
+        if (isEmailAlreadyTaken(email.toLowerCase(), clinicId))
             throw new IllegalArgumentException("\n\nThis email is already taken. Please choose another one!");
 
         try {
             // Add new user automatically in contact list
-            contactRepository.save(new Contact(clinicRepository.findByClinicId(clinicId), firstName, lastName, birthDate, email, true));
-            return userRepository.save(new User(clinicRepository.findByClinicId(clinicId), email, firstName, lastName, birthDate, gender, EncriptService.encryptPassword(password), role));
+            contactRepository.save(new Contact(clinicRepository.findByClinicId(clinicId), firstName, lastName, birthDate, email.toLowerCase(), true));
+            return userRepository.save(new User(clinicRepository.findByClinicId(clinicId), email.toLowerCase(), firstName, lastName, birthDate, gender, EncriptService.encryptPassword(password), role));
         } catch (PersistenceException exp){
             exp.printStackTrace();
             System.out.println("\n\nPersistence Error! -> " + exp.getMessage());
@@ -831,7 +831,7 @@ public class DataEntryAndManagementService {
     public void editUserAccountCredentials(String email, String clinicId, String password, Permission role) throws Exception{
 
         try {
-            User user = userRepository.findUserAccountWithUsernameAndPassword(email, clinicId);
+            User user = userRepository.findUserAccountWithUsernameAndPassword(email.toLowerCase(), clinicId);
             user.setPassword(EncriptService.encryptPassword(password));
             user.setRole(role);
             userRepository.save(user);
@@ -856,7 +856,7 @@ public class DataEntryAndManagementService {
     public void editUserPhoto(String email, String clinic, Byte[] photo) throws Exception{
 
         try {
-            User user = userRepository.findUserAccountWithUsernameAndPassword(email, clinic);
+            User user = userRepository.findUserAccountWithUsernameAndPassword(email.toLowerCase(), clinic);
             user.setPhoto(photo);
             userRepository.save(user);
         } catch (PersistenceException exp){
@@ -962,8 +962,8 @@ public class DataEntryAndManagementService {
         return (product != null);
     }
 
-    private boolean isUsernameAlreadyTaken(String email, String clinicId){
-        User user = userRepository.findUserAccountWithUsernameAndPassword(email, clinicId);
+    private boolean isEmailAlreadyTaken(String email, String clinicId){
+        User user = userRepository.findUserAccountWithUsernameAndPassword(email.toLowerCase(), clinicId);
 
         return (user != null);
     }

@@ -35,14 +35,6 @@ public class UserController {
     // TODO: this can only be used by SUPERADMIN
     @GetMapping("/admin/users")
     public ModelAndView fetchAllPatientsView(Model model){
-
-        //model.addAttribute("todoList", TKS.InitializeTodoList("CH-PLATINUM-JASC"));
-
-        //model.addAttribute("userList", DQS.findAllAllRegisteredUsersForClinic("CH-PLATINUM-JASC"));
-        //model.addAttribute("amount", DQS.findAllAllRegisteredUsersForClinic("CH-PLATINUM-JASC").size());
-       // model.addAttribute("userList", DQS.findAllAllRegisteredUsersForClinic(clinicId));
-        //model.addAttribute("amount", DQS.findAllAllRegisteredUsersForClinic(clinicId).size());
-
         return new ModelAndView("/users/allUsers");
     }
 
@@ -98,9 +90,9 @@ public class UserController {
     @PostMapping("/userLogin")
     public String loginUser(@RequestParam("email") String email, @RequestParam("password") String password){
         
-        if (DQS.validateUserAccountCredentials(email, password))
+        if (DQS.validateUserAccountCredentials(email.toLowerCase(), password))
         {
-            User u = DQS.findRegisteredUserAccount(email,password);
+            User u = DQS.findRegisteredUserAccount(email.toLowerCase(),password);
             DQS.setSessionAttr("user",u);
             return "redirect:/"; // TODO: filter which user is login in to redirect them to the correct url
         }

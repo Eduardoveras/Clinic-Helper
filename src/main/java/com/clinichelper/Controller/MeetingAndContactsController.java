@@ -62,6 +62,7 @@ public class MeetingAndContactsController {
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
         model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
         model.addAttribute("meetingsList", DQS.findAllRegisteredMeetingsForClinic(clinicId));
+        model.addAttribute("contactList", DQS.findAllRegisteredContactsForClinic(clinicId));
 
         if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             model.addAttribute("isAdmin", false);
@@ -81,7 +82,7 @@ public class MeetingAndContactsController {
             return "redirect:/contacts";
 
         try {
-            DEAMS.createNewStaffMember(DQS.getCurrentLoggedUser().getClinic().getClinicId(), firstName, lastName, new Date(new SimpleDateFormat("MM/dd/yyyy").parse(birthDate).getTime()), email);
+            DEAMS.createNewStaffMember(DQS.getCurrentLoggedUser().getClinic().getClinicId(), firstName, lastName, new Date(new SimpleDateFormat("MM/dd/yyyy").parse(birthDate).getTime()), email.toLowerCase());
             return "redirect:/contacts";
         } catch (Exception exp){
             exp.printStackTrace();

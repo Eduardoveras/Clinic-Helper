@@ -22,6 +22,7 @@
                 <div class="row">
                 <#--include "/patients/_patientsForm.ftl"-->
                 <#include "_meetingsTable.ftl">
+                <#include "_meetingsModal.ftl">
 
 
 

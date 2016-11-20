@@ -9,12 +9,12 @@
                    cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <th><@spring.message "appDate" /></th>
-                    <th><@spring.message "patient" /></th>
-                    <th><@spring.message "type" /></th>
-                    <th><@spring.message "action" /></th>
-                    <th><@spring.message "description" /></th>
-                    <th><@spring.message "status" /></th>
+                    <th><span style="text-transform: uppercase;"><@spring.message "appDate" /></span></th>
+                    <th><span style="text-transform: uppercase;"><@spring.message "patient" /></span></th>
+                    <th><span style="text-transform: uppercase;"><@spring.message "type" /></span></th>
+                    <th><span style="text-transform: uppercase;"><@spring.message "action" /></span></th>
+                    <th><span style="text-transform: uppercase;"><@spring.message "description" /></span></th>
+                    <th><span style="text-transform: uppercase;"><@spring.message "status" /></span></th>
                 </tr>
                 </thead>
                 <tbody>

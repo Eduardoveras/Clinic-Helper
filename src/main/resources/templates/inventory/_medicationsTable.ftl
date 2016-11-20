@@ -1,4 +1,4 @@
-<#if isAdmin><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#medications"><@spring.message "newMed" /></button><#else><strong><@spring.message "restrict2" /></strong></#if>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#medications"><@spring.message "newMed" /></button>
 <table id="datatable-responsive" class="table table-hover table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
     <thead>
     <tr>
