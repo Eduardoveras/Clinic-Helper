@@ -96,9 +96,6 @@ public class MeetingAndContactsController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.ADMIN)
-           return "redirect:/meetings";
-
         List<Contact> team = new ArrayList<>();
 
         try {
