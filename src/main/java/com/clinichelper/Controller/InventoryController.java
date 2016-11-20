@@ -172,10 +172,11 @@ public class InventoryController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-
         try {
             Equipment equipment = DQS.findRegisteredEquipment(equipmentId);
-            equipment.setEquipmentInStock(stock);
+
+            equipment.setEquipmentInStock(equipment.getEquipmentInStock() + stock);
+
             DEAMS.editEquipment(equipment);
             return "redirect:/Inventory";
         } catch (Exception exp){
