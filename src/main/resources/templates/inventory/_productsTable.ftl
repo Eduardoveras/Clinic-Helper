@@ -23,7 +23,7 @@
         <td>
             <form method="post" action="/deleteProduct">
                 <input type="hidden" name="id" value="${product.productId}">
-                <input type="submit" class="btn btn-small btn-danger" onclick="return confirm('Are you sure you want to delete this item?');" value="DELETE">
+                <input type="submit" class="btn btn-small btn-danger" onclick="return confirm('<@spring.message "confirmMessage" />');" value="DELETE">
             </form>
         </td>
     </tr>
