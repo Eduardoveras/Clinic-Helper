@@ -29,7 +29,8 @@ public class AmazonService {
             System.out.println("Uploading a new object to S3 from a file\n");
 
             s3client.putObject(new PutObjectRequest(bucketName, uploadFileName,
-                    file.getAbsolutePath()));
+                    file.getAbsolutePath())
+                    .withCannedAcl(CannedAccessControlList.PublicRead));
 
         } catch (AmazonServiceException ase) {
             System.out.println("Caught an AmazonServiceException, which " +
