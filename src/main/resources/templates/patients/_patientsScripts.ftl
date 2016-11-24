@@ -1,7 +1,12 @@
 <!-- bootstrap-daterangepicker -->
 <script>
+
+    var date = new Date();
+    date.setDate(date.getDate()-1);
+
     $(document).ready(function() {
-        $('#dateOfBirth').daterangepicker({
+        $('#dateofbirth').daterangepicker({
+            endDate: date,
             singleDatePicker: true,
             calender_style: "picker_4"
         }, function(start, end, label) {

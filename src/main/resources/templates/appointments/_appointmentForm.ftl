@@ -10,7 +10,7 @@
                   data-parsley-validate class="form-horizontal form-label-left">
 
                 <div class="form-group item">
-                    <label class="text-left" class="control-label col-md-6 col-sm-6 col-xs-12" class="date-picker"
+                    <label class="text-left control-label col-md-6 col-sm-6 col-xs-12 date-picker"
                            for="appointmentTime"> <@spring.message "appDate" />: <span class="required">*</span>
                     </label>
                     <div class='input-group date' id='datetimepicker1'>
