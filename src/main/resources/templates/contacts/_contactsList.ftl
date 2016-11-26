@@ -29,7 +29,7 @@
                                 </div>
                             </div>
                             <div class="col-xs-12 bottom text-center">
-                                <#if isAdmin>
+                                <!--<if isAdmin>-->
                                 <div class="col-xs-12 col-sm-12 emphasis">
                                     <button data-toggle="dropdown" class="btn btn-default dropdown-toggle btn-sm btn-round" type="button" aria-expanded="false"><@spring.message "options" /> <span class="caret"></span>
                                     </button>
@@ -44,7 +44,7 @@
                                         <li><a href="#"><@spring.message "editProfile" /></a></li>
                                     </ul>
                                 </div>
-                                </#if>
+                                <!--</if>-->
                                 <button type="button" class="btn btn-primary btn-sm btn-round" >
                                     <i class="fa fa-user"> </i> <@spring.message "viewProfile" />
                                 </button>

@@ -12,16 +12,14 @@
                  <#include "_topBoxes.ftl">
                 <div class="row">
 
-                    <#if userRole == "ASSISTANT">
+                    <!--<if userRole == "ASSISTANT"> -->
                         <#include "assistant/_appointments.ftl">
                         <#include "assistant/_calendar.ftl">
                         <#include "/appointments/_modal.ftl">
-                    <#else>
-                        <#include "doctor/_calendar.ftl">
+                    <!--<else>
+                        <include "doctor/_calendar.ftl">
 
-
-                    </#if>
-
+                    </if>-->
                 </div>
             </div>
         </div>
