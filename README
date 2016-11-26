@@ -17,6 +17,15 @@ Language: Java
 Framework(s): Java EE 8 - JDK 1.8, Spring Boot, FreeMarker, JPA-ORM, Hibernate
 Database: PostgreSQL 9
 
+Version: v0.15.0-BETA
+** New I18N Standard with implemented Spanish (Bilingual Mode)
+** Improved inventory management system with new features
+    Delete items
+    Restock items
+** New Deletion Confirmation Protocol
+** Fixed future date bug in registration processes
+** New integrated Amazon Service for data storage
+
 Version: v0.14.0
 ** New password encryption algorithm
 ** Internationalism partially implemented with beginner words
