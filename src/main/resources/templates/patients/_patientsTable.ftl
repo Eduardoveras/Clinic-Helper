@@ -2,46 +2,31 @@
     <div class="x_panel">
         <div class="x_title">
             <h2>
-                <a href="/new_patient" role="button" class="btn btn-primary">New Patient</a>
+                <!--<if canUse>--><a href="/new_patient" role="button" class="btn btn-primary"><@spring.message "newPatient" /></a><!--<else><strong>Only ASSISTANT accounts can register new patients</strong></if>-->
             </h2>
-            <ul class="nav navbar-right panel_toolbox">
-                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Settings 1</a>
-                        </li>
-                        <li><a href="#">Settings 2</a>
-                        </li>
-                    </ul>
-                </li>
-                <li><a class="close-link"><i class="fa fa-close"></i></a>
-                </li>
-            </ul>
             <div class="clearfix"></div>
         </div>
         <div class="x_content">
             <table id="datatable-responsive" class="table table-hover table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Cedula/pasaporte</th>
-                    <th>Phone</th>
-                    <th>Contact Phone</th>
-                    <th>email</th>
-                    <th>Birthday</th>
-                    <th>gender</th>
-                    <th>Register Date</th>
-                    <th>occupation</th>
-                    <th>Nationality</th>
-                    <th>Adress</th>
-                    <th>city</th>
-                    <th>country</th>
+                    <th><span style="text-transform: uppercase;"><@spring.message "name" /></span></th>
+                    <th><span style="text-transform: uppercase;"><@spring.message "id" /></span></th>
+                    <th><span style="text-transform: uppercase;"><@spring.message "mainPhone" /></span></th>
+                    <th><span style="text-transform: uppercase;"><@spring.message "sPhone" /></span></th>
+                    <th><span style="text-transform: uppercase;"><@spring.message "email" /></span></th>
+                    <th><span style="text-transform: uppercase;"><@spring.message "bday" /></span></th>
+                    <th><span style="text-transform: uppercase;"><@spring.message "sex" /></span></th>
+                    <th><span style="text-transform: uppercase;"><@spring.message "rDay" /></span></th>
+                    <th><span style="text-transform: uppercase;"><@spring.message "job" /></span></th>
+                    <th><span style="text-transform: uppercase;"><@spring.message "nationality" /></span></th>
+                    <th><span style="text-transform: uppercase;"><@spring.message "address" /></span></th>
+                    <th><span style="text-transform: uppercase;"><@spring.message "city" /></span></th>
+                    <th><span style="text-transform: uppercase;"><@spring.message "country" /></span></th>
                 </tr>
                 </thead>
                 <tbody>
-                <#list patientList as patient>
+                <#list patientList?sort_by("patientLastName") as patient>
                 <tr>
                     <td><a href="/patient/${patient.patientId}">${patient.patientFullName}</a></td>
                     <td>${patient.patientIdCard}</td>
@@ -59,7 +44,7 @@
                 </tr>
                 <#else>
                 <tr>
-                    <th scope="row">NO PATIENTS AVAIBLE</th>
+                    <th scope="row"><@spring.message "emptyPatient" /></th>
 
                 </tr>
                 </#list>

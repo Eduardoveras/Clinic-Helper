@@ -13,9 +13,9 @@
                         <span class=" fa fa-angle-down"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu pull-right">
-                        <li><a href="/user/${user.getUserId()}"> Profile</a></li>
-                        <li><a href="javascript:;">Help</a></li>
-                        <li><a href="/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                        <li><a href="/user/${user.getUserId()}"><@spring.message "profile" /></a></li>
+                        <li><a href="javascript:;"><@spring.message "help" /></a></li>
+                        <li><a href="/logout"><i class="fa fa-sign-out pull-right"></i><@spring.message "logOut" /></a></li>
                     </ul>
                 </li>
 

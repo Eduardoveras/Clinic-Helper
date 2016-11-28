@@ -1,4 +1,5 @@
-<ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+<ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu" style="width: 400px">
+<div style="overflow: auto; max-height: 400px;">
 <#list todoList as todo>
     <li>
         <a>
@@ -15,23 +16,24 @@
     <li>
         <div class="text-center">
             <a>
-                <strong>You did everything!</strong>
+                <strong><@spring.message "didIt" /></strong>
                 <i class="fa fa-angle-right"></i>
             </a>
         </div>
     </li>
 </#list>
+</div>
     <li>
         <div class="text-center">
             <a>
-                <strong>See All Alerts</strong>
+                <strong><@spring.message "alerts" /></strong>
                 <i class="fa fa-angle-right"></i>
             </a>
         </div>
     </li>
     <li>
         <div class="text-center">
-            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Create
+            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal"><@spring.message "create" />
             </button>
         </div>
     </li>
@@ -87,12 +89,29 @@
                                       data-parsley-validation-threshold="10">
                                                         </textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="sel1">Select type:</label>
-                            <select class="form-control" id="type" name="type">
-                                <option>REMINDER</option>
-                                <option>URGENT</option>
-                            </select>
+
+                        <div>
+                            <div class="form-group" style="display: inline-block;">
+                                <label for="sel1">Select type:</label>
+                                <select class="form-control" id="type" name="type">
+                                    <option>REMINDER</option>
+                                    <option>URGENT</option>
+                                </select>
+                            </div>
+                            <div class="form-group"style="display: inline-block;">
+                                <label for="sel1">Repeat:</label>
+                                <select class="form-control" id="repeat" name="repeat">
+                                    <option>EVERY_DAY</option>
+                                    <option>MONDAY</option>
+                                    <option>TUESDAY</option>
+                                    <option>WEDNESDAY</option>
+                                    <option>THURSDAY</option>
+                                    <option>FRIDAY</option>
+                                    <option>SATURDAY</option>
+                                    <option>MONTHLY</option>
+                                    <option>YEARLY</option>
+                                </select>
+                            </div>
                         </div>
                         <input type="submit" value="CREATE" class="btn btn-success" />
                     </form>

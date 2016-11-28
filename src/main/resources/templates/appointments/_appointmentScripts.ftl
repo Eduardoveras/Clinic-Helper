@@ -87,3 +87,15 @@
         TableManageButtons.init();
     });
 </script>
+
+
+<!-- Select2 -->
+<script>
+    $(document).ready(function() {
+        $(".select2_single").select2({
+            placeholder: "<@spring.message "selectPat" />",
+            allowClear: true
+        });
+    });
+</script>
+<!-- /Select2 -->

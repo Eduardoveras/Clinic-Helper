@@ -14,7 +14,7 @@
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3>User Registration</h3>
+                        <h3><spring:message code="uParam" arguments="${user.clinic.clinicPrefix}" htmlEscape="false" /></h3>
                     </div>
                 </div>
                 <div class="clearfix"></div>

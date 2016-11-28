@@ -10,8 +10,8 @@
         <div class="right_col" role="main">
             <div class="">
                 <div class="row">
-                <#include "/inventory/_inventoryTabs.ftl">
-                <#include  "_modal.ftl">
+                    <#include "/inventory/_inventoryTabs.ftl">
+                    <#include  "_modal.ftl">
                     <#include  "_modal2.ftl">
                     <#include  "_modal3.ftl">
                 </div>

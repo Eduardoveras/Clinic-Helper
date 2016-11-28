@@ -14,7 +14,7 @@
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3>Patient Registration</h3>
+                        <h3><@spring.message "meetingFrag1" /> ${user.clinic.clinicPrefix} <@spring.message "meetingFrag2" /></h3>
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -22,6 +22,7 @@
                 <div class="row">
                 <#--include "/patients/_patientsForm.ftl"-->
                 <#include "_meetingsTable.ftl">
+                <#include "_meetingsModal.ftl">
 
 
 
@@ -35,8 +36,7 @@
     </div>
 </div>
 <#include "/layouts/footer.ftl">
-<#include "/patients/_patientsScripts.ftl">
-<!-- /Datatables -->
+<#include "_meetingsScripts.ftl">
 <#include "/layouts/pageCloser.ftl">
 
 

@@ -48,6 +48,8 @@ public class DataQueryService {
     private UserRepository userRepository;
     @Autowired
     private HttpSession session;
+    @Autowired
+    private EncryptionService EncriptService;
 
 
 
@@ -78,11 +80,12 @@ public class DataQueryService {
         return appointmentRepository.findByPatientId(patientId);
     }
 
-    public List<Appointment> findAllRegisteredAppointmentsForToday(String clinicId) throws Exception{
+    public List<Appointment> findAllRegisteredAppointmentsForToday(String clinicId) {
         try {
             return findAllRegisteredAppointmentsByGivenDate(new Date(Calendar.getInstance().getTime().getTime()), clinicId);
         } catch (Exception exp){
-            throw new  Exception("Error during search for appointments for today");
+            exp.printStackTrace();
+            return null;
         }
      }
 
@@ -90,6 +93,7 @@ public class DataQueryService {
         try{
             return appointmentRepository.findByDateRange(new Timestamp(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(searchDate.toString() + " 00:00:00").getTime()), new Timestamp(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(searchDate.toString() + " 23:59:00").getTime()), clinicId);
         } catch (Exception exp){
+            exp.printStackTrace();
             throw new  Exception("Error during search for appointments of a specific date");
         }
     }
@@ -219,13 +223,13 @@ public class DataQueryService {
     // User Queries
     public User findUserInformation(String userId) { return userRepository.findByUserId(userId); }
 
-    public User findRegisteredUserAccount(String email, String password){ return userRepository.findUserAccountWithUsernameAndPassword(email, password); }
+    public User findRegisteredUserAccount(String email, String password){ return userRepository.findUserAccountWithUsernameAndPassword(email,EncriptService.encryptPassword(password)); }
 
     public List<User> findAllAllRegisteredUsersForClinic(String clinicId) { return userRepository.findByClinicId(clinicId); }
 
     public boolean validateUserAccountCredentials(String username, String password) {
 
-        User user = userRepository.findUserAccountWithUsernameAndClinicIdAndPassword(username.toLowerCase(), password);
+        User user = userRepository.findUserAccountWithUsernameAndClinicIdAndPassword(username.toLowerCase(), EncriptService.encryptPassword(password));
 
         return (user != null);
     }

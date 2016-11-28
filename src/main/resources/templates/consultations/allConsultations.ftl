@@ -20,7 +20,8 @@
                 <div class="clearfix"></div>
                 <!--ADD CONTENT HERE-->
                 <div class="row">
-                <#include "/consultations/_consultation.ftl">
+                <#include "/templates/consultations/consultationForm/_consultation.ftl">
+
 
 
 
@@ -34,13 +35,6 @@
     </div>
 </div>
 <#include "/layouts/footer.ftl">
-<!-- bootstrap-daterangepicker -->
-<script>
-    $(document).ready($(function () {
-        $('#datetimepicker1').datetimepicker();
-    }));
-</script>
-<!-- /bootstrap-daterangepicker -->
 <#include "/layouts/pageCloser.ftl">
 
 

@@ -15,6 +15,9 @@ import java.util.List;
 public interface SurgeryRepository extends JpaRepository<Surgery, String> {
     Surgery findBySurgeryId(String surgeryId);
 
+    @Query("select s from Surgery s where s.appointment.appointmentId = :id")
+    Surgery findByAppointmentId(@Param("id") String appointmentId);
+
     @Query("select s from Surgery s where s.appointment.clinic.clinicId = :clinic")
     List<Surgery> findByClinicId(@Param("clinic") String clinicId);
 

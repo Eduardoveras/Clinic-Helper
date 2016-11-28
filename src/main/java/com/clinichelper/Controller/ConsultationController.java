@@ -6,8 +6,11 @@ import com.clinichelper.Entity.Patient;
 import com.clinichelper.Entity.Record;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
-import org.apache.catalina.LifecycleState;
+import com.clinichelper.Service.ToolKitService;
+import com.clinichelper.Tools.Enums.Permission;
+import com.clinichelper.Tools.Enums.SurgeryType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,20 +18,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.persistence.PersistenceException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 /**
  * Created by eva_c on 11/6/2016.
  */
+@Controller
 public class ConsultationController {
     // Services
     @Autowired
     private DataEntryAndManagementService DEAMS;
     @Autowired
     private DataQueryService DQS;
+    @Autowired
+    private ToolKitService TKS;
 
     // Gets
     @GetMapping("/consultations")
@@ -36,14 +40,19 @@ public class ConsultationController {
         if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
-        //if (DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
-           // return new ModelAndView("redirect:/");
+        model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
 
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
 
         model.addAttribute("consultationList", DQS.findAllRegisteredConsultationsForClinic(clinicId));
+        //model.addAttribute("isAdmin", false);
 
-        return new ModelAndView("t");
+        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+            model.addAttribute("isAdmin", false);
+        else
+            model.addAttribute("isAdmin", true);
+
+        return new ModelAndView("consultations/allConsultations");
     }
 
     // Posts
@@ -55,7 +64,7 @@ public class ConsultationController {
             @RequestParam("observations") String observations,
             @RequestParam("specialconditions") String specialConditions,
             @RequestParam("photos") ArrayList<byte[]> photos,
-            @RequestParam("surgerytype") String surgeryType,
+            @RequestParam("surgerytype") SurgeryType surgeryType,
             @RequestParam("medicaldata")  ArrayList<String> medicaData){
 
         if (!DQS.isUserLoggedIn())
@@ -88,10 +97,8 @@ public class ConsultationController {
             DEAMS.editRecord(record);
 
             return "redirect:/"; // todavia no hay vista
-        } catch (PersistenceException | IllegalArgumentException | NullPointerException exp){
-            //
         } catch (Exception exp){
-            //
+            exp.printStackTrace();
         }
 
         return "redirect:/"; // TODO: add error message handling

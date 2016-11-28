@@ -17,6 +17,7 @@ public class Product implements Serializable {
     @Id
     private String productId;
     private String productName;
+    private String supplier;
     private String productDescription;
     private Float productPrice;
     private Integer productInStock;
@@ -28,9 +29,10 @@ public class Product implements Serializable {
 
     }
 
-    public Product(Clinic clinic, String productName, String productDescription, Float productPrice, Integer productInStock){
+    public Product(Clinic clinic, String productName, String supplier, String productDescription, Float productPrice, Integer productInStock){
         this.setProductId(clinic.getClinicPrefix() + "-ITEM-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setProductName(productName);
+        this.setSupplier(supplier);
         this.setProductDescription(productDescription);
         this.setProductPrice(productPrice);
         this.setProductInStock(productInStock);
@@ -84,5 +86,13 @@ public class Product implements Serializable {
 
     public void setClinic(Clinic clinic) {
         this.clinic = clinic;
+    }
+
+    public String getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(String supplier) {
+        this.supplier = supplier;
     }
 }

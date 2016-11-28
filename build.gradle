@@ -7,12 +7,23 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "io.spring.gradle:dependency-management-plugin:0.5.4.RELEASE"
+
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
+apply plugin: "io.spring.dependency-management"
+
+dependencyManagement {
+    imports {
+        mavenBom 'com.amazonaws:aws-java-sdk-bom:1.10.47'
+    }
+}
+
+
 
 group 'myapp'
 version = '0.0.1-SNAPSHOT'
@@ -63,6 +74,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-devtools")
     // https://mvnrepository.com/artifact/com.sendgrid/sendgrid-java
     compile 'com.sendgrid:sendgrid-java:3.1.0'
+    compile 'com.amazonaws:aws-java-sdk-s3'
 }
 
 

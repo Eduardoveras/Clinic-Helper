@@ -8,27 +8,26 @@
     <a class="hiddenanchor" id="signin"></a>
 
     <div class="login_wrapper">
-        <div class="animate form login_form">
+        <div class="form-group animate form login_form item">
             <section class="login_content">
                 <form METHOD="POST" enctype="multipart/form-data" action="/userLogin">
-                    <h1>Login</h1>
+                    <h1><@spring.message "logIn" /></h1>
                     <div>
-                        <input type="text" class="form-control" name="email" id="email" placeholder="Email" required="" />
+                        <input type="email" class="form-control" name="email" id="email" placeholder="<@spring.message "email" />" required="" />
                     </div>
                     <div>
-                        <input type="password" class="form-control" name="password" id="password" placeholder="Password" required="" />
+                        <input type="password" class="form-control" name="password" id="password" placeholder="<@spring.message "password" />" required="" />
                     </div>
                     <div>
-                        <input type="hidden" name="clinic" value="CH-PLATINUM-JASC">
-                        <input type="submit" value="Log In" class="btn btn-default submit"></input>
-                        <a class="reset_pass" href="#">Lost your password?</a>
+                        <input id="send" type="submit" value="<@spring.message "start" />" class="btn btn-default submit">
+                        <a class="reset_pass" href="#"><@spring.message "lost" /></a>
                     </div>
 
                     <div class="clearfix"></div>
 
                     <div class="separator">
-                        <p class="change_link">New to site?
-                            <a href="#signup" class="to_register"> Create Account </a>
+                        <p class="change_link"><@spring.message "newTo" />
+                            <a href="#signup" class="to_register"><@spring.message "createAccount" /></a>
                         </p>
 
                         <div class="clearfix"></div>
@@ -46,18 +45,18 @@
         <div id="register" class="animate form registration_form">
             <section class="login_content">
                 <form action="/newUser" method="post" enctype="multipart/form-data" >
-                    <h1>Create Account</h1>
+                    <h1><@spring.message "createAccount" />t</h1>
                     <div>
-                        <input type="text" name="username" class="form-control" placeholder="Username" required="" />
+                        <input type="text" name="username" class="form-control" placeholder="<@spring.message "username" />" required="" />
                     </div>
                     <div>
-                        <input type="email" name="email" class="form-control" placeholder="Email" required="" />
+                        <input type="email" name="email" class="form-control" placeholder="<@spring.message "email" />" required="" />
                     </div>
                     <div>
-                        <input type="password" name="password" class="form-control" placeholder="Password" required="" />
+                        <input type="password" name="password" class="form-control" placeholder="<@spring.message "password" />" required="" />
                     </div>
                     <div>
-                        <input type="hidden" name="staff" value="JASC-STAFF-ADMIN" class="form-control" placeholder="Email" required="" />
+                        <input type="hidden" name="staff" value="JASC-STAFF-ADMIN" class="form-control" placeholder="<@spring.message "email" />" required="" />
                         <input type="submit" value="Register" class="btn btn-default submit" ></input>
                     </div>
 
@@ -81,5 +80,6 @@
         </div>
     </div>
 </div>
+<#include "/layouts/footer.ftl">
 </body>
 </html>

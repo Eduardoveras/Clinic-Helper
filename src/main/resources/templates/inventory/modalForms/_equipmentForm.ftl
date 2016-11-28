@@ -1,21 +1,6 @@
 <div class="x_panel">
     <div class="x_title">
-        <h2>Form Design <small>different form elements</small></h2>
-        <ul class="nav navbar-right panel_toolbox">
-            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-            </li>
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Settings 1</a>
-                    </li>
-                    <li><a href="#">Settings 2</a>
-                    </li>
-                </ul>
-            </li>
-            <li><a class="close-link"><i class="fa fa-close"></i></a>
-            </li>
-        </ul>
+        <h2><@spring.message "equipmentForm" /></h2>
         <div class="clearfix"></div>
     </div>
     <div class="x_content">
@@ -23,28 +8,28 @@
         <form action="/newEquipment" METHOD="POST" id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
 
             <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name"><@spring.message "name" /> <span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <input type="text" id="name" required="required" name="name" class="form-control col-md-7 col-xs-12">
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="use">Use <span class="required">*</span>
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="use"><@spring.message "use" /> <span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="luse" name="use" required="required" class="form-control col-md-7 col-xs-12">
+                    <input type="text" id="use" name="use" required="required" class="form-control col-md-7 col-xs-12">
                 </div>
             </div>
             <div class="form-group">
-                <label for="description" class="control-label col-md-3 col-sm-3 col-xs-12">Description </label>
+                <label for="description" class="control-label col-md-3 col-sm-3 col-xs-12"><@spring.message "description" /> </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <input id="description" class="form-control col-md-7 col-xs-12" type="text" name="description">
                 </div>
             </div>
 
             <div class="form-group">
-                <label for= "quantity"class="control-label col-md-3 col-sm-3 col-xs-12">Quantity <span class="required">*</span>
+                <label for= "quantity" class="control-label col-md-3 col-sm-3 col-xs-12"><@spring.message "quantity" /> <span class="required">*</span>
                 </label>
                 <div class="container">
                     <div class="row">
@@ -65,8 +50,7 @@
             <div class="ln_solid"></div>
             <div class="form-group">
                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                    <button type="submit" class="btn btn-primary">Cancel</button>
-                    <button type="submit" class="btn btn-success">Submit</button>
+                    <button type="submit" class="btn btn-success"><@spring.message "submit" /></button>
                 </div>
             </div>
 

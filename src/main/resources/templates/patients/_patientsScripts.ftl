@@ -1,7 +1,12 @@
 <!-- bootstrap-daterangepicker -->
 <script>
+
+    var date = new Date();
+    date.setDate(date.getDate()-1);
+
     $(document).ready(function() {
-        $('#dateOfBirth').daterangepicker({
+        $('#dateofbirth').daterangepicker({
+            endDate: date,
             singleDatePicker: true,
             calender_style: "picker_4"
         }, function(start, end, label) {
@@ -106,3 +111,70 @@
     });
 </script>
 <!-- /jQuery Smart Wizard -->
+<!--FILL COUNTRIES-->
+<script language="javascript">
+    populateCountries("country", "state"); // first parameter is id of country drop-down and second parameter is id of state drop-down
+</script>
+<!--/FILL COUNTRIES-->
+
+
+<!-- jQuery Tags Input -->
+<script>
+    function onAddTag(tag) {
+        alert("Added a tag: " + tag);
+    }
+
+    function onRemoveTag(tag) {
+        alert("Removed a tag: " + tag);
+    }
+
+    function onChangeTag(input, tag) {
+        alert("Changed a tag: " + tag);
+    }
+
+    $(document).ready(function() {
+        $('#tags_1_tagsinput').tagsInput({
+            width: 'auto'
+        });
+        $('#tags_2_tagsinput').tagsInput({
+            width: 'auto'
+        });
+    });
+</script>
+<!-- /jQuery Tags Input -->
+
+
+<script>
+
+    $(function() {
+        var action;
+        $(".number-spinner button").mousedown(function () {
+            btn = $(this);
+            input = btn.closest('.number-spinner').find('input');
+            btn.closest('.number-spinner').find('button').prop("disabled", false);
+
+            if (btn.attr('data-dir') == 'up') {
+                action = setInterval(function(){
+                    if ( input.attr('max') == undefined || parseInt(input.val()) < parseInt(input.attr('max')) ) {
+                        input.val(parseInt(input.val())+1);
+                    }else{
+                        btn.prop("disabled", true);
+                        clearInterval(action);
+                    }
+                }, 50);
+            } else {
+                action = setInterval(function(){
+                    if ( input.attr('min') == undefined || parseInt(input.val()) > parseInt(input.attr('min')) ) {
+                        input.val(parseInt(input.val())-1);
+                    }else{
+                        btn.prop("disabled", true);
+                        clearInterval(action);
+                    }
+                }, 50);
+            }
+        }).mouseup(function(){
+            clearInterval(action);
+        });
+    });
+
+</script>
