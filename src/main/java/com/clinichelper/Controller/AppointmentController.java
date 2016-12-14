@@ -4,8 +4,8 @@
 package com.clinichelper.Controller;
 
 import com.clinichelper.Entity.Appointment;
-import com.clinichelper.Entity.Patient;
 import com.clinichelper.Service.CRUD.DataCreationService;
+import com.clinichelper.Service.CRUD.DataDeleteService;
 import com.clinichelper.Service.CRUD.DataUpdateService;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
@@ -22,7 +22,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @Controller
 public class AppointmentController {
@@ -32,6 +31,8 @@ public class AppointmentController {
     private DataCreationService DCS;
     @Autowired
     private DataUpdateService DUS;
+    @Autowired
+    private DataDeleteService DDS;
     @Autowired
     private DataEntryAndManagementService DEAMS;
     @Autowired
@@ -94,7 +95,7 @@ public class AppointmentController {
 
         try {
             if (DQS.findRegisteredAppointment(appointmentId).getAppointmentStatus() == AppointmentStatus.PENDING)
-                DEAMS.deleteRegisteredAppointment(appointmentId);
+                DDS.deleteRegisteredAppointment(appointmentId);
             else
                 return "redirect:/" ; // TODO: add error message handling
 

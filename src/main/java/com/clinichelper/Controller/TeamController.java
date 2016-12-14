@@ -2,6 +2,7 @@ package com.clinichelper.Controller;
 
 import com.clinichelper.Entity.User;
 import com.clinichelper.Service.CRUD.DataCreationService;
+import com.clinichelper.Service.CRUD.DataDeleteService;
 import com.clinichelper.Service.CRUD.DataUpdateService;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
@@ -32,6 +33,8 @@ public class TeamController {
     private DataCreationService DCS;
     @Autowired
     private DataUpdateService DUS;
+    @Autowired
+    private DataDeleteService DDS;
     @Autowired
     private DataEntryAndManagementService DEAMS;
     @Autowired
@@ -92,7 +95,7 @@ public class TeamController {
             return "redirect:/";
 
         try {
-            DEAMS.deleteRegisteredUserAccount(userId);
+            DDS.deleteRegisteredUserAccount(userId);
         } catch (Exception exp){
             exp.printStackTrace();
         }

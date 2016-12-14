@@ -4,6 +4,7 @@ import com.clinichelper.Entity.Contact;
 import com.clinichelper.Entity.Meeting;
 import com.clinichelper.Entity.Patient;
 import com.clinichelper.Service.CRUD.DataCreationService;
+import com.clinichelper.Service.CRUD.DataDeleteService;
 import com.clinichelper.Service.CRUD.DataUpdateService;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
@@ -37,6 +38,8 @@ public class MeetingAndContactsController {
     private DataCreationService DCS;
     @Autowired
     private DataUpdateService DUS;
+    @Autowired
+    private DataDeleteService DDS;
     @Autowired
     private DataEntryAndManagementService DEAMS;
     @Autowired
@@ -133,7 +136,7 @@ public class MeetingAndContactsController {
             return "redirect:/users"; // TODO: add Not allowed action delete user account first
 
         try {
-            DEAMS.deleteRegisteredStaff(contactId);
+            DDS.deleteRegisteredStaff(contactId);
             return "redirect:/contacts";
         } catch (Exception exp){
             exp.printStackTrace();
@@ -151,7 +154,7 @@ public class MeetingAndContactsController {
           //  return "redirect:/meetings";
 
         try {
-            DEAMS.deleteRegisteredMeeting(meetingId);
+            DDS.deleteRegisteredMeeting(meetingId);
             return "redirect:/meetings";
         } catch (Exception exp){
             exp.printStackTrace();

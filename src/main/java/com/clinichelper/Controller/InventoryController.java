@@ -7,6 +7,7 @@ import com.clinichelper.Entity.Equipment;
 import com.clinichelper.Entity.Medication;
 import com.clinichelper.Entity.Product;
 import com.clinichelper.Service.CRUD.DataCreationService;
+import com.clinichelper.Service.CRUD.DataDeleteService;
 import com.clinichelper.Service.CRUD.DataUpdateService;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
@@ -32,6 +33,8 @@ public class InventoryController {
     private DataCreationService DCS;
     @Autowired
     private DataUpdateService DUS;
+    @Autowired
+    private DataDeleteService DDS;
     @Autowired
     private DataEntryAndManagementService DEAMS;
     @Autowired
@@ -132,7 +135,7 @@ public class InventoryController {
             return "redirect:/login";
 
         try{
-            DEAMS.deleteRegisteredEquipment(equipmentId);
+            DDS.deleteRegisteredEquipment(equipmentId);
             return "redirect:/Inventory";
         } catch (Exception exp){
             exp.printStackTrace();
@@ -148,7 +151,7 @@ public class InventoryController {
 
 
         try {
-            DEAMS.deleteRegisteredMedication(medicationId);
+            DDS.deleteRegisteredMedication(medicationId);
             return "redirect:/Inventory";
         } catch (Exception exp){
             exp.printStackTrace();
@@ -159,12 +162,12 @@ public class InventoryController {
 
     @PostMapping("/deleteProduct")
     public String deleteProduct(@RequestParam("id") String productId){
+
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-
         try{
-            DEAMS.deleteRegisteredProduct(productId);
+            DDS.deleteRegisteredProduct(productId);
             return "redirect:/Inventory";
         } catch (Exception exp){
             exp.printStackTrace();
@@ -176,9 +179,9 @@ public class InventoryController {
     // Restock
     @PostMapping("/restockEquipment")
     public String restockEquipment(@RequestParam("id") String equipmentId, @RequestParam("quantity") Integer stock){
+
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
-
 
         try {
             Equipment equipment = DQS.findRegisteredEquipment(equipmentId);
