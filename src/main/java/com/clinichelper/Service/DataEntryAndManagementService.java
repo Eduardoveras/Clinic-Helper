@@ -328,34 +328,6 @@ public class DataEntryAndManagementService {
     // Editing Functions
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // Auxiliary Functions
     private boolean doesAppointmentIdExist(String appointmentId) {
         Appointment appointment = appointmentRepository.findByAppointmentId(appointmentId);
