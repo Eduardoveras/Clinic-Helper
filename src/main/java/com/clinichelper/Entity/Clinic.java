@@ -22,6 +22,7 @@ public class Clinic implements Serializable{
     private String clinicId;
     private Date registeredDate;
     @NotNull
+    @Column(unique = true)
     private String clinicName;
     @NotNull
     private String clinicPrefix;

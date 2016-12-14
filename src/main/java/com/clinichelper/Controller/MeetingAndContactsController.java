@@ -3,6 +3,7 @@ package com.clinichelper.Controller;
 import com.clinichelper.Entity.Contact;
 import com.clinichelper.Entity.Meeting;
 import com.clinichelper.Entity.Patient;
+import com.clinichelper.Service.CRUD.DataCreationService;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
@@ -29,7 +30,10 @@ import java.util.Map;
  */
 @Controller
 public class MeetingAndContactsController {
+
     // Services
+    @Autowired
+    private DataCreationService DCS;
     @Autowired
     private DataEntryAndManagementService DEAMS;
     @Autowired
@@ -83,7 +87,7 @@ public class MeetingAndContactsController {
             return "redirect:/contacts";
 
         try {
-            DEAMS.createNewStaffMember(DQS.getCurrentLoggedUser().getClinic().getClinicId(), firstName, lastName, new Date(new SimpleDateFormat("MM/dd/yyyy").parse(birthDate).getTime()), email.toLowerCase());
+            DCS.createNewStaffMember(DQS.getCurrentLoggedUser().getClinic().getClinicId(), firstName, lastName, new Date(new SimpleDateFormat("MM/dd/yyyy").parse(birthDate).getTime()), email.toLowerCase());
             return "redirect:/contacts";
         } catch (Exception exp){
             exp.printStackTrace();
@@ -105,7 +109,7 @@ public class MeetingAndContactsController {
                 team.add(DQS.findRegisteredStaffByEmail(DQS.getCurrentLoggedUser().getClinic().getClinicId(), s));
             }
 
-            DEAMS.createNewMeeting(DQS.getCurrentLoggedUser().getClinic().getClinicId(), title, objective, new Timestamp(new SimpleDateFormat("MM/dd/yyyy hh:mm a").parse(time).getTime()), place, new HashSet<>(team));
+            DCS.createNewMeeting(DQS.getCurrentLoggedUser().getClinic().getClinicId(), title, objective, new Timestamp(new SimpleDateFormat("MM/dd/yyyy hh:mm a").parse(time).getTime()), place, new HashSet<>(team));
             return "redirect:/meetings";
         } catch (Exception exp){
             exp.printStackTrace();

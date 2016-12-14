@@ -6,6 +6,7 @@ package com.clinichelper.Controller;
 import com.clinichelper.Entity.Equipment;
 import com.clinichelper.Entity.Medication;
 import com.clinichelper.Entity.Product;
+import com.clinichelper.Service.CRUD.DataCreationService;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
@@ -24,7 +25,10 @@ import java.util.Map;
 
 @Controller
 public class InventoryController {
-    // Repositories
+
+    // Services
+    @Autowired
+    private DataCreationService DCS;
     @Autowired
     private DataEntryAndManagementService DEAMS;
     @Autowired
@@ -72,7 +76,7 @@ public class InventoryController {
             return "redirect:/";
 
         try {
-            DEAMS.createNewEquipment(DQS.getCurrentLoggedUser().getClinic().getClinicId(), equipmentName, equipmentUse, equipmentDescription, stock);
+            DCS.createNewEquipment(DQS.getCurrentLoggedUser().getClinic().getClinicId(), equipmentName, equipmentUse, equipmentDescription, stock);
             return "redirect:/Inventory";
         } catch (Exception exp){
             exp.printStackTrace();
@@ -90,7 +94,7 @@ public class InventoryController {
             return "redirect:/";
 
         try {
-            DEAMS.createNewProduct(DQS.getCurrentLoggedUser().getClinic().getClinicId(), productName, supplier, productDescription, productPrice, stock);
+            DCS.createNewProduct(DQS.getCurrentLoggedUser().getClinic().getClinicId(), productName, supplier, productDescription, productPrice, stock);
             return "redirect:/Inventory";
         } catch (Exception exp){
             exp.printStackTrace();
@@ -109,7 +113,7 @@ public class InventoryController {
             return "redirect:/";
 
         try {
-            DEAMS.createNewMedication(DQS.getCurrentLoggedUser().getClinic().getClinicId(), medicationName, supplier, medicationDescription, medicationPrice, stock);
+            DCS.createNewMedication(DQS.getCurrentLoggedUser().getClinic().getClinicId(), medicationName, supplier, medicationDescription, medicationPrice, stock);
             return "redirect:/Inventory";
         } catch (Exception exp){
             exp.printStackTrace();

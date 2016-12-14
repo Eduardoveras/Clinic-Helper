@@ -1,9 +1,7 @@
 package com.clinichelper.Entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -20,11 +18,11 @@ public class Record implements Serializable{
     @OneToOne
     private Patient patient;
     @OneToMany
-    private Set<Surgery> surgeries;
+    private Set<Surgery> surgeryLog;
     @OneToMany
-    private Set<Consultation> consultations;
+    private Set<Consultation> consultationLog;
     @OneToMany
-    private Set<History> history;
+    private Set<History> historyLog;
 
     // Constructors
     public Record(){
@@ -34,9 +32,9 @@ public class Record implements Serializable{
     public Record(Patient patient) {
         this.setRecordId(patient.getPatientId() + "-R-" + UUID.randomUUID().toString().split("-")[0].toUpperCase());
         this.setPatient(patient);
-        this.setSurgeries(new HashSet<>());
-        this.setConsultations(new HashSet<>());
-        this.setHistory(new HashSet<>());
+        this.setSurgeryLog(new HashSet<>());
+        this.setConsultationLog(new HashSet<>());
+        this.setHistoryLog(new HashSet<>());
     }
 
     public String getRecordId() {
@@ -55,27 +53,27 @@ public class Record implements Serializable{
         this.patient = patient;
     }
 
-    public Set<Surgery> getSurgeries() {
-        return surgeries;
+    public Set<Surgery> getSurgeryLog() {
+        return surgeryLog;
     }
 
-    public void setSurgeries(Set<Surgery> surgeries) {
-        this.surgeries = surgeries;
+    public void setSurgeryLog(Set<Surgery> surgeries) {
+        this.surgeryLog = surgeries;
     }
 
-    public Set<Consultation> getConsultations() {
-        return consultations;
+    public Set<Consultation> getConsultationLog() {
+        return consultationLog;
     }
 
-    public void setConsultations(Set<Consultation> consultations) {
-        this.consultations = consultations;
+    public void setConsultationLog(Set<Consultation> consultations) {
+        this.consultationLog = consultations;
     }
 
-    public Set<History> getHistory() {
-        return history;
+    public Set<History> getHistoryLog() {
+        return historyLog;
     }
 
-    public void setHistory(Set<History> history) {
-        this.history = history;
+    public void setHistoryLog(Set<History> history) {
+        this.historyLog = history;
     }
 }

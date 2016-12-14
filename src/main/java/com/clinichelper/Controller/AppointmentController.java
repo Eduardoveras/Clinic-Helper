@@ -5,6 +5,7 @@ package com.clinichelper.Controller;
 
 import com.clinichelper.Entity.Appointment;
 import com.clinichelper.Entity.Patient;
+import com.clinichelper.Service.CRUD.DataCreationService;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
@@ -26,6 +27,8 @@ import java.util.Date;
 public class AppointmentController {
 
     // Services
+    @Autowired
+    private DataCreationService DCS;
     @Autowired
     private DataEntryAndManagementService DEAMS;
     @Autowired
@@ -67,7 +70,7 @@ public class AppointmentController {
           //  return "redirect:/";
 
         try {
-            DEAMS.createNewAppointment(DQS.getCurrentLoggedUser().getClinic().getClinicId(),  new Timestamp(new SimpleDateFormat("MM/dd/yyyy hh:mm a").parse(appointmentTime).getTime()), DQS.findRegisteredPatient(patientId).getPatientId(), appointmentDescription);
+            DCS.createNewAppointment(DQS.getCurrentLoggedUser().getClinic().getClinicId(),  new Timestamp(new SimpleDateFormat("MM/dd/yyyy hh:mm a").parse(appointmentTime).getTime()), DQS.findRegisteredPatient(patientId).getPatientId(), appointmentDescription);
             return "redirect:/appointments";
         } catch (Exception exp){
             System.out.println("ERROR MESSAGE:");

@@ -1,6 +1,7 @@
 package com.clinichelper.Controller;
 
 import com.clinichelper.Entity.User;
+import com.clinichelper.Service.CRUD.DataCreationService;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
@@ -24,7 +25,10 @@ import java.text.SimpleDateFormat;
 
 @Controller
 public class TeamController {
+
     // Services
+    @Autowired
+    private DataCreationService DCS;
     @Autowired
     private DataEntryAndManagementService DEAMS;
     @Autowired
@@ -66,7 +70,7 @@ public class TeamController {
             return "redirect:/";
 
         try{
-            DEAMS.createNewUserAccount(DQS.getCurrentLoggedUser().getClinic().getClinicId(), email.toLowerCase(), firstName, lastName, new Date(new SimpleDateFormat("MM/dd/yyyy").parse(birthDate).getTime()), gender.toUpperCase().equals("F") ? Gender.F : Gender.M, password, role.toUpperCase().equals("M") ? Permission.MEDIC : Permission.ASSISTANT);
+            DCS.createNewUserAccount(DQS.getCurrentLoggedUser().getClinic().getClinicId(), email.toLowerCase(), firstName, lastName, new Date(new SimpleDateFormat("MM/dd/yyyy").parse(birthDate).getTime()), gender.toUpperCase().equals("F") ? Gender.F : Gender.M, password, role.toUpperCase().equals("M") ? Permission.MEDIC : Permission.ASSISTANT);
             return "redirect:/users";
         } catch (Exception exp){
             exp.printStackTrace();

@@ -4,6 +4,7 @@ import com.clinichelper.Entity.Consultation;
 import com.clinichelper.Entity.History;
 import com.clinichelper.Entity.Patient;
 import com.clinichelper.Entity.Record;
+import com.clinichelper.Service.CRUD.DataCreationService;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
@@ -26,7 +27,10 @@ import java.util.Set;
  */
 @Controller
 public class ConsultationController {
+
     // Services
+    @Autowired
+    private DataCreationService DCS;
     @Autowired
     private DataEntryAndManagementService DEAMS;
     @Autowired
@@ -76,22 +80,22 @@ public class ConsultationController {
         try {
             Patient patient = DQS.findRegisteredPatientByIdCard(DQS.getCurrentLoggedUser().getClinic().getClinicId(), patientId);
             // Creating the history
-            History history = DEAMS.createNewHistory(patient, visitObjective, observations, specialConditions, photos, surgeryType, medicaData, consultationId);
+            History history = DCS.createNewHistory(patient, visitObjective, observations, specialConditions, photos, surgeryType, medicaData, consultationId);
 
             // Adding it to the Record
             Record record = DQS.findPatientsRegisteredRecord(patient.getPatientId());
 
             // Fetching the list of history
-            Set<History> medicalHistory = record.getHistory();
+            Set<History> medicalHistory = record.getHistoryLog();
             // Adding the new one
             medicalHistory.add(history);
             // Modifying the old list
-            record.setHistory(medicalHistory);
+            record.setHistoryLog(medicalHistory);
 
             // Also saving the consultation
-            Set<Consultation> consultationsHistory = record.getConsultations();
+            Set<Consultation> consultationsHistory = record.getConsultationLog();
             consultationsHistory.add(DQS.findRegisteredConsultation(consultationId));
-            record.setConsultations(consultationsHistory);
+            record.setConsultationLog(consultationsHistory);
 
             // Edit patient medical record
             DEAMS.editRecord(record);

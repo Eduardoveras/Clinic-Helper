@@ -5,6 +5,7 @@ package com.clinichelper.Controller;
 
 import com.clinichelper.Entity.Patient;
 import com.clinichelper.Service.AmazonService;
+import com.clinichelper.Service.CRUD.DataCreationService;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
@@ -28,7 +29,10 @@ import java.util.ArrayList;
 
 @Controller
 public class PatientController {
-    // Repositories
+
+    // Services
+    @Autowired
+    private DataCreationService DCS;
     @Autowired
     private DataEntryAndManagementService DEAMS;
     @Autowired
@@ -154,7 +158,7 @@ public class PatientController {
         try {
             SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy");
 
-            DEAMS.createNewPatient(DQS.getCurrentLoggedUser().getClinic().getClinicId(), firstName, lastName, idCard, telephoneNumber, patientWorkphone, patientCellphone, patientContactName, patientContactLastName,
+            DCS.createNewPatient(DQS.getCurrentLoggedUser().getClinic().getClinicId(), firstName, lastName, idCard, telephoneNumber, patientWorkphone, patientCellphone, patientContactName, patientContactLastName,
                     patientContactAddress, patientContactCellphone, contactTelephoneNumber, occupation, gender.toUpperCase().equals("F") ? Gender.F : Gender.M, mail,
                     new Date(sdf1.parse(dateOfBirth).getTime()), nationality, address, cities, countries, patientAllergies, patientReligion,
                     "0", "0", patientBloodType,

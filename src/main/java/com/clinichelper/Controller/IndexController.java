@@ -2,6 +2,7 @@ package com.clinichelper.Controller;
 
 import com.clinichelper.Entity.Appointment;
 import com.clinichelper.Service.AmazonService;
+import com.clinichelper.Service.CRUD.DataCreationService;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
@@ -26,6 +27,9 @@ import java.util.List;
 @Controller
 public class IndexController implements ErrorController {
 
+    // Services
+    @Autowired
+    private DataCreationService DCS;
     @Autowired
     private DataEntryAndManagementService DEAMS;
     @Autowired
@@ -96,7 +100,7 @@ public class IndexController implements ErrorController {
         try {
             ArrayList<Repeat> reminders = new ArrayList<>();
             reminders.add(repeat);
-            DEAMS.createNewCustomTask(DQS.getCurrentLoggedUser().getUserId(), title, type, description, reminders);
+            DCS.createNewCustomTask(DQS.getCurrentLoggedUser().getUserId(), title, type, description, reminders);
             return "redirect:/";
         } catch (Exception exp){
             System.out.println("ERROR EN CREAR TASK");
