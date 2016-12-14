@@ -4,6 +4,7 @@ import com.clinichelper.Entity.Contact;
 import com.clinichelper.Entity.Meeting;
 import com.clinichelper.Entity.Patient;
 import com.clinichelper.Service.CRUD.DataCreationService;
+import com.clinichelper.Service.CRUD.DataUpdateService;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
@@ -34,6 +35,8 @@ public class MeetingAndContactsController {
     // Services
     @Autowired
     private DataCreationService DCS;
+    @Autowired
+    private DataUpdateService DUS;
     @Autowired
     private DataEntryAndManagementService DEAMS;
     @Autowired
@@ -168,7 +171,7 @@ public class MeetingAndContactsController {
         try{
             Meeting meeting = DQS.findRegisteredMeeting(meetingId);
             meeting.setMeetingTime(newTime);
-            DEAMS.editMeeting(meeting);
+            DUS.editMeeting(meeting);
             return "redirect:/meetings";
         } catch (Exception exp){
             exp.printStackTrace();

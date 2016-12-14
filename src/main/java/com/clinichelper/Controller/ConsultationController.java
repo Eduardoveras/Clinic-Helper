@@ -5,6 +5,7 @@ import com.clinichelper.Entity.History;
 import com.clinichelper.Entity.Patient;
 import com.clinichelper.Entity.Record;
 import com.clinichelper.Service.CRUD.DataCreationService;
+import com.clinichelper.Service.CRUD.DataUpdateService;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
@@ -31,6 +32,8 @@ public class ConsultationController {
     // Services
     @Autowired
     private DataCreationService DCS;
+    @Autowired
+    private DataUpdateService DUS;
     @Autowired
     private DataEntryAndManagementService DEAMS;
     @Autowired
@@ -98,7 +101,7 @@ public class ConsultationController {
             record.setConsultationLog(consultationsHistory);
 
             // Edit patient medical record
-            DEAMS.editRecord(record);
+            DUS.editRecord(record);
 
             return "redirect:/"; // todavia no hay vista
         } catch (Exception exp){

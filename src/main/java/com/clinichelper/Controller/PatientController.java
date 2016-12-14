@@ -6,6 +6,7 @@ package com.clinichelper.Controller;
 import com.clinichelper.Entity.Patient;
 import com.clinichelper.Service.AmazonService;
 import com.clinichelper.Service.CRUD.DataCreationService;
+import com.clinichelper.Service.CRUD.DataUpdateService;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
@@ -33,6 +34,8 @@ public class PatientController {
     // Services
     @Autowired
     private DataCreationService DCS;
+    @Autowired
+    private DataUpdateService DUS;
     @Autowired
     private DataEntryAndManagementService DEAMS;
     @Autowired
@@ -193,7 +196,7 @@ public class PatientController {
             patient.setPatientNationality(nationality.toUpperCase());
             patient.setPatientCountry(countries.toUpperCase());
             patient.setPatientCity(cities.toUpperCase());
-            DEAMS.editPatient(patient);
+            DUS.editPatient(patient);
             return "redirect:/patient" + patient.getPatientId();
         } catch (Exception exp){
             exp.printStackTrace();

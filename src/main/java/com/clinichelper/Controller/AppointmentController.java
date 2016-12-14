@@ -6,6 +6,7 @@ package com.clinichelper.Controller;
 import com.clinichelper.Entity.Appointment;
 import com.clinichelper.Entity.Patient;
 import com.clinichelper.Service.CRUD.DataCreationService;
+import com.clinichelper.Service.CRUD.DataUpdateService;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
@@ -29,6 +30,8 @@ public class AppointmentController {
     // Services
     @Autowired
     private DataCreationService DCS;
+    @Autowired
+    private DataUpdateService DUS;
     @Autowired
     private DataEntryAndManagementService DEAMS;
     @Autowired
@@ -117,7 +120,7 @@ public class AppointmentController {
 
             appointment.setAppointmentTime(new Timestamp(new SimpleDateFormat("MM/dd/yyyy hh:mm a").parse(newDate).getTime()));
 
-            DEAMS.editAppointment(appointment);
+            DUS.editAppointment(appointment);
             return "redirect:/appointments";
         } catch (Exception exp){
             exp.printStackTrace();

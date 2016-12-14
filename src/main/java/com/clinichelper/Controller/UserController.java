@@ -1,6 +1,7 @@
 package com.clinichelper.Controller;
 
 import com.clinichelper.Entity.User;
+import com.clinichelper.Service.CRUD.DataUpdateService;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
@@ -24,6 +25,8 @@ import javax.persistence.PersistenceException;
 public class UserController {
 
     // Services
+    @Autowired
+    private DataUpdateService DUS;
     @Autowired
     private DataEntryAndManagementService DEAMS;
     @Autowired
@@ -78,7 +81,7 @@ public class UserController {
         User user = DQS.findRegisteredUserAccount(email,clinicId);
 
         try {
-            DEAMS.editUserPhoto(email, clinicId, processImageFile(file.getBytes()));
+            DUS.editUserPhoto(email, clinicId, processImageFile(file.getBytes()));
             return "redirect:/user/" + user.getUserId();
         } catch (Exception exp){
             exp.printStackTrace();
@@ -111,7 +114,7 @@ public class UserController {
             User user = DQS.findRegisteredUserAccount(email.toLowerCase(),clinicId);
 
             try {
-                DEAMS.editUserAccountCredentials(user.getEmail(), user.getClinic().getClinicId(), newPassword, user.getRole());
+                DUS.editUserAccountCredentials(user.getEmail(), user.getClinic().getClinicId(), newPassword, user.getRole());
                 return "redirect:/user/" + user.getUserId();
             } catch (Exception exp){
                 exp.printStackTrace();

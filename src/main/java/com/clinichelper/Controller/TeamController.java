@@ -2,6 +2,7 @@ package com.clinichelper.Controller;
 
 import com.clinichelper.Entity.User;
 import com.clinichelper.Service.CRUD.DataCreationService;
+import com.clinichelper.Service.CRUD.DataUpdateService;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
@@ -29,6 +30,8 @@ public class TeamController {
     // Services
     @Autowired
     private DataCreationService DCS;
+    @Autowired
+    private DataUpdateService DUS;
     @Autowired
     private DataEntryAndManagementService DEAMS;
     @Autowired
@@ -109,7 +112,7 @@ public class TeamController {
         User user = DQS.findUserInformation(userId);
 
         try {
-            DEAMS.editUserAccountCredentials(user.getEmail(), user.getClinic().getClinicId(), user.getPassword(), Permission.ADMIN);
+            DUS.editUserAccountCredentials(user.getEmail(), user.getClinic().getClinicId(), user.getPassword(), Permission.ADMIN);
             return "redirect:/team";
         } catch (Exception exp){
             exp.printStackTrace();

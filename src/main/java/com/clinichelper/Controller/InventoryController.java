@@ -7,6 +7,7 @@ import com.clinichelper.Entity.Equipment;
 import com.clinichelper.Entity.Medication;
 import com.clinichelper.Entity.Product;
 import com.clinichelper.Service.CRUD.DataCreationService;
+import com.clinichelper.Service.CRUD.DataUpdateService;
 import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
@@ -29,6 +30,8 @@ public class InventoryController {
     // Services
     @Autowired
     private DataCreationService DCS;
+    @Autowired
+    private DataUpdateService DUS;
     @Autowired
     private DataEntryAndManagementService DEAMS;
     @Autowired
@@ -180,7 +183,7 @@ public class InventoryController {
         try {
             Equipment equipment = DQS.findRegisteredEquipment(equipmentId);
             equipment.setEquipmentInStock(stock);
-            DEAMS.editEquipment(equipment);
+            DUS.editEquipment(equipment);
             return "redirect:/Inventory";
         } catch (Exception exp){
             exp.printStackTrace();
@@ -198,7 +201,7 @@ public class InventoryController {
         try {
             Medication medication = DQS.findRegisteredMedication(medicationId);
             medication.setMedicationInStock(stock);
-            DEAMS.editMedication(medication);
+            DUS.editMedication(medication);
             return "redirect:/Inventory";
         } catch (Exception exp){
             exp.printStackTrace();
@@ -216,7 +219,7 @@ public class InventoryController {
         try {
             Product product = DQS.findRegisteredProduct(productId);
             product.setProductInStock(stock);
-            DEAMS.editProduct(product);
+            DUS.editProduct(product);
             return "redirect:/Inventory";
         } catch (Exception exp){
             exp.printStackTrace();
@@ -236,7 +239,7 @@ public class InventoryController {
             equipment.setEquipmentName(name);
             equipment.setEquipmentUse(use);
             equipment.setEquipmentDescription(description);
-            DEAMS.editEquipment(equipment);
+            DUS.editEquipment(equipment);
             return "redirect:/Inventory";
         } catch (Exception exp){
             exp.printStackTrace();
@@ -257,7 +260,7 @@ public class InventoryController {
             medication.setSupplier(supplier);
             medication.setMedicationDescription(description);
             medication.setMedicationPrice(price);
-            DEAMS.editMedication(medication);
+            DUS.editMedication(medication);
             return "redirect:/Inventory";
         } catch (Exception exp){
             exp.printStackTrace();
@@ -277,7 +280,7 @@ public class InventoryController {
             product.setProductDescription(description);
             product.setSupplier(supplier);
             product.setProductPrice(price);
-            DEAMS.editProduct(product);
+            DUS.editProduct(product);
             return "redirect:/Inventory";
         } catch (Exception exp){
             exp.printStackTrace();
