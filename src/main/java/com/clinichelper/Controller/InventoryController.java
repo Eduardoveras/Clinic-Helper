@@ -9,6 +9,7 @@ import com.clinichelper.Entity.Product;
 import com.clinichelper.Service.CRUD.DataCreationService;
 import com.clinichelper.Service.CRUD.DataDeleteService;
 import com.clinichelper.Service.CRUD.DataUpdateService;
+import com.clinichelper.Service.CRUD.Reading.EquipmentMedicationProductService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Enums.Permission;
@@ -34,6 +35,8 @@ public class InventoryController {
     private DataUpdateService DUS;
     @Autowired
     private DataDeleteService DDS;
+    @Autowired
+    private EquipmentMedicationProductService EMPS;
     @Autowired
     private DataQueryService DQS;
     //
@@ -182,7 +185,7 @@ public class InventoryController {
             return "redirect:/login";
 
         try {
-            Equipment equipment = DQS.findRegisteredEquipment(equipmentId);
+            Equipment equipment = EMPS.findRegisteredEquipment(equipmentId);
             equipment.setEquipmentInStock(stock);
             DUS.editEquipment(equipment);
             return "redirect:/Inventory";
@@ -200,7 +203,7 @@ public class InventoryController {
 
 
         try {
-            Medication medication = DQS.findRegisteredMedication(medicationId);
+            Medication medication = EMPS.findRegisteredMedication(medicationId);
             medication.setMedicationInStock(stock);
             DUS.editMedication(medication);
             return "redirect:/Inventory";
@@ -218,7 +221,7 @@ public class InventoryController {
 
 
         try {
-            Product product = DQS.findRegisteredProduct(productId);
+            Product product = EMPS.findRegisteredProduct(productId);
             product.setProductInStock(stock);
             DUS.editProduct(product);
             return "redirect:/Inventory";
@@ -236,7 +239,7 @@ public class InventoryController {
 
 
         try {
-            Equipment equipment = DQS.findRegisteredEquipment(equipmentId);
+            Equipment equipment = EMPS.findRegisteredEquipment(equipmentId);
             equipment.setEquipmentName(name);
             equipment.setEquipmentUse(use);
             equipment.setEquipmentDescription(description);
@@ -256,7 +259,7 @@ public class InventoryController {
 
 
         try {
-            Medication medication = DQS.findRegisteredMedication(medicationId);
+            Medication medication = EMPS.findRegisteredMedication(medicationId);
             medication.setMedicationName(name);
             medication.setSupplier(supplier);
             medication.setMedicationDescription(description);
@@ -276,7 +279,7 @@ public class InventoryController {
             return "redirect:/login";
 
         try {
-            Product product = DQS.findRegisteredProduct(productId);
+            Product product = EMPS.findRegisteredProduct(productId);
             product.setProductName(name);
             product.setProductDescription(description);
             product.setSupplier(supplier);
