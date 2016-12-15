@@ -73,49 +73,9 @@ public class DataQueryService {
 
 
 
-    // Insurance Queries
-    public Insurance findRegisteredInsurance(String insuranceId){ return insuranceRepository.findByInsuranceId(insuranceId); }
-
-    public List<Insurance> findAllRegisteredInsurances(){ return insuranceRepository.findAll(); }
-
-    public List<Insurance> findRegisteredInsyranceByInsuranceSerialCode(String insuranceSerialCode){ return insuranceRepository.findByInsuranceSerialCode(insuranceSerialCode); }
-
-    public List<Insurance> findRegisteredInsuranceByOwner(String searchID){ return insuranceRepository.findByOwnerId(searchID); }
 
 
 
-    // Patient Queries
-    public Patient findRegisteredPatient(String patientId){ return patientRepository.findByPatientId(patientId);}
-
-    public List<Patient> findAllRegisteredPatientsForClinic(String clinicId){ return patientRepository.findByClinicId(clinicId); }
-
-    public Patient findRegisteredPatientByIdCard(String clinicId, String searchIdCard){ return patientRepository.findByPatientIdCard(searchIdCard, clinicId); }
-
-    //public List<Patient> findRegisteredPatientByEmail(String clinicId, String patientEmail){ return patientRepository.findByPatientEmail(patientEmail, clinicId); }
-
-    //public List<Patient> findRegisteredPatientByBirthDate(String clinicId, Date patientBirthDate){ return patientRepository.findByPatientBirthDate(patientBirthDate, clinicId); }
-
-    //public List<Patient> findRegisteredPatientByFullName(String clinicId, String searchFistName, String searchLastName){ return patientRepository.findByFullName(searchFistName, searchLastName, clinicId); }
-/*
-    public List<Patient> findRegisteredPatientByGeneralInformation(String clinicId, String searchFistName, String searchLastName,
-                                                                  String searchTelephone,String searchEmail ){
-        return patientRepository.findByFLTEFields(searchFistName,searchLastName,searchTelephone,searchEmail, clinicId);
-    }
-*/
-
-
-    // Record Queries
-    public Record findRegisteredRecord(String recordId){ return recordRepository.findByRecordId(recordId); }
-
-    public Record findPatientsRegisteredRecord(String patientId){
-
-        if (!doesPatientIdExist(patientId))
-            throw new IllegalArgumentException("\n\nThis is an invalid patient Id");
-
-        return recordRepository.findByPatientId(patientId);
-    }
-
-    public List<Record> findRegisteredRecordsForClinic(String clinicId){ return recordRepository.findByClinicId(clinicId); }
 
 
 
