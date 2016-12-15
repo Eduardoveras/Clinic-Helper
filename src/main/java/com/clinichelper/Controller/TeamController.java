@@ -105,7 +105,7 @@ public class TeamController {
     }
 
     @PostMapping("/makUserAdmin") //Only accessed by the admin of the clinic account
-    public String makeUserDamin(@RequestParam("id") String userId){
+    public String makeUserAdmin(@RequestParam("id") String userId){
 
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
