@@ -5,6 +5,7 @@ import com.clinichelper.Entity.Meeting;
 import com.clinichelper.Service.CRUD.DataCreationService;
 import com.clinichelper.Service.CRUD.DataDeleteService;
 import com.clinichelper.Service.CRUD.DataUpdateService;
+import com.clinichelper.Service.CRUD.Reading.ContactMeetingService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Enums.Permission;
@@ -38,6 +39,8 @@ public class MeetingAndContactsController {
     @Autowired
     private DataDeleteService DDS;
     @Autowired
+    private ContactMeetingService CMS;
+    @Autowired
     private DataQueryService DQS;
     //
     @Autowired
@@ -51,7 +54,7 @@ public class MeetingAndContactsController {
 
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
         model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
-        model.addAttribute("contactList", DQS.findAllRegisteredContactsForClinic(clinicId));
+        model.addAttribute("contactList", CMS.findAllRegisteredContactsForClinic(clinicId));
 
         if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             model.addAttribute("isAdmin", false);
@@ -68,8 +71,8 @@ public class MeetingAndContactsController {
 
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
         model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
-        model.addAttribute("meetingsList", DQS.findAllRegisteredMeetingsForClinic(clinicId));
-        model.addAttribute("contactList", DQS.findAllRegisteredContactsForClinic(clinicId));
+        model.addAttribute("meetingsList", CMS.findAllRegisteredMeetingsForClinic(clinicId));
+        model.addAttribute("contactList", CMS.findAllRegisteredContactsForClinic(clinicId));
 
         if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             model.addAttribute("isAdmin", false);
@@ -108,7 +111,7 @@ public class MeetingAndContactsController {
         try {
             for (String s:
                     attendees) {
-                team.add(DQS.findRegisteredStaffByEmail(DQS.getCurrentLoggedUser().getClinic().getClinicId(), s));
+                team.add(CMS.findRegisteredStaffByEmail(DQS.getCurrentLoggedUser().getClinic().getClinicId(), s));
             }
 
             DCS.createNewMeeting(DQS.getCurrentLoggedUser().getClinic().getClinicId(), title, objective, new Timestamp(new SimpleDateFormat("MM/dd/yyyy hh:mm a").parse(time).getTime()), place, new HashSet<>(team));
@@ -128,7 +131,7 @@ public class MeetingAndContactsController {
         if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/contacts";
 
-        if (DQS.findRegisteredContact(contactId).isHasAccount())
+        if (CMS.findRegisteredContact(contactId).isHasAccount())
             return "redirect:/users"; // TODO: add Not allowed action delete user account first
 
         try {
@@ -168,7 +171,7 @@ public class MeetingAndContactsController {
           //  return "redirect:/meetings";
 
         try{
-            Meeting meeting = DQS.findRegisteredMeeting(meetingId);
+            Meeting meeting = CMS.findRegisteredMeeting(meetingId);
             meeting.setMeetingTime(newTime);
             DUS.editMeeting(meeting);
             return "redirect:/meetings";
