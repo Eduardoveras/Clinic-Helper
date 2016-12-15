@@ -5,7 +5,7 @@ package com.clinichelper.Service.CRUD;
 
 import com.clinichelper.Entity.*;
 import com.clinichelper.Repository.*;
-import com.clinichelper.Service.EncryptionService;
+import com.clinichelper.Service.Security.EncryptionService;
 import com.clinichelper.Tools.Enums.Permission;
 import freemarker.template.utility.NullArgumentException;
 import org.springframework.beans.factory.annotation.Autowired;

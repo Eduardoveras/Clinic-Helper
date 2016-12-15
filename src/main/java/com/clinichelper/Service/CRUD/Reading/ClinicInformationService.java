@@ -7,7 +7,7 @@ import com.clinichelper.Entity.Chore;
 import com.clinichelper.Entity.User;
 import com.clinichelper.Repository.ChoreRepository;
 import com.clinichelper.Repository.UserRepository;
-import com.clinichelper.Service.EncryptionService;
+import com.clinichelper.Service.Security.EncryptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
