@@ -4,6 +4,7 @@ import com.clinichelper.Entity.User;
 import com.clinichelper.Service.CRUD.DataCreationService;
 import com.clinichelper.Service.CRUD.DataDeleteService;
 import com.clinichelper.Service.CRUD.DataUpdateService;
+import com.clinichelper.Service.CRUD.Reading.ClinicInformationService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Enums.Gender;
@@ -35,6 +36,8 @@ public class TeamController {
     @Autowired
     private DataDeleteService DDS;
     @Autowired
+    private ClinicInformationService CIS;
+    @Autowired
     private DataQueryService DQS;
     //
     @Autowired
@@ -52,8 +55,8 @@ public class TeamController {
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
 
         model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
-        model.addAttribute("userList", DQS.findAllAllRegisteredUsersForClinic(clinicId));
-        model.addAttribute("clinicId", DQS.findAllAllRegisteredUsersForClinic(clinicId).get(0).getClinic().getClinicPrefix());
+        model.addAttribute("userList", CIS.findAllAllRegisteredUsersForClinic(clinicId));
+        model.addAttribute("clinicId", CIS.findAllAllRegisteredUsersForClinic(clinicId).get(0).getClinic().getClinicPrefix());
 
         if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             model.addAttribute("isAdmin", false);
@@ -110,7 +113,7 @@ public class TeamController {
         if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/";
 
-        User user = DQS.findUserInformation(userId);
+        User user = CIS.findUserInformation(userId);
 
         try {
             DUS.editUserAccountCredentials(user.getEmail(), user.getClinic().getClinicId(), user.getPassword(), Permission.ADMIN);

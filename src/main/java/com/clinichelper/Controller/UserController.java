@@ -2,6 +2,7 @@ package com.clinichelper.Controller;
 
 import com.clinichelper.Entity.User;
 import com.clinichelper.Service.CRUD.DataUpdateService;
+import com.clinichelper.Service.CRUD.Reading.ClinicInformationService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Enums.Permission;
@@ -25,6 +26,8 @@ public class UserController {
     // CRUD
     @Autowired
     private DataUpdateService DUS;
+    @Autowired
+    private ClinicInformationService CIS;
     @Autowired
     private DataQueryService DQS;
     //
@@ -57,7 +60,7 @@ public class UserController {
         if (!DQS.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
-        User u = DQS.findUserInformation(userId);
+        User u = CIS.findUserInformation(userId);
         model.addAttribute("todoList", TKS.InitializeTodoList(u.getUserId()));
         model.addAttribute("user", u);
 
@@ -75,7 +78,7 @@ public class UserController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        User user = DQS.findRegisteredUserAccount(email,clinicId);
+        User user = CIS.findRegisteredUserAccount(email,clinicId);
 
         try {
             DUS.editUserPhoto(email, clinicId, processImageFile(file.getBytes()));
@@ -90,9 +93,9 @@ public class UserController {
     @PostMapping("/userLogin")
     public String loginUser(@RequestParam("email") String email, @RequestParam("password") String password){
         
-        if (DQS.validateUserAccountCredentials(email.toLowerCase(), password))
+        if (CIS.validateUserAccountCredentials(email.toLowerCase(), password))
         {
-            User u = DQS.findRegisteredUserAccount(email.toLowerCase(),password);
+            User u = CIS.findRegisteredUserAccount(email.toLowerCase(),password);
             DQS.setSessionAttr("user",u);
             return "redirect:/"; // TODO: filter which user is login in to redirect them to the correct url
         }
@@ -106,9 +109,9 @@ public class UserController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.validateUserAccountCredentials(email.toLowerCase(), password)){
+        if (CIS.validateUserAccountCredentials(email.toLowerCase(), password)){
 
-            User user = DQS.findRegisteredUserAccount(email.toLowerCase(),clinicId);
+            User user = CIS.findRegisteredUserAccount(email.toLowerCase(),clinicId);
 
             try {
                 DUS.editUserAccountCredentials(user.getEmail(), user.getClinic().getClinicId(), newPassword, user.getRole());
