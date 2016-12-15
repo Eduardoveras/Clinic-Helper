@@ -1,4 +1,4 @@
-package com.clinichelper.Service;
+package com.clinichelper.Service.Remote;
 
 import com.clinichelper.Tools.Classes.CalendarEvent;
 import com.sendgrid.*;
