@@ -21,7 +21,7 @@ public class ContactMeetingService {
     @Autowired
     private MeetingRepository meetingRepository;
 
-    // Contact
+    // Contacts
     public Contact findRegisteredContact(String contactId){ return contactRepository.findByContactId(contactId); }
 
     public List<Contact> findAllRegisteredContactsForClinic(String clinicId){ return contactRepository.findByClinicId(clinicId); }
@@ -30,7 +30,7 @@ public class ContactMeetingService {
 
     public List<Contact> findRegisteredStaffByFirstNameAndLastName(String clinicId, String searchFirstName, String searchLastName){ return contactRepository.findByFirstNameAndLastName(searchFirstName, searchLastName, clinicId); }
 
-    // Meeting Queries
+    // Meetings
     public Meeting findRegisteredMeeting(String meetingId){ return meetingRepository.findByMeetingId(meetingId);}
 
     public List<Meeting> findAllRegisteredMeetingsForClinic(String clinicId){ return meetingRepository.findByClinicId(clinicId); }

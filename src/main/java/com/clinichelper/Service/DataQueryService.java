@@ -73,14 +73,6 @@ public class DataQueryService {
 
 
 
-    // Equipment Queries
-    public Equipment findRegisteredEquipment(String equipmentId) { return equipmentRepository.findByEquipmentId(equipmentId); }
-
-    public List<Equipment> findAllRegisteredEquipmentsForClinic(String clinicId){ return equipmentRepository.findByClinic(clinicId); }
-
-    public List<Equipment> findRegisteredEquipmentByName(String clinicId, String searchName){ return equipmentRepository.findByEquipmentName(searchName, clinicId); }
-
-
     // Insurance Queries
     public Insurance findRegisteredInsurance(String insuranceId){ return insuranceRepository.findByInsuranceId(insuranceId); }
 
@@ -89,15 +81,6 @@ public class DataQueryService {
     public List<Insurance> findRegisteredInsyranceByInsuranceSerialCode(String insuranceSerialCode){ return insuranceRepository.findByInsuranceSerialCode(insuranceSerialCode); }
 
     public List<Insurance> findRegisteredInsuranceByOwner(String searchID){ return insuranceRepository.findByOwnerId(searchID); }
-
-    // Medication Queries
-    public Medication findRegisteredMedication(String medicationId) { return medicationRepository.findByMedicationId(medicationId); }
-
-    public List<Medication> findRegisteredMedicationByClinic(String clinicId) { return medicationRepository.findByClinic(clinicId); }
-
-    public List<Medication> findRegisteredMedicationByName(String clinicId, String medicationName) { return medicationRepository.findByMedicationName(medicationName, clinicId); }
-
-    public List<Medication> findRegisteredMedicationBySupplier(String clinicId, String supplier) { return medicationRepository.findBySupplier(supplier, clinicId); }
 
 
 
@@ -119,13 +102,6 @@ public class DataQueryService {
         return patientRepository.findByFLTEFields(searchFistName,searchLastName,searchTelephone,searchEmail, clinicId);
     }
 */
-
-    // Product Queries
-    public Product findRegisteredProduct(String productId) { return productRepository.findByProductId(productId); }
-
-    public List<Product> findRegisteredProductForClinic(String clinicId) { return productRepository.findByClinic(clinicId); }
-
-    public List<Product> findRegisteredProductByName(String clinicId, String productName) { return productRepository.findByProductName(productName, clinicId); }
 
 
     // Record Queries
