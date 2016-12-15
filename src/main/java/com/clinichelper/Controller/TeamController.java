@@ -6,7 +6,7 @@ import com.clinichelper.Service.CRUD.DataDeleteService;
 import com.clinichelper.Service.CRUD.DataUpdateService;
 import com.clinichelper.Service.CRUD.Reading.ClinicInformationService;
 import com.clinichelper.Service.Security.SessionService;
-import com.clinichelper.Service.ToolKitService;
+import com.clinichelper.Service.Native.ToolKitService;
 import com.clinichelper.Tools.Enums.Gender;
 import com.clinichelper.Tools.Enums.Permission;
 import org.springframework.beans.factory.annotation.Autowired;

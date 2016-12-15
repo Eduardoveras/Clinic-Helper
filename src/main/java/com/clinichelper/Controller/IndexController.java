@@ -7,7 +7,7 @@ import com.clinichelper.Service.CRUD.Reading.AppointmentConsultationSurgeryServi
 import com.clinichelper.Service.CRUD.Reading.ClinicInformationService;
 import com.clinichelper.Service.CRUD.Reading.PatientInformationService;
 import com.clinichelper.Service.Security.SessionService;
-import com.clinichelper.Service.ToolKitService;
+import com.clinichelper.Service.Native.ToolKitService;
 import com.clinichelper.Tools.Enums.AppointmentStatus;
 import com.clinichelper.Tools.Enums.Permission;
 import com.clinichelper.Tools.Enums.Repeat;

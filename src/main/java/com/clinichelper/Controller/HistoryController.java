@@ -4,7 +4,7 @@
 package com.clinichelper.Controller;
 
 import com.clinichelper.Service.Security.SessionService;
-import com.clinichelper.Service.ToolKitService;
+import com.clinichelper.Service.Native.ToolKitService;
 import com.clinichelper.Tools.Enums.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
