@@ -1,7 +1,7 @@
 /**
  * Created by Djidjelly Siclait on 10/30/2016.
  */
-package com.clinichelper.Service;
+package com.clinichelper.Service.Native;
 
 import com.clinichelper.Entity.Clinic;
 import com.clinichelper.Entity.User;
