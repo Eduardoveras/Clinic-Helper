@@ -100,17 +100,6 @@ public class DataQueryService {
     public List<Medication> findRegisteredMedicationBySupplier(String clinicId, String supplier) { return medicationRepository.findBySupplier(supplier, clinicId); }
 
 
-    // Meeting Queries
-    public Meeting findRegisteredMeeting(String meetingId){ return meetingRepository.findByMeetingId(meetingId);}
-
-    public List<Meeting> findAllRegisteredMeetingsForClinic(String clinicId){ return meetingRepository.findByClinicId(clinicId); }
-
-    public List<Meeting> findRegisteredMeetingByTitle(String clinicId, String searchTitle){ return meetingRepository.findByMeetingTitle(searchTitle, clinicId); }
-
-    //public List<Meeting> findRegisteredMeetingByDate (String clinicId, Date searchDate){ return meetingRepository.findByMeetingDate(searchDate, clinicId); }
-
-    public List<Meeting> findRegisteredMeetingByPlace (String clinicId, String searchPlace){ return meetingRepository.findByMeetingPlace(searchPlace, clinicId); }
-
 
     // Patient Queries
     public Patient findRegisteredPatient(String patientId){ return patientRepository.findByPatientId(patientId);}
@@ -153,15 +142,6 @@ public class DataQueryService {
     public List<Record> findRegisteredRecordsForClinic(String clinicId){ return recordRepository.findByClinicId(clinicId); }
 
 
-
-    // Staff Queries
-    public Contact findRegisteredContact(String contactId){ return contactRepository.findByContactId(contactId); }
-
-    public List<Contact> findAllRegisteredContactsForClinic(String clinicId){ return contactRepository.findByClinicId(clinicId); }
-
-    public Contact findRegisteredStaffByEmail(String clinicId, String staffEmail){ return contactRepository.findByStaffEmail(staffEmail, clinicId); }
-
-    public List<Contact> findRegisteredStaffByFirstNameAndLastName(String clinicId, String searchFirstName, String searchLastName){ return contactRepository.findByFirstNameAndLastName(searchFirstName, searchLastName, clinicId); }
 
 
 
