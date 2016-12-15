@@ -4,6 +4,7 @@ import com.clinichelper.Entity.Appointment;
 import com.clinichelper.Service.AmazonService;
 import com.clinichelper.Service.CRUD.DataCreationService;
 import com.clinichelper.Service.CRUD.Reading.AppointmentConsultationSurgeryService;
+import com.clinichelper.Service.CRUD.Reading.PatientInformationService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Enums.AppointmentStatus;
@@ -31,6 +32,8 @@ public class IndexController implements ErrorController {
     private DataCreationService DCS;
     @Autowired
     private AppointmentConsultationSurgeryService ACSS;
+    @Autowired
+    private PatientInformationService PIS;
     @Autowired
     private DataQueryService DQS;
     //
@@ -61,7 +64,7 @@ public class IndexController implements ErrorController {
             model.addAttribute("todays_appointments", new ArrayList<Appointment>()); // An error occurred to make the list empty
         }
 
-        model.addAttribute("patient_amount",DQS.findAllRegisteredPatientsForClinic(clinicId).size());
+        model.addAttribute("patient_amount",PIS.findAllRegisteredPatientsForClinic(clinicId).size());
         model.addAttribute("users_amount",DQS.findAllAllRegisteredUsersForClinic(clinicId).size());
         model.addAttribute("surg_amount",ACSS.findAllRegisteredSurgeries(clinicId).size());
         model.addAttribute("app_today_amount",ACSS.findAllRegisteredAppointmentsForToday(clinicId).size());

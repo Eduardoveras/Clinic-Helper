@@ -8,6 +8,7 @@ import com.clinichelper.Service.CRUD.DataCreationService;
 import com.clinichelper.Service.CRUD.DataDeleteService;
 import com.clinichelper.Service.CRUD.DataUpdateService;
 import com.clinichelper.Service.CRUD.Reading.AppointmentConsultationSurgeryService;
+import com.clinichelper.Service.CRUD.Reading.PatientInformationService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Enums.AppointmentStatus;
@@ -37,6 +38,8 @@ public class AppointmentController {
     @Autowired
     private AppointmentConsultationSurgeryService ACSS;
     @Autowired
+    private PatientInformationService PIS;
+    @Autowired
     private DataQueryService DQS;
     //
     @Autowired
@@ -55,7 +58,7 @@ public class AppointmentController {
 
         model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
         model.addAttribute("appointmentList", ACSS.findAllRegisteredAppointmentsForClinic(clinicId));
-        model.addAttribute("userList", DQS.findAllRegisteredPatientsForClinic(clinicId));
+        model.addAttribute("userList", PIS.findAllRegisteredPatientsForClinic(clinicId));
 
         if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             model.addAttribute("isAdmin", false);
@@ -76,7 +79,7 @@ public class AppointmentController {
           //  return "redirect:/";
 
         try {
-            DCS.createNewAppointment(DQS.getCurrentLoggedUser().getClinic().getClinicId(),  new Timestamp(new SimpleDateFormat("MM/dd/yyyy hh:mm a").parse(appointmentTime).getTime()), DQS.findRegisteredPatient(patientId).getPatientId(), appointmentDescription);
+            DCS.createNewAppointment(DQS.getCurrentLoggedUser().getClinic().getClinicId(),  new Timestamp(new SimpleDateFormat("MM/dd/yyyy hh:mm a").parse(appointmentTime).getTime()), PIS.findRegisteredPatient(patientId).getPatientId(), appointmentDescription);
             return "redirect:/appointments";
         } catch (Exception exp){
             System.out.println("ERROR MESSAGE:");

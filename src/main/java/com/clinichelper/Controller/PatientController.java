@@ -8,6 +8,7 @@ import com.clinichelper.Service.AmazonService;
 import com.clinichelper.Service.CRUD.DataCreationService;
 import com.clinichelper.Service.CRUD.DataUpdateService;
 import com.clinichelper.Service.CRUD.Reading.AppointmentConsultationSurgeryService;
+import com.clinichelper.Service.CRUD.Reading.PatientInformationService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Enums.Gender;
@@ -39,6 +40,8 @@ public class PatientController {
     @Autowired
     private AppointmentConsultationSurgeryService ACSS;
     @Autowired
+    private PatientInformationService PIS;
+    @Autowired
     private DataQueryService DQS;
     //
     @Autowired
@@ -58,8 +61,8 @@ public class PatientController {
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
 
         model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
-        model.addAttribute("patientList", DQS.findAllRegisteredPatientsForClinic(clinicId));
-        model.addAttribute("amount", DQS.findAllRegisteredPatientsForClinic(clinicId).size());
+        model.addAttribute("patientList", PIS.findAllRegisteredPatientsForClinic(clinicId));
+        model.addAttribute("amount", PIS.findAllRegisteredPatientsForClinic(clinicId).size());
 
         if (DQS.getCurrentLoggedUser().getRole() != Permission.ASSISTANT)
             model.addAttribute("canUse", false);
@@ -91,7 +94,7 @@ public class PatientController {
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
 
         model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
-        model.addAttribute("amount", DQS.findAllRegisteredPatientsForClinic(clinicId).size());
+        model.addAttribute("amount", PIS.findAllRegisteredPatientsForClinic(clinicId).size());
         //model.addAttribute("isAdmin", false);
 
         if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
@@ -111,7 +114,7 @@ public class PatientController {
             //return new ModelAndView("redirect:/");
 
         model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
-        model.addAttribute("patient", DQS.findRegisteredPatient(patientId));
+        model.addAttribute("patient", PIS.findRegisteredPatient(patientId));
         model.addAttribute("appointments", ACSS.findPatientsRegisteredAppointments(patientId));
         //model.addAttribute("isAdmin", false);
 
@@ -182,7 +185,7 @@ public class PatientController {
             return "redirect:/login";
 
         try {
-            Patient patient = DQS.findRegisteredPatient(patientId);
+            Patient patient = PIS.findRegisteredPatient(patientId);
 
             patient.setPatientFirstName(firstName.toLowerCase());
             patient.setPatientLastName(lastName.toUpperCase());
@@ -211,7 +214,7 @@ public class PatientController {
         if (!DQS.isUserLoggedIn())
             return "redirect:/login";
 
-        Patient patient = DQS.findRegisteredPatient(patientId);
+        Patient patient = PIS.findRegisteredPatient(patientId);
 
         try {
             File newFile= convertToFile(file);

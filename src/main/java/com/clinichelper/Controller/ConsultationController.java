@@ -7,6 +7,7 @@ import com.clinichelper.Entity.Record;
 import com.clinichelper.Service.CRUD.DataCreationService;
 import com.clinichelper.Service.CRUD.DataUpdateService;
 import com.clinichelper.Service.CRUD.Reading.AppointmentConsultationSurgeryService;
+import com.clinichelper.Service.CRUD.Reading.PatientInformationService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Enums.Permission;
@@ -37,6 +38,8 @@ public class ConsultationController {
     private DataUpdateService DUS;
     @Autowired
     private AppointmentConsultationSurgeryService ACCS;
+    @Autowired
+    private PatientInformationService PIS;
     @Autowired
     private DataQueryService DQS;
     //
@@ -83,12 +86,12 @@ public class ConsultationController {
           //  return "redirect:/";
 
         try {
-            Patient patient = DQS.findRegisteredPatientByIdCard(DQS.getCurrentLoggedUser().getClinic().getClinicId(), patientId);
+            Patient patient = PIS.findRegisteredPatientByIdCard(DQS.getCurrentLoggedUser().getClinic().getClinicId(), patientId);
             // Creating the history
             History history = DCS.createNewHistory(patient, visitObjective, observations, specialConditions, photos, surgeryType, medicaData, consultationId);
 
             // Adding it to the Record
-            Record record = DQS.findPatientsRegisteredRecord(patient.getPatientId());
+            Record record = PIS.findPatientsRegisteredRecord(patient.getPatientId());
 
             // Fetching the list of history
             Set<History> medicalHistory = record.getHistoryLog();
