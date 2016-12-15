@@ -4,7 +4,7 @@
 package com.clinichelper.Controller;
 
 import com.clinichelper.Entity.Patient;
-import com.clinichelper.Service.AmazonService;
+import com.clinichelper.Service.Remote.AmazonService;
 import com.clinichelper.Service.CRUD.DataCreationService;
 import com.clinichelper.Service.CRUD.DataUpdateService;
 import com.clinichelper.Service.CRUD.Reading.AppointmentConsultationSurgeryService;

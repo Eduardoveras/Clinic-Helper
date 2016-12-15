@@ -1,4 +1,4 @@
-package com.clinichelper.Service;
+package com.clinichelper.Service.Remote;
 
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
@@ -19,7 +19,7 @@ import java.io.IOException;
 @Service
 public class AmazonService {
 
-    private static String bucketName     = "clinic-manager-staging";
+    private static String bucketName = "clinic-manager-staging";
 
     public void UploadImageToAWS(String uploadFileName,File file) {
         AWSCredentials credentials = new ProfileCredentialsProvider().getCredentials();
