@@ -3,7 +3,6 @@ package com.clinichelper.Controller;
 import com.clinichelper.Entity.Appointment;
 import com.clinichelper.Service.AmazonService;
 import com.clinichelper.Service.CRUD.DataCreationService;
-import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Enums.AppointmentStatus;
@@ -19,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.persistence.PersistenceException;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,12 +25,12 @@ import java.util.List;
 public class IndexController implements ErrorController {
 
     // Services
+    // CRUD
     @Autowired
     private DataCreationService DCS;
     @Autowired
-    private DataEntryAndManagementService DEAMS;
-    @Autowired
     private DataQueryService DQS;
+    //
     @Autowired
     private ToolKitService TKS;
     @Autowired

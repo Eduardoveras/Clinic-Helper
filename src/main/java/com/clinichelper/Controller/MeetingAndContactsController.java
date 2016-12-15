@@ -2,11 +2,9 @@ package com.clinichelper.Controller;
 
 import com.clinichelper.Entity.Contact;
 import com.clinichelper.Entity.Meeting;
-import com.clinichelper.Entity.Patient;
 import com.clinichelper.Service.CRUD.DataCreationService;
 import com.clinichelper.Service.CRUD.DataDeleteService;
 import com.clinichelper.Service.CRUD.DataUpdateService;
-import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Enums.Permission;
@@ -18,14 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.persistence.PersistenceException;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Eduardo veras on 07-Nov-16.
@@ -34,6 +30,7 @@ import java.util.Map;
 public class MeetingAndContactsController {
 
     // Services
+    // CRUD
     @Autowired
     private DataCreationService DCS;
     @Autowired
@@ -41,9 +38,8 @@ public class MeetingAndContactsController {
     @Autowired
     private DataDeleteService DDS;
     @Autowired
-    private DataEntryAndManagementService DEAMS;
-    @Autowired
     private DataQueryService DQS;
+    //
     @Autowired
     private ToolKitService TKS;
 

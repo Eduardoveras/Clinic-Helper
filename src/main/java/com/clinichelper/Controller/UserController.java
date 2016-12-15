@@ -2,7 +2,6 @@ package com.clinichelper.Controller;
 
 import com.clinichelper.Entity.User;
 import com.clinichelper.Service.CRUD.DataUpdateService;
-import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Enums.Permission;
@@ -16,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.persistence.PersistenceException;
-
 /**
  * Created by Eduardo veras on 28-Oct-16.
  */
@@ -25,12 +22,12 @@ import javax.persistence.PersistenceException;
 public class UserController {
 
     // Services
+    // CRUD
     @Autowired
     private DataUpdateService DUS;
     @Autowired
-    private DataEntryAndManagementService DEAMS;
-    @Autowired
     private DataQueryService DQS;
+    //
     @Autowired
     private ToolKitService TKS;
 

@@ -7,7 +7,6 @@ import com.clinichelper.Entity.Appointment;
 import com.clinichelper.Service.CRUD.DataCreationService;
 import com.clinichelper.Service.CRUD.DataDeleteService;
 import com.clinichelper.Service.CRUD.DataUpdateService;
-import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Enums.AppointmentStatus;
@@ -27,6 +26,7 @@ import java.text.SimpleDateFormat;
 public class AppointmentController {
 
     // Services
+    // CRUD
     @Autowired
     private DataCreationService DCS;
     @Autowired
@@ -34,9 +34,8 @@ public class AppointmentController {
     @Autowired
     private DataDeleteService DDS;
     @Autowired
-    private DataEntryAndManagementService DEAMS;
-    @Autowired
     private DataQueryService DQS;
+    //
     @Autowired
     private ToolKitService TKS;
 

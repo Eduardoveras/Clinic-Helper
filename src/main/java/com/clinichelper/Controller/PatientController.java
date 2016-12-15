@@ -7,7 +7,6 @@ import com.clinichelper.Entity.Patient;
 import com.clinichelper.Service.AmazonService;
 import com.clinichelper.Service.CRUD.DataCreationService;
 import com.clinichelper.Service.CRUD.DataUpdateService;
-import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Enums.Gender;
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.persistence.PersistenceException;
 import java.io.File;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -32,14 +30,14 @@ import java.util.ArrayList;
 public class PatientController {
 
     // Services
+    // CRUD
     @Autowired
     private DataCreationService DCS;
     @Autowired
     private DataUpdateService DUS;
     @Autowired
-    private DataEntryAndManagementService DEAMS;
-    @Autowired
     private DataQueryService DQS;
+    //
     @Autowired
     private ToolKitService TKS;
     @Autowired

@@ -4,7 +4,6 @@ import com.clinichelper.Entity.User;
 import com.clinichelper.Service.CRUD.DataCreationService;
 import com.clinichelper.Service.CRUD.DataDeleteService;
 import com.clinichelper.Service.CRUD.DataUpdateService;
-import com.clinichelper.Service.DataEntryAndManagementService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Enums.Gender;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.persistence.PersistenceException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
@@ -29,6 +27,7 @@ import java.text.SimpleDateFormat;
 public class TeamController {
 
     // Services
+    // CRUD
     @Autowired
     private DataCreationService DCS;
     @Autowired
@@ -36,9 +35,8 @@ public class TeamController {
     @Autowired
     private DataDeleteService DDS;
     @Autowired
-    private DataEntryAndManagementService DEAMS;
-    @Autowired
     private DataQueryService DQS;
+    //
     @Autowired
     private ToolKitService TKS;
 
