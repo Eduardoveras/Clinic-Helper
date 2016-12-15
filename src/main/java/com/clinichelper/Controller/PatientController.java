@@ -9,7 +9,7 @@ import com.clinichelper.Service.CRUD.DataCreationService;
 import com.clinichelper.Service.CRUD.DataUpdateService;
 import com.clinichelper.Service.CRUD.Reading.AppointmentConsultationSurgeryService;
 import com.clinichelper.Service.CRUD.Reading.PatientInformationService;
-import com.clinichelper.Service.DataQueryService;
+import com.clinichelper.Service.Security.SessionService;
 import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Enums.Gender;
 import com.clinichelper.Tools.Enums.Permission;
@@ -41,8 +41,9 @@ public class PatientController {
     private AppointmentConsultationSurgeryService ACSS;
     @Autowired
     private PatientInformationService PIS;
+    //Security
     @Autowired
-    private DataQueryService DQS;
+    private SessionService sessionService;
     //
     @Autowired
     private ToolKitService TKS;
@@ -52,19 +53,19 @@ public class PatientController {
     // Gets
     @GetMapping("/patients")
     public ModelAndView fetchAllPatientsView(Model model){
-        if (!DQS.isUserLoggedIn())
+        if (!sessionService.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
         //if (DQS.getCurrentLoggedUser().getRole() == Permission.ADMIN)
            // return new ModelAndView("redirect:/");
 
-        String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
+        String clinicId = sessionService.getCurrentLoggedUser().getClinic().getClinicId();
 
-        model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
+        model.addAttribute("todoList", TKS.InitializeTodoList(sessionService.getCurrentLoggedUser().getUserId()));
         model.addAttribute("patientList", PIS.findAllRegisteredPatientsForClinic(clinicId));
         model.addAttribute("amount", PIS.findAllRegisteredPatientsForClinic(clinicId).size());
 
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ASSISTANT)
+        if (sessionService.getCurrentLoggedUser().getRole() != Permission.ASSISTANT)
             model.addAttribute("canUse", false);
         else
             model.addAttribute("canUse", true);
@@ -72,12 +73,12 @@ public class PatientController {
         //model.addAttribute("isAdmin", false);
 
 
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+        if (sessionService.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             model.addAttribute("isAdmin", false);
         else
             model.addAttribute("isAdmin", true);
 
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
+        if (sessionService.getCurrentLoggedUser().getRole() != Permission.MEDIC)
             return new ModelAndView("patients/allPatients");
         else
             return new ModelAndView(""); // TODO: create a patient view fit for the doctor
@@ -85,19 +86,20 @@ public class PatientController {
 
     @GetMapping("/new_patient")
     public ModelAndView patientForm(Model model){
-        if (!DQS.isUserLoggedIn())
+
+        if (!sessionService.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
         //if (DQS.getCurrentLoggedUser().getRole() != Permission.ASSISTANT)
             //return new ModelAndView("redirect:/");
 
-        String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
+        String clinicId = sessionService.getCurrentLoggedUser().getClinic().getClinicId();
 
-        model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
+        model.addAttribute("todoList", TKS.InitializeTodoList(sessionService.getCurrentLoggedUser().getUserId()));
         model.addAttribute("amount", PIS.findAllRegisteredPatientsForClinic(clinicId).size());
         //model.addAttribute("isAdmin", false);
 
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+        if (sessionService.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             model.addAttribute("isAdmin", false);
         else
             model.addAttribute("isAdmin", true);
@@ -107,18 +109,19 @@ public class PatientController {
 
     @GetMapping("/patient/{id}")
     public ModelAndView fetchPatientview(Model model, @PathVariable(value="id") String patientId){
-        if (!DQS.isUserLoggedIn())
+
+        if (!sessionService.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
         //if (DQS.getCurrentLoggedUser().getRole() == Permission.ADMIN)
             //return new ModelAndView("redirect:/");
 
-        model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
+        model.addAttribute("todoList", TKS.InitializeTodoList(sessionService.getCurrentLoggedUser().getUserId()));
         model.addAttribute("patient", PIS.findRegisteredPatient(patientId));
         model.addAttribute("appointments", ACSS.findPatientsRegisteredAppointments(patientId));
         //model.addAttribute("isAdmin", false);
 
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+        if (sessionService.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             model.addAttribute("isAdmin", false);
         else
             model.addAttribute("isAdmin", true);
@@ -156,7 +159,7 @@ public class PatientController {
            @RequestParam("supplier") String supplier,
            @RequestParam("plan") String insurancePlan){
 
-        if (!DQS.isUserLoggedIn())
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
         //if (DQS.getCurrentLoggedUser().getRole() != Permission.ASSISTANT)
@@ -165,7 +168,7 @@ public class PatientController {
         try {
             SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy");
 
-            DCS.createNewPatient(DQS.getCurrentLoggedUser().getClinic().getClinicId(), firstName, lastName, idCard, telephoneNumber, patientWorkphone, patientCellphone, patientContactName, patientContactLastName,
+            DCS.createNewPatient(sessionService.getCurrentLoggedUser().getClinic().getClinicId(), firstName, lastName, idCard, telephoneNumber, patientWorkphone, patientCellphone, patientContactName, patientContactLastName,
                     patientContactAddress, patientContactCellphone, contactTelephoneNumber, occupation, gender.toUpperCase().equals("F") ? Gender.F : Gender.M, mail,
                     new Date(sdf1.parse(dateOfBirth).getTime()), nationality, address, cities, countries, patientAllergies, patientReligion,
                     "0", "0", patientBloodType,
@@ -181,7 +184,8 @@ public class PatientController {
 
     @PostMapping("/editPatient")
     public String editPatient(@RequestParam("id") String patientId, @RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("idCard") String idCard, @RequestParam("mail") String mail, @RequestParam("telephoneNumber") String telephoneNumber, @RequestParam("contactTelephoneNumber") String contactTelephoneNumber, @RequestParam("address") String address, @RequestParam("occupation") String occupation, @RequestParam("dateOfBirth")Date dateOfBirth, @RequestParam("gender") String gender, @RequestParam("nationality") String nationality, @RequestParam("countries") String countries, @RequestParam("cities") String cities){
-        if (!DQS.isUserLoggedIn())
+
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
         try {
@@ -211,7 +215,8 @@ public class PatientController {
 
     @PostMapping("/uploadPhoto")
     public String uploadPatientPhoto(@RequestParam("id") String patientId ,@RequestParam("photo")MultipartFile file){
-        if (!DQS.isUserLoggedIn())
+
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
         Patient patient = PIS.findRegisteredPatient(patientId);

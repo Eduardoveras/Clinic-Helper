@@ -9,7 +9,7 @@ import com.clinichelper.Service.CRUD.DataDeleteService;
 import com.clinichelper.Service.CRUD.DataUpdateService;
 import com.clinichelper.Service.CRUD.Reading.AppointmentConsultationSurgeryService;
 import com.clinichelper.Service.CRUD.Reading.PatientInformationService;
-import com.clinichelper.Service.DataQueryService;
+import com.clinichelper.Service.Security.SessionService;
 import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Enums.AppointmentStatus;
 import com.clinichelper.Tools.Enums.Permission;
@@ -39,8 +39,9 @@ public class AppointmentController {
     private AppointmentConsultationSurgeryService ACSS;
     @Autowired
     private PatientInformationService PIS;
+    // Security
     @Autowired
-    private DataQueryService DQS;
+    private SessionService sessionService;
     //
     @Autowired
     private ToolKitService TKS;
@@ -48,19 +49,19 @@ public class AppointmentController {
     // Gets
     @GetMapping("/appointments")
     public ModelAndView fetchAppointmentView(Model model) throws Exception{
-        if (!DQS.isUserLoggedIn())
+        if (!sessionService.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        if (sessionService.getCurrentLoggedUser().getRole() == Permission.MEDIC)
             return new ModelAndView("redirect:/");
 
-        String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
+        String clinicId = sessionService.getCurrentLoggedUser().getClinic().getClinicId();
 
-        model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
+        model.addAttribute("todoList", TKS.InitializeTodoList(sessionService.getCurrentLoggedUser().getUserId()));
         model.addAttribute("appointmentList", ACSS.findAllRegisteredAppointmentsForClinic(clinicId));
         model.addAttribute("userList", PIS.findAllRegisteredPatientsForClinic(clinicId));
 
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+        if (sessionService.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             model.addAttribute("isAdmin", false);
         else
             model.addAttribute("isAdmin", true);
@@ -72,14 +73,14 @@ public class AppointmentController {
     @PostMapping("/newAppointment")
     public String createNewApointment(@RequestParam("appointmentTime") String appointmentTime, @RequestParam("patient") String patientId, @RequestParam("description") String appointmentDescription){
 
-        if (!DQS.isUserLoggedIn())
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
         //if (DQS.getCurrentLoggedUser().getRole() != Permission.ASSISTANT)
           //  return "redirect:/";
 
         try {
-            DCS.createNewAppointment(DQS.getCurrentLoggedUser().getClinic().getClinicId(),  new Timestamp(new SimpleDateFormat("MM/dd/yyyy hh:mm a").parse(appointmentTime).getTime()), PIS.findRegisteredPatient(patientId).getPatientId(), appointmentDescription);
+            DCS.createNewAppointment(sessionService.getCurrentLoggedUser().getClinic().getClinicId(),  new Timestamp(new SimpleDateFormat("MM/dd/yyyy hh:mm a").parse(appointmentTime).getTime()), PIS.findRegisteredPatient(patientId).getPatientId(), appointmentDescription);
             return "redirect:/appointments";
         } catch (Exception exp){
             System.out.println("ERROR MESSAGE:");
@@ -92,7 +93,7 @@ public class AppointmentController {
 
     @PostMapping("/cancelAppointment")
     public String cancelRegisteredAppointment( @RequestParam("appointment_id") String appointmentId){
-        if (!DQS.isUserLoggedIn())
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
         //if (DQS.getCurrentLoggedUser().getRole() != Permission.ASSISTANT)
@@ -115,7 +116,7 @@ public class AppointmentController {
     @PostMapping("/changeDateAndTime")
     public String editDateAndTimeOfRegisteredAppointment(@RequestParam("id") String appointmentId, @RequestParam("appointmentTime") String newDate){
 
-        if (!DQS.isUserLoggedIn())
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
         //if (DQS.getCurrentLoggedUser().getRole() != Permission.ASSISTANT)

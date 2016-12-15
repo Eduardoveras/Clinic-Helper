@@ -8,7 +8,7 @@ import com.clinichelper.Service.CRUD.DataCreationService;
 import com.clinichelper.Service.CRUD.DataUpdateService;
 import com.clinichelper.Service.CRUD.Reading.AppointmentConsultationSurgeryService;
 import com.clinichelper.Service.CRUD.Reading.PatientInformationService;
-import com.clinichelper.Service.DataQueryService;
+import com.clinichelper.Service.Security.SessionService;
 import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Enums.Permission;
 import com.clinichelper.Tools.Enums.SurgeryType;
@@ -40,8 +40,9 @@ public class ConsultationController {
     private AppointmentConsultationSurgeryService ACCS;
     @Autowired
     private PatientInformationService PIS;
+    // Security
     @Autowired
-    private DataQueryService DQS;
+    private SessionService sessionService;
     //
     @Autowired
     private ToolKitService TKS;
@@ -49,17 +50,18 @@ public class ConsultationController {
     // Gets
     @GetMapping("/consultations")
     public ModelAndView fetchConsultationView(Model model) throws Exception{
-        if (!DQS.isUserLoggedIn())
+
+        if (!sessionService.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
-        model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
+        model.addAttribute("todoList", TKS.InitializeTodoList(sessionService.getCurrentLoggedUser().getUserId()));
 
-        String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
+        String clinicId = sessionService.getCurrentLoggedUser().getClinic().getClinicId();
 
         model.addAttribute("consultationList", ACCS.findAllRegisteredConsultationsForClinic(clinicId));
         //model.addAttribute("isAdmin", false);
 
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+        if (sessionService.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             model.addAttribute("isAdmin", false);
         else
             model.addAttribute("isAdmin", true);
@@ -79,14 +81,14 @@ public class ConsultationController {
             @RequestParam("surgerytype") SurgeryType surgeryType,
             @RequestParam("medicaldata")  ArrayList<String> medicaData){
 
-        if (!DQS.isUserLoggedIn())
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
         //if (DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
           //  return "redirect:/";
 
         try {
-            Patient patient = PIS.findRegisteredPatientByIdCard(DQS.getCurrentLoggedUser().getClinic().getClinicId(), patientId);
+            Patient patient = PIS.findRegisteredPatientByIdCard(sessionService.getCurrentLoggedUser().getClinic().getClinicId(), patientId);
             // Creating the history
             History history = DCS.createNewHistory(patient, visitObjective, observations, specialConditions, photos, surgeryType, medicaData, consultationId);
 

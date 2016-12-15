@@ -10,7 +10,7 @@ import com.clinichelper.Service.CRUD.DataCreationService;
 import com.clinichelper.Service.CRUD.DataDeleteService;
 import com.clinichelper.Service.CRUD.DataUpdateService;
 import com.clinichelper.Service.CRUD.Reading.EquipmentMedicationProductService;
-import com.clinichelper.Service.DataQueryService;
+import com.clinichelper.Service.Security.SessionService;
 import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Enums.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +37,9 @@ public class InventoryController {
     private DataDeleteService DDS;
     @Autowired
     private EquipmentMedicationProductService EMPS;
+    // Security
     @Autowired
-    private DataQueryService DQS;
+    private SessionService sessionService;
     //
     @Autowired
     private ToolKitService TKS;
@@ -46,16 +47,16 @@ public class InventoryController {
     // Gets
     @RequestMapping("/Inventory")
     public ModelAndView FetchInventoryView(Model model){
-        if (!DQS.isUserLoggedIn())
+        if (!sessionService.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        if (sessionService.getCurrentLoggedUser().getRole() == Permission.MEDIC)
             return new ModelAndView("redirect:/");
 
-        String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
+        String clinicId = sessionService.getCurrentLoggedUser().getClinic().getClinicId();
 
         Map<String, List> inventory = TKS.FetchClinicInventory(clinicId);
-        model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
+        model.addAttribute("todoList", TKS.InitializeTodoList(sessionService.getCurrentLoggedUser().getUserId()));
         model.addAttribute("equipmentList", inventory.get("equipments"));
         model.addAttribute("eSize", inventory.get("equipments").size());
         model.addAttribute("productList", inventory.get("products"));
@@ -63,7 +64,7 @@ public class InventoryController {
         model.addAttribute("medicationList", inventory.get("medication"));
         model.addAttribute("mSize", inventory.get("medication").size());
 
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+        if (sessionService.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             model.addAttribute("isAdmin", false);
         else
             model.addAttribute("isAdmin", true);
@@ -76,14 +77,14 @@ public class InventoryController {
     @PostMapping("/newEquipment")
     public String registerNewEquipment(@RequestParam("name") String equipmentName, @RequestParam("use") String equipmentUse, @RequestParam("description") String equipmentDescription, @RequestParam("quantity") Integer stock){
 
-        if (!DQS.isUserLoggedIn())
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+        if (sessionService.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/";
 
         try {
-            DCS.createNewEquipment(DQS.getCurrentLoggedUser().getClinic().getClinicId(), equipmentName, equipmentUse, equipmentDescription, stock);
+            DCS.createNewEquipment(sessionService.getCurrentLoggedUser().getClinic().getClinicId(), equipmentName, equipmentUse, equipmentDescription, stock);
             return "redirect:/Inventory";
         } catch (Exception exp){
             exp.printStackTrace();
@@ -94,14 +95,14 @@ public class InventoryController {
     @PostMapping("/newProduct")
     public String registerNewProduct(@RequestParam("name") String productName, @RequestParam("supplier") String supplier, @RequestParam("description") String productDescription, @RequestParam("price") Float productPrice, @RequestParam("quantity") Integer stock){
 
-        if (!DQS.isUserLoggedIn())
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+        if (sessionService.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/";
 
         try {
-            DCS.createNewProduct(DQS.getCurrentLoggedUser().getClinic().getClinicId(), productName, supplier, productDescription, productPrice, stock);
+            DCS.createNewProduct(sessionService.getCurrentLoggedUser().getClinic().getClinicId(), productName, supplier, productDescription, productPrice, stock);
             return "redirect:/Inventory";
         } catch (Exception exp){
             exp.printStackTrace();
@@ -113,14 +114,14 @@ public class InventoryController {
     @PostMapping("/newMedication")
     public String registerNewMedication(@RequestParam("name")  String medicationName, @RequestParam("supplier") String supplier, @RequestParam("description") String medicationDescription, @RequestParam("price") Float medicationPrice, @RequestParam("quantity") Integer stock){
 
-        if (!DQS.isUserLoggedIn())
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+        if (sessionService.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/";
 
         try {
-            DCS.createNewMedication(DQS.getCurrentLoggedUser().getClinic().getClinicId(), medicationName, supplier, medicationDescription, medicationPrice, stock);
+            DCS.createNewMedication(sessionService.getCurrentLoggedUser().getClinic().getClinicId(), medicationName, supplier, medicationDescription, medicationPrice, stock);
             return "redirect:/Inventory";
         } catch (Exception exp){
             exp.printStackTrace();
@@ -132,7 +133,8 @@ public class InventoryController {
     // Deletes
     @PostMapping("/deleteEquipment")
     public String deleteEquipment(@RequestParam("id") String equipmentId){
-        if (!DQS.isUserLoggedIn())
+
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
         try{
@@ -147,7 +149,7 @@ public class InventoryController {
 
     @PostMapping("/deleteMedication")
     public String deleteMedication(@RequestParam("id") String medicationId){
-        if (!DQS.isUserLoggedIn())
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
 
@@ -164,7 +166,7 @@ public class InventoryController {
     @PostMapping("/deleteProduct")
     public String deleteProduct(@RequestParam("id") String productId){
 
-        if (!DQS.isUserLoggedIn())
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
         try{
@@ -181,7 +183,7 @@ public class InventoryController {
     @PostMapping("/restockEquipment")
     public String restockEquipment(@RequestParam("id") String equipmentId, @RequestParam("quantity") Integer stock){
 
-        if (!DQS.isUserLoggedIn())
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
         try {
@@ -198,7 +200,7 @@ public class InventoryController {
 
     @PostMapping("/restockMedication")
     public String restockMedication(@RequestParam("id") String medicationId, @RequestParam("quantity") Integer stock){
-        if (!DQS.isUserLoggedIn())
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
 
@@ -216,7 +218,7 @@ public class InventoryController {
 
     @PostMapping("/restockProduct")
     public String restockProduct(@RequestParam("id") String productId, @RequestParam("quantity") Integer stock){
-        if (!DQS.isUserLoggedIn())
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
 
@@ -234,7 +236,7 @@ public class InventoryController {
 
     @PostMapping("/editEquipmentInformation")
     public String editEquipmentInformation(@RequestParam("id") String equipmentId, @RequestParam("name") String name, @RequestParam("use") String use, @RequestParam("description") String description){
-        if (!DQS.isUserLoggedIn())
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
 
@@ -254,7 +256,7 @@ public class InventoryController {
 
     @PostMapping("/editMedicationInformation")
     public String editMedicationInformation(@RequestParam("id") String medicationId, @RequestParam("name") String name, @RequestParam("supplier") String supplier, @RequestParam("description") String description, @RequestParam("price") Float price){
-        if (!DQS.isUserLoggedIn())
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
 
@@ -275,7 +277,7 @@ public class InventoryController {
 
     @PostMapping("/editProductInformation")
     public String editProductInformation(@RequestParam("id") String productId, @RequestParam("name") String name, @RequestParam("supplier") String supplier, @RequestParam("description") String description, @RequestParam("price") Float price){
-        if (!DQS.isUserLoggedIn())
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
         try {
