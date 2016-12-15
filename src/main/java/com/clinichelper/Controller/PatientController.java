@@ -7,6 +7,7 @@ import com.clinichelper.Entity.Patient;
 import com.clinichelper.Service.AmazonService;
 import com.clinichelper.Service.CRUD.DataCreationService;
 import com.clinichelper.Service.CRUD.DataUpdateService;
+import com.clinichelper.Service.CRUD.Reading.AppointmentConsultationSurgeryService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Enums.Gender;
@@ -35,6 +36,8 @@ public class PatientController {
     private DataCreationService DCS;
     @Autowired
     private DataUpdateService DUS;
+    @Autowired
+    private AppointmentConsultationSurgeryService ACSS;
     @Autowired
     private DataQueryService DQS;
     //
@@ -109,7 +112,7 @@ public class PatientController {
 
         model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
         model.addAttribute("patient", DQS.findRegisteredPatient(patientId));
-        model.addAttribute("appointments", DQS.findPatientsRegisteredAppointments(patientId));
+        model.addAttribute("appointments", ACSS.findPatientsRegisteredAppointments(patientId));
         //model.addAttribute("isAdmin", false);
 
         if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)

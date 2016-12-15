@@ -3,6 +3,7 @@ package com.clinichelper.Controller;
 import com.clinichelper.Entity.Appointment;
 import com.clinichelper.Service.AmazonService;
 import com.clinichelper.Service.CRUD.DataCreationService;
+import com.clinichelper.Service.CRUD.Reading.AppointmentConsultationSurgeryService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Enums.AppointmentStatus;
@@ -29,6 +30,8 @@ public class IndexController implements ErrorController {
     @Autowired
     private DataCreationService DCS;
     @Autowired
+    private AppointmentConsultationSurgeryService ACSS;
+    @Autowired
     private DataQueryService DQS;
     //
     @Autowired
@@ -52,7 +55,7 @@ public class IndexController implements ErrorController {
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
         
         try {
-            model.addAttribute("todays_appointments", DQS.findAllRegisteredAppointmentsForToday(clinicId));
+            model.addAttribute("todays_appointments", ACSS.findAllRegisteredAppointmentsForToday(clinicId));
         } catch (Exception exp){
             exp.printStackTrace();
             model.addAttribute("todays_appointments", new ArrayList<Appointment>()); // An error occurred to make the list empty
@@ -60,8 +63,8 @@ public class IndexController implements ErrorController {
 
         model.addAttribute("patient_amount",DQS.findAllRegisteredPatientsForClinic(clinicId).size());
         model.addAttribute("users_amount",DQS.findAllAllRegisteredUsersForClinic(clinicId).size());
-        model.addAttribute("surg_amount",DQS.findAllRegisteredSurgeries(clinicId).size());
-        model.addAttribute("app_today_amount",DQS.findAllRegisteredAppointmentsForToday(clinicId).size());
+        model.addAttribute("surg_amount",ACSS.findAllRegisteredSurgeries(clinicId).size());
+        model.addAttribute("app_today_amount",ACSS.findAllRegisteredAppointmentsForToday(clinicId).size());
 
 
         model.addAttribute("name", name);

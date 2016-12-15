@@ -7,6 +7,7 @@ import com.clinichelper.Entity.Appointment;
 import com.clinichelper.Service.CRUD.DataCreationService;
 import com.clinichelper.Service.CRUD.DataDeleteService;
 import com.clinichelper.Service.CRUD.DataUpdateService;
+import com.clinichelper.Service.CRUD.Reading.AppointmentConsultationSurgeryService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Enums.AppointmentStatus;
@@ -34,6 +35,8 @@ public class AppointmentController {
     @Autowired
     private DataDeleteService DDS;
     @Autowired
+    private AppointmentConsultationSurgeryService ACSS;
+    @Autowired
     private DataQueryService DQS;
     //
     @Autowired
@@ -51,7 +54,7 @@ public class AppointmentController {
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
 
         model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
-        model.addAttribute("appointmentList", DQS.findAllRegisteredAppointmentsForClinic(clinicId));
+        model.addAttribute("appointmentList", ACSS.findAllRegisteredAppointmentsForClinic(clinicId));
         model.addAttribute("userList", DQS.findAllRegisteredPatientsForClinic(clinicId));
 
         if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
@@ -93,7 +96,7 @@ public class AppointmentController {
         //  return "redirect:/";
 
         try {
-            if (DQS.findRegisteredAppointment(appointmentId).getAppointmentStatus() == AppointmentStatus.PENDING)
+            if (ACSS.findRegisteredAppointment(appointmentId).getAppointmentStatus() == AppointmentStatus.PENDING)
                 DDS.deleteRegisteredAppointment(appointmentId);
             else
                 return "redirect:/" ; // TODO: add error message handling
@@ -116,7 +119,7 @@ public class AppointmentController {
         //  return "redirect:/";
 
         try {
-            Appointment appointment = DQS.findRegisteredAppointment(appointmentId);
+            Appointment appointment = ACSS.findRegisteredAppointment(appointmentId);
 
             appointment.setAppointmentTime(new Timestamp(new SimpleDateFormat("MM/dd/yyyy hh:mm a").parse(newDate).getTime()));
 

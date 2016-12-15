@@ -6,6 +6,7 @@ import com.clinichelper.Entity.Patient;
 import com.clinichelper.Entity.Record;
 import com.clinichelper.Service.CRUD.DataCreationService;
 import com.clinichelper.Service.CRUD.DataUpdateService;
+import com.clinichelper.Service.CRUD.Reading.AppointmentConsultationSurgeryService;
 import com.clinichelper.Service.DataQueryService;
 import com.clinichelper.Service.ToolKitService;
 import com.clinichelper.Tools.Enums.Permission;
@@ -35,6 +36,8 @@ public class ConsultationController {
     @Autowired
     private DataUpdateService DUS;
     @Autowired
+    private AppointmentConsultationSurgeryService ACCS;
+    @Autowired
     private DataQueryService DQS;
     //
     @Autowired
@@ -50,7 +53,7 @@ public class ConsultationController {
 
         String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
 
-        model.addAttribute("consultationList", DQS.findAllRegisteredConsultationsForClinic(clinicId));
+        model.addAttribute("consultationList", ACCS.findAllRegisteredConsultationsForClinic(clinicId));
         //model.addAttribute("isAdmin", false);
 
         if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
@@ -96,7 +99,7 @@ public class ConsultationController {
 
             // Also saving the consultation
             Set<Consultation> consultationsHistory = record.getConsultationLog();
-            consultationsHistory.add(DQS.findRegisteredConsultation(consultationId));
+            consultationsHistory.add(ACCS.findRegisteredConsultation(consultationId));
             record.setConsultationLog(consultationsHistory);
 
             // Edit patient medical record
