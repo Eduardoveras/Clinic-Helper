@@ -1,9 +1,12 @@
 package com.clinichelper.Controller;
 
 import com.clinichelper.Entity.User;
-import com.clinichelper.Service.DataEntryAndManagementService;
-import com.clinichelper.Service.DataQueryService;
-import com.clinichelper.Service.ToolKitService;
+import com.clinichelper.Service.CRUD.DataCreationService;
+import com.clinichelper.Service.CRUD.DataDeleteService;
+import com.clinichelper.Service.CRUD.DataUpdateService;
+import com.clinichelper.Service.CRUD.Reading.ClinicInformationService;
+import com.clinichelper.Service.Security.SessionService;
+import com.clinichelper.Service.Native.ToolKitService;
 import com.clinichelper.Tools.Enums.Gender;
 import com.clinichelper.Tools.Enums.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.persistence.PersistenceException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
@@ -24,30 +26,40 @@ import java.text.SimpleDateFormat;
 
 @Controller
 public class TeamController {
+
     // Services
+    // CRUD
     @Autowired
-    private DataEntryAndManagementService DEAMS;
+    private DataCreationService DCS;
     @Autowired
-    private DataQueryService DQS;
+    private DataUpdateService DUS;
+    @Autowired
+    private DataDeleteService DDS;
+    @Autowired
+    private ClinicInformationService CIS;
+    // Security
+    @Autowired
+    private SessionService sessionService;
+    //
     @Autowired
     private ToolKitService TKS;
 
     // Gets
     @GetMapping("/users")
     public ModelAndView fetchAllPatientsView(Model model){
-        if (!DQS.isUserLoggedIn())
+        if (!sessionService.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+        if (sessionService.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return new ModelAndView("redirect:/");
 
-        String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
+        String clinicId = sessionService.getCurrentLoggedUser().getClinic().getClinicId();
 
-        model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
-        model.addAttribute("userList", DQS.findAllAllRegisteredUsersForClinic(clinicId));
-        model.addAttribute("clinicId", DQS.findAllAllRegisteredUsersForClinic(clinicId).get(0).getClinic().getClinicPrefix());
+        model.addAttribute("todoList", TKS.InitializeTodoList(sessionService.getCurrentLoggedUser().getUserId()));
+        model.addAttribute("userList", CIS.findAllAllRegisteredUsersForClinic(clinicId));
+        model.addAttribute("clinicId", CIS.findAllAllRegisteredUsersForClinic(clinicId).get(0).getClinic().getClinicPrefix());
 
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+        if (sessionService.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             model.addAttribute("isAdmin", false);
         else
             model.addAttribute("isAdmin", true);
@@ -59,14 +71,14 @@ public class TeamController {
     @PostMapping("/newUser")
     public String newUser(@RequestParam("email") String email, @RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("dateOfBirth") String  birthDate, @RequestParam("gender") String gender, @RequestParam("password") String password, @RequestParam("role") String role){
 
-        if (!DQS.isUserLoggedIn())
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+        if (sessionService.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/";
 
         try{
-            DEAMS.createNewUserAccount(DQS.getCurrentLoggedUser().getClinic().getClinicId(), email.toLowerCase(), firstName, lastName, new Date(new SimpleDateFormat("MM/dd/yyyy").parse(birthDate).getTime()), gender.toUpperCase().equals("F") ? Gender.F : Gender.M, password, role.toUpperCase().equals("M") ? Permission.MEDIC : Permission.ASSISTANT);
+            DCS.createNewUserAccount(sessionService.getCurrentLoggedUser().getClinic().getClinicId(), email.toLowerCase(), firstName, lastName, new Date(new SimpleDateFormat("MM/dd/yyyy").parse(birthDate).getTime()), gender.toUpperCase().equals("F") ? Gender.F : Gender.M, password, role.toUpperCase().equals("M") ? Permission.MEDIC : Permission.ASSISTANT);
             return "redirect:/users";
         } catch (Exception exp){
             exp.printStackTrace();
@@ -78,14 +90,14 @@ public class TeamController {
     @PostMapping("/deleteUser")
     public String deleteUser (@RequestParam("id") String userId){
 
-        if (!DQS.isUserLoggedIn())
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+        if (sessionService.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/";
 
         try {
-            DEAMS.deleteRegisteredUserAccount(userId);
+            DDS.deleteRegisteredUserAccount(userId);
         } catch (Exception exp){
             exp.printStackTrace();
         }
@@ -94,18 +106,18 @@ public class TeamController {
     }
 
     @PostMapping("/makUserAdmin") //Only accessed by the admin of the clinic account
-    public String makeUserDamin(@RequestParam("id") String userId){
+    public String makeUserAdmin(@RequestParam("id") String userId){
 
-        if (!DQS.isUserLoggedIn())
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+        if (sessionService.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/";
 
-        User user = DQS.findUserInformation(userId);
+        User user = CIS.findUserInformation(userId);
 
         try {
-            DEAMS.editUserAccountCredentials(user.getEmail(), user.getClinic().getClinicId(), user.getPassword(), Permission.ADMIN);
+            DUS.editUserAccountCredentials(user.getEmail(), user.getClinic().getClinicId(), user.getPassword(), Permission.ADMIN);
             return "redirect:/team";
         } catch (Exception exp){
             exp.printStackTrace();

@@ -1,9 +1,10 @@
 package com.clinichelper.Controller;
 
 import com.clinichelper.Entity.User;
-import com.clinichelper.Service.DataEntryAndManagementService;
-import com.clinichelper.Service.DataQueryService;
-import com.clinichelper.Service.ToolKitService;
+import com.clinichelper.Service.CRUD.DataUpdateService;
+import com.clinichelper.Service.CRUD.Reading.ClinicInformationService;
+import com.clinichelper.Service.Security.SessionService;
+import com.clinichelper.Service.Native.ToolKitService;
 import com.clinichelper.Tools.Enums.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.persistence.PersistenceException;
-
 /**
  * Created by Eduardo veras on 28-Oct-16.
  */
@@ -24,10 +23,15 @@ import javax.persistence.PersistenceException;
 public class UserController {
 
     // Services
+    // CRUD
     @Autowired
-    private DataEntryAndManagementService DEAMS;
+    private DataUpdateService DUS;
     @Autowired
-    private DataQueryService DQS;
+    private ClinicInformationService CIS;
+    // Security
+    @Autowired
+    private SessionService sessionService;
+    //
     @Autowired
     private ToolKitService TKS;
 
@@ -45,23 +49,23 @@ public class UserController {
 
     @RequestMapping("/logout")
     public ModelAndView logOut(){
-        if (!DQS.isUserLoggedIn())
+        if (!sessionService.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
-        DQS.logOut();
+        sessionService.logOut();
         return new ModelAndView("redirect:/login");
     }
 
     @GetMapping("/user/{id}")
     public ModelAndView fetchUserProfile(Model model,@PathVariable(value="id") String userId){
-        if (!DQS.isUserLoggedIn())
+        if (!sessionService.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
-        User u = DQS.findUserInformation(userId);
+        User u = CIS.findUserInformation(userId);
         model.addAttribute("todoList", TKS.InitializeTodoList(u.getUserId()));
         model.addAttribute("user", u);
 
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+        if (sessionService.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             model.addAttribute("isAdmin", false);
         else
             model.addAttribute("isAdmin", true);
@@ -72,13 +76,13 @@ public class UserController {
     // Post
     @PostMapping("/uploadProfilePhoto")
     public String uploadProfilePicture(@RequestParam() String email, @RequestParam("clinic") String clinicId, @RequestParam("photo") MultipartFile file){
-        if (!DQS.isUserLoggedIn())
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
-        User user = DQS.findRegisteredUserAccount(email,clinicId);
+        User user = CIS.findRegisteredUserAccount(email,clinicId);
 
         try {
-            DEAMS.editUserPhoto(email, clinicId, processImageFile(file.getBytes()));
+            DUS.editUserPhoto(email, clinicId, processImageFile(file.getBytes()));
             return "redirect:/user/" + user.getUserId();
         } catch (Exception exp){
             exp.printStackTrace();
@@ -90,10 +94,10 @@ public class UserController {
     @PostMapping("/userLogin")
     public String loginUser(@RequestParam("email") String email, @RequestParam("password") String password){
         
-        if (DQS.validateUserAccountCredentials(email.toLowerCase(), password))
+        if (CIS.validateUserAccountCredentials(email.toLowerCase(), password))
         {
-            User u = DQS.findRegisteredUserAccount(email.toLowerCase(),password);
-            DQS.setSessionAttr("user",u);
+            User u = CIS.findRegisteredUserAccount(email.toLowerCase(),password);
+            sessionService.setSessionAttr("user",u);
             return "redirect:/"; // TODO: filter which user is login in to redirect them to the correct url
         }
         else
@@ -103,15 +107,15 @@ public class UserController {
     @PostMapping("/editMyPassword")
     public String editUserPassword(@RequestParam("email") String email, @RequestParam("clinic") String clinicId, @RequestParam("password") String password, @RequestParam("newPassword") String newPassword){
 
-        if (!DQS.isUserLoggedIn())
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.validateUserAccountCredentials(email.toLowerCase(), password)){
+        if (CIS.validateUserAccountCredentials(email.toLowerCase(), password)){
 
-            User user = DQS.findRegisteredUserAccount(email.toLowerCase(),clinicId);
+            User user = CIS.findRegisteredUserAccount(email.toLowerCase(),clinicId);
 
             try {
-                DEAMS.editUserAccountCredentials(user.getEmail(), user.getClinic().getClinicId(), newPassword, user.getRole());
+                DUS.editUserAccountCredentials(user.getEmail(), user.getClinic().getClinicId(), newPassword, user.getRole());
                 return "redirect:/user/" + user.getUserId();
             } catch (Exception exp){
                 exp.printStackTrace();

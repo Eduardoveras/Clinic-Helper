@@ -2,10 +2,12 @@ package com.clinichelper.Controller;
 
 import com.clinichelper.Entity.Contact;
 import com.clinichelper.Entity.Meeting;
-import com.clinichelper.Entity.Patient;
-import com.clinichelper.Service.DataEntryAndManagementService;
-import com.clinichelper.Service.DataQueryService;
-import com.clinichelper.Service.ToolKitService;
+import com.clinichelper.Service.CRUD.DataCreationService;
+import com.clinichelper.Service.CRUD.DataDeleteService;
+import com.clinichelper.Service.CRUD.DataUpdateService;
+import com.clinichelper.Service.CRUD.Reading.ContactMeetingService;
+import com.clinichelper.Service.Security.SessionService;
+import com.clinichelper.Service.Native.ToolKitService;
 import com.clinichelper.Tools.Enums.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,39 +17,48 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.persistence.PersistenceException;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Eduardo veras on 07-Nov-16.
  */
 @Controller
 public class MeetingAndContactsController {
+
     // Services
+    // CRUD
     @Autowired
-    private DataEntryAndManagementService DEAMS;
+    private DataCreationService DCS;
     @Autowired
-    private DataQueryService DQS;
+    private DataUpdateService DUS;
+    @Autowired
+    private DataDeleteService DDS;
+    @Autowired
+    private ContactMeetingService CMS;
+    // Security
+    @Autowired
+    private SessionService sessionService;
+    //
     @Autowired
     private ToolKitService TKS;
 
     // Gets
     @RequestMapping("/contacts")
     public ModelAndView FetchContactsView(Model model){
-        if (!DQS.isUserLoggedIn())
+
+        if (!sessionService.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
-        String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
-        model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
-        model.addAttribute("contactList", DQS.findAllRegisteredContactsForClinic(clinicId));
+        String clinicId = sessionService.getCurrentLoggedUser().getClinic().getClinicId();
+        model.addAttribute("todoList", TKS.InitializeTodoList(sessionService.getCurrentLoggedUser().getUserId()));
+        model.addAttribute("contactList", CMS.findAllRegisteredContactsForClinic(clinicId));
 
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+        if (sessionService.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             model.addAttribute("isAdmin", false);
         else
             model.addAttribute("isAdmin", true);
@@ -57,15 +68,16 @@ public class MeetingAndContactsController {
 
     @RequestMapping("/meetings")
     public ModelAndView FetchMeetings(Model model){
-        if (!DQS.isUserLoggedIn())
+
+        if (!sessionService.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
-        String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
-        model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
-        model.addAttribute("meetingsList", DQS.findAllRegisteredMeetingsForClinic(clinicId));
-        model.addAttribute("contactList", DQS.findAllRegisteredContactsForClinic(clinicId));
+        String clinicId = sessionService.getCurrentLoggedUser().getClinic().getClinicId();
+        model.addAttribute("todoList", TKS.InitializeTodoList(sessionService.getCurrentLoggedUser().getUserId()));
+        model.addAttribute("meetingsList", CMS.findAllRegisteredMeetingsForClinic(clinicId));
+        model.addAttribute("contactList", CMS.findAllRegisteredContactsForClinic(clinicId));
 
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+        if (sessionService.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             model.addAttribute("isAdmin", false);
         else
             model.addAttribute("isAdmin", true);
@@ -76,14 +88,15 @@ public class MeetingAndContactsController {
     // Posts
     @PostMapping("/new_contact")
     public String registerNewContact(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("dateOfBirth") String  birthDate, @RequestParam("email") String email){
-        if (!DQS.isUserLoggedIn())
+
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+        if (sessionService.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/contacts";
 
         try {
-            DEAMS.createNewStaffMember(DQS.getCurrentLoggedUser().getClinic().getClinicId(), firstName, lastName, new Date(new SimpleDateFormat("MM/dd/yyyy").parse(birthDate).getTime()), email.toLowerCase());
+            DCS.createNewStaffMember(sessionService.getCurrentLoggedUser().getClinic().getClinicId(), firstName, lastName, new Date(new SimpleDateFormat("MM/dd/yyyy").parse(birthDate).getTime()), email.toLowerCase());
             return "redirect:/contacts";
         } catch (Exception exp){
             exp.printStackTrace();
@@ -94,7 +107,8 @@ public class MeetingAndContactsController {
 
     @PostMapping("/new_meeting")
     public String registerNewMeeting(@RequestParam("title") String title, @RequestParam("objective") String objective, @RequestParam("time")String time, @RequestParam("place")String place, @RequestParam("attendees") List<String> attendees){
-        if (!DQS.isUserLoggedIn())
+
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
         List<Contact> team = new ArrayList<>();
@@ -102,10 +116,10 @@ public class MeetingAndContactsController {
         try {
             for (String s:
                     attendees) {
-                team.add(DQS.findRegisteredStaffByEmail(DQS.getCurrentLoggedUser().getClinic().getClinicId(), s));
+                team.add(CMS.findRegisteredStaffByEmail(sessionService.getCurrentLoggedUser().getClinic().getClinicId(), s));
             }
 
-            DEAMS.createNewMeeting(DQS.getCurrentLoggedUser().getClinic().getClinicId(), title, objective, new Timestamp(new SimpleDateFormat("MM/dd/yyyy hh:mm a").parse(time).getTime()), place, new HashSet<>(team));
+            DCS.createNewMeeting(sessionService.getCurrentLoggedUser().getClinic().getClinicId(), title, objective, new Timestamp(new SimpleDateFormat("MM/dd/yyyy hh:mm a").parse(time).getTime()), place, new HashSet<>(team));
             return "redirect:/meetings";
         } catch (Exception exp){
             exp.printStackTrace();
@@ -116,17 +130,18 @@ public class MeetingAndContactsController {
 
     @PostMapping("/delete_contact")
     public String deleteContact(@RequestParam("contactId") String contactId){
-        if (!DQS.isUserLoggedIn())
+
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+        if (sessionService.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             return "redirect:/contacts";
 
-        if (DQS.findRegisteredContact(contactId).isHasAccount())
+        if (CMS.findRegisteredContact(contactId).isHasAccount())
             return "redirect:/users"; // TODO: add Not allowed action delete user account first
 
         try {
-            DEAMS.deleteRegisteredStaff(contactId);
+            DDS.deleteRegisteredStaff(contactId);
             return "redirect:/contacts";
         } catch (Exception exp){
             exp.printStackTrace();
@@ -137,14 +152,15 @@ public class MeetingAndContactsController {
 
     @PostMapping("/cancelMeeting")
     public String deleteMeeting(@RequestParam("id") String meetingId){
-        if (!DQS.isUserLoggedIn())
+
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
         //if (DQS.getCurrentLoggedUser().getRole() == Permission.ADMIN)
           //  return "redirect:/meetings";
 
         try {
-            DEAMS.deleteRegisteredMeeting(meetingId);
+            DDS.deleteRegisteredMeeting(meetingId);
             return "redirect:/meetings";
         } catch (Exception exp){
             exp.printStackTrace();
@@ -155,16 +171,17 @@ public class MeetingAndContactsController {
 
     @PostMapping("/rescheduleMeeting")
     public String changeMeetingTimeAndDate(@RequestParam("id") String meetingId, @RequestParam("time") Timestamp newTime){
-        if (!DQS.isUserLoggedIn())
+
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
         //if (DQS.getCurrentLoggedUser().getRole() == Permission.ADMIN)
           //  return "redirect:/meetings";
 
         try{
-            Meeting meeting = DQS.findRegisteredMeeting(meetingId);
+            Meeting meeting = CMS.findRegisteredMeeting(meetingId);
             meeting.setMeetingTime(newTime);
-            DEAMS.editMeeting(meeting);
+            DUS.editMeeting(meeting);
             return "redirect:/meetings";
         } catch (Exception exp){
             exp.printStackTrace();

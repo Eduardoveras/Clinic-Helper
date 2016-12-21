@@ -1,7 +1,7 @@
 /**
  * Created by Djidjelly Siclait on 10/11/2016.
  */
-package com.clinichelper.Service;
+package com.clinichelper.Service.Native;
 
 import com.clinichelper.Entity.*;
 import com.clinichelper.Repository.*;

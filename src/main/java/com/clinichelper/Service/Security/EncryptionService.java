@@ -1,4 +1,4 @@
-package com.clinichelper.Service;
+package com.clinichelper.Service.Security;
 
 import org.springframework.stereotype.Service;
 

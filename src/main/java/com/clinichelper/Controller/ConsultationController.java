@@ -4,9 +4,12 @@ import com.clinichelper.Entity.Consultation;
 import com.clinichelper.Entity.History;
 import com.clinichelper.Entity.Patient;
 import com.clinichelper.Entity.Record;
-import com.clinichelper.Service.DataEntryAndManagementService;
-import com.clinichelper.Service.DataQueryService;
-import com.clinichelper.Service.ToolKitService;
+import com.clinichelper.Service.CRUD.DataCreationService;
+import com.clinichelper.Service.CRUD.DataUpdateService;
+import com.clinichelper.Service.CRUD.Reading.AppointmentConsultationSurgeryService;
+import com.clinichelper.Service.CRUD.Reading.PatientInformationService;
+import com.clinichelper.Service.Security.SessionService;
+import com.clinichelper.Service.Native.ToolKitService;
 import com.clinichelper.Tools.Enums.Permission;
 import com.clinichelper.Tools.Enums.SurgeryType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,28 +29,39 @@ import java.util.Set;
  */
 @Controller
 public class ConsultationController {
+
     // Services
+    //CRUD
     @Autowired
-    private DataEntryAndManagementService DEAMS;
+    private DataCreationService DCS;
     @Autowired
-    private DataQueryService DQS;
+    private DataUpdateService DUS;
+    @Autowired
+    private AppointmentConsultationSurgeryService ACCS;
+    @Autowired
+    private PatientInformationService PIS;
+    // Security
+    @Autowired
+    private SessionService sessionService;
+    //
     @Autowired
     private ToolKitService TKS;
 
     // Gets
     @GetMapping("/consultations")
     public ModelAndView fetchConsultationView(Model model) throws Exception{
-        if (!DQS.isUserLoggedIn())
+
+        if (!sessionService.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
-        model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
+        model.addAttribute("todoList", TKS.InitializeTodoList(sessionService.getCurrentLoggedUser().getUserId()));
 
-        String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
+        String clinicId = sessionService.getCurrentLoggedUser().getClinic().getClinicId();
 
-        model.addAttribute("consultationList", DQS.findAllRegisteredConsultationsForClinic(clinicId));
+        model.addAttribute("consultationList", ACCS.findAllRegisteredConsultationsForClinic(clinicId));
         //model.addAttribute("isAdmin", false);
 
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+        if (sessionService.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             model.addAttribute("isAdmin", false);
         else
             model.addAttribute("isAdmin", true);
@@ -67,34 +81,34 @@ public class ConsultationController {
             @RequestParam("surgerytype") SurgeryType surgeryType,
             @RequestParam("medicaldata")  ArrayList<String> medicaData){
 
-        if (!DQS.isUserLoggedIn())
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
         //if (DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
           //  return "redirect:/";
 
         try {
-            Patient patient = DQS.findRegisteredPatientByIdCard(DQS.getCurrentLoggedUser().getClinic().getClinicId(), patientId);
+            Patient patient = PIS.findRegisteredPatientByIdCard(sessionService.getCurrentLoggedUser().getClinic().getClinicId(), patientId);
             // Creating the history
-            History history = DEAMS.createNewHistory(patient, visitObjective, observations, specialConditions, photos, surgeryType, medicaData, consultationId);
+            History history = DCS.createNewHistory(patient, visitObjective, observations, specialConditions, photos, surgeryType, medicaData, consultationId);
 
             // Adding it to the Record
-            Record record = DQS.findPatientsRegisteredRecord(patient.getPatientId());
+            Record record = PIS.findPatientsRegisteredRecord(patient.getPatientId());
 
             // Fetching the list of history
-            Set<History> medicalHistory = record.getHistory();
+            Set<History> medicalHistory = record.getHistoryLog();
             // Adding the new one
             medicalHistory.add(history);
             // Modifying the old list
-            record.setHistory(medicalHistory);
+            record.setHistoryLog(medicalHistory);
 
             // Also saving the consultation
-            Set<Consultation> consultationsHistory = record.getConsultations();
-            consultationsHistory.add(DQS.findRegisteredConsultation(consultationId));
-            record.setConsultations(consultationsHistory);
+            Set<Consultation> consultationsHistory = record.getConsultationLog();
+            consultationsHistory.add(ACCS.findRegisteredConsultation(consultationId));
+            record.setConsultationLog(consultationsHistory);
 
             // Edit patient medical record
-            DEAMS.editRecord(record);
+            DUS.editRecord(record);
 
             return "redirect:/"; // todavia no hay vista
         } catch (Exception exp){

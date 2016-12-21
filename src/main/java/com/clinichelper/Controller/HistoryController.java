@@ -3,8 +3,8 @@
  */
 package com.clinichelper.Controller;
 
-import com.clinichelper.Service.DataQueryService;
-import com.clinichelper.Service.ToolKitService;
+import com.clinichelper.Service.Security.SessionService;
+import com.clinichelper.Service.Native.ToolKitService;
 import com.clinichelper.Tools.Enums.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,22 +16,24 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HistoryController {
     // Services
-    @Autowired
-    private DataQueryService DQS;
+        // Security
+    private SessionService sessionService;
+    //
     @Autowired
     private ToolKitService TKS;
 
     // Gets
     @GetMapping("/patient/record/{i}")
     public ModelAndView fetchPatientMedicalRecord(Model model, @PathVariable(value="id") String patientId){
-        if (!DQS.isUserLoggedIn())
+
+        if (!sessionService.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
         //if (DQS.getCurrentLoggedUser().getRole() != Permission.MEDIC)
         //return new ModelAndView("redirect:/");
         //model.addAttribute("isAdmin", false);
 
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+        if (sessionService.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             model.addAttribute("isAdmin", false);
         else
             model.addAttribute("isAdmin", true);

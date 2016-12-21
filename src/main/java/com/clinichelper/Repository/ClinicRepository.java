@@ -15,7 +15,7 @@ public interface ClinicRepository extends JpaRepository<Clinic, String>{
     Clinic findByClinicId(String clinicId);
 
     @Query("select c from Clinic c where c.clinicName = :name")
-    List<Clinic> findByClinicName(@Param("name") String clinicName);
+    Clinic findByClinicName(@Param("name") String clinicName);
 
     @Query("select c from Clinic c where c.accountType = :account")
     List<Clinic> findByAccountType(@Param("account")AccountType accountType);

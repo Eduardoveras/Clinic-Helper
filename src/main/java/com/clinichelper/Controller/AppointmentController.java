@@ -4,10 +4,13 @@
 package com.clinichelper.Controller;
 
 import com.clinichelper.Entity.Appointment;
-import com.clinichelper.Entity.Patient;
-import com.clinichelper.Service.DataEntryAndManagementService;
-import com.clinichelper.Service.DataQueryService;
-import com.clinichelper.Service.ToolKitService;
+import com.clinichelper.Service.CRUD.DataCreationService;
+import com.clinichelper.Service.CRUD.DataDeleteService;
+import com.clinichelper.Service.CRUD.DataUpdateService;
+import com.clinichelper.Service.CRUD.Reading.AppointmentConsultationSurgeryService;
+import com.clinichelper.Service.CRUD.Reading.PatientInformationService;
+import com.clinichelper.Service.Security.SessionService;
+import com.clinichelper.Service.Native.ToolKitService;
 import com.clinichelper.Tools.Enums.AppointmentStatus;
 import com.clinichelper.Tools.Enums.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,35 +23,45 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @Controller
 public class AppointmentController {
 
     // Services
+    // CRUD
     @Autowired
-    private DataEntryAndManagementService DEAMS;
+    private DataCreationService DCS;
     @Autowired
-    private DataQueryService DQS;
+    private DataUpdateService DUS;
+    @Autowired
+    private DataDeleteService DDS;
+    @Autowired
+    private AppointmentConsultationSurgeryService ACSS;
+    @Autowired
+    private PatientInformationService PIS;
+    // Security
+    @Autowired
+    private SessionService sessionService;
+    //
     @Autowired
     private ToolKitService TKS;
 
     // Gets
     @GetMapping("/appointments")
     public ModelAndView fetchAppointmentView(Model model) throws Exception{
-        if (!DQS.isUserLoggedIn())
+        if (!sessionService.isUserLoggedIn())
             return new ModelAndView("redirect:/login");
 
-        if (DQS.getCurrentLoggedUser().getRole() == Permission.MEDIC)
+        if (sessionService.getCurrentLoggedUser().getRole() == Permission.MEDIC)
             return new ModelAndView("redirect:/");
 
-        String clinicId = DQS.getCurrentLoggedUser().getClinic().getClinicId();
+        String clinicId = sessionService.getCurrentLoggedUser().getClinic().getClinicId();
 
-        model.addAttribute("todoList", TKS.InitializeTodoList(DQS.getCurrentLoggedUser().getUserId()));
-        model.addAttribute("appointmentList", DQS.findAllRegisteredAppointmentsForClinic(clinicId));
-        model.addAttribute("userList", DQS.findAllRegisteredPatientsForClinic(clinicId));
+        model.addAttribute("todoList", TKS.InitializeTodoList(sessionService.getCurrentLoggedUser().getUserId()));
+        model.addAttribute("appointmentList", ACSS.findAllRegisteredAppointmentsForClinic(clinicId));
+        model.addAttribute("userList", PIS.findAllRegisteredPatientsForClinic(clinicId));
 
-        if (DQS.getCurrentLoggedUser().getRole() != Permission.ADMIN)
+        if (sessionService.getCurrentLoggedUser().getRole() != Permission.ADMIN)
             model.addAttribute("isAdmin", false);
         else
             model.addAttribute("isAdmin", true);
@@ -60,14 +73,14 @@ public class AppointmentController {
     @PostMapping("/newAppointment")
     public String createNewApointment(@RequestParam("appointmentTime") String appointmentTime, @RequestParam("patient") String patientId, @RequestParam("description") String appointmentDescription){
 
-        if (!DQS.isUserLoggedIn())
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
         //if (DQS.getCurrentLoggedUser().getRole() != Permission.ASSISTANT)
           //  return "redirect:/";
 
         try {
-            DEAMS.createNewAppointment(DQS.getCurrentLoggedUser().getClinic().getClinicId(),  new Timestamp(new SimpleDateFormat("MM/dd/yyyy hh:mm a").parse(appointmentTime).getTime()), DQS.findRegisteredPatient(patientId).getPatientId(), appointmentDescription);
+            DCS.createNewAppointment(sessionService.getCurrentLoggedUser().getClinic().getClinicId(),  new Timestamp(new SimpleDateFormat("MM/dd/yyyy hh:mm a").parse(appointmentTime).getTime()), PIS.findRegisteredPatient(patientId).getPatientId(), appointmentDescription);
             return "redirect:/appointments";
         } catch (Exception exp){
             System.out.println("ERROR MESSAGE:");
@@ -80,15 +93,15 @@ public class AppointmentController {
 
     @PostMapping("/cancelAppointment")
     public String cancelRegisteredAppointment( @RequestParam("appointment_id") String appointmentId){
-        if (!DQS.isUserLoggedIn())
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
         //if (DQS.getCurrentLoggedUser().getRole() != Permission.ASSISTANT)
         //  return "redirect:/";
 
         try {
-            if (DQS.findRegisteredAppointment(appointmentId).getAppointmentStatus() == AppointmentStatus.PENDING)
-                DEAMS.deleteRegisteredAppointment(appointmentId);
+            if (ACSS.findRegisteredAppointment(appointmentId).getAppointmentStatus() == AppointmentStatus.PENDING)
+                DDS.deleteRegisteredAppointment(appointmentId);
             else
                 return "redirect:/" ; // TODO: add error message handling
 
@@ -103,18 +116,18 @@ public class AppointmentController {
     @PostMapping("/changeDateAndTime")
     public String editDateAndTimeOfRegisteredAppointment(@RequestParam("id") String appointmentId, @RequestParam("appointmentTime") String newDate){
 
-        if (!DQS.isUserLoggedIn())
+        if (!sessionService.isUserLoggedIn())
             return "redirect:/login";
 
         //if (DQS.getCurrentLoggedUser().getRole() != Permission.ASSISTANT)
         //  return "redirect:/";
 
         try {
-            Appointment appointment = DQS.findRegisteredAppointment(appointmentId);
+            Appointment appointment = ACSS.findRegisteredAppointment(appointmentId);
 
             appointment.setAppointmentTime(new Timestamp(new SimpleDateFormat("MM/dd/yyyy hh:mm a").parse(newDate).getTime()));
 
-            DEAMS.editAppointment(appointment);
+            DUS.editAppointment(appointment);
             return "redirect:/appointments";
         } catch (Exception exp){
             exp.printStackTrace();
