@@ -17,6 +17,9 @@ Language: Java
 Framework(s): Java EE 8 - JDK 1.8, Spring Boot, FreeMarker, JPA-ORM, Hibernate
 Database: PostgreSQL 9
 
+Version: v0.16.0
+** Refactored Service Structure
+
 Version: v0.15.0-BETA
 ** New I18N Standard with implemented Spanish (Bilingual Mode)
 ** Improved inventory management system with new features
